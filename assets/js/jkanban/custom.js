@@ -8,7 +8,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">23/7/20</span><span class="badge badge-primary f-right">medium</span>
                                 <h6>Design Dashboard</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -24,9 +24,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+10</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -36,7 +36,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -52,9 +52,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -70,7 +70,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -86,9 +86,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -98,7 +98,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-success f-right">Low</span>
                                 <h6>Dashboard issue</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Pixelstrap, New york</p>
                                   </div>
@@ -114,9 +114,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -132,7 +132,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -148,9 +148,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -160,7 +160,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">23/7/20</span><span class="badge badge-primary f-right">medium</span>
                                 <h6>Design Dashboard</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -176,9 +176,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+10</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -206,7 +206,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box bg-light-info" href="#"><span class="date">24/7/20</span><span class="badge badge-info f-right">medium</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -222,9 +222,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -234,7 +234,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box bg-light-info" href="#"><span class="date">24/7/20</span><span class="badge badge-success f-right">Low</span>
                                 <h6>Dashboard issue</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Pixelstrap, New york</p>
                                   </div>
@@ -250,9 +250,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -269,7 +269,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box bg-light-warning" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -285,9 +285,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -297,7 +297,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box bg-light-warning" href="#"><span class="date">24/7/20</span><span class="badge badge-success f-right">Low</span>
                                 <h6>Dashboard issue</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Pixelstrap, New york</p>
                                   </div>
@@ -313,9 +313,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -333,7 +333,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box bg-light-success" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -349,9 +349,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -361,7 +361,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box bg-light-success" href="#"><span class="date">24/7/20</span><span class="badge badge-success f-right">Low</span>
                                 <h6>Dashboard issue</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Pixelstrap, New york</p>
                                   </div>
@@ -377,9 +377,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -406,7 +406,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -422,9 +422,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -434,7 +434,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -450,9 +450,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -468,9 +468,9 @@ var kanban1 = new jKanban({
                     {
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
-                                <img class="mt-2 img-fluid" src="../assets/images/other-images/maintenance-bg.jpg" alt="" data-original-title="" title="">
+                                <img class="mt-2 img-fluid" src="assets/images/other-images/maintenance-bg.jpg" alt="" data-original-title="" title="">
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -486,9 +486,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -498,7 +498,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -514,9 +514,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -533,7 +533,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -549,9 +549,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -560,9 +560,9 @@ var kanban1 = new jKanban({
                     {
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
-                                <img class="mt-2 img-fluid" src="../assets/images/other-images/sidebar-bg.jpg" alt="" data-original-title="" title="">
+                                <img class="mt-2 img-fluid" src="assets/images/other-images/sidebar-bg.jpg" alt="" data-original-title="" title="">
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -578,9 +578,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -598,9 +598,9 @@ var kanban1 = new jKanban({
             {
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
-                                <img class="mt-2 img-fluid" src="../assets/images/other-images/sidebar-bg.jpg" alt="" data-original-title="" title="">
+                                <img class="mt-2 img-fluid" src="assets/images/other-images/sidebar-bg.jpg" alt="" data-original-title="" title="">
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -616,9 +616,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -638,7 +638,7 @@ var kanban1 = new jKanban({
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -654,9 +654,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>
@@ -666,9 +666,9 @@ var kanban1 = new jKanban({
                     {
                             'title': `
                                <a class="kanban-box" href="#"><span class="date">24/7/20</span><span class="badge badge-danger f-right">Argent</span>
-                                <img class="mt-2 img-fluid" src="../assets/images/other-images/maintenance-bg.jpg" alt="" data-original-title="" title="">
+                                <img class="mt-2 img-fluid" src="assets/images/other-images/maintenance-bg.jpg" alt="" data-original-title="" title="">
                                 <h6>Test Sidebar</h6>
-                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title="">
+                                <div class="media"><img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title="">
                                   <div class="media-body">
                                     <p>Themeforest, australia</p>
                                   </div>
@@ -684,9 +684,9 @@ var kanban1 = new jKanban({
                                       <li class="d-inline-block mr-3">
                                         <p class="f-12">+5</p>
                                       </li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                      <li class="d-inline-block"><img class="img-20 rounded-circle" src="assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
                                     </ul>
                                   </div>
                                 </div></a>

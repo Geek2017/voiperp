@@ -15,7 +15,7 @@ var options4 = {
       hollow: {
         margin: 5,
         size: '60%',
-        image: '../assets/images/dashboard-2/radial-image.png',
+        image: 'assets/images/dashboard-2/radial-image.png',
         imageWidth: 140,
         imageHeight: 140,
         imageClipped: false,

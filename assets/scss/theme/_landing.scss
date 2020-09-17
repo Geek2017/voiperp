@@ -72,7 +72,7 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-image: url(../../assets/images/landing/landing_bg.jpg);
+  background-image: url(assets/images/landing/landing_bg.jpg);
   background-position: right top;
   background-size: cover;
   .content{
@@ -83,7 +83,7 @@
      -webkit-text-fill-color: transparent;
      background: -o-linear-gradient(transparent, transparent);
      -webkit-background-clip: text;
-     background-image: -webkit-linear-gradient(rgba(158, 107, 248, 0.5), rgba(119, 101, 250 , 0.5)),url(../../assets/images/landing/title.gif);
+     background-image: -webkit-linear-gradient(rgba(158, 107, 248, 0.5), rgba(119, 101, 250 , 0.5)),url(assets/images/landing/title.gif);
      background-position: left;
      line-height: 1;
      font-size: calc(25px + (57 - 25) * ((100vw - 300px) / (1920 - 300)));
@@ -390,7 +390,7 @@ $landing-color : $primary-color;
   margin-left: 0;
 }
 .email_bg {
-  background-image: url(../../assets/images/landing/email-bg.jpg) !important;
+  background-image: url(assets/images/landing/email-bg.jpg) !important;
 }
 .app_bg {
   background-color: #f7f7fe;
@@ -399,7 +399,7 @@ $landing-color : $primary-color;
   background: #fff !important;
 }
 .layout {
-  background-image: url(../../assets/images/landing/email-bg.jpg);
+  background-image: url(assets/images/landing/email-bg.jpg);
 }
 .layout {
   margin-bottom: -30px;
@@ -721,7 +721,7 @@ $landing-color : $primary-color;
     }
   }
   .landing-home{
-    background-image: url(../../assets/images/landing/landing_bg.jpg);
+    background-image: url(assets/images/landing/landing_bg.jpg);
     .content{
       margin-left: 30px;
     }
