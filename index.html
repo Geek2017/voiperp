@@ -461,6 +461,57 @@
     <script src="app.js"></script>
     <script src="controller/DashboardCtrl.js"></script>
     <!-- must be below AngularJS imports -->
+
+    <script>
+
+        // var user = sessionStorage.getItem("user");
+
+        // var settings = {
+        // "url": "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/users/" + user,
+        // "method": "GET",
+        // "timeout": 0,
+        // };
+        // $.ajax(settings).done(function (response) {
+        // // var user = response.username;
+        // document.getElementById("username").innerHTML = user;
+        // });
+
+
+        let state = sessionStorage.getItem('state');
+        let role = sessionStorage.getItem('role'); 
+        let isAdmin = false;
+
+        if(state == 1) {
+            if(role == 2) {
+            $("#ai").show();
+            $("#logs").hide();
+            $("#settings").show();
+            } else {
+            $("#ai").hide();
+            $("#logs").hide();
+            $("#settings").hide();
+            }
+        }else {
+            window.location.href = './login.html';
+        }
+        // console.log(isAdmin);
+
+        function signout() {
+            window.localStorage.removeItem("username");
+            sessionStorage.clear();
+            window.localStorage.removeItem("req");
+            window.localStorage.removeItem("user");
+            console.log("Logged out!");
+            window.location.href = './index.html';
+            // firebase.auth().signOut().then(function() {
+            //     console.log("Logged out!");
+            //     window.location.href = './index.html';
+            // }, function(error) {
+            //     console.log(error.code);
+            //     console.log(error.message);
+            // });
+        }
+    </script>
 </body>
 
 </html>
