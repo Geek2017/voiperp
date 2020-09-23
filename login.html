@@ -73,7 +73,8 @@
                                             <label for="checkbox1">Remember me</label>
                                         </div>
                                         <div class="form-group ">
-                                            <button class="btn btn-success btn-block" type="button" id="signIn">LOGIN</button>
+                                            <button class="btn btn-success btn-block" type="button"
+                                                id="signIn">LOGIN</button>
                                         </div>
                                         <div class="login-divider"></div>
                                         <div class="social mt-3">
@@ -453,13 +454,13 @@
                 type: "POST",
                 dataType: "json",
                 // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvsapi/companies/{id}",
+                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
                 data: myData,
                 headers: {
                     "Content-Type": "application/json"
                 },
-                success: function (data) {
-                    console.log(data);
+                success: function (response) {
+                    console.log(response);
                     console.log("Success");
                     // sessionStorage.setItem("state", 1);
                     // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
@@ -472,44 +473,50 @@
                     // window.location.href = './index.html';
                 },
                 error: function (response) {
-                    // console.log(response.responseText);
+                    console.log(response.responseText);
 
                     var id = response.responseText;
+                    // localStorage.setItem("comid", id);
 
+                    var str = id;
+                    var res = str.split("\r\n", 1);
+
+                    console.log(res[0]);
+                    
                     var myData2 = JSON.stringify({
-
+                        
                         //     // "count": "13",
                         //     // "domain": "www.done.com"
                         "email": $('#email').val(),
-                        "comid": id,
+                        "comid": res[0],
+                        // "comid": $('#email').val(),
                         "contact": $('#contact').val(),
                         "designation": $('#designation').val(),
                         "fullname": $('#fullname').val(),
                         "image": localStorage.getItem("picture"),
                         "password": Base64.encode(pwd.value),
-                        "role": " "
-
+                        "role": "admin",
+                        
                         // "password": Base64.encode(pwd.value),
                         // "role": ""
-
+                        
                     });
-
-                    // console.log(myData2);
-
-
+                    
+                    console.log(myData2);
+                    
                     $.ajax({
                         type: "POST",
                         dataType: "json",
                         // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                        url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvsapi/allusers/{email}",
+                        url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
                         data: myData2,
                         headers: {
                             "Content-Type": "application/json"
                         },
                         success: function (data) {
                             console.log(data);
-                            console.log("Success");
-                            // sessionStorage.setItem("state", 1);
+                            // console.log("Success");
+                            sessionStorage.setItem("state", 1);
                             // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
                             // setTimeout(function(){ 
                             // $('#registerStyle').hide();
@@ -517,7 +524,7 @@
                             // $('#loginStyle').show();
                             // },3000);
 
-                            // window.location.href = './index.html';
+                            window.location.href = './index.html';
                         },
                         error: function (response) {
                             console.log(response);
@@ -527,6 +534,7 @@
                     });
                 }
             });
+
         }
 
 
@@ -535,41 +543,46 @@
             const username = $('#loginEmail').val();
 
             var settings = {
-                "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvsapi/allusers/" + username,
+                "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + username,
                 "method": "GET",
                 "timeout": 0,
             };
             $.ajax(settings).done(function (response) {
                 var user = response.username;
                 console.log(response);
-                // if (response.username && response.password && response.role) {
-                //     // console.log(Base64.decode(response.password));
-                //     var lsrole = 0;
-                //     var decodedPwd = Base64.decode(response.password);
-                //     var role = response.role;
-                //     var signInPwd = $('#passwordSignIn').val();
-                //     console.log(role);
-                //     if (role == "ordinary") {
-                //         lsrole = 1;
-                //     } else if (role == "admin") {
-                //         lsrole = 2;
-                //     }
-                //     if (signInPwd == decodedPwd) {
-                //         sessionStorage.setItem("state", 1);
-                //         sessionStorage.setItem("user", user);
-                //         sessionStorage.setItem("role", lsrole);
-                //         console.log("You're in!");
-                //         window.location.href = './index.html';
+                console.log(response.email);
+                if (response.email && response.password) {
+                    console.log(Base64.decode(response.password));
+                    // var lsrole = 0;
+                    var decodedPwd = Base64.decode(response.password);
+                    // var role = response.role;
+                    var signInPwd = $('#loginPassword').val();
+                    // console.log(role);
+                    // if (role == "ordinary") {
+                    //     lsrole = 1;
+                    // } else if (role == "admin") {
+                    //     lsrole = 2;
+                    // }
+                    if (signInPwd == decodedPwd) {
+                        sessionStorage.setItem("state", 1);
+                        sessionStorage.setItem("user", user);
+                        // sessionStorage.setItem("role", lsrole);
+                        console.log("You're in!");
+                        window.location.href = './index.html';
 
-                //     } else {
-                //         document.getElementById("messages").innerHTML = "Your password is incorrect!";
-                //     }
-                // } else if (response.username && response.password && !response.role) {
+                    } else {
+                        // document.getElementById("messages").innerHTML = "Your password is incorrect!";
+                        console.log("Your password is incorrect!");
+                    }
+                } 
+                // else if (response.username && response.password && !response.role) {
                 //     document.getElementById("messages").innerHTML =
                 //         "Kindly contact the administrator for your authorization";
-                // } else if (!response.username && !response.password && !response.role) {
-                //     document.getElementById("messages").innerHTML = "Your account is not registered";
-                // }
+                // } 
+                else if (!response.email && !response.password) {
+                    // document.getElementById("messages").innerHTML = "Your account is not registered";
+                    console.log("Your account is not registered");
+                }
 
             });
         }
