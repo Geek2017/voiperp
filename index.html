@@ -309,7 +309,7 @@
                                 <li><i data-feather="mail"></i><span>Inbox</span></li>
                                 <li><i data-feather="file-text"></i><span>Taskboard</span></li>
                                 <li><i data-feather="settings"></i><span>Settings</span></li>
-                                <li><a href="./login.html"><i data-feather="log-in"> </i><span>Log in</span></a></li>
+                                <li><a href="#/" id="logout"><i data-feather="log-in" > </i><span>Log Out</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -353,40 +353,41 @@
 
                                 <li class="sidebar-title">
                                     <div>
-                                        <h6>Dashboard</h6>
+                                        <!-- <h6>Dashboard</h6> -->
+                                        <a href="#/">Dashboard</a>
                                         <p>Controls & Funtions</p>
                                     </div>
                                 </li>
 
-                                <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="crosshair"></i><span>Leads</span></a>
+                                <li id="leads" class="dropdown"><a class="nav-link menu-title" href="#/"><i data-feather="crosshair"></i><span>Leads</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#">List</a></li>
                                         <li><a href="#">New</a></li>
                                     </ul>
                                 </li>
 
-                                <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="phone"></i><span>Calls</span></a>
+                                <li id="calls" class="dropdown"><a class="nav-link menu-title" href="#/"><i data-feather="phone"></i><span>Calls</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#">List</a></li>
                                         <li><a href="#">New</a></li>
                                     </ul>
                                 </li>
 
-                                <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="users"></i><span>Users</span></a>
+                                <li id="users" class="dropdown"><a class="nav-link menu-title" href="#/"><i data-feather="users"></i><span>Users</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#">List</a></li>
                                         <li><a href="#">New</a></li>
                                     </ul>
                                 </li>
 
-                                <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="globe"></i><span>Company</span></a>
+                                <li id="company" class="dropdown"><a class="nav-link menu-title" href="#/"><i data-feather="globe"></i><span>Company</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#">List</a></li>
                                         <li><a href="#">New</a></li>
                                     </ul>
                                 </li>
 
-                                <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="terminal"></i><span>Logs</span></a>
+                                <li id="logs" class="dropdown"><a class="nav-link menu-title" href="#/"><i data-feather="terminal"></i><span>Logs</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#">List</a></li>
                                         <li><a href="#">New</a></li>
@@ -482,19 +483,25 @@
         let isAdmin = false;
 
         if(state == 1) {
-            if(role == 2) {
-            $("#ai").show();
+            if(role == 1) {
+            // $("#ai").show();
             $("#logs").hide();
-            $("#settings").show();
-            } else {
-            $("#ai").hide();
+            } else if(role == 2){
+            $("#leads").hide();
+            $("#users").hide();
+            $("#company").hide();
             $("#logs").hide();
-            $("#settings").hide();
             }
         }else {
             window.location.href = './login.html';
         }
         // console.log(isAdmin);
+
+        $('#logout').click(function () {
+            console.log("Logged out!");
+            sessionStorage.clear();
+            window.location.href = './index.html';
+        });
 
         function signout() {
             window.localStorage.removeItem("username");
