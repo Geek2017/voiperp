@@ -336,9 +336,9 @@
                         <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i
                                     data-feather="maximize"></i></a></li>
                         <li class="profile-nav onhover-dropdown p-0">
-                            <div class="media profile-media"><img class="b-r-10"
-                                    src="assets/images/dashboard/profile.jpg" alt="">
-                                <div class="media-body"><span>Emay Walter</span>
+                            <div class="media profile-media"><img id="picture" class="b-r-10"
+                                    src="assets/images/dashboard/profile.jpg" width="30" height="30" alt="">
+                                <div id="username" class="media-body"><span>User</span>
                                     <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
                                 </div>
                             </div>
@@ -530,8 +530,12 @@
         let role = sessionStorage.getItem('role');
         let isAdmin = false;
         var logo = sessionStorage.getItem('comPhoto');
+        var picture = sessionStorage.getItem('picture');
+        var fullname = localStorage.getItem('fullname');
 
         if (state == 1) {
+            document.getElementById("picture").src = picture;
+            document.getElementById("username").innerHTML = fullname;
             if (role == 1) {
                 document.getElementById("photoURL").src = logo;
                 // $("#ai").show();
@@ -555,11 +559,16 @@
         });
 
         function signout() {
-            window.localStorage.removeItem("username");
+            window.localStorage.removeItem("fullname");
+            window.localStorage.removeItem("user");
+            window.localStorage.removeItem("req");
+            window.localStorage.removeItem("logo");
+            window.localStorage.removeItem("picture");
+            window.localStorage.removeItem("comid");
             sessionStorage.clear();
             localStorage.clear();
-            window.localStorage.removeItem("req");
-            window.localStorage.removeItem("user");
+            // window.localStorage.removeItem("req");
+            // window.localStorage.removeItem("user");
             console.log("Logged out!");
             window.location.href = './index.html';
             // firebase.auth().signOut().then(function() {

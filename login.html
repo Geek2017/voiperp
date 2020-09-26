@@ -65,8 +65,8 @@
                             <div class="cont text-left">
                                 <div>
                                     <form class="theme-form">
-                                        <div class="text-danger wrapper text-center" id="messages3"></div>
-                                        <div class="text-success wrapper text-center" id="success3"></div>
+                                        <div class="text-danger wrapper text-center" id="messages"></div>
+                                        <div class="text-success wrapper text-center" id="success"></div>
                                         <br>
                                         <h4>LOGIN</h4>
                                         <h6>Enter your Username and Password</h6>
@@ -131,6 +131,11 @@
                                                         <!-- <div class="card-header">
                                                     <h5>Form Vertical Wizard</h5>
                                                   </div> -->
+                                                        <div class="text-danger wrapper text-center" id="messages2">
+                                                        </div>
+                                                        <div class="text-success wrapper text-center" id="success2">
+                                                        </div>
+                                                        <br>
                                                         <h4 class="text-center">NEW USER</h4>
                                                         <h6 class="text-center">Enter your Username and Password For
                                                             Signup</h6>
@@ -658,6 +663,8 @@
                 // console.log(response.email);
                 if (response.email && response.password) {
 
+                    var picture = response.image;
+
                     var settings = {
                         "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/" +
                             response.comid,
@@ -682,14 +689,18 @@
                             // console.log("2");
                         }
                         if (signInPwd == decodedPwd) {
+                            document.getElementById("success").innerHTML = "Success! Redirecting . .";
                             sessionStorage.setItem("state", 1);
                             sessionStorage.setItem("user", user);
                             sessionStorage.setItem("role", lsrole);
+                            localStorage.setItem("fullname", response.fullname);
+                            sessionStorage.setItem("picture", picture);
                             console.log("You're in!");
                             window.location.href = './index.html';
-    
+
                         } else {
-                            // document.getElementById("messages").innerHTML = "Your password is incorrect!";
+                            document.getElementById("messages").innerHTML =
+                                "Your password is incorrect!";
                             console.log("Your password is incorrect!");
                         }
                     });
@@ -705,7 +716,7 @@
                 //         "Kindly contact the administrator for your authorization";
                 // } 
                 else if (!response.email && !response.password) {
-                    // document.getElementById("messages").innerHTML = "Your account is not registered";
+                    document.getElementById("messages").innerHTML = "Your account is not registered";
                     console.log("Your account is not registered");
                 }
 

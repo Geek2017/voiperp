@@ -220,147 +220,180 @@
     });
 
     function onFinishCallback() {
-        // $('#wizard').smartWizard('showMessage', 'All Step Done.. !!!');
+
         // console.log("asdsad");
 
-        var logo, picture;
+        var comName = $('#comName').val(),
+            comAdd = $('#comAdd').val(),
+            comNum = $('#comNum').val(),
+            comLogo = localStorage.getItem("logo"),
+            email = $('#email').val(),
+            contact = $('#contact').val(),
+            designation = $('#designation').val(),
+            fullname = $('#fullname').val(),
+            image = localStorage.getItem("picture"),
+            password = $('#password').val();
 
-        fileSelect = document.getElementById("comLogo").files;
-        fileSelect2 = document.getElementById("picture").files;
-        if (fileSelect.length > 0) {
-            var fileSelect = fileSelect[0];
-            var fileReader = new FileReader();
+            console.log(comName);
+            console.log(comAdd);
+            console.log(comNum);
+            console.log(email);
+            console.log(contact);
+            console.log(designation);
+            console.log(fullname);
+            console.log(password);
 
-            fileReader.onload = function (FileLoadEvent) {
-                var data = FileLoadEvent.target.result;
-                logo = data;
-                // console.log(data);
-                localStorage.setItem("logo", data);
+        if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
 
+            var logo, picture;
+
+            fileSelect = document.getElementById("comLogo").files;
+            fileSelect2 = document.getElementById("picture").files;
+            if (fileSelect.length > 0) {
+                var fileSelect = fileSelect[0];
+                var fileReader = new FileReader();
+
+                fileReader.onload = function (FileLoadEvent) {
+                    var data = FileLoadEvent.target.result;
+                    logo = data;
+                    // console.log(data);
+                    localStorage.setItem("logo", data);
+                    sessionStorage.setItem("comPhoto", data);
+
+                }
+                fileReader.readAsDataURL(fileSelect);
             }
-            fileReader.readAsDataURL(fileSelect);
+
+            if (fileSelect2.length > 0) {
+                var fileSelect2 = fileSelect2[0];
+                var fileReader2 = new FileReader();
+
+                fileReader2.onload = function (FileLoadEvent) {
+                    var data2 = FileLoadEvent.target.result;
+                    picture = data2;
+                    // console.log(data2);
+                    localStorage.setItem("picture", data2);
+                    sessionStorage.setItem("picture", data2);
+
+                }
+                fileReader2.readAsDataURL(fileSelect2);
+            }
+
+            // var logo = document.getElementById("comLogo");
+            // logo.addEventListener("change", function () {
+            //     encodeImageFileURL();
+            // })
+
+
+
+            var myData = JSON.stringify({
+
+                //     // "count": "13",
+                //     // "domain": "www.done.com"
+                "name": $('#comName').val(),
+                "address": $('#comAdd').val(),
+                "contact": $('#comNum').val(),
+                "logo": localStorage.getItem("logo"),
+                "subscription": "0",
+                // "password": Base64.encode(pwd.value),
+                // "role": ""
+
+            });
+            // console.log(myData);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
+                data: myData,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: function (response) {
+                    console.log(response);
+                    console.log("Success");
+                    // sessionStorage.setItem("state", 1);
+                    // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
+                    // setTimeout(function(){ 
+                    // $('#registerStyle').hide();
+                    // $('#forgotStyle').hide();
+                    // $('#loginStyle').show();
+                    // },3000);
+
+                    // window.location.href = './index.html';
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+
+                    var id = response.responseText;
+                    // localStorage.setItem("comid", id);
+
+                    var str = id;
+                    var res = str.split("\r\n", 1);
+
+                    console.log(res[0]);
+
+                    var myData2 = JSON.stringify({
+
+                        //     // "count": "13",
+                        //     // "domain": "www.done.com"
+                        "email": $('#email').val(),
+                        "comid": res[0],
+                        // "comid": $('#email').val(),
+                        "contact": $('#contact').val(),
+                        "designation": $('#designation').val(),
+                        "fullname": $('#fullname').val(),
+                        "image": localStorage.getItem("picture"),
+                        "password": Base64.encode(pwd.value),
+                        "role": "1",
+
+                        // "password": Base64.encode(pwd.value),
+                        // "role": ""
+
+                    });
+
+                    console.log(myData2);
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                        url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
+                        data: myData2,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            // console.log("Success");
+                            localStorage.setItem("fullname", $('#fullname').val());
+                            sessionStorage.setItem("state", 1);
+                            sessionStorage.setItem("role", 1);
+                            // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
+                            // setTimeout(function(){ 
+                            // $('#registerStyle').hide();
+                            // $('#forgotStyle').hide();
+                            // $('#loginStyle').show();
+                            // },3000);
+                            $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .');
+
+                            window.location.href = './index.html';
+                        },
+                        error: function (response) {
+                            console.log(response);
+                            console.log("Error");
+
+                        }
+                    });
+                }
+            });
+        } else {
+            document.getElementById("messages2").innerHTML = "You need to fill up everything, check the fields again.";
+            console.log("You need to fill up everything, check the feilds again.");
         }
 
-        if (fileSelect2.length > 0) {
-            var fileSelect2 = fileSelect2[0];
-            var fileReader2 = new FileReader();
-
-            fileReader2.onload = function (FileLoadEvent) {
-                var data2 = FileLoadEvent.target.result;
-                picture = data2;
-                // console.log(data2);
-                localStorage.setItem("picture", data2);
-                sessionStorage.setItem("comPhoto", data2);
-
-            }
-            fileReader2.readAsDataURL(fileSelect2);
-        }
-
-        // var logo = document.getElementById("comLogo");
-        // logo.addEventListener("change", function () {
-        //     encodeImageFileURL();
-        // })
 
 
 
-        var myData = JSON.stringify({
-
-            //     // "count": "13",
-            //     // "domain": "www.done.com"
-            "name": $('#comName').val(),
-            "address": $('#comAdd').val(),
-            "contact": $('#comNum').val(),
-            "logo": localStorage.getItem("logo"),
-            "subscription": "0",
-            // "password": Base64.encode(pwd.value),
-            // "role": ""
-
-        });
-        // console.log(myData);
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
-            data: myData,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            success: function (response) {
-                console.log(response);
-                console.log("Success");
-                // sessionStorage.setItem("state", 1);
-                // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
-                // setTimeout(function(){ 
-                // $('#registerStyle').hide();
-                // $('#forgotStyle').hide();
-                // $('#loginStyle').show();
-                // },3000);
-
-                // window.location.href = './index.html';
-            },
-            error: function (response) {
-                console.log(response.responseText);
-
-                var id = response.responseText;
-                // localStorage.setItem("comid", id);
-
-                var str = id;
-                var res = str.split("\r\n", 1);
-
-                console.log(res[0]);
-
-                var myData2 = JSON.stringify({
-
-                    //     // "count": "13",
-                    //     // "domain": "www.done.com"
-                    "email": $('#email').val(),
-                    "comid": res[0],
-                    // "comid": $('#email').val(),
-                    "contact": $('#contact').val(),
-                    "designation": $('#designation').val(),
-                    "fullname": $('#fullname').val(),
-                    "image": localStorage.getItem("picture"),
-                    "password": Base64.encode(pwd.value),
-                    "role": "1",
-
-                    // "password": Base64.encode(pwd.value),
-                    // "role": ""
-
-                });
-
-                console.log(myData2);
-
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                    url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
-                    data: myData2,
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        // console.log("Success");
-                        sessionStorage.setItem("state", 1);
-                        sessionStorage.setItem("role", 1);
-                        // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
-                        // setTimeout(function(){ 
-                        // $('#registerStyle').hide();
-                        // $('#forgotStyle').hide();
-                        // $('#loginStyle').show();
-                        // },3000);
-
-                        window.location.href = './index.html';
-                    },
-                    error: function (response) {
-                        console.log(response);
-                        console.log("Error");
-
-                    }
-                });
-            }
-        });
     }
 })(jQuery);
