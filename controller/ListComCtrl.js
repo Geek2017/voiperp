@@ -17,7 +17,7 @@ angular.module('fvs').controller('ListComCtrl', function($scope) {
         // console.log(response);
         for (var i = 0; i < count; i++){
 
-            $scope.arr[i] = {name: response.Items[i].name.S, address: response.Items[i].address.S, contact: response.Items[i].contact.S, subscription: response.Items[i].subscription.S }
+            $scope.arr[i] = {name: response.Items[i].name.S, address: response.Items[i].address.S, contact: response.Items[i].contact.S, subscription: response.Items[i].subscription.S, action: "" }
             // console.log(response.Items[i])
             $scope.data.push($scope.arr[i]);
             
@@ -93,20 +93,20 @@ angular.module('fvs').controller('ListComCtrl', function($scope) {
                         }];
                         // btn.type = buttons.values(type);
                         
-                        // for (let k = 0; k < buttons.length; k++) {
-                        //     let button = buttons[k];
-                        //     var btn = document.createElement('input');
-                        //     btn.type = button.type;
-                        //     btn.value = button.value;
-                        //     btn.className = button.className;
-                        //     btn
-                        //     if(btn.value === "Edit") {
-                        //         btn.onclick = (function(entry) {return function() {$scope.selectUser(entry);}})(entry);
-                        //     } else {
-                        //         btn.onclick = (function(entry) {return function() {$scope.selectUser2(entry);}})(entry);
-                        //     }
-                        //     td.appendChild(btn)[i];
-                        // }
+                        for (let k = 0; k < buttons.length; k++) {
+                            let button = buttons[k];
+                            var btn = document.createElement('input');
+                            btn.type = button.type;
+                            btn.value = button.value;
+                            btn.className = button.className;
+                            btn
+                            if(btn.value === "Edit") {
+                                btn.onclick = (function(entry) {return function() {$scope.selectUser(entry);}})(entry);
+                            } else {
+                                btn.onclick = (function(entry) {return function() {$scope.selectUser2(entry);}})(entry);
+                            }
+                            td.appendChild(btn)[i];
+                        }
 
                         // var entry2 = $scope.arr[i];
                         // var btn2 = document.createElement('br');

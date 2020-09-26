@@ -250,6 +250,7 @@
                 picture = data2;
                 // console.log(data2);
                 localStorage.setItem("picture", data2);
+                sessionStorage.setItem("comPhoto", data2);
 
             }
             fileReader2.readAsDataURL(fileSelect2);
@@ -321,7 +322,7 @@
                     "fullname": $('#fullname').val(),
                     "image": localStorage.getItem("picture"),
                     "password": Base64.encode(pwd.value),
-                    "role": "admin",
+                    "role": "1",
 
                     // "password": Base64.encode(pwd.value),
                     // "role": ""
@@ -343,6 +344,7 @@
                         console.log(data);
                         // console.log("Success");
                         sessionStorage.setItem("state", 1);
+                        sessionStorage.setItem("role", 1);
                         // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
                         // setTimeout(function(){ 
                         // $('#registerStyle').hide();
