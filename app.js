@@ -9,10 +9,14 @@ angular
                 templateUrl: 'views/dashboard.html',
                 controller: 'DashboardCtrl'
             })
-            // .when('/contacts', {
-            //   templateUrl : 'views/contacts.html',
-            //   controller  : 'ContactCtrl'
-            // })
+            .when('/listUsers', {
+              templateUrl : 'views/listUsers.html',
+              controller  : 'ListUsersCtrl'
+            })
+            .when('/listCompanies', {
+                templateUrl : 'views/listCompanies.html',
+                controller  : 'ListCompaniesCtrl'
+              })
             // .when('/about', {
             //   templateUrl : 'views/about.html',
             //   controller  : 'AboutCtrl'

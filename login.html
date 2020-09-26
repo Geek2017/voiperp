@@ -653,17 +653,25 @@
                 "timeout": 0,
             };
             $.ajax(settings).done(function (response) {
-                var user = response.username;
-                console.log(response);
-                console.log(response.email);
+                var user = response.email;
+                // console.log(response);
+                // console.log(response.email);
                 if (response.email && response.password) {
-                    console.log(Base64.decode(response.password));
-                    var lsrole = 0;
-                    var decodedPwd = Base64.decode(response.password);
-                    // var role = response.role;
-                    var signInPwd = $('#loginPassword').val();
-                    // console.log(role);
-                    if (response.role == 0) {
+
+                    var settings = {
+                        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/" +
+                            response.comid,
+                        "method": "GET",
+                        "timeout": 0,
+                    };
+                    $.ajax(settings).done(function (response2) {
+                        sessionStorage.setItem("comPhoto", response2.logo);
+                        var lsrole = 0;
+                        var decodedPwd = Base64.decode(response.password);
+                        // var role = response.role;
+                        var signInPwd = $('#loginPassword').val();
+                        // console.log(role);
+                        if (response.role == 0) {
                             lsrole = 0;
                             console.log("0");
                         } else if (response.role == 1) {
@@ -673,17 +681,24 @@
                             lsrole = 2;
                             console.log("2");
                         }
-                    if (signInPwd == decodedPwd) {
-                        sessionStorage.setItem("state", 1);
-                        sessionStorage.setItem("user", user);
-                        sessionStorage.setItem("role", lsrole);
-                        console.log("You're in!");
-                        window.location.href = './index.html';
+                        if (signInPwd == decodedPwd) {
+                            sessionStorage.setItem("state", 1);
+                            sessionStorage.setItem("user", user);
+                            sessionStorage.setItem("role", lsrole);
+                            console.log("You're in!");
+                            window.location.href = './index.html';
+    
+                        } else {
+                            // document.getElementById("messages").innerHTML = "Your password is incorrect!";
+                            console.log("Your password is incorrect!");
+                        }
+                    });
+                    // $.ajax(settings).done(function (error2) {
+                    //     console.log(error2);
+                    //     // sessionStorage.setItem("comPhoto", response2.logo);
+                    // });
 
-                    } else {
-                        // document.getElementById("messages").innerHTML = "Your password is incorrect!";
-                        console.log("Your password is incorrect!");
-                    }
+                    // console.log(Base64.decode(response.password));
                 }
                 // else if (response.username && response.password && !response.role) {
                 //     document.getElementById("messages").innerHTML =
@@ -693,6 +708,8 @@
                     // document.getElementById("messages").innerHTML = "Your account is not registered";
                     console.log("Your account is not registered");
                 }
+
+
 
             });
         }
