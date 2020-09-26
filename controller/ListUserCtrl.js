@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('fvs').controller('ListCompaniesCtrl', function($scope) {
+angular.module('fvs').controller('ListUserCtrl', function($scope) {
 
     $scope.data = [];
 
     $scope.arr = [];
 
     var settings = {
-        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcompanies",
+        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
         "method": "GET",
         "timeout": 0,
       };
@@ -17,7 +17,7 @@ angular.module('fvs').controller('ListCompaniesCtrl', function($scope) {
         // console.log(response);
         for (var i = 0; i < count; i++){
 
-            $scope.arr[i] = {name: response.Items[i].name.S, address: response.Items[i].address.S, contact: response.Items[i].contact.S, subscription: response.Items[i].subscription.S }
+            $scope.arr[i] = {email: response.Items[i].email.S, fullname: response.Items[i].fullname.S, designation: response.Items[i].designation.S, contact: response.Items[i].contact.S, password: response.Items[i].password.S, role: response.Items[i].role.S }
             // console.log(response.Items[i])
             $scope.data.push($scope.arr[i]);
             

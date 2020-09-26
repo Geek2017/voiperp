@@ -11,11 +11,11 @@ angular
             })
             .when('/listUsers', {
               templateUrl : 'views/listUsers.html',
-              controller  : 'ListUsersCtrl'
+              controller  : 'ListUserCtrl'
             })
             .when('/listCompanies', {
                 templateUrl : 'views/listCompanies.html',
-                controller  : 'ListCompaniesCtrl'
+                controller  : 'ListComCtrl'
               })
             // .when('/about', {
             //   templateUrl : 'views/about.html',
