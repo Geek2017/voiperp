@@ -555,16 +555,22 @@
         $('#logout').click(function () {
             console.log("Logged out!");
             sessionStorage.clear();
+            localStorage.removeItem("fullname");
+            localStorage.removeItem("user");
+            localStorage.removeItem("req");
+            localStorage.removeItem("logo");
+            localStorage.removeItem("picture");
+            localStorage.removeItem("comid");
             window.location.href = './index.html';
         });
 
         function signout() {
-            window.localStorage.removeItem("fullname");
-            window.localStorage.removeItem("user");
-            window.localStorage.removeItem("req");
-            window.localStorage.removeItem("logo");
-            window.localStorage.removeItem("picture");
-            window.localStorage.removeItem("comid");
+            localStorage.removeItem("fullname");
+            localStorage.removeItem("user");
+            localStorage.removeItem("req");
+            localStorage.removeItem("logo");
+            localStorage.removeItem("picture");
+            localStorage.removeItem("comid");
             sessionStorage.clear();
             localStorage.clear();
             // window.localStorage.removeItem("req");
