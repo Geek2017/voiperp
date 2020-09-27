@@ -234,15 +234,6 @@
             image = localStorage.getItem("picture"),
             password = $('#password').val();
 
-            console.log(comName);
-            console.log(comAdd);
-            console.log(comNum);
-            console.log(email);
-            console.log(contact);
-            console.log(designation);
-            console.log(fullname);
-            console.log(password);
-
         if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
 
             var logo, picture;
@@ -331,6 +322,8 @@
                     var str = id;
                     var res = str.split("\r\n", 1);
 
+                    sessionStorage.setItem("comid", res[0]);
+
                     console.log(res[0]);
 
                     var myData2 = JSON.stringify({
@@ -345,7 +338,8 @@
                         "fullname": $('#fullname').val(),
                         "image": localStorage.getItem("picture"),
                         "password": Base64.encode(pwd.value),
-                        "role": "1",
+                        "role": "admin",
+                        "verification": "not verify"
 
                         // "password": Base64.encode(pwd.value),
                         // "role": ""
@@ -375,9 +369,36 @@
                             // $('#forgotStyle').hide();
                             // $('#loginStyle').show();
                             // },3000);
-                            $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .');
+                            // $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .');
+                            var template_params = {
+                                "to_email": $('#email').val(),
+                                // "bcc": email,
+                                // "reply_to": email,
+                                "from_name": "FVS Team",
+                                "to_name": "",
+                                "message_html": "http://127.0.0.1:5500/verification.html#" + res[0] + "#" + $('#email').val()
+                            }
 
-                            window.location.href = './index.html';
+
+                            var service_id = "fvs2";
+                            var template_id = "template_3hi63vh";
+                            emailjs.send(service_id, template_id, template_params);
+
+                            console.log("Sent");
+                            document.getElementById("comName").value = "";
+                            document.getElementById("comAdd").value = "";
+                            document.getElementById("comNum").value = "";
+                            document.getElementById("email").value = "";
+                            document.getElementById("contact").value = "";
+                            document.getElementById("designation").value = "";
+                            document.getElementById("fullname").value = "";
+                            document.getElementById("password").value = "";
+
+                            document.getElementById("messages2").innerHTML =
+                                "A verification email has been sent! You need to verify your email before logging in.";
+
+
+                            // window.location.href = './index.html';
                         },
                         error: function (response) {
                             console.log(response);
@@ -389,7 +410,10 @@
             });
         } else {
             document.getElementById("messages2").innerHTML = "You need to fill up everything, check the fields again.";
-            console.log("You need to fill up everything, check the feilds again.");
+            setTimeout(function () {
+                document.getElementById("messages2").innerHTML = " ";
+            }, 3000);
+            // console.log("You need to fill up everything, check the feilds again.");
         }
 
 

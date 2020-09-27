@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <!-- <h1>My First Heading</h1> -->
+    <h1>
+        <p id="verify" style="font-size:20px;">Verifying . . .</p>
+    </h1>
+    <div id="display" style="display: none;">
+         <a href="./login.html" id="toLogin"><span>Click here to login</span></a>
+    </div>
+
+</body>
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+
+<script>
+    // var url = window.location.href;
+    var str = window.location.href;
+    // console.log(str);
+    var res = str.split("#", 2);
+    // document.getElementById("demo").innerHTML = res[0];
+    // document.getElementById("demo2").innerHTML = res[1];
+
+    var str2 = res[1];
+    var res2 = str2.split("%23", 2)
+    // document.getElementById("demo3").innerHTML = res2[0];
+    // document.getElementById("demo4").innerHTML = res2[1];
+
+    var settings = {
+        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + res2[1],
+        "method": "GET",
+        "timeout": 0,
+    };
+    $.ajax(settings).done(function (response) {
+
+        // console.log(response);
+
+        if (response.email && response.verification == "not verify") {
+            var myData = JSON.stringify({
+
+                "email": response.email,
+                "comid": response.comid,
+                "contact": response.contact,
+                "designation": response.designation,
+                "fullname": response.fullname,
+                "image": response.image,
+                "password": response.password,
+                "role": response.role,
+                "verification": "verified"
+
+            });
+            // console.log(myData);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
+                data: myData,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: function (data) {
+                    document.getElementById("verify").innerHTML = "Your account is now verified! ";
+                    document.getElementById("display").style.display = "block";
+                    // console.log("Success");
+                    // sessionStorage.setItem("state", 1);
+                    // sessionStorage.setItem("role", lsrole);
+                    // // $('#registerStyle').hide();
+                    // // $('#forgotStyle').hide();
+                    // // $('#loginStyle').show();
+                    // window.location.href = './index.html';
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            document.getElementById("verify").innerHTML = "There's an error verifying this account! Try again.";
+        }
+
+        if(response.verification == "verified"){
+            document.getElementById("verify").innerHTML = "Your account is already verified";
+            document.getElementById("display").style.display = "block";
+        }
+
+
+    });
+</script>
+
+</html>

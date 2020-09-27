@@ -40,6 +40,13 @@
     <link id="color" rel="stylesheet" href="assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("user_r0ocDShgO3V3hH7Qw6juY");
+        })();
+    </script>
 </head>
 
 <body>
@@ -221,7 +228,8 @@
                                 </li>
                                 <li>
                                     <p class="mb-0"><i class="fa fa-circle-o mr-3 font-primary"> </i>Delivery processing
-                                        <span class="pull-right">10 min.</span></p>
+                                        <span class="pull-right">10 min.</span>
+                                    </p>
                                 </li>
                                 <li>
                                     <p class="mb-0"><i class="fa fa-circle-o mr-3 font-success"></i>Order Complete<span
@@ -371,8 +379,8 @@
             <!-- Page Sidebar Start-->
             <header class="main-nav">
                 <div class="logo-wrapper">
-                    <a href="#/"><img id="photoURL" class="img-fluid for-light"
-                            src="assets/images/logo/logo.png" width="90" height="20" alt=""><img class="img-fluid for-dark"
+                    <a href="#/"><img id="photoURL" class="img-fluid for-light" src="assets/images/logo/logo.png"
+                            width="40%" height="50%" style="text-align:center;" alt=""><img class="img-fluid for-dark"
                             src="assets/images/logo/logo_dark.png" alt=""></a>
                     <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                     <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle">
@@ -417,23 +425,23 @@
                                     </ul>
                                 </li>
 
-                                <li id="users" class="dropdown"><a class="nav-link menu-title" ><i
+                                <li id="users" class="dropdown"><a class="nav-link menu-title"><i
                                             data-feather="users"></i><span>Users</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#/listUsers">List</a></li>
-                                        <li><a href="#">New</a></li>
+                                        <li><a href="#/newUser">New</a></li>
                                     </ul>
                                 </li>
 
-                                <li id="company" class="dropdown"><a class="nav-link menu-title" ><i
+                                <li id="company" class="dropdown"><a class="nav-link menu-title"><i
                                             data-feather="globe"></i><span>Company</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#/listCompanies">List</a></li>
-                                        <li><a href="#">New</a></li>
+                                        <!-- <li><a href="#/newCompany">New</a></li> -->
                                     </ul>
                                 </li>
 
-                                <li id="logs" class="dropdown"><a class="nav-link menu-title" ><i
+                                <li id="logs" class="dropdown"><a class="nav-link menu-title"><i
                                             data-feather="terminal"></i><span>Logs</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#">List</a></li>
@@ -510,6 +518,7 @@
     <script src="controller/DashboardCtrl.js"></script>
     <script src="controller/ListUserCtrl.js"></script>
     <script src="controller/ListComCtrl.js"></script>
+    <script src="controller/NewUsersCtrl.js"></script>
     <!-- must be below AngularJS imports -->
 
     <script>
@@ -534,14 +543,19 @@
         var fullname = localStorage.getItem('fullname');
 
         if (state == 1) {
-            document.getElementById("picture").src = picture;
+            if (picture) {
+                document.getElementById("picture").src = picture;
+            }
+            if (logo) {
+                document.getElementById("photoURL").src = logo;
+            }
             document.getElementById("username").innerHTML = fullname;
             if (role == 1) {
-                document.getElementById("photoURL").src = logo;
+                // document.getElementById("photoURL").src = logo;
                 // $("#ai").show();
                 $("#logs").hide();
             } else if (role == 2) {
-                document.getElementById("photoURL").src = logo;
+                // document.getElementById("photoURL").src = logo;
                 $("#leads").hide();
                 $("#users").hide();
                 $("#company").hide();

@@ -17,7 +17,7 @@ angular.module('fvs').controller('ListUserCtrl', function($scope) {
         // console.log(response);
         for (var i = 0; i < count; i++){
 
-            $scope.arr[i] = {email: response.Items[i].email.S, fullname: response.Items[i].fullname.S, designation: response.Items[i].designation.S, contact: response.Items[i].contact.S, password: response.Items[i].password.S, role: response.Items[i].role.S, action: "" }
+            $scope.arr[i] = {email: response.Items[i].email.S, fullname: response.Items[i].fullname.S, designation: response.Items[i].designation.S, contact: response.Items[i].contact.S, role: response.Items[i].role.S, status: response.Items[i].verification.S, action: "" }
             // console.log(response.Items[i])
             $scope.data.push($scope.arr[i]);
             
