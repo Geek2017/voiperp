@@ -181,7 +181,8 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
                 divContainer.appendChild(table);
     
             }
-        } else {
+        } 
+        else if (role == 1) {
             var noOfContacts = newFiltered.length;
 
             if (noOfContacts > 0) {
