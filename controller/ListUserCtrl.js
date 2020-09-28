@@ -6,6 +6,8 @@ angular.module('fvs').controller('ListUserCtrl', function($scope) {
 
     $scope.arr = [];
 
+    var userComID = sessionStorage.getItem("comid");
+
     var settings = {
         "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
         "method": "GET",
