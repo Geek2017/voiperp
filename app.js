@@ -9,6 +9,14 @@ angular
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl'
       })
+      .when('/leads', {
+        templateUrl: 'views/Leads.html',
+        controller: 'LeadsCtrl'
+      })
+      .when('/calls', {
+        templateUrl: 'views/Call.html',
+        controller: 'CallCtrl'
+      })
       .when('/listUsers', {
         templateUrl: 'views/listUsers.html',
         controller: 'ListUserCtrl'
@@ -20,6 +28,10 @@ angular
       .when('/listCompanies', {
         templateUrl: 'views/listCompanies.html',
         controller: 'ListComCtrl'
+      })
+      .when('/logs', {
+        templateUrl: 'views/Logs.html',
+        controller: 'LogsCtrl'
       })
     // .when('/about', {
     //   templateUrl : 'views/about.html',

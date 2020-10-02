@@ -649,6 +649,10 @@
 
 
         function login() {
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date + ' ' + time;
 
             const username = $('#loginEmail').val();
 
@@ -699,7 +703,52 @@
                             localStorage.setItem("fullname", response.fullname);
                             sessionStorage.setItem("picture", picture);
                             console.log("You're in!");
-                            window.location.href = './index.html';
+
+                            var myData = JSON.stringify({
+
+                                //     // "count": "13",
+                                //     // "domain": "www.done.com"
+                                "action": "Login",
+                                "comid": response.comid,
+                                "datetime": dateTime,
+                                "module": "Auth",
+                                "role": response.role,
+                                "userid": response.email
+
+                                // "password": Base64.encode(pwd.value),
+                                // "role": ""
+
+                            });
+
+                            // console.log(myData2);
+
+                            $.ajax({
+                                type: "POST",
+                                dataType: "json",
+                                // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/t-logs/{id}",
+                                data: myData,
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                success: function (data) {
+                                    console.log("T-Log");
+                                    
+                                    window.location.href = './index.html';
+                                },
+                                error: function (response) {
+                                    console.log(response);
+                                    console.log("Error");
+
+                                }
+                            });
+                            // sessionStorage.setItem("state", 1);
+                            // sessionStorage.setItem("user", user);
+                            // sessionStorage.setItem("role", lsrole);
+                            // localStorage.setItem("fullname", response.fullname);
+                            // sessionStorage.setItem("picture", picture);
+                            // console.log("You're in!");
+                            // window.location.href = './index.html';
 
                         } else {
                             document.getElementById("messages").innerHTML =

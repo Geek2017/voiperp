@@ -2,9 +2,26 @@
 
 angular.module('fvs').controller('ListComCtrl', function ($scope) {
 
+    var modal = document.getElementById('myModal');
+    var modal2 = document.getElementById('myModal2');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var accept = document.getElementById("accept");
+
+    $("#editBtn").click(function() {
+        modal.style.display = "block";
+    });
+
     $scope.data = [];
 
     $scope.arr = [];
+
+    var userName, email, role, id;
+
+    $scope.clickedUser = {};
 
     var userComID = sessionStorage.getItem("comid");
     var role = sessionStorage.getItem("role")
@@ -25,6 +42,7 @@ angular.module('fvs').controller('ListComCtrl', function ($scope) {
                 name: response.Items[i].name.S,
                 address: response.Items[i].address.S,
                 contact: response.Items[i].contact.S,
+                logo: response.Items[i].logo.S,
                 subscription: response.Items[i].subscription.S,
                 action: ""
             }
@@ -420,5 +438,117 @@ angular.module('fvs').controller('ListComCtrl', function ($scope) {
 
 
     });
+
+
+    $scope.statuses = [
+        {username: 'asdasdasds', role: 'status1'},
+        {username: 'asdasdasdsad', role: 'status2'},
+        {username: 'asdasdsadas', role: 'status3'}
+      ];
+
+    //   console.log($scope.statuses);
+
+    $scope.selectUser = function(entry) {
+        // console.log(users);
+        console.log(entry);
+        // $scope.clickedUser = entry;
+        $("#editName").val(entry.name);
+        $("#editAddress").val(entry.address);
+        $("#editContact").val(entry.contact);
+        $("#editSubscription").val(entry.subscription);
+        // $("#editRole").val(entry.role);
+        id = entry;
+        modal.style.display = "block";  
+        // $('#myModal').modal('show');
+    };
+
+    $scope.selectUser2 = function(entry) {
+        // console.log(users);
+        $scope.clickedUser = entry;
+        document.getElementById("deleteUser").innerText =  entry.fullname;
+        id = entry;
+        modal2.style.display = "block";
+    };
+
+    $scope.updateUser = function() {
+        // var ref2 = firebase.database().ref("datasets/users/" + id.$id);
+        // ref2.update({
+        //     username: $scope.clickedUser.username,
+        //     email: $scope.clickedUser.email,
+        //     // country: $scope.clickedUser.country,
+        //     // gender: $scope.clickedUser.gender,
+        //     role: $scope.clickedUser.role
+        // })
+        // console.log($("#editName").val());
+        // console.log($("#editPass").val());
+        // console.log($("#editRole").val());
+
+        var myData = JSON.stringify({
+            // "domain": "www.done.com"
+            "id": id.comid,
+            "name": $("#editName").val(),
+            "address": $("#editAddress").val(),
+            "contact": $("#editContact").val(),
+            "logo": id.logo,
+            "subscription": $("#editSubscription").val(),
+            // "password": Base64.encode(pwd.value),
+            // "role": "ordinary"
+        });
+
+        console.log(myData);
+    
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
+            data: myData,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            success: function(data) {
+                console.log(data);
+                window.location.hash = "#/";
+                window.location.hash = "#/listCompanies";
+                // console.log(window.location.hash);
+    
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        
+
+        modal.style.display = "none";
+
+    };
+
+    $scope.deleteUser = function() {
+        // console.log(entry)
+        // var ref = firebase.database().ref("datasets/users/" + id.$id);
+        // ref.remove();
+        // modal2.style.display = "none";
+        // console.log(id.username);
+
+
+        var settings = {
+            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + id.email,
+            "method": "DELETE",
+            "timeout": 0,
+        };
+        $.ajax(settings).done(function(response) {
+            console.log(response);
+            modal2.style.display = "none";
+        });
+    };
+
+    $scope.close = function() {
+        modal.style.display = "none";
+    };
+
+    $scope.close2 = function() {
+        modal2.style.display = "none";
+    };
+
 
 });

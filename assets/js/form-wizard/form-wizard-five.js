@@ -234,10 +234,6 @@
             image = localStorage.getItem("picture"),
             password = $('#password').val();
 
-        if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
-
-            var logo, picture;
-
             fileSelect = document.getElementById("comLogo").files;
             fileSelect2 = document.getElementById("picture").files;
             if (fileSelect.length > 0) {
@@ -269,6 +265,11 @@
                 }
                 fileReader2.readAsDataURL(fileSelect2);
             }
+            
+        if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
+
+            var logo, picture;
+
 
             // var logo = document.getElementById("comLogo");
             // logo.addEventListener("change", function () {

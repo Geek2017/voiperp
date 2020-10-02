@@ -1,19 +1,6 @@
 'use strict';
 
-angular.module('fvs').controller('ListUserCtrl', function ($scope) {
-
-    var modal = document.getElementById('myModal');
-    var modal2 = document.getElementById('myModal2');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var accept = document.getElementById("accept");
-
-    $("#editBtn").click(function() {
-        modal.style.display = "block";
-    });
+angular.module('fvs').controller('LogsCtrl', function ($scope) {
 
     $scope.data = [];
 
@@ -21,21 +8,18 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
     let actual = 0;
 
-    var userName, email, role, id;
-
-    $scope.clickedUser = {};
-
     var userComID = sessionStorage.getItem("comid");
     var role = sessionStorage.getItem("role");
     // console.log(userComID);
 
     var settings = {
-        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
+        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/alllogs",
         "method": "GET",
         "timeout": 0,
     };
 
     $.ajax(settings).done(function (response) {
+        console.log(response);
         var count = response.Count;
 
       
@@ -44,15 +28,11 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
             $scope.arr[i] = {
                 comid: response.Items[i].comid.S,
-                email: response.Items[i].email.S,
-                fullname: response.Items[i].fullname.S,
-                designation: response.Items[i].designation.S,
-                image: response.Items[i].image.S,
-                password: response.Items[i].password.S,
-                contact: response.Items[i].contact.S,
+                email: response.Items[i].userid.S,
+                action: response.Items[i].action.S,
+                datetime: response.Items[i].datetime.S,
+                module: response.Items[i].module.S,
                 role: response.Items[i].role.S,
-                status: response.Items[i].verification.S,
-                action: ""
             }
             $scope.data.push($scope.arr[i]);
 
@@ -71,12 +51,10 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
         var newFiltered = filtered.map((users) => {
             var user = {
                 email: users.email,
-                fullname: users.fullname,
-                designation: users.designation,
-                contact: users.contact,
+                action: users.action,
+                datetime: users.datetime,
+                module: users.module,
                 role: users.role,
-                status: users.status,
-                action: users.action
             }
 
             return user
@@ -152,28 +130,28 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
                     }];
                     // btn.type = buttons.values(type);
     
-                    for (let k = 0; k < buttons.length; k++) {
-                        let button = buttons[k];
-                        var btn = document.createElement('input');
-                        btn.type = button.type;
-                        btn.value = button.value;
-                        btn.className = button.className;
-                        btn
-                        if (btn.value === "Edit") {
-                            btn.onclick = (function (entry) {
-                                return function () {
-                                    $scope.selectUser(entry);
-                                }
-                            })(entry);
-                        } else {
-                            btn.onclick = (function (entry) {
-                                return function () {
-                                    $scope.selectUser2(entry);
-                                }
-                            })(entry);
-                        }
-                        td.appendChild(btn)[i];
-                    }
+                    // for (let k = 0; k < buttons.length; k++) {
+                    //     let button = buttons[k];
+                    //     var btn = document.createElement('input');
+                    //     btn.type = button.type;
+                    //     btn.value = button.value;
+                    //     btn.className = button.className;
+                    //     btn
+                    //     if (btn.value === "Edit") {
+                    //         btn.onclick = (function (entry) {
+                    //             return function () {
+                    //                 $scope.selectUser(entry);
+                    //             }
+                    //         })(entry);
+                    //     } else {
+                    //         btn.onclick = (function (entry) {
+                    //             return function () {
+                    //                 $scope.selectUser2(entry);
+                    //             }
+                    //         })(entry);
+                    //     }
+                    //     td.appendChild(btn)[i];
+                    // }
     
                     // var entry2 = $scope.arr[i];
                     // var btn2 = document.createElement('br');
@@ -274,28 +252,28 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
                     }];
                     // btn.type = buttons.values(type);
     
-                    for (let k = 0; k < buttons.length; k++) {
-                        let button = buttons[k];
-                        var btn = document.createElement('input');
-                        btn.type = button.type;
-                        btn.value = button.value;
-                        btn.className = button.className;
-                        btn
-                        if (btn.value === "Edit") {
-                            btn.onclick = (function (entry) {
-                                return function () {
-                                    $scope.selectUser(entry);
-                                }
-                            })(entry);
-                        } else {
-                            btn.onclick = (function (entry) {
-                                return function () {
-                                    $scope.selectUser2(entry);
-                                }
-                            })(entry);
-                        }
-                        td.appendChild(btn)[i];
-                    }
+                    // for (let k = 0; k < buttons.length; k++) {
+                    //     let button = buttons[k];
+                    //     var btn = document.createElement('input');
+                    //     btn.type = button.type;
+                    //     btn.value = button.value;
+                    //     btn.className = button.className;
+                    //     btn
+                    //     if (btn.value === "Edit") {
+                    //         btn.onclick = (function (entry) {
+                    //             return function () {
+                    //                 $scope.selectUser(entry);
+                    //             }
+                    //         })(entry);
+                    //     } else {
+                    //         btn.onclick = (function (entry) {
+                    //             return function () {
+                    //                 $scope.selectUser2(entry);
+                    //             }
+                    //         })(entry);
+                    //     }
+                    //     td.appendChild(btn)[i];
+                    // }
     
                     // var entry2 = $scope.arr[i];
                     // var btn2 = document.createElement('br');
@@ -398,28 +376,28 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
                 }];
                 // btn.type = buttons.values(type);
 
-                for (let k = 0; k < buttons.length; k++) {
-                    let button = buttons[k];
-                    var btn = document.createElement('input');
-                    btn.type = button.type;
-                    btn.value = button.value;
-                    btn.className = button.className;
-                    btn
-                    if (btn.value === "Edit") {
-                        btn.onclick = (function (entry) {
-                            return function () {
-                                $scope.selectUser(entry);
-                            }
-                        })(entry);
-                    } else {
-                        btn.onclick = (function (entry) {
-                            return function () {
-                                $scope.selectUser2(entry);
-                            }
-                        })(entry);
-                    }
-                    td.appendChild(btn)[i];
-                }
+                // for (let k = 0; k < buttons.length; k++) {
+                //     let button = buttons[k];
+                //     var btn = document.createElement('input');
+                //     btn.type = button.type;
+                //     btn.value = button.value;
+                //     btn.className = button.className;
+                //     btn
+                //     if (btn.value === "Edit") {
+                //         btn.onclick = (function (entry) {
+                //             return function () {
+                //                 $scope.selectUser(entry);
+                //             }
+                //         })(entry);
+                //     } else {
+                //         btn.onclick = (function (entry) {
+                //             return function () {
+                //                 $scope.selectUser2(entry);
+                //             }
+                //         })(entry);
+                //     }
+                //     td.appendChild(btn)[i];
+                // }
 
                 // var entry2 = $scope.arr[i];
                 // var btn2 = document.createElement('br');
@@ -456,119 +434,8 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
     });
 
-
-
-    $scope.statuses = [
-        {username: 'asdasdasds', role: 'status1'},
-        {username: 'asdasdasdsad', role: 'status2'},
-        {username: 'asdasdsadas', role: 'status3'}
-      ];
-
-    //   console.log($scope.statuses);
-
-    $scope.selectUser = function(entry) {
-        // console.log(users);
-        console.log(entry);
-        // $scope.clickedUser = entry;
-        $("#editEmail").val(entry.email);
-        $("#editFullname").val(entry.fullname);
-        $("#editDesignation").val(entry.designation);
-        $("#editContact").val(entry.contact);
-        $("#editRole").val(entry.role);
-        id = entry;
-        modal.style.display = "block";
-        // $('#myModal').modal('show');
-    };
-
-    $scope.selectUser2 = function(entry) {
-        // console.log(users);
-        $scope.clickedUser = entry;
-        document.getElementById("deleteUser").innerText =  entry.fullname;
-        id = entry;
-        modal2.style.display = "block";
-    };
-
-    $scope.updateUser = function() {
-        // var ref2 = firebase.database().ref("datasets/users/" + id.$id);
-        // ref2.update({
-        //     username: $scope.clickedUser.username,
-        //     email: $scope.clickedUser.email,
-        //     // country: $scope.clickedUser.country,
-        //     // gender: $scope.clickedUser.gender,
-        //     role: $scope.clickedUser.role
-        // })
-        // console.log($("#editName").val());
-        // console.log($("#editPass").val());
-        // console.log($("#editRole").val());
-
-        var myData = JSON.stringify({
-            // "domain": "www.done.com"
-            "email": $("#editEmail").val(),
-            "comid": id.comid,
-            "contact": $("#editContact").val(),
-            "designation": $("#editDesignation").val(),
-            "fullname": $("#editFullname").val(),
-            "image": id.image,
-            "password": id.password,
-            "role": $("#editRole").val(),
-            "verification": id.status,
-            // "password": Base64.encode(pwd.value),
-            // "role": "ordinary"
-        });
-
-        // console.log(myData);
-    
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-            url: " https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
-            data: myData,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            success: function(data) {
-                console.log(data);
-                window.location.hash = "#/";
-                window.location.hash = "#/listUsers";
-                // console.log(window.location.hash);
-    
-            },
-            error: function(error) {
-                // console.log(error);
-            }
-        });
-        
-
-        modal.style.display = "none";
-
-    };
-
-    $scope.deleteUser = function() {
-        // console.log(entry)
-        // var ref = firebase.database().ref("datasets/users/" + id.$id);
-        // ref.remove();
-        // modal2.style.display = "none";
-        // console.log(id.username);
-
-
-        var settings = {
-            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + id.email,
-            "method": "DELETE",
-            "timeout": 0,
-        };
-        $.ajax(settings).done(function(response) {
-            console.log(response);
-            modal2.style.display = "none";
-        });
-    };
-
-    $scope.close = function() {
-        modal.style.display = "none";
-    };
-
-    $scope.close2 = function() {
-        modal2.style.display = "none";
-    };
+    $.ajax(settings).fail(function (response) {
+        console.log(response.responseText);
+    });
 
 });
