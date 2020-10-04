@@ -498,7 +498,7 @@ angular.module('fvs').controller('ListComCtrl', function ($scope) {
         console.log(myData);
     
         $.ajax({
-            type: "POST",
+            type: "PUT",
             dataType: "json",
             // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
             url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
@@ -532,7 +532,7 @@ angular.module('fvs').controller('ListComCtrl', function ($scope) {
 
 
         var settings = {
-            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + id.email,
+            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/" + id.comid,
             "method": "DELETE",
             "timeout": 0,
         };
