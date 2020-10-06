@@ -86,8 +86,7 @@
                 </div>
                 <div class="left-menu-header col horizontal-wrapper pl-0">
                     <ul class="horizontal-menu">
-                        <li class="mega-menu"><a class="nav-link" href="#"><i data-feather="layers"></i><span>Bonus
-                                    Ui</span></a>
+                        <li class="mega-menu"><a class="" href="#"><span></span></a>
                             <div class="mega-menu-container menu-content">
                                 <div class="container-fluid">
                                     <div class="row">
@@ -414,11 +413,32 @@
                                     </div>
                                 </li>
 
+                                <li id="projects" class="dropdown"><a class="nav-link menu-title"><i
+                                            data-feather="box"></i><span>Projects</span></a>
+                                    <ul class="nav-submenu menu-content">
+                                        <li><a href="#/projectlist">Project List</a></li>
+                                        <li><a href="#/projectcreate">Create New</a></li>
+                                    </ul>
+                                </li>
+
+                                <li id="marketing"><a class="nav-link " href="#/marketing"><i
+                                            data-feather="airplay"></i><span>Marketing</span></a>
+                                </li>
+                                <li id="sales"><a class="nav-link" href="#/sales"><i
+                                            data-feather="shopping-bag"></i><span>Sales</span></a>
+                                </li>
+                                <li id="client" class="dropdown"><a class="nav-link menu-title"><i
+                                            data-feather="users"></i><span>Client</span></a>
+                                    <ul class="nav-submenu menu-content">
+                                        <li><a href="#/listClient">List</a></li>
+                                        <li><a href="#/newClient">New</a></li>
+                                    </ul>
+                                </li>
                                 <li id="leads" class="dropdown"><a class="nav-link menu-title"><i
                                             data-feather="crosshair"></i><span>Leads</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#/leads">List</a></li>
-                                        <li><a href="#">New</a></li>
+                                        <li><a href="#/newLeads">New</a></li>
                                     </ul>
                                 </li>
 
@@ -426,17 +446,18 @@
                                             data-feather="phone"></i><span>Calls</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#/calls">List</a></li>
-                                        <li><a href="#">New</a></li>
+                                        <li><a href="#/newCalls">New</a></li>
                                     </ul>
                                 </li>
 
                                 <li id="users" class="dropdown"><a class="nav-link menu-title"><i
-                                            data-feather="users"></i><span>Users</span></a>
+                                            data-feather="user"></i><span>Users</span></a>
                                     <ul class="nav-submenu menu-content">
                                         <li><a href="#/listUsers">List</a></li>
                                         <li><a href="#/newUser">New</a></li>
                                     </ul>
                                 </li>
+
 
                                 <li id="company" class="dropdown"><a class="nav-link menu-title"><i
                                             data-feather="globe"></i><span>Company</span></a>
@@ -446,6 +467,17 @@
                                     </ul>
                                 </li>
 
+                                <li id="invoice"><a class="nav-link" href="#/task"><i
+                                            data-feather="check-square"></i><span>Task</span></a>
+                                </li>
+
+                                <li id="invoice"><a class="nav-link" href="#/invoice"><i
+                                            data-feather="file-text"></i><span>Invoice</span></a>
+                                </li>
+                                <li id="reports"><a class="nav-link" href="#/reports"><i
+                                            data-feather="edit"></i><span>Reports</span></a>
+                                </li>
+
                                 <li id="logs" class="dropdown"><a class="nav-link menu-title"><i
                                             data-feather="terminal"></i><span>Logs</span></a>
                                     <ul class="nav-submenu menu-content">
@@ -453,6 +485,7 @@
                                         <!-- <li><a href="#">New</a></li> -->
                                     </ul>
                                 </li>
+
 
                             </ul>
                         </div>
@@ -521,12 +554,23 @@
 
     <script src="app.js"></script>
     <script src="controller/DashboardCtrl.js"></script>
+    <script src="controller/ProjectListCtrl.js"></script>
+    <script src="controller/ProjectCreateCtrl.js"></script>
+    <script src="controller/ListClientCtrl.js"></script>
+    <script src="controller/NewClientCtrl.js"></script>
     <script src="controller/LeadsCtrl.js"></script>
+    <script src="controller/NewLeadsCtrl.js"></script>
     <script src="controller/CallCtrl.js"></script>
+    <script src="controller/NewCallsCtrl.js"></script>
     <script src="controller/ListUserCtrl.js"></script>
     <script src="controller/ListComCtrl.js"></script>
     <script src="controller/NewUsersCtrl.js"></script>
     <script src="controller/LogsCtrl.js"></script>
+    <script src="controller/MarketingCtrl.js"></script>
+    <script src="controller/SalesCtrl.js"></script>
+    <script src="controller/InvoiceCtrl.js"></script>
+    <script src="controller/TaskCtrl.js"></script>
+    <script src="controller/ReportsCtrl.js"></script>
     <!-- must be below AngularJS imports -->
 
     <script>

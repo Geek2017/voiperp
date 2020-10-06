@@ -61,6 +61,15 @@ $(document).ready(function () {
     $('#export-button').DataTable({
         dom: 'Bfrtip',
         buttons: [
+            // {
+            //     text: 'Upload',
+            //     className: 'btn-success float-right ',
+            //     action: function (e, dt, node, config) {
+            //         // alert('Button activated');
+            //         // console.log("click");
+            //         fileupload.click();
+            //     }
+            // },
             'copyHtml5',
             'excelHtml5',
             'csvHtml5',
