@@ -64,7 +64,7 @@
                         <div class="card-body">
                             <div class="cont text-left">
                                 <div>
-                                    <form class="theme-form">
+                                    <form class="theme-form" id="signIn">
                                         <div class="text-danger wrapper text-center" id="messages"></div>
                                         <div class="text-success wrapper text-center" id="success"></div>
                                         <br>
@@ -83,8 +83,8 @@
                                             <label for="checkbox1">Remember me</label>
                                         </div>
                                         <div class="form-group ">
-                                            <button class="btn btn-success btn-block" type="button"
-                                                id="signIn">LOGIN</button>
+                                            <button class="btn btn-success btn-block" type="submit"
+                                                >LOGIN</button>
                                         </div>
 
                                         <div>
@@ -490,8 +490,9 @@
         //     ajaxsave()
         // }
 
-        signIn.onclick = function () {
-            login()
+        signIn.onsubmit = function () {
+            login();
+            return false;
         }
 
         $('#comLogo').on("change", function () {
@@ -649,6 +650,7 @@
 
 
         function login() {
+
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
