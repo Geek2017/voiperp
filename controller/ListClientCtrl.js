@@ -26,11 +26,12 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
     $scope.clickedUser = {};
 
     var userComID = sessionStorage.getItem("comid");
+    var user = sessionStorage.getItem("user");
     var role = sessionStorage.getItem("role");
     // console.log(userComID);
 
     var settings = {
-        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
+        "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allclients",
         "method": "GET",
         "timeout": 0,
     };
@@ -45,13 +46,13 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             $scope.arr[i] = {
                 comid: response.Items[i].comid.S,
                 email: response.Items[i].email.S,
-                fullname: response.Items[i].fullname.S,
-                designation: response.Items[i].designation.S,
-                image: response.Items[i].image.S,
-                password: response.Items[i].password.S,
-                contact: response.Items[i].contact.S,
-                role: response.Items[i].role.S,
-                status: response.Items[i].verification.S,
+                companyName: response.Items[i].companyName.S,
+                mailingAdd: response.Items[i].mailingAdd.S,
+                phoneNo: response.Items[i].phoneNo.S,
+                firstname: response.Items[i].firstname.S,
+                lastname: response.Items[i].lastname.S,
+                title: response.Items[i].title.S,
+                toWhom: response.Items[i].toWhom.S,
                 action: ""
             }
             $scope.data.push($scope.arr[i]);
@@ -62,8 +63,8 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
         // console.log($scope.arr);
 
-        var filtered = $scope.arr.filter(function (comid) {
-            return comid.comid == userComID;
+        var filtered = $scope.arr.filter(function (filter) {
+            return filter.toWhom == user;
         });
 
         // console.log(filtered);
@@ -71,11 +72,12 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
         var newFiltered = filtered.map((users) => {
             var user = {
                 email: users.email,
-                fullname: users.fullname,
-                designation: users.designation,
-                contact: users.contact,
-                role: users.role,
-                status: users.status,
+                companyName: users.companyName,
+                mailingAdd: users.mailingAdd,
+                phoneNo: users.phoneNo,
+                firstname: users.firstname,
+                lastname: users.lastname,
+                title: users.title,
                 action: users.action
             }
 
@@ -95,6 +97,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 table.setAttribute('border', '1');
                 table.setAttribute('cellspacing', '0');
                 table.setAttribute('cellpadding', '5');
+                table.setAttribute("id", "export-button");
     
                 // retrieve column header ('Name', 'Email', and 'Mobile')
     
@@ -217,6 +220,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 table.setAttribute('border', '1');
                 table.setAttribute('cellspacing', '0');
                 table.setAttribute('cellpadding', '5');
+                table.setAttribute("id", "export-button");
     
                 // retrieve column header ('Name', 'Email', and 'Mobile')
     
@@ -341,6 +345,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             table.setAttribute('border', '1');
             table.setAttribute('cellspacing', '0');
             table.setAttribute('cellpadding', '5');
+            table.setAttribute("id", "export-button");
 
             // retrieve column header ('Name', 'Email', and 'Mobile')
 
@@ -456,6 +461,30 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
     });
 
+    setTimeout(() => {
+        var fileupload = document.getElementById("FileUpload1");
+        $('#export-button').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: 'Upload',
+                    className: 'btn-success float-right ',
+                    action: function (e, dt, node, config) {
+                        // alert('Button activated');
+                        // console.log("click");
+                        fileupload.click();
+                    }
+                },
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        } );
+        // console.log(document.getElementById("export-button"));
+        // console.log('1');
+    }, 3000);
+
 
 
     $scope.statuses = [
@@ -468,13 +497,15 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
     $scope.selectUser = function(entry) {
         // console.log(users);
-        console.log(entry);
+        // console.log(entry);
         // $scope.clickedUser = entry;
         $("#editEmail").val(entry.email);
-        $("#editFullname").val(entry.fullname);
-        $("#editDesignation").val(entry.designation);
-        $("#editContact").val(entry.contact);
-        $("#editRole").val(entry.role);
+        $("#editcompanyName").val(entry.companyName);
+        $("#editMailingAdd").val(entry.mailingAdd);
+        $("#editPhoneNo").val(entry.phoneNo);
+        $("#editFirstname").val(entry.firstname);
+        $("#editLastname").val(entry.lastname);
+        $("#editTitle").val(entry.title);
         id = entry;
         modal.style.display = "block";
         // $('#myModal').modal('show');
@@ -483,7 +514,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
     $scope.selectUser2 = function(entry) {
         // console.log(users);
         $scope.clickedUser = entry;
-        document.getElementById("deleteUser").innerText =  entry.fullname;
+        document.getElementById("deleteUser").innerText =  entry.firstname + " " + entry.lastname;
         id = entry;
         modal2.style.display = "block";
     };
@@ -505,13 +536,13 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             // "domain": "www.done.com"
             "email": $("#editEmail").val(),
             "comid": id.comid,
-            "contact": $("#editContact").val(),
-            "designation": $("#editDesignation").val(),
-            "fullname": $("#editFullname").val(),
-            "image": id.image,
-            "password": id.password,
-            "role": $("#editRole").val(),
-            "verification": id.status,
+            "companyName": $("#editcompanyName").val(),
+            "firstname": $("#editFirstname").val(),
+            "lastname": $("#editLastname").val(),
+            "mailingAdd": $("#editMailingAdd").val(),
+            "phoneNo": $("#editPhoneNo").val(),
+            "title": $("#editTitle").val(),
+            "toWhom": id.toWhom,
             // "password": Base64.encode(pwd.value),
             // "role": "ordinary"
         });
@@ -522,7 +553,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             type: "POST",
             dataType: "json",
             // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-            url: " https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
+            url: " https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/clients/{email}",
             data: myData,
             headers: {
                 "Content-Type": "application/json"
@@ -530,7 +561,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             success: function(data) {
                 console.log(data);
                 window.location.hash = "#/";
-                window.location.hash = "#/listUsers";
+                window.location.hash = "#/listClient";
                 // console.log(window.location.hash);
     
             },
@@ -553,7 +584,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
 
         var settings = {
-            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + id.email,
+            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/clients/" + id.email,
             "method": "DELETE",
             "timeout": 0,
         };
