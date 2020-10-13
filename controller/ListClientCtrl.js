@@ -11,7 +11,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
     // Get the <span> element that closes the modal
     var accept = document.getElementById("accept");
 
-    $("#editBtn").click(function() {
+    $("#editBtn").click(function () {
         modal.style.display = "block";
     });
 
@@ -39,7 +39,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
     $.ajax(settings).done(function (response) {
         var count = response.Count;
 
-      
+
         // console.log(response);
         for (var i = 0; i < count; i++) {
 
@@ -86,7 +86,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
         // console.log(newFiltered)
 
-        if(role == 0){
+        if (role == 0) {
             var noOfContacts = $scope.arr.length;
             if (noOfContacts > 0) {
 
@@ -98,9 +98,9 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 table.setAttribute('cellspacing', '0');
                 table.setAttribute('cellpadding', '5');
                 table.setAttribute("id", "export-button");
-    
+
                 // retrieve column header ('Name', 'Email', and 'Mobile')
-    
+
                 var col = []; // define an empty array
                 for (var i = 0; i < noOfContacts; i++) {
                     for (var key in $scope.arr[i]) {
@@ -109,14 +109,14 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                         }
                     }
                 }
-    
+
                 // CREATE TABLE HEAD .
                 var tHead = document.createElement("thead");
-    
-    
+
+
                 // CREATE ROW FOR TABLE HEAD .
                 var hRow = document.createElement("tr");
-    
+
                 // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
                 for (var i = 0; i < col.length; i++) {
                     var th = document.createElement("th");
@@ -125,22 +125,22 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 }
                 tHead.appendChild(hRow);
                 table.appendChild(tHead);
-    
+
                 // CREATE TABLE BODY .
                 var tBody = document.createElement("tbody");
-    
+
                 // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
                 for (var i = 0; i < noOfContacts; i++) {
-    
+
                     var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
-    
-    
+
+
                     for (var j = 0; j < col.length; j++) {
                         var td = document.createElement("td");
                         td.innerHTML = $scope.arr[i][col[j]];
-    
+
                         bRow.appendChild(td);
-    
+
                     }
                     tBody.appendChild(bRow)
                     var entry = $scope.arr[i];
@@ -154,7 +154,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                         className: "btn btn-danger mx-2"
                     }];
                     // btn.type = buttons.values(type);
-    
+
                     for (let k = 0; k < buttons.length; k++) {
                         let button = buttons[k];
                         var btn = document.createElement('input');
@@ -177,7 +177,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                         }
                         td.appendChild(btn)[i];
                     }
-    
+
                     // var entry2 = $scope.arr[i];
                     // var btn2 = document.createElement('br');
                     // btn.type = "button";
@@ -185,7 +185,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                     // btn.value = "Delete";
                     // btn.onclick = (function(entry2) {return function() {$scope.selectUser2(entry2);}})(entry2);
                     // td.appendChild(btn2);
-    
+
                     // var entry3 = $scope.arr[i];
                     // var btn3 = document.createElement('input');
                     // btn.type = "button";
@@ -193,22 +193,21 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                     // btn.value = "Delete";
                     // btn.onclick = (function(entry3) {return function() {$scope.selectUser2(entry3);}})(entry3);
                     // td.appendChild(btn3);
-    
-    
-    
-    
+
+
+
+
                 }
                 table.appendChild(tBody);
-    
-    
+
+
                 // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
                 var divContainer = document.getElementById("myContacts");
                 divContainer.innerHTML = "";
                 divContainer.appendChild(table);
-    
+
             }
-        } 
-        else if (role == 1) {
+        } else if (role == 1) {
             var noOfContacts = newFiltered.length;
 
             if (noOfContacts > 0) {
@@ -221,9 +220,9 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 table.setAttribute('cellspacing', '0');
                 table.setAttribute('cellpadding', '5');
                 table.setAttribute("id", "export-button");
-    
+
                 // retrieve column header ('Name', 'Email', and 'Mobile')
-    
+
                 var col = []; // define an empty array
                 for (var i = 0; i < noOfContacts; i++) {
                     for (var key in newFiltered[i]) {
@@ -232,14 +231,14 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                         }
                     }
                 }
-    
+
                 // CREATE TABLE HEAD .
                 var tHead = document.createElement("thead");
-    
-    
+
+
                 // CREATE ROW FOR TABLE HEAD .
                 var hRow = document.createElement("tr");
-    
+
                 // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
                 for (var i = 0; i < col.length; i++) {
                     var th = document.createElement("th");
@@ -248,22 +247,22 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 }
                 tHead.appendChild(hRow);
                 table.appendChild(tHead);
-    
+
                 // CREATE TABLE BODY .
                 var tBody = document.createElement("tbody");
-    
+
                 // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
                 for (var i = 0; i < noOfContacts; i++) {
-    
+
                     var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
-    
-    
+
+
                     for (var j = 0; j < col.length; j++) {
                         var td = document.createElement("td");
                         td.innerHTML = newFiltered[i][col[j]];
-    
+
                         bRow.appendChild(td);
-    
+
                     }
                     tBody.appendChild(bRow)
                     var entry = newFiltered[i];
@@ -277,7 +276,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                         className: "btn btn-danger mx-2"
                     }];
                     // btn.type = buttons.values(type);
-    
+
                     for (let k = 0; k < buttons.length; k++) {
                         let button = buttons[k];
                         var btn = document.createElement('input');
@@ -300,7 +299,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                         }
                         td.appendChild(btn)[i];
                     }
-    
+
                     // var entry2 = $scope.arr[i];
                     // var btn2 = document.createElement('br');
                     // btn.type = "button";
@@ -308,7 +307,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                     // btn.value = "Delete";
                     // btn.onclick = (function(entry2) {return function() {$scope.selectUser2(entry2);}})(entry2);
                     // td.appendChild(btn2);
-    
+
                     // var entry3 = $scope.arr[i];
                     // var btn3 = document.createElement('input');
                     // btn.type = "button";
@@ -316,19 +315,19 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                     // btn.value = "Delete";
                     // btn.onclick = (function(entry3) {return function() {$scope.selectUser2(entry3);}})(entry3);
                     // td.appendChild(btn3);
-    
-    
-    
-    
+
+
+
+
                 }
                 table.appendChild(tBody);
-    
-    
+
+
                 // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
                 var divContainer = document.getElementById("myContacts");
                 divContainer.innerHTML = "";
                 divContainer.appendChild(table);
-    
+
             }
         }
 
@@ -463,10 +462,9 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
     setTimeout(() => {
         var fileupload = document.getElementById("FileUpload1");
-        $('#export-button').DataTable( {
+        $('#export-button').DataTable({
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     text: 'Upload',
                     className: 'btn-success float-right ',
                     action: function (e, dt, node, config) {
@@ -480,22 +478,30 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 'csvHtml5',
                 'pdfHtml5'
             ]
-        } );
+        });
         // console.log(document.getElementById("export-button"));
         // console.log('1');
     }, 3000);
 
 
 
-    $scope.statuses = [
-        {username: 'asdasdasds', role: 'status1'},
-        {username: 'asdasdasdsad', role: 'status2'},
-        {username: 'asdasdsadas', role: 'status3'}
-      ];
+    $scope.statuses = [{
+            username: 'asdasdasds',
+            role: 'status1'
+        },
+        {
+            username: 'asdasdasdsad',
+            role: 'status2'
+        },
+        {
+            username: 'asdasdsadas',
+            role: 'status3'
+        }
+    ];
 
     //   console.log($scope.statuses);
 
-    $scope.selectUser = function(entry) {
+    $scope.selectUser = function (entry) {
         // console.log(users);
         // console.log(entry);
         // $scope.clickedUser = entry;
@@ -511,15 +517,15 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
         // $('#myModal').modal('show');
     };
 
-    $scope.selectUser2 = function(entry) {
+    $scope.selectUser2 = function (entry) {
         // console.log(users);
         $scope.clickedUser = entry;
-        document.getElementById("deleteUser").innerText =  entry.firstname + " " + entry.lastname;
+        document.getElementById("deleteUser").innerText = entry.firstname + " " + entry.lastname;
         id = entry;
         modal2.style.display = "block";
     };
 
-    $scope.updateUser = function() {
+    $scope.updateUser = function () {
         // var ref2 = firebase.database().ref("datasets/users/" + id.$id);
         // ref2.update({
         //     username: $scope.clickedUser.username,
@@ -548,7 +554,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
         });
 
         // console.log(myData);
-    
+
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -558,24 +564,24 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             headers: {
                 "Content-Type": "application/json"
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
                 window.location.hash = "#/";
                 window.location.hash = "#/listClient";
                 // console.log(window.location.hash);
-    
+
             },
-            error: function(error) {
+            error: function (error) {
                 // console.log(error);
             }
         });
-        
+
 
         modal.style.display = "none";
 
     };
 
-    $scope.deleteUser = function() {
+    $scope.deleteUser = function () {
         // console.log(entry)
         // var ref = firebase.database().ref("datasets/users/" + id.$id);
         // ref.remove();
@@ -588,17 +594,19 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             "method": "DELETE",
             "timeout": 0,
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
             console.log(response);
             modal2.style.display = "none";
+            window.location.hash = "#/";
+            window.location.hash = "#/listClient";
         });
     };
 
-    $scope.close = function() {
+    $scope.close = function () {
         modal.style.display = "none";
     };
 
-    $scope.close2 = function() {
+    $scope.close2 = function () {
         modal2.style.display = "none";
     };
 
