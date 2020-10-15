@@ -6,6 +6,126 @@
   </div>
   <!-- Container-fluid starts-->
 
+  <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+<!-- ico-font-->
+<link rel="stylesheet" type="text/css" href="assets/css/icofont.css">
+<!-- Themify icon-->
+<link rel="stylesheet" type="text/css" href="assets/css/themify.css">
+<!-- Flag icon-->
+<link rel="stylesheet" type="text/css" href="assets/css/flag-icon.css">
+<!-- Feather icon-->
+<link rel="stylesheet" type="text/css" href="assets/css/feather-icon.css">
+<!-- Plugins css start-->
+<link rel="stylesheet" type="text/css" href="assets/css/datatables.css">
+<link rel="stylesheet" type="text/css" href="assets/css/datatable-extension.css">
+<!-- Plugins css Ends-->
+<!-- Bootstrap css-->
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+<!-- App css-->
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link id="color" rel="stylesheet" href="assets/css/color-1.css" media="screen">
+<!-- Responsive css-->
+<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
+<style>
+  /* The Modal (background) */
+  
+  .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+  }
+  /* Modal Content/Box */
+  
+  .modal-content {
+      color: #414242;
+      margin: 15% auto;
+      /* 15% from the top and centered */
+      padding: 30px 60px;
+      width: 500px;
+      /* Could be more or less, depending on screen size */
+      font-family: Lato;
+      font-size: 16px;
+      line-height: 28px;
+      letter-spacing: 0.5px;
+      -webkit-font-smoothing: antialiased;
+      /* Rectangle 2 Copy 3: */
+      background: #FFFFFF;
+      border: 1px solid #9B9C9D;
+      box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.20);
+      border-radius: 6px;
+  }
+  
+  .modal-content a {
+      color: #636464;
+  }
+  
+  .modal-content>h1 {
+      display: block;
+      width: 100%;
+      text-align: center;
+  }
+  
+  button#accept {
+      margin: 30px auto;
+      display: block;
+      border: 1px solid #fc4c02;
+      border-radius: 3px;
+      background: #fff;
+      color: #fc4c02;
+      font-size: 16px;
+      height: 48px;
+      padding: 0 20px;
+      cursor: pointer;
+  }
+  
+  .safety {
+      color: #9B9C9D;
+      font-size: 12px;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+  }
+  
+  .close {
+      background: #606061;
+      color: #FFFFFF;
+      line-height: 25px;
+      position: absolute;
+      right: -12px;
+      text-align: center;
+      top: -10px;
+      width: 24px;
+      text-decoration: none;
+      font-weight: bold;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
+      -moz-box-shadow: 1px 1px 3px #000;
+      -webkit-box-shadow: 1px 1px 3px #000;
+      box-shadow: 1px 1px 3px #000;
+  }
+  
+  .close:hover {
+      background: #00d9ff;
+  }
+</style>
+
   <div class="container-fluid" style="display: none;">
     <div class="page-header">
       <div class="row">
@@ -56,7 +176,7 @@
   <!-- Container-fluid starts-->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12 project-list">
+      <!-- <div class="col-md-12 project-list">
         <div class="card">
           <div class="row">
             <div class="col-sm-6">
@@ -73,10 +193,19 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
+            <div class="dt-ext table-responsive">
+                <input type="file" id="FileUpload1" style="display: none" />
+                <div id="myContacts">
+                  <p>&nbsp;&nbsp;You have zero Leads</p>
+              </div>
+              
+            </div>
+          </div>
+          <!-- <div class="card-body">
             <div class="tab-content" id="top-tabContent">
               <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                 <div class="row">
@@ -775,11 +904,218 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Edit Project</h4>
+            <button type="button" ng-click="close()">&times;</button>
+
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Project Title</label>
+            <input class="form-control" type="text" id="editProjectName" placeholder="Project name *">
+          </div>
+
+          <div class="form-group">
+            <label>Client name</label>
+            <input class="form-control" type="text" id="editClientName" placeholder="Name client or company name">
+          </div>
+          <div class="form-group">
+            <label>Project Rate</label>
+            <input class="form-control" type="text" id="editProjectRate" placeholder="Enter project Rate">
+          </div>
+          <div class="form-group">
+            <label>Project Type</label>
+            <select class="form-control digits" id="editProjectType">
+              <option value="hourly">Hourly</option>
+              <option value="fix">Fix price</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Priority</label>
+            <select class="form-control digits" id="editPriority">
+              <option value="low">Low</option>
+              <option value="meduim">Medium</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Project Size</label>
+            <select class="form-control digits" id="editProjectSize">
+              <option value="small">Small</option>
+              <option value="meduim">Medium</option>
+              <option value="big">Big</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Starting date</label>
+            <input class="datepicker-here form-control" id="editStartingDate" type="text" data-language="en">
+          </div>
+          <div class="form-group">
+            <label>Ending date</label>
+            <input class="datepicker-here form-control" id="editEndingDate" type="text" data-language="en">
+          </div>
+          <div class="form-group">
+            <label for="task-title">Task Title</label>
+            <input class="form-control" id="editTaskTitle" type="text" required="" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="sub-task">Sub task</label>
+            <input class="form-control" id="editSubTask" type="text" required="" autocomplete="off">
+          </div>
+          <!-- <div class="form-group">
+            <select class="js-example-basic-single">
+              <option value="task">My Task</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="js-example-disabled-results" id="bm-collection">
+              <option value="general">General</option>
+            </select>
+          </div> -->
+          <div class="form-group">
+            <label>Enter some Details</label>
+            <textarea class="form-control" id="editDetails" rows="3"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button>
+            <button type="button" class="btn btn btn-danger" ng-click="close()">Cancel</button>
+        </div>
+    </div>
+
+
+</div>
+
+<div id="myModalView" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">View Project</h4>
+          <button type="button" ng-click="close3()">&times;</button>
+
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Project Title</label>
+          <input class="form-control" type="text" id="editProjectName2" placeholder="Project name *" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Client name</label>
+          <input class="form-control" type="text" id="editClientName2" placeholder="Name client or company name" disabled>
+        </div>
+        <div class="form-group">
+          <label>Project Rate</label>
+          <input class="form-control" type="text" id="editProjectRate2" placeholder="Enter project Rate" disabled>
+        </div>
+        <div class="form-group">
+          <label>Project Type</label>
+          <select class="form-control digits" id="editProjectType2" disabled>
+            <option value="hourly">Hourly</option>
+            <option value="fix">Fix price</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Priority</label>
+          <select class="form-control digits" id="editPriority2" disabled>
+            <option value="low">Low</option>
+            <option value="meduim">Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Project Size</label>
+          <select class="form-control digits" id="editProjectSize2" disabled>
+            <option value="small">Small</option>
+            <option value="meduim">Medium</option>
+            <option value="big">Big</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Starting date</label>
+          <input class="datepicker-here form-control" id="editStartingDate2" type="text" data-language="en" disabled>
+        </div>
+        <div class="form-group">
+          <label>Ending date</label>
+          <input class="datepicker-here form-control" id="editEndingDate2" type="text" data-language="en" disabled>
+        </div>
+        <div class="form-group">
+          <label for="task-title">Task Title</label>
+          <input class="form-control" id="editTaskTitle2" type="text" required="" autocomplete="off" disabled>
+        </div>
+        <div class="form-group">
+          <label for="sub-task">Sub task</label>
+          <input class="form-control" id="editSubTask2" type="text" required="" autocomplete="off" disabled>
+        </div>
+        <!-- <div class="form-group">
+          <select class="js-example-basic-single">
+            <option value="task">My Task</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="js-example-disabled-results" id="bm-collection">
+            <option value="general">General</option>
+          </select>
+        </div> -->
+        <div class="form-group">
+          <label>Enter some Details</label>
+          <textarea class="form-control" id="editDetails2" rows="3" disabled></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+          <!-- <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button> -->
+          <button type="button" class="btn btn btn-danger" ng-click="close3()">Cancel</button>
+      </div>
+  </div>
+
+
+</div>
+
+
+<!-- The Modal -->
+<div id="myModal2" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Are you sure?</h4>
+            <button type="button" ng-click="close2()">&times;</button>
+
+        </div>
+        <div class="modal-body">
+
+            <p>You want to delete <strong id="deleteUser" style="color: red;"></strong> Project?</p>
+            <!-- <p id="deleteUser" ></p> -->
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="deleteUser()">Yes</button>
+            <button type="button" class="btn btn-info" ng-click="close2()">No</button>
+        </div>
+    </div>
+
+
+</div>
 
 
 
@@ -794,6 +1130,28 @@
 <!-- <script src="assets/js/sidebar-menu.js"></script> -->
 <script src="assets/js/config.js"></script>
 <!-- Plugins JS start-->
+
+<script src="assets/js/datatable/datatables/jquery.dataTables2.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/jszip.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/responsive.bootstrap4.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.keyTable.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.colReorder.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.fixedHeader.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.rowReorder.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/dataTables.scroller.min.js"></script>
+<script src="assets/js/datatable/datatable-extension/custom2.js"></script>
+
 <script src="assets/js/chart/apex-chart/moment.min.js"></script>
 <script src="assets/js/chart/apex-chart/apex-chart.js"></script>
 <script src="assets/js/chart/apex-chart/stock-prices.js"></script>
