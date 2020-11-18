@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "~6.1",
+        "subbe/waveapp":"0.3",
+        "twilio/sdk": "^5.0"
+    }
+}
