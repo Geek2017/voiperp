@@ -81,8 +81,8 @@ angular
         templateUrl: 'views/Reports.html',
         controller: 'ReportsCtrl'
       })
-    // .when('/about', {
-    //   templateUrl : 'views/about.html',
-    //   controller  : 'AboutCtrl'
-    // });
+    .when('/calendar', {
+      templateUrl : 'views/calendar.html',
+      controller  : 'CalendarCtrl'
+    });
   });

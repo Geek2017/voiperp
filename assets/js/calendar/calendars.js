@@ -21,11 +21,11 @@ function addCalendar(calendar) {
 function findCalendar(id) {
     var found;
 
-    CalendarList.forEach(function(calendar) {
-        if (calendar.id === id) {
-            found = calendar;
-        }
-    });
+    // CalendarList.forEach(function(calendar) {
+    //     if (calendar.id === id) {
+    //         found = calendar;
+    //     }
+    // });
 
     return found || CalendarList[0];
 }
