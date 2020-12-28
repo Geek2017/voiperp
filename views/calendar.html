@@ -8,6 +8,15 @@
         background: url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
     }
 
+    #clock {
+        font-size: 25px;
+        width: 150px;
+        /* margin: 200px;  */
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 20px;
+    }
+
     #wrap {
         width: 1100px;
         margin: 0 auto;
@@ -172,7 +181,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <!-- <label >Subject</label> -->
-                                <input class="form-control" id="subject" type="text" placeholder="Subject" disabled>
+                                <input class="form-control" id="subject" type="text" placeholder="Subject">
                             </div>
                         </div>
                     </div>
@@ -180,7 +189,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <!-- <label >Subject</label> -->
-                                <input class="form-control" id="location" type="text" placeholder="location" disabled>
+                                <input class="form-control" id="location" type="text" placeholder="location">
                             </div>
                         </div>
                     </div>
@@ -193,18 +202,9 @@
                             </div>
                         </div>
                         <div class="checkbox checkbox-success col-sm-6">
-                            <input id="checkbox-primary" type="checkbox">
-                            <label for="checkbox-primary">All Day</label>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <!-- <label>Project Type</label> -->
-                            <select class="form-control digits" id="dp">
-                                <option value="Daily Itinerary">Busy</option>
-                                <option value="Free">Free</option>
-                            </select>
+                            <!-- <div id="txt"></div> -->
+                            <!-- <input class="form-control" id="txt" type="text"> -->
+                            <div id="clock">8:10:45</div>
                         </div>
                     </div>
                     <div class="card-body animate-chk" style="display: none;" id="list">
@@ -235,9 +235,9 @@
 
             </div>
             <div class="modal-footer">
-                <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled/>
-                <input type="button" value="Start" id="sw-go" disabled/>
-                <input type="button" value="Save" style="display: none;" id="sw-save" disabled/>
+                <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
+                <input type="button" value="Start" id="sw-go" disabled />
+                <input type="button" value="Save" style="display: none;" id="sw-save" disabled />
                 <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
             </div>
@@ -245,6 +245,7 @@
 
     </div>
 </div>
+
 
 
 <script src="assets/js/calendar/tui-code-snippet.min.js"></script>
@@ -332,11 +333,61 @@
 </script> -->
 
 <script>
+    setInterval(showTime, 1000);
+
+    function showTime() {
+        let time = new Date();
+        let hour = time.getHours();
+        let min = time.getMinutes();
+        let sec = time.getSeconds();
+        am_pm = "AM";
+
+        if (hour > 12) {
+            hour -= 12;
+            am_pm = "PM";
+        }
+        if (hour == 0) {
+            hr = 12;
+            am_pm = "AM";
+        }
+
+        hour = hour < 10 ? "0" + hour : hour;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+
+        let currentTime = hour + ":" +
+            min + ":" + sec + am_pm;
+
+        document.getElementById("clock")
+            .innerHTML = currentTime;
+    }
+
+    showTime();
     $(document).ready(function () {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+        // function startTime() {
+        //     var today = new Date();
+        //     var h = today.getHours();
+        //     var m = today.getMinutes();
+        //     var s = today.getSeconds();
+        //     // add a zero in front of numbers<10
+        //     m = checkTime(m);
+        //     s = checkTime(s);
+        //     document.getElementById("txt").innerHTML = h + ":" + m + ":" + s;
+        //     var t = setTimeout(function () {
+        //         startTime()
+        //     }, 500);
+        // }
+
+        // function checkTime(i) {
+        //     if (i < 10) {
+        //         i = "0" + i;
+        //     }
+        //     return i;
+        // }
 
         var data = [];
         var arr = [];
@@ -440,13 +491,13 @@
                 }
             ];
 
-            console.log(events);
-            console.log(newFiltered);
+            // console.log(events);
+            // console.log(newFiltered);
             sessionStorage.setItem("newFiltered", JSON.stringify(newFiltered));
 
             // console.log(JSON.stringify(newFiltered));
-            console.log(JSON.parse(sessionStorage.getItem("newFiltered")));
-            console.log(JSON.stringify(newFiltered));
+            // console.log(JSON.parse(sessionStorage.getItem("newFiltered")));
+            // console.log(JSON.stringify(newFiltered));
 
         });
 
@@ -510,8 +561,10 @@
             allDaySlot: false,
             selectHelper: true,
             select: function (start, end, allDay) {
+
                 document.getElementById("location").value = sessionStorage.getItem('gadd');
-                var subject = document.getElementById("subject").value = "Cleaning manhattan madison sqr. garden";
+                var subject = document.getElementById("subject").value =
+                    "Cleaning manhattan madison sqr. garden";
                 // console.log(start);
                 // console.log(end);
                 // console.log(allDay);
@@ -674,7 +727,11 @@
                 calendar.fullCalendar('unselect');
 
                 $("#times").click(function () {
-
+                    $('#myModal').modal('hide');
+                    setTimeout(() => {
+                        window.location.href = '#';
+                        window.location.href = '#calendar';
+                    }, 500);
                     calendar.fullCalendar('unselect');
                 });
 
