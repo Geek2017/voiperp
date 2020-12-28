@@ -1,3 +1,64 @@
+<style>
+    body {
+        margin-bottom: 40px;
+        margin-top: 40px;
+        text-align: center;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        background: url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
+    }
+
+    #wrap {
+        width: 1100px;
+        margin: 0 auto;
+    }
+
+    #external-events {
+        float: left;
+        width: 150px;
+        padding: 0 10px;
+        text-align: left;
+    }
+
+    #external-events h4 {
+        font-size: 16px;
+        margin-top: 0;
+        padding-top: 1em;
+    }
+
+    .external-event {
+        /* try to mimick the look of a real event */
+        margin: 10px 0;
+        padding: 2px 4px;
+        background: #3366CC;
+        color: #fff;
+        font-size: .85em;
+        cursor: pointer;
+    }
+
+    #external-events p {
+        margin: 1.5em 0;
+        font-size: 11px;
+        color: #666;
+    }
+
+    #external-events p input {
+        margin: 0;
+        vertical-align: middle;
+    }
+
+    #calendar {
+        /* 		float: right; */
+        margin: 0 auto;
+        width: 900px;
+        background-color: #FFFFFF;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px #C3C3C3;
+        -webkit-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+        -moz-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+        box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+    }
+</style>
 <br>
 
 <div class="container-fluid">
@@ -6,10 +67,28 @@
         <div class="col-sm-12">
             <div class="card box-shadow-title">
                 <div class="card-header">
-                    <span>You are @ :{{gadd}}</span>
+                    <span id="myAdd">You are @ :{{gadd}}</span>
                     <object data="./assets/geolocate.html" width="100%" height="500"></object>
+                    <br>
+                    <!-- <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FManila&amp;src=amF5c29ubGlnbmVzQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=1" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
                 </div>
-                <div class="d-flex">
+                <!-- <button id="btnCreateEvents" class="btn btn-primary" onclick="makeApiCall();">
+                    Create Events</button>
+
+                <div id="divifm">
+                    <iframe id="ifmCalendar"
+                        src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FManila&amp;src=amF5c29ubGlnbmVzQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=1"
+                        style="border-width: 0" width="950" height="520" frameborder="0" scrolling="no">
+                    </iframe>
+                </div> -->
+                <div id='wrap'>
+
+                    <div id='calendar'></div>
+
+                    <div style='clear:both'></div>
+                </div>
+                <!-- <iframe src="https://calendar.google.com/calendar/embed?src=cj.lignes%40gmail.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
+                <!-- <div class="d-flex">
                     <div id="lnb">
                         <div class="lnb-new-schedule text-center">
                             <button class="btn btn-primary" id="btn-new-schedule" type="button" data-toggle="modal">New schedule</button>
@@ -56,9 +135,114 @@
                   <button class="btn btn-default btn-sm move-day" type="button" data-action="move-next"><i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i></button></span><span class="render-range" id="renderRange"></span></div>
                         <div id="calendar"></div>
                     </div>
-                </div>
+                </div> -->
+                <!-- <div id="stopwatch">
+                    <div id="sw-time">00:00:00</div>
+                   
+                    <input type="button" value="Reset" id="sw-rst" disabled/>
+                    <input type="button" value="Start" id="sw-go" disabled/>
+                  </div> -->
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="sw-time" style="display: none;">00:00:00</div>
+                <!-- <h4 class="modal-title">Modal Header</h4> -->
+                <button type="button" class="close" data-dismiss="modal" id="times">&times;</button>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <!-- <label>Project Type</label> -->
+                            <select class="form-control digits" id="dp">
+                                <option value="Daily Itinerary">Daily Itinerary</option>
+                                <!-- <option value="fix">Fix price</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <!-- <label >Subject</label> -->
+                                <input class="form-control" id="subject" type="text" placeholder="Subject" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <!-- <label >Subject</label> -->
+                                <input class="form-control" id="location" type="text" placeholder="location" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <!-- <label >Subject</label> -->
+                                <input class="form-control" id="dateStart" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="checkbox checkbox-success col-sm-6">
+                            <input id="checkbox-primary" type="checkbox">
+                            <label for="checkbox-primary">All Day</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <!-- <label>Project Type</label> -->
+                            <select class="form-control digits" id="dp">
+                                <option value="Daily Itinerary">Busy</option>
+                                <option value="Free">Free</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body animate-chk" style="display: none;" id="list">
+                        <h5>Lists</h5>
+                        <div class="row">
+                            <div class="col">
+                                <label class="d-block" for="chk-ani">
+                                    <input class="checkbox_animated" id="chk-ani" type="checkbox"> Option 1
+                                </label>
+                                <label class="d-block" for="chk-ani1">
+                                    <input class="checkbox_animated" id="chk-ani1" type="checkbox"> Option 2
+                                </label>
+                                <label class="d-block" for="chk-ani2">
+                                    <input class="checkbox_animated" id="chk-ani2" type="checkbox"> Option 3
+                                </label>
+                                <label class="d-block" for="chk-ani3">
+                                    <input class="checkbox_animated" id="chk-ani3" type="checkbox"> Option 4
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <!-- <p>{{gadd}}</p> -->
+
+                <!-- <div id="sw-time">00:00:00</div> -->
+
+            </div>
+            <div class="modal-footer">
+                <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled/>
+                <input type="button" value="Start" id="sw-go" disabled/>
+                <input type="button" value="Save" style="display: none;" id="sw-save" disabled/>
+                <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -72,3 +256,521 @@
 <script src="assets/js/calendar/calendars.js"></script>
 <script src="assets/js/calendar/schedules.js"></script>
 <script src="assets/js/calendar/app.js"></script>
+
+<!-- <script>
+    // Google api console clientID and apiKey 
+
+    var clientId = '252751we734600-se6610ol8twerwern886jj7gc5m2ugaai.apps.googleuserecontent.com';
+    var apiKey = 'AIzaSyCnk5CDEX3Pvwerwerwe0OpnVf4eW_Lmeere80';
+
+    // enter the scope of current project (this API must be turned on in the Google console)
+    var scopes = 'https://www.googleapis.com/auth/calendar';
+
+
+    // OAuth2 functions
+    function handleClientLoad() {
+        gapi.client.setApiKey(apiKey);
+        window.setTimeout(checkAuth, 1);
+    }
+
+    //To authenticate
+    function checkAuth() {
+        gapi.auth.authorize({
+            client_id: clientId,
+            scope: scopes,
+            immediate: true
+        }, handleAuthResult);
+    }
+
+    // This is the resource we will pass while calling api function
+    var resource = {
+        "summary": "My Event",
+        "start": {
+            "dateTime": today
+        },
+        "end": {
+            "dateTime": twoHoursLater
+        },
+        "description": "We are organizing events",
+        "location": "US",
+        "attendees": [{
+                "email": "attendee1@gmail.com",
+                "displayName": "Jhon",
+                "organizer": true,
+                "self": false,
+                "resource": false,
+                "optional": false,
+                "responseStatus": "needsAction",
+                "comment": "This is my demo event",
+                "additionalGuests": 3
+
+            },
+            {
+                "email": "attendee2@gmail.com",
+                "displayName": "Marry",
+                "organizer": true,
+                "self": false,
+                "resource": false,
+                "optional": false,
+                "responseStatus": "needsAction",
+                "comment": "This is an official event",
+                "additionalGuests": 3
+            }
+        ],
+    };
+
+    function makeApiCall() {
+        gapi.client.load('calendar', 'v3', function () { // load the calendar api (version 3)
+            var request = gapi.client.calendar.events.insert({
+                'calendarId': '24tn4fht2tr6m86efdiqqlsedk@group.calendar.google.com',
+                // calendar ID which id of Google Calendar where you are creating events. this can be copied from your Google Calendar user view.
+
+                "resource": resource // above resource will be passed here
+            });
+        });
+    }
+</script> -->
+
+<script>
+    $(document).ready(function () {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        var data = [];
+        var arr = [];
+        var settings = {
+            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcalendar",
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (response) {
+            // console.log(response);
+            var count = response.Count;
+
+
+            // console.log(response);
+            for (var i = 0; i < count; i++) {
+
+                arr[i] = {
+                    comid: response.Items[i].comid.S,
+                    email: response.Items[i].email.S,
+                    title: response.Items[i].title.S,
+                    location: response.Items[i].location.S,
+                    day: response.Items[i].day.S,
+                    month: response.Items[i].month.S,
+                    year: response.Items[i].year.S,
+                    allDay: response.Items[i].allDay.S,
+                    hr: response.Items[i].hr.S,
+                    mins: response.Items[i].mins.S,
+                    secs: response.Items[i].secs.S,
+                }
+                data.push(arr[i]);
+
+
+
+            }
+
+            // console.log($scope.arr);
+
+            // var filtered = $scope.arr.filter(function (comid) {
+            //     return comid.comid == userComID;
+            // });
+
+
+            var newFiltered = arr.map((users) => {
+                // if(users.year == 12)
+                // var y2 = users.year - 1;
+                // var m2 = users.month - 1;
+                // var d2 = users.day + 1;
+                var user = {
+                    title: users.title,
+                    start: new Date(users.year, users.month, users.day)
+                    // start: new Date(y, m, 30)
+                }
+
+                return user
+            });
+
+            var events = [{
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1)
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d - 3, 16, 0),
+                    allDay: false,
+                    className: 'info'
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d + 4, 16, 0),
+                    allDay: false,
+                    className: 'info'
+                },
+                {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false,
+                    className: 'important'
+                },
+                {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    className: 'important'
+                },
+                {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d + 1, 19, 0),
+                    end: new Date(y, m, d + 1, 22, 30),
+                    allDay: false,
+                },
+                {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 29),
+                    end: new Date(y, m, 30),
+                    url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
+                    className: 'success'
+                }
+            ];
+
+            console.log(events);
+            console.log(newFiltered);
+            sessionStorage.setItem("newFiltered", JSON.stringify(newFiltered));
+
+            // console.log(JSON.stringify(newFiltered));
+            console.log(JSON.parse(sessionStorage.getItem("newFiltered")));
+            console.log(JSON.stringify(newFiltered));
+
+        });
+
+        /*  className colors
+        
+        className: default(transparent), important(red), chill(pink), success(green), info(blue)
+        
+        */
+
+
+        /* initialize the external events
+        -----------------------------------------------------------------*/
+
+        $('#external-events div.external-event').each(function () {
+
+            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+            // it doesn't need to have a start or end
+            var eventObject = {
+                title: $.trim($(this).text()) // use the element's text as the event title
+            };
+
+            // store the Event Object in the DOM element so we can get to it later
+            $(this).data('eventObject', eventObject);
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+                zIndex: 999,
+                revert: true, // will cause the event to go back to its
+                revertDuration: 0 //  original position after the drag
+            });
+
+        });
+
+
+        /* initialize the calendar
+        -----------------------------------------------------------------*/
+
+        var calendar = $('#calendar').fullCalendar({
+            header: {
+                left: 'title',
+                center: 'agendaDay,agendaWeek,month',
+                right: 'prev,next today'
+            },
+            editable: true,
+            firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+            selectable: true,
+            defaultView: 'month',
+
+            axisFormat: 'h:mm',
+            columnFormat: {
+                month: 'ddd', // Mon
+                week: 'ddd d', // Mon 7
+                day: 'dddd M/d', // Monday 9/7
+                agendaDay: 'dddd d'
+            },
+            titleFormat: {
+                month: 'MMMM yyyy', // September 2009
+                week: "MMMM yyyy", // September 2009
+                day: 'MMMM yyyy' // Tuesday, Sep 8, 2009
+            },
+            allDaySlot: false,
+            selectHelper: true,
+            select: function (start, end, allDay) {
+                document.getElementById("location").value = sessionStorage.getItem('gadd');
+                var subject = document.getElementById("subject").value = "Cleaning manhattan madison sqr. garden";
+                // console.log(start);
+                // console.log(end);
+                // console.log(allDay);
+                // var arr2 = arr1[1].split(',');
+                // console.log(end);
+                // console.log('Day: ', arr1[0]);
+                // console.log('Month: ', arr1[1]);
+                // console.log('Date: ', arr1[2]);
+                // console.log('Year: ', arr1[3]);
+                const stringNew = new String(start);
+                var arr1 = stringNew.split(' ');
+                var fixMonth;
+                var dayAdded = arr1[2] * 1;
+                var dayAdded = dayAdded + 1;
+                if (arr1[1] == "Jan") {
+                    fixMonth = 00;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Feb") {
+                    fixMonth = 01;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Mar") {
+                    fixMonth = 02;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Apr") {
+                    fixMonth = 03;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "May") {
+                    fixMonth = 04;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Jun") {
+                    fixMonth = 05;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Jul") {
+                    fixMonth = 06;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Aug") {
+                    fixMonth = 07;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Sep") {
+                    fixMonth = 08;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Oct") {
+                    fixMonth = 09;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Nov") {
+                    fixMonth = 10;
+                    // console.log(fixMonth);
+                } else if (arr1[1] == "Dec") {
+                    fixMonth = 11;
+                    // console.log(fixMonth);
+                }
+                document.getElementById("dateStart").value = arr1[2] + "/" + fixMonth + "/" + arr1[
+                    3];
+                // $("#dateStart").val(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
+                console.log(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
+                // var title = prompt('Event Title:');
+                $("#myModal").modal();
+                $("#sw-save").click(function () {
+                    console.log("Save2");
+                    var gadd = sessionStorage.getItem('gadd');
+                    if (gadd) {
+                        calendar.fullCalendar('renderEvent', {
+                                title: subject,
+                                start: start,
+                                end: end,
+                                allDay: allDay
+                            },
+                            true // make the event "stick"
+                        );
+                        document.getElementById("sw-save").style.display = "none";
+                        document.getElementById("sw-rst").style.display = "none";
+                        document.getElementById("sw-time").style.display = "none";
+                        document.getElementById("list").style.display = "none";
+                        var button = document.getElementById("times");
+                        button.disabled = false;
+                        var userComID = sessionStorage.getItem("comid");
+                        var userEmail = sessionStorage.getItem("user");
+                        var myData2 = JSON.stringify({
+
+                            //     // "count": "13",
+                            //     // "domain": "www.done.com"
+                            "comid": userComID,
+                            "email": userEmail,
+                            // "comid": $('#email').val(),
+                            "title": "Cleaning manhattan madison sqr. garden",
+                            "location": gadd,
+                            "day": dayAdded,
+                            "month": fixMonth,
+                            "year": arr1[3],
+                            "start": start,
+                            "end": end,
+                            "allDay": allDay,
+                            "hr": sessionStorage.getItem('hr'),
+                            "mins": sessionStorage.getItem('mins'),
+                            "secs": sessionStorage.getItem('secs')
+
+                            // "password": Base64.encode(pwd.value),
+                            // "role": ""
+
+                        });
+
+                        // console.log(myData2);
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+                            data: myData2,
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                // console.log("Success");
+                                // localStorage.setItem("fullname", $('#fullname').val());
+                                // sessionStorage.setItem("state", 1);
+                                // sessionStorage.setItem("role", 1);
+                                // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
+                                // setTimeout(function(){ 
+                                // $('#registerStyle').hide();
+                                // $('#forgotStyle').hide();
+                                // $('#loginStyle').show();
+                                // },3000);
+                                // $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .')
+
+                                console.log("Saved!");
+
+                                // document.getElementById("messages").innerHTML =
+                                //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
+
+
+                                // window.location.href = './index.html';
+                            },
+                            error: function (response) {
+                                console.log(response);
+                                console.log("Error");
+
+                            }
+                        });
+
+
+                        $('#myModal').modal('hide');
+
+                        setTimeout(() => {
+
+                            setTimeout(() => {
+
+                                // window.location.href = '#';
+                                // window.location.href = '#calendar';
+                                console.log("refreshed!")
+                                location.reload();
+                            }, 1000);
+                            window.location.href = '#';
+                            window.location.href = '#calendar';
+                            // location.reload();
+                        }, 500);
+                    }
+                });
+                calendar.fullCalendar('unselect');
+
+                $("#times").click(function () {
+
+                    calendar.fullCalendar('unselect');
+                });
+
+                // $scope.gadd = sessionStorage.getItem('gadd');
+                // if (title) {
+                //     calendar.fullCalendar('renderEvent', {
+                //             title: title,
+                //             start: start,
+                //             end: end,
+                //             allDay: allDay
+                //         },
+                //         true // make the event "stick"
+                //     );
+                // }
+
+                // calendar.fullCalendar('unselect');
+            },
+            droppable: true, // this allows things to be dropped onto the calendar !!!
+            drop: function (date, allDay) { // this function is called when something is dropped
+
+                // retrieve the dropped element's stored Event Object
+                var originalEventObject = $(this).data('eventObject');
+
+                // we need to copy it, so that multiple events don't have a reference to the same object
+                var copiedEventObject = $.extend({}, originalEventObject);
+
+                // assign it the date that was reported
+                copiedEventObject.start = date;
+                copiedEventObject.allDay = allDay;
+
+                // render the event on the calendar
+                // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                // is the "remove after drop" checkbox checked?
+                if ($('#drop-remove').is(':checked')) {
+                    // if so, remove the element from the "Draggable Events" list
+                    $(this).remove();
+                }
+
+            },
+            events: JSON.parse(sessionStorage.getItem("newFiltered")),
+            // events: newFiltered,
+
+            // events: [{
+            //         title: 'All Day Event',
+            //         start: new Date(y, m, 1)
+            //     },
+            //     {
+            //         id: 999,
+            //         title: 'Repeating Event',
+            //         start: new Date(y, m, d - 3, 16, 0),
+            //         allDay: false,
+            //         className: 'info'
+            //     },
+            //     {
+            //         id: 999,
+            //         title: 'Repeating Event',
+            //         start: new Date(y, m, d + 4, 16, 0),
+            //         allDay: false,
+            //         className: 'info'
+            //     },
+            //     {
+            //         title: 'Meeting',
+            //         start: new Date(y, m, d, 10, 30),
+            //         allDay: false,
+            //         className: 'important'
+            //     },
+            //     {
+            //         title: 'Lunch',
+            //         start: new Date(y, m, d, 12, 0),
+            //         end: new Date(y, m, d, 14, 0),
+            //         allDay: false,
+            //         className: 'important'
+            //     },
+            //     {
+            //         title: 'Birthday Party',
+            //         start: new Date(y, m, d + 1, 19, 0),
+            //         end: new Date(y, m, d + 1, 22, 30),
+            //         allDay: false,
+            //     },
+            //     {
+            //         title: 'Click for Google',
+            //         start: new Date(y, m, 29),
+            //         end: new Date(y, m, 30),
+            //         url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
+            //         className: 'success'
+            //     }
+            // ],
+
+        });
+
+
+
+
+
+
+    });
+</script>
