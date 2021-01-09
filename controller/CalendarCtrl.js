@@ -20,97 +20,98 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       // console.log("save admin!");
       // console.log(timeAdmin);
     });
-    $("#save-admin").click(function () {
-      var timeAdmin = $("#timeAdmin").val();
-      var tagColor = $("#tagColor").val();
-      // console.log("save admin!");
-      // console.log(timeAdmin);
-      console.log(tagColor);
-      console.log($scope.tojson(obj))
-      // var gadd = sessionStorage.getItem('gadd');
-      // if (gadd) {
-      //     calendar.fullCalendar('renderEvent', {
-      //             title: subject,
-      //             start: start,
-      //             end: end,
-      //             allDay: allDay
-      //         },
-      //         true // make the event "stick"
-      //     );
-      //     var button = document.getElementById("times");
-      //     button.disabled = false;
-      //     var userComID = sessionStorage.getItem("comid");
-      //     var userEmail = sessionStorage.getItem("user");
-      //     var myData2 = JSON.stringify({
+  //   $("#save-admin").click(function () {
+  //     var timeAdmin = $("#timeAdmin").val();
+  //     var tagColor = $("#tagColor").val();
+  //     // console.log("save admin!");
+  //     // console.log(timeAdmin);
+  //     console.log(tagColor);
+  //     console.log($scope.tojson(obj))
+  //     var gadd = sessionStorage.getItem('gadd');
+  //     if (gadd) {
+  //         calendar.fullCalendar('renderEvent', {
+  //                 title: subject,
+  //                 start: start,
+  //                 end: end,
+  //                 allDay: allDay
+  //             },
+  //             true // make the event "stick"
+  //         );
+  //         var button = document.getElementById("times");
+  //         button.disabled = false;
+  //         var userComID = sessionStorage.getItem("comid");
+  //         var userEmail = sessionStorage.getItem("user");
+  //         var myData2 = JSON.stringify({
 
-      //         //     // "count": "13",
-      //         //     // "domain": "www.done.com"
-      //         "comid": userComID,
-      //         "email": userEmail,
-      //         // "comid": $('#email').val(),
-      //         "title": document.getElementById("subject").value,
-      //         "location": gadd,
-      //         "day": dayAdded,
-      //         "month": fixMonth,
-      //         "year": arr1[3],
-      //         "start": start,
-      //         "end": end,
-      //         "allDay": allDay,
-      //         "hr": sessionStorage.getItem('hr'),
-      //         "mins": sessionStorage.getItem('mins'),
-      //         "secs": sessionStorage.getItem('secs')
+  //             //     // "count": "13",
+  //             //     // "domain": "www.done.com"
+  //             "comid": userComID,
+  //             "email": userEmail,
+  //             // "comid": $('#email').val(),
+  //             "cleanerID": document.getElementById("cleanersID").value,
+  //             "title": document.getElementById("title").value,
+  //             // "location": gadd,
+  //             // "day": dayAdded,
+  //             // "month": fixMonth,
+  //             // "year": arr1[3],
+  //             // "start": start,
+  //             // "end": end,
+  //             "allDay": allDay,
+  //             // "hr": sessionStorage.getItem('hr'),
+  //             // "mins": sessionStorage.getItem('mins'),
+  //             // "secs": sessionStorage.getItem('secs')
 
-      //         // "password": Base64.encode(pwd.value),
-      //         // "role": ""
+  //             // "password": Base64.encode(pwd.value),
+  //             // "role": ""
 
-      //     });
+  //         });
 
-      //     // console.log(myData2);
+  //         // console.log(myData2);
 
-      //     $.ajax({
-      //         type: "POST",
-      //         dataType: "json",
-      //         // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-      //         url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
-      //         data: myData2,
-      //         headers: {
-      //             "Content-Type": "application/json"
-      //         },
-      //         success: function (data) {
-      //             console.log(data);
-
-
-      //             console.log("Saved!");
-
-      //             // document.getElementById("messages").innerHTML =
-      //             //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
+  //         $.ajax({
+  //             type: "POST",
+  //             dataType: "json",
+  //             // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+  //             url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+  //             data: myData2,
+  //             headers: {
+  //                 "Content-Type": "application/json"
+  //             },
+  //             success: function (data) {
+  //                 console.log(data);
 
 
-      //             // window.location.href = './index.html';
-      //         },
-      //         error: function (response) {
-      //             console.log(response);
-      //             console.log("Error");
+  //                 console.log("Saved!");
 
-      //         }
-      //     });
+  //                 // document.getElementById("messages").innerHTML =
+  //                 //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
 
 
-      //     setTimeout(() => {
+  //                 // window.location.href = './index.html';
+  //             },
+  //             error: function (response) {
+  //                 console.log(response);
+  //                 console.log("Error");
 
-      //         setTimeout(() => {
+  //             }
+  //         });
 
-      //             // window.location.href = '#';
-      //             // window.location.href = '#calendar';
-      //             console.log("refreshed!")
-      //             location.reload();
-      //         }, 1000);
-      //         window.location.href = '#';
-      //         window.location.href = '#calendar';
-      //         // location.reload();
-      //     }, 500);
-      // }
-  });
+
+  //         setTimeout(() => {
+
+  //             setTimeout(() => {
+
+  //                 // window.location.href = '#';
+  //                 // window.location.href = '#calendar';
+  //                 console.log("refreshed!")
+  //                 location.reload();
+  //             }, 1000);
+  //             window.location.href = '#';
+  //             window.location.href = '#calendar';
+  //             // location.reload();
+  //         }, 500);
+  //     }
+  // });
 
     var cnt = 0;
     $scope.addtr = function() {
@@ -152,20 +153,20 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
   $scope.gadd = sessionStorage.getItem('gadd');
 
-  var myVar = setInterval(myTimer, 500);
+  // var myVar = setInterval(myTimer, 500);
 
-  function myTimer() {
-    if (sessionStorage.getItem('gadd')) {
-      console.log(window.location.href);
-      console.log(sessionStorage.getItem('gadd'));
-      document.getElementById("myAdd").textContent = "You are @ :" + sessionStorage.getItem('gadd');
-      // window.location.href = "#";
-      // window.location.href = "#calendar";
-      clearInterval(myVar);
-    } else {
-      console.log("Nothing");
-    }
-  }
+  // function myTimer() {
+  //   if (sessionStorage.getItem('gadd')) {
+  //     console.log(window.location.href);
+  //     console.log(sessionStorage.getItem('gadd'));
+  //     document.getElementById("myAdd").textContent = "You are @ :" + sessionStorage.getItem('gadd');
+  //     // window.location.href = "#";
+  //     // window.location.href = "#calendar";
+  //     clearInterval(myVar);
+  //   } else {
+  //     console.log("Nothing");
+  //   }
+  // }
 
   (function ($, undefined) {
 

@@ -1,5 +1,7 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly" defer></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly"
+    defer></script>
 
 <style type="text/css">
     body {
@@ -77,36 +79,37 @@
         background-color: black;
     }
 
-    
+
     #map {
-            height: 100%;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .custom-map-control-button {
-            appearance: button;
-            background-color: #fff;
-            border: 0;
-            border-radius: 2px;
-            box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            margin: 10px;
-            padding: 0 0.5em;
-            height: 40px;
-            font: 400 18px Roboto, Arial, sans-serif;
-            overflow: hidden;
-        }
-        
-        .custom-map-control-button:hover {
-            background: #ebebeb;
-        }
+        height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .custom-map-control-button {
+        appearance: button;
+        background-color: #fff;
+        border: 0;
+        border-radius: 2px;
+        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        margin: 10px;
+        padding: 0 0.5em;
+        height: 40px;
+        font: 400 18px Roboto, Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .custom-map-control-button:hover {
+        background: #ebebeb;
+    }
 </style>
 
 <link rel="stylesheet" type="text/css" href="./assets/css/select2.min.css">
@@ -380,7 +383,8 @@
                 <input type="button" value="Save" style="display: none;" id="sw-save" /> -->
                 <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="save-admin" value="Save">Save</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="save-admin"
+                    value="Save">Save</button>
             </div>
         </div>
 
@@ -563,7 +567,8 @@
                 <input type="button" value="Save" style="display: none;" id="sw-save" disabled /> -->
                 <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="save2-admin" value="Save">Save</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="save2-admin"
+                    value="Save">Save</button>
             </div>
         </div>
 
@@ -657,94 +662,6 @@
 </script> -->
 
 <script>
-    // $("#save-admin").click(function () {
-    //     var timeAdmin = $("#timeAdmin").val();
-    //     console.log("save admin!");
-    //     console.log(timeAdmin);
-    //     // var gadd = sessionStorage.getItem('gadd');
-    //     // if (gadd) {
-    //     //     calendar.fullCalendar('renderEvent', {
-    //     //             title: subject,
-    //     //             start: start,
-    //     //             end: end,
-    //     //             allDay: allDay
-    //     //         },
-    //     //         true // make the event "stick"
-    //     //     );
-    //     //     var button = document.getElementById("times");
-    //     //     button.disabled = false;
-    //     //     var userComID = sessionStorage.getItem("comid");
-    //     //     var userEmail = sessionStorage.getItem("user");
-    //     //     var myData2 = JSON.stringify({
-
-    //     //         //     // "count": "13",
-    //     //         //     // "domain": "www.done.com"
-    //     //         "comid": userComID,
-    //     //         "email": userEmail,
-    //     //         // "comid": $('#email').val(),
-    //     //         "title": document.getElementById("subject").value,
-    //     //         "location": gadd,
-    //     //         "day": dayAdded,
-    //     //         "month": fixMonth,
-    //     //         "year": arr1[3],
-    //     //         "start": start,
-    //     //         "end": end,
-    //     //         "allDay": allDay,
-    //     //         "hr": sessionStorage.getItem('hr'),
-    //     //         "mins": sessionStorage.getItem('mins'),
-    //     //         "secs": sessionStorage.getItem('secs')
-
-    //     //         // "password": Base64.encode(pwd.value),
-    //     //         // "role": ""
-
-    //     //     });
-
-    //     //     // console.log(myData2);
-
-    //     //     $.ajax({
-    //     //         type: "POST",
-    //     //         dataType: "json",
-    //     //         // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-    //     //         url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
-    //     //         data: myData2,
-    //     //         headers: {
-    //     //             "Content-Type": "application/json"
-    //     //         },
-    //     //         success: function (data) {
-    //     //             console.log(data);
-
-
-    //     //             console.log("Saved!");
-
-    //     //             // document.getElementById("messages").innerHTML =
-    //     //             //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
-
-
-    //     //             // window.location.href = './index.html';
-    //     //         },
-    //     //         error: function (response) {
-    //     //             console.log(response);
-    //     //             console.log("Error");
-
-    //     //         }
-    //     //     });
-
-
-    //     //     setTimeout(() => {
-
-    //     //         setTimeout(() => {
-
-    //     //             // window.location.href = '#';
-    //     //             // window.location.href = '#calendar';
-    //     //             console.log("refreshed!")
-    //     //             location.reload();
-    //     //         }, 1000);
-    //     //         window.location.href = '#';
-    //     //         window.location.href = '#calendar';
-    //     //         // location.reload();
-    //     //     }, 500);
-    //     // }
-    // });
     setInterval(showTime, 1000);
 
     function showTime() {
@@ -1006,6 +923,7 @@
                 document.getElementById("location").value = sessionStorage.getItem('gadd');
                 var subject = document.getElementById("subject").value =
                     "Cleaning manhattan madison sqr. garden";
+                
                 // console.log(start);
                 // console.log(end);
                 // console.log(allDay);
@@ -1078,7 +996,7 @@
                         });
 
                     }
-                    
+
                 } else if (role == 2) {
                     $("#myModal2").modal();
                     if (navigator.geolocation) {
@@ -1183,6 +1101,102 @@
 
 
                         $('#myModal').modal('hide');
+
+                        setTimeout(() => {
+
+                            setTimeout(() => {
+
+                                // window.location.href = '#';
+                                // window.location.href = '#calendar';
+                                console.log("refreshed!")
+                                location.reload();
+                            }, 1000);
+                            window.location.href = '#';
+                            window.location.href = '#calendar';
+                            // location.reload();
+                        }, 500);
+                    }
+                });
+
+                $("#save-admin").click(function () {
+                    var title = document.getElementById("title").value =
+                        $("#title").val();
+                    var timeAdmin = $("#timeAdmin").val();
+                    var tagColor = $("#tagColor").val();
+                    // console.log("save admin!");
+                    console.log(title);
+                    console.log(tagColor);
+                    //   console.log($scope.tojson(obj))
+                    var gadd = sessionStorage.getItem('gadd');
+                    if (gadd) {
+                        calendar.fullCalendar('renderEvent', {
+                                title: title,
+                                start: start,
+                                end: end,
+                                allDay: allDay
+                            },
+                            true // make the event "stick"
+                        );
+                        var button = document.getElementById("times");
+                        button.disabled = false;
+                        var userComID = sessionStorage.getItem("comid");
+                        var userEmail = sessionStorage.getItem("user");
+                        var myData2 = JSON.stringify({
+
+                            //     // "count": "13",
+                            //     // "domain": "www.done.com"
+                            "comid": userComID,
+                            "email": userEmail,
+                            // "comid": $('#email').val(),
+                            "cleanerID": document.getElementById("cleanersID")
+                                .value,
+                            "title": document.getElementById("title").value,
+                            "location": gadd,
+                            "day": dayAdded,
+                            "month": fixMonth,
+                            "year": arr1[3],
+                            "start": start,
+                            "end": end,
+                            "allDay": allDay,
+                            // "hr": sessionStorage.getItem('hr'),
+                            // "mins": sessionStorage.getItem('mins'),
+                            // "secs": sessionStorage.getItem('secs')
+
+                            // "password": Base64.encode(pwd.value),
+                            // "role": ""
+
+                        });
+
+                        // console.log(myData2);
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+                            data: myData2,
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            success: function (data) {
+                                console.log(data);
+
+
+                                console.log("Saved!");
+
+                                // document.getElementById("messages").innerHTML =
+                                //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
+
+
+                                // window.location.href = './index.html';
+                            },
+                            error: function (response) {
+                                console.log(response);
+                                console.log("Error");
+
+                            }
+                        });
+
 
                         setTimeout(() => {
 
@@ -1324,7 +1338,7 @@
         // console.log(lng)
         sessionStorage.setItem('lat', lat);
         sessionStorage.setItem('lng', lng);
-        if(role == 1){
+        if (role == 1) {
             $("#myModal3").modal();
         } else {
             console.log("You're not an Admin!");
