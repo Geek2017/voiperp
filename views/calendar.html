@@ -1,8 +1,3 @@
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly"
-    defer></script>
-
 <style type="text/css">
     body {
         margin-bottom: 40px;
@@ -77,38 +72,6 @@
 
     .my-modal .modal-content {
         background-color: black;
-    }
-
-
-    #map {
-        height: 100%;
-    }
-
-    /* Optional: Makes the sample page fill the window. */
-
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .custom-map-control-button {
-        appearance: button;
-        background-color: #fff;
-        border: 0;
-        border-radius: 2px;
-        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-        margin: 10px;
-        padding: 0 0.5em;
-        height: 40px;
-        font: 400 18px Roboto, Arial, sans-serif;
-        overflow: hidden;
-    }
-
-    .custom-map-control-button:hover {
-        background: #ebebeb;
     }
 </style>
 
@@ -527,7 +490,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <!-- <label >Subject</label> -->
-                                <input class="form-control" id="dateStart2" type="text">
+                                <input class="form-control" id="dateStart3" type="text">
                             </div>
                         </div>
                         <!-- <div class="checkbox checkbox-success col-sm-6">
@@ -1331,9 +1294,10 @@
         // console.log(eventId);
         // console.log(events);
         const e = events.filter(event => event.id == eventId)[0];
-        console.log(e.location);
+        console.log(e);
         document.getElementById("location3").value = e.location;
         document.getElementById("subject2").value = e.title;
+        document.getElementById("dateStart3").value = e.month + "/" + e.day + "/" + e.year;
         // console.log(lat)
         // console.log(lng)
         sessionStorage.setItem('lat', lat);
