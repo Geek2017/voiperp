@@ -1,5 +1,141 @@
 angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
+  var obj;
+    $scope.tojson = function(obj) {
+
+        var table = $('#convert-table').tableToJSON({
+
+            extractor: function(cellIndex, $cell) {
+                return $cell.find('input').val() || $cell.text() || $cell.find('.textarea').val();
+            }
+
+
+        })
+        return table;
+
+    }
+
+    $('#newEvent').on('submit', function(e) {
+      // var timeAdmin = $("#timeAdmin").val();
+      // console.log("save admin!");
+      // console.log(timeAdmin);
+    });
+    $("#save-admin").click(function () {
+      var timeAdmin = $("#timeAdmin").val();
+      var tagColor = $("#tagColor").val();
+      // console.log("save admin!");
+      // console.log(timeAdmin);
+      console.log(tagColor);
+      console.log($scope.tojson(obj))
+      // var gadd = sessionStorage.getItem('gadd');
+      // if (gadd) {
+      //     calendar.fullCalendar('renderEvent', {
+      //             title: subject,
+      //             start: start,
+      //             end: end,
+      //             allDay: allDay
+      //         },
+      //         true // make the event "stick"
+      //     );
+      //     var button = document.getElementById("times");
+      //     button.disabled = false;
+      //     var userComID = sessionStorage.getItem("comid");
+      //     var userEmail = sessionStorage.getItem("user");
+      //     var myData2 = JSON.stringify({
+
+      //         //     // "count": "13",
+      //         //     // "domain": "www.done.com"
+      //         "comid": userComID,
+      //         "email": userEmail,
+      //         // "comid": $('#email').val(),
+      //         "title": document.getElementById("subject").value,
+      //         "location": gadd,
+      //         "day": dayAdded,
+      //         "month": fixMonth,
+      //         "year": arr1[3],
+      //         "start": start,
+      //         "end": end,
+      //         "allDay": allDay,
+      //         "hr": sessionStorage.getItem('hr'),
+      //         "mins": sessionStorage.getItem('mins'),
+      //         "secs": sessionStorage.getItem('secs')
+
+      //         // "password": Base64.encode(pwd.value),
+      //         // "role": ""
+
+      //     });
+
+      //     // console.log(myData2);
+
+      //     $.ajax({
+      //         type: "POST",
+      //         dataType: "json",
+      //         // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+      //         url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+      //         data: myData2,
+      //         headers: {
+      //             "Content-Type": "application/json"
+      //         },
+      //         success: function (data) {
+      //             console.log(data);
+
+
+      //             console.log("Saved!");
+
+      //             // document.getElementById("messages").innerHTML =
+      //             //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
+
+
+      //             // window.location.href = './index.html';
+      //         },
+      //         error: function (response) {
+      //             console.log(response);
+      //             console.log("Error");
+
+      //         }
+      //     });
+
+
+      //     setTimeout(() => {
+
+      //         setTimeout(() => {
+
+      //             // window.location.href = '#';
+      //             // window.location.href = '#calendar';
+      //             console.log("refreshed!")
+      //             location.reload();
+      //         }, 1000);
+      //         window.location.href = '#';
+      //         window.location.href = '#calendar';
+      //         // location.reload();
+      //     }, 500);
+      // }
+  });
+
+    var cnt = 0;
+    $scope.addtr = function() {
+        $("#appendhere").append(' <tr class="row_to_clone"><td class="col-md-6"><label class="input"> <input type="text" placeholder="List"></label></td></td><td class="col-md-1"><label class="input"> <input type="text"  placeholder="hrs"></label></td></td><td class="col-md-1"><label class="input"> <input class="checkbox_animated" id="chk-ani" type="checkbox"></label></td></tr>');
+        cnt++;
+        $('table thead th').each(function(i) {
+
+        });
+
+    }
+    $scope.removetr = function() {
+
+        $('#appendhere tr:last').remove();
+        $('table thead th').each(function(i) {
+
+        });
+    }
+
+    $("#appendhere").on('click', '.deleteb', function() {
+        $(this).closest("tr").remove();
+        $('table thead th').each(function(i) {
+
+        });
+    });
+
 //   setTimeout(() => {
 
 //     setTimeout(() => {
@@ -529,7 +665,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         currentView.clearEvents(); // actually remove the DOM elements
         currentView.clearEventData(); // for View.js, TODO: unify with clearEvents
       }
-
 
       function getAndRenderEvents() {
         if (!options.lazyFetching || isFetchNeeded(currentView.visStart, currentView.visEnd)) {
@@ -5440,7 +5575,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         if (url) {
           html += "<a href='" + htmlEscape(url) + "'";
         } else {
-          html += "<div";
+          html += `<div onclick="displayEvent('${event.id}')"`;
         }
         html +=
           " class='" + classNames.join(' ') + "'" +
@@ -5461,10 +5596,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             "</span>";
         }
         html +=
-          "<span class='fc-event-title'>" +
-          htmlEscape(event.title || '') +
-          "</span>" +
-          "</div>";
+        // `<span class='fc-event-title'>${htmlEscape(event.title || '')}</span><input class='btn btn-xs' type='button'  value='edit'></div>`
+        `<span class='fc-event-title'>${htmlEscape(event.title || '')}</span></div>`
+          // "<span class='fc-event-title'>" +
+          // htmlEscape(event.id || '') +
+          // "</span>" +
+          // "<input class='btn btn-xs' type='button'  value='edit'>" +
+          // "</div>";
         if (segment.isEnd && isEventResizable(event)) {
           html +=
             "<div class='ui-resizable-handle ui-resizable-" + (isRTL ? 'w' : 'e') + "'>" +
@@ -5481,6 +5619,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return html;
       }
 
+      // $scope.displayEvent = function(eventId) {
+      //   console.log(eventId);
+      // }
 
       // Associate each segment (an object) with an element (a jQuery object),
       // by setting each `segment.element`.
@@ -6258,6 +6399,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
     // (C) START!
     start: function () {
+      sw.now = -1;
       sw.timer = setInterval(sw.tick, 1000);
       sw.ego.value = "Stop";
       document.getElementById("sw-time").style.display = "block";
@@ -6273,6 +6415,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
     stop: function () {
       clearInterval(sw.timer);
       var remain = sw.now;
+      // if (sw.timer != null) {
+      //   sw.stop();
+      // }
+      // sw.now = -1;
+      // sw.tick();
       var hours = Math.floor(remain / 3600);
       remain -= hours * 3600;
       var mins = Math.floor(remain / 60);
@@ -6288,7 +6435,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       sw.timer = null;
       sw.ego.value = "Start";
       document.getElementById("sw-save").style.display = "block";
-      document.getElementById("sw-rst").style.display = "block";
+      // document.getElementById("sw-rst").style.display = "block";
       var button = document.getElementById("times");
       button.disabled = false;
       sw.ego.removeEventListener("click", sw.stop);
@@ -6302,7 +6449,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
       sw.now = -1;
       sw.tick();
-      document.getElementById("sw-rst").style.display = "none";
+      // document.getElementById("sw-rst").style.display = "none";
       document.getElementById("sw-save").style.display = "none";
       document.getElementById("list").style.display = "none";
       var button = document.getElementById("times");

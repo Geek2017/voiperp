@@ -55,7 +55,7 @@
     </script>
 </head>
 
-<body>
+<body class="dark-only">
     <!-- tap on top starts-->
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
     <!-- tap on tap ends-->
@@ -82,8 +82,8 @@
                     <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle">
                         </i></div>
                 </div>
-                <div class="left-menu-header col horizontal-wrapper pl-0">
-                    <ul class="horizontal-menu">
+                <div class="left-menu-header col horizontal-wrapper pl-0" >
+                    <ul class="horizontal-menu" style="display: none;">
                         <li class="mega-menu"><a class="" href="#"><span></span></a>
                             <div class="mega-menu-container menu-content">
                                 <div class="container-fluid">
@@ -239,7 +239,7 @@
                             </ul>
                         </li>
                         <li>
-                            <div class="mode"><i class="fa fa-moon-o"></i></div>
+                            <div class="mode"><i class="fa fa-lightbulb-o"></i></div>
                         </li>
                         <li class="cart-nav onhover-dropdown">
                             <div class="cart-box"><i data-feather="shopping-cart"></i><span class="badge badge-pill badge-primary">2</span></div>
@@ -360,7 +360,8 @@
             <!-- Page Sidebar Start-->
             <header class="main-nav">
                 <div class="logo-wrapper aligncenter">
-                    <a href="#/"><img id="photoURL" class="img-fluid for-light" src="./assets/images/logo/logo.png" width="40%" height="50%" style="text-align:center;" alt=""><img class="img-fluid for-dark" src="./assets/images/logo/logo_dark.png" alt=""></a>
+                    <a href="#/"><img id="photoURL" class="img-fluid for-light" src="./assets/images/logo/logo.png" width="40%" height="50%" style="text-align:center;" alt="">
+                        <img id="photoURLDark" class="img-fluid for-dark" src="./assets/images/logo/logo.png" width="40%" height="50%" style="text-align: center;" alt=""></a>
                     <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                     <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle">
                         </i></div>
@@ -543,6 +544,7 @@
     <!--AngulasJS-->
     <script src="./assets/AngularJS/angular.js"></script>
     <script src="./assets/AngularJS/angular-route.js"></script>
+    <script src="./assets/jquery.tabletojson.min.js"></script>
 
 
 
@@ -595,6 +597,7 @@
             }
             if (logo) {
                 document.getElementById("photoURL").src = logo;
+                document.getElementById("photoURLDark").src = logo;
             }
             document.getElementById("username").innerHTML = fullname;
             if (role == 1) {
