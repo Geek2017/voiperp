@@ -1,81 +1,138 @@
+<script src="./assets/jquery.tabletojson.min.js"></script>
 <style type="text/css">
-    body {
-        margin-bottom: 40px;
-        margin-top: 40px;
-        text-align: center;
-        font-size: 14px;
-        font-family: 'Roboto', sans-serif;
-        background: url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
-    }
+  body {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    background: url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
+  }
 
-    #clock {
-        font-size: 25px;
-        width: 150px;
-        /* margin: 200px;  */
-        text-align: center;
-        border: 2px solid black;
-        border-radius: 20px;
-    }
+  #clock {
+    font-size: 25px;
+    width: 150px;
+    /* margin: 200px;  */
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+  }
 
-    #wrap {
-        width: 1400px;
-        margin: 0 auto;
-    }
+  #wrap {
+    width: 1400px;
+    margin: 0 auto;
+  }
 
-    #external-events {
-        float: left;
-        width: 150px;
-        padding: 0 10px;
-        text-align: left;
-    }
+  #external-events {
+    float: left;
+    width: 150px;
+    padding: 0 10px;
+    text-align: left;
+  }
 
-    #external-events h4 {
-        font-size: 16px;
-        margin-top: 0;
-        padding-top: 1em;
-    }
+  #external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+  }
 
-    .external-event {
-        /* try to mimick the look of a real event */
-        margin: 10px 0;
-        padding: 2px 4px;
-        background: #3366CC;
-        color: #fff;
-        font-size: .85em;
-        cursor: pointer;
-    }
+  .external-event {
+    /* try to mimick the look of a real event */
+    margin: 10px 0;
+    padding: 2px 4px;
+    background: #3366cc;
+    color: #fff;
+    font-size: 0.85em;
+    cursor: pointer;
+  }
 
-    #external-events p {
-        margin: 1.5em 0;
-        font-size: 11px;
-        color: #666;
-    }
+  #external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+  }
 
-    #external-events p input {
-        margin: 0;
-        vertical-align: middle;
-    }
+  #external-events p input {
+    margin: 0;
+    vertical-align: middle;
+  }
 
-    #calendar {
-        /* 		float: right; */
-        margin: 0 auto;
-        /* width: 1100px; */
-        max-width: 100%;
-        height: auto;
-        background-color: #FFFFFF;
-        border-radius: 6px;
-        box-shadow: 0 1px 2px #C3C3C3;
-        -webkit-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-        -moz-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-        box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-    }
+  #calendar {
+    /* 		float: right; */
+    margin: 0 auto;
+    /* width: 1100px; */
+    max-width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px #c3c3c3;
+    -webkit-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+    -moz-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+    box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+    padding: 10px;
+  }
 
-    .my-modal .modal-content {
-        background-color: black;
-    }
+  .fc-header-title {
+    color: #666;
+  }
+
+  .fc-day-header {
+    color: #fff;
+  }
+
+  .fc-week {
+    color: #c3c3c3;
+  }
+
+  .fc-day-number {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 100%;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-weight: 500;
+  }
+
+  .fc-day-number:hover {
+    background-color: #c3c3c3;
+    color: #ffffff;
+  }
+
+  thead tr th {
+    background-color: #3366cc;
+    padding: 10px 0 10px 0;
+  }
+
+  .fc-event-inner {
+    padding: 5px;
+  }
+
+  #sw-time {
+    font-size: xx-large;
+    padding-left: 10px;
+  }
+
+  .my-modal .modal-content {
+    background-color: black;
+  }
 </style>
 
-<link rel="stylesheet" type="text/css" href="./assets/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/assets/css/calendar.css" /> -->
+<link
+  href="/assets/fullcalendar/fullcalendar/fullcalendar.css"
+  rel="stylesheet"
+/>
+<link
+  href="/assets/fullcalendar/fullcalendar/fullcalendar.print.css"
+  rel="stylesheet"
+  media="print"
+/>
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/jquery-ui.custom.min.js"></script>
+<script src="/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
 <script src="./assets/js/select2.min.js"></script>
 
 <!-- Select2 CSS -->
@@ -86,20 +143,22 @@
 
 <!-- Select2 JS -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
-<br>
+<br />
 
 <div class="container-fluid">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card box-shadow-title">
-                <div class="card-header">
-                    <span id="myAdd">You are @ :{{gadd}}</span>
-                    <object data="./assets/geolocate.html" width="100%" height="500"></object>
-                    <br>
-                    <!-- <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FManila&amp;src=amF5c29ubGlnbmVzQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=1" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
-                </div>
-                <!-- <button id="btnCreateEvents" class="btn btn-primary" onclick="makeApiCall();">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card box-shadow-title">
+        <!-- <div class="card-header">
+          <span id="myAdd">You are @ :{{gadd}}</span>
+          <object
+            data="./assets/geolocate.html"
+            width="100%"
+            height="500"
+          ></object>
+          <br />
+        </div> -->
+        <!-- <button id="btnCreateEvents" class="btn btn-primary" onclick="makeApiCall();">
                     Create Events</button>
 
                 <div id="divifm">
@@ -108,14 +167,13 @@
                         style="border-width: 0" width="950" height="520" frameborder="0" scrolling="no">
                     </iframe>
                 </div> -->
-                <div id='wrap' style="max-width:100%;height:auto;">
+        <div id="wrap" style="max-width: 100%; height: auto">
+          <div id="calendar"></div>
 
-                    <div id='calendar'></div>
-
-                    <div style='clear:both'></div>
-                </div>
-                <!-- <iframe src="https://calendar.google.com/calendar/embed?src=cj.lignes%40gmail.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
-                <!-- <div class="d-flex">
+          <div style="clear: both"></div>
+        </div>
+        <!-- <iframe src="https://calendar.google.com/calendar/embed?src=cj.lignes%40gmail.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
+        <!-- <div class="d-flex">
                     <div id="lnb">
                         <div class="lnb-new-schedule text-center">
                             <button class="btn btn-primary" id="btn-new-schedule" type="button" data-toggle="modal">New schedule</button>
@@ -163,32 +221,32 @@
                         <div id="calendar"></div>
                     </div>
                 </div> -->
-                <!-- <div id="stopwatch">
+        <!-- <div id="stopwatch">
                     <div id="sw-time">00:00:00</div>
                    
                     <input type="button" value="Reset" id="sw-rst" disabled/>
                     <input type="button" value="Start" id="sw-go" disabled/>
                   </div> -->
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h4 class="modal-title">Admin</h4> -->
-                <button type="button" class="close" data-dismiss="modal" id="times">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form class="" id="newEvent">
-
-                    <fieldset>
-                        <!-- Dropdown -->
-                        <!-- <select id='selUser' style='width: 200px;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h4 class="modal-title">Admin</h4> -->
+        <button type="button" class="close" data-dismiss="modal" id="">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="" id="newEvent">
+          <fieldset>
+            <!-- Dropdown -->
+            <!-- <select id='selUser' style='width: 200px;'>
                             <option value='0'>Select User</option>
                             <option value='1'>Yogesh singh</option>
                             <option value='2'>Sonarika Bhadoria</option>
@@ -203,1109 +261,1417 @@
     
                         <br />
                         <div id='result'></div> -->
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <!-- <label>Project Type</label> -->
-                                <select class="form-control digits" id="dp">
-                                    <option value="Daily Itinerary">Daily Itinerary</option>
-                                    <!-- <option value="fix">Fix price</option> -->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <!-- <label >Subject</label> -->
-                                    <input class="form-control" id="cleanersID" type="text" placeholder="Cleaner's ID"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <!-- <label >Subject</label> -->
-                                    <input class="form-control" id="title" type="text" placeholder="Subject" required>
-                                </div>
-                            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <!-- <label >Subject</label> -->
+                  <select
+                    class="form-control"
+                    id="cleanersID"
+                    type="text"
+                    placeholder="Cleaner's Name"
+                    required
+                    autocomplete="off"
+                  >
+                    <option value="0">Select User</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <!-- <label >Subject</label> -->
+                  <input
+                    class="form-control"
+                    id="title"
+                    type="text"
+                    placeholder="Title"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <!-- <label >Subject</label> -->
+                  <input
+                    class="form-control"
+                    id="a-location"
+                    type="text"
+                    placeholder="Location"
+                  />
+                </div>
+              </div>
+            </div>
 
-                        </div>
-                        <div class="row" style="display: none;">
-                            <div class="col">
-                                <div class="form-group">
-                                    <!-- <label >Subject</label> -->
-                                    <input class="form-control" id="location2" type="text" placeholder="location">
-                                </div>
-                            </div>
-                        </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <!-- <label >Subject</label> -->
+                  <input
+                    class="form-control"
+                    id="timeAdmin"
+                    type="time"
+                    placeholder="time"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <!-- <label >Subject</label> -->
-                                    <input class="form-control" id="timeAdmin" type="time" placeholder="time" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <!-- <label >Subject</label> -->
-                                    <input class="form-control" id="dateStart" type="text" disabled>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="tagColor">Tag</label>
-                                    <input type="color" id="tagColor" name="tagColor" value="#ff0000">
-                                </div>
-                            </div>
-                            <!-- <div class="checkbox checkbox-success col-sm-6">
+            <div class="row">
+              <div class="col-sm-6" style="display: none">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    id="dateStart"
+                    type="text"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12 d-flex">
+                <ul
+                  class="fc-color-picker d-flex justify-content-around w-50"
+                  id="color-chooser"
+                >
+                  <li>
+                    <a
+                      class="bg-primary"
+                      onclick="pickColor('#7366ff')"
+                      style="
+                        height: 25px;
+                        width: 25px;
+                        display: block;
+                        border-radius: 3px;
+                      "
+                      href="javascript:void(0)"
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      class="bg-warning"
+                      onclick="pickColor('#f8d62b')"
+                      style="
+                        height: 25px;
+                        width: 25px;
+                        display: block;
+                        border-radius: 3px;
+                      "
+                      href="javascript:void(0)"
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      class="bg-success"
+                      onclick="pickColor('#51bb25')"
+                      style="
+                        height: 25px;
+                        width: 25px;
+                        display: block;
+                        border-radius: 3px;
+                      "
+                      href="javascript:void(0)"
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      class="bg-danger"
+                      onclick="pickColor('#dc3545')"
+                      style="
+                        height: 25px;
+                        width: 25px;
+                        display: block;
+                        border-radius: 3px;
+                      "
+                      href="javascript:void(0)"
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      class="bg-info"
+                      onclick="pickColor('#a927f9')"
+                      style="
+                        height: 25px;
+                        width: 25px;
+                        display: block;
+                        border-radius: 3px;
+                      "
+                      href="javascript:void(0)"
+                    ></a>
+                  </li>
+                </ul>
+                <div class="form-group w-50">
+                  <input
+                    type="color"
+                    class="p-0"
+                    id="tagColor"
+                    name="tagColor"
+                    style="width: 75%; height: 25px"
+                    value="#ffffff"
+                  />
+                </div>
+              </div>
+              <!-- <div class="checkbox checkbox-success col-sm-6">
                                 <div id="clock">8:10:45</div>
                             </div> -->
-                        </div>
-                        <div class="btn-group btn-group-sm pull-right">
-                            <button type="button" class="btn btn-success " ng-click="addtr()"><i
-                                    class="fa fa-plus-circle"></i></button>
+            </div>
+            <div class="btn-group btn-group-sm pull-right">
+              <button type="button" class="btn btn-success" ng-click="addtr()">
+                <i class="fa fa-plus-circle"></i>
+              </button>
 
-                            <button type="button" class="btn btn-danger" ng-click="removetr()"><i
-                                    class="fa fa-minus-circle"></i></button>
-                        </div>
-                        <table id="convert-table" class="table table-striped table-bordered table-hover" width="100%">
+              <button
+                type="button"
+                class="btn btn-danger"
+                ng-click="removetr()"
+              >
+                <i class="fa fa-minus-circle"></i>
+              </button>
+            </div>
+            <!-- <table id="convert-table" class="table table-striped table-bordered table-hover" width="100%">
                             <thead>
 
                                 <tr>
-                                    <th class="text-center">List</th>
-                                    <th class="text-center">Hours</th>
-                                    <th class="text-center"></th>
-                                    <!-- <th class="text-center th">First 30 Days Total Cost</th>
-                                    <th class="text-center th">Second 30 Days Quantity</th>
-                                    <th class="text-center th">Second 30 Days Total Cost</th>
-                                    <th class="text-center th">Third 30 Days Quantity</th>
-                                    <th class="text-center th">Third 30 Days Total Cost</th> -->
+                                    <th class="text-center text-primary">Number</th>
+                                    <th class="text-center text-primary">Task</th>
+                                    <th class="text-center text-primary">Status</th>
+
                                 </tr>
                             </thead>
                             <tbody id="appendhere">
                                 <tr class="row_to_clone">
 
-                                    <td class="col-md-6"><label class="input">
-                                            <input type="text" placeholder="List">
+                                    <td class=""><label class="input">
+                                            <span>1</span>
                                         </label></td>
                                     </td>
 
                                     <td class="col-md-1"><label class="input">
-                                            <input type="text" placeholder="hrs">
+                                            <input type="text" placeholder="Task">
                                         </label></td>
                                     </td>
                                     <td class="col-md-1"><label class="input">
                                             <input class="checkbox_animated" id="chk-ani" type="checkbox">
                                         </label></td>
-                                    <!-- <td class="col-md-1">
-                                        <label class="input "> 
-                                            <input type="number" class="txt" autocomplete='off' placeholder="0.00"/>
-                                       </label>
-                                    </td>
-    
-                                    <td class="col-md-1"><label class="input"> 
-                                        <input type="text" autocomplete='off' placeholder="Qty">
-                                    </label></td>
-                                    </td>
-                                    <td class="col-md-1">
-    
-                                        <label class="input "> 
-                                            <input type="number"  class="txt2" autocomplete='off' placeholder="0.00"/>
-                                       </label>
-                                    </td>
-    
-                                    <td class="col-md-1"><label class="input"> 
-                                        <input type="text" placeholder="Qty">
-                                    </label></td>
-                                    </td>
-                                    <td class="col-md-1">
-    
-                                        <label class="input "> 
-                                            <input type="number"  class="txt3" autocomplete='off' placeholder="0.00"/>
-                                       </label>
-                                    </td> -->
                                 </tr>
                             </tbody>
-                        </table>
-                    </fieldset>
-                </form>
-
-
-                <!-- <p>{{gadd}}</p> -->
-
-                <!-- <div id="sw-time">00:00:00</div> -->
-
+                        </table> -->
+            <div class="w-100 d-flex justify-content-around py-2">
+              <span class="w-25">Number</span>
+              <span class="w-50 text-left pl-2">Task</span>
+              <span class="w-25">Status</span>
             </div>
-            <div class="modal-footer">
-                <!-- <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
+            <div id="appendhere"></div>
+          </fieldset>
+        </form>
+
+        <!-- <p>{{gadd}}</p> -->
+
+        <!-- <div id="sw-time">00:00:00</div> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
                 <input type="button" value="Start" id="sw-go" disabled />
                 <input type="button" value="Save" style="display: none;" id="sw-save" /> -->
-                <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
+        <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="save-admin"
-                    value="Save">Save</button>
-            </div>
-        </div>
-
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          id="save-admin"
+          value="Save"
+        >
+          Save
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="modal fade" id="myModal2" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <div id="sw-time" style="display: none;">00:00:00</div>
-                <!-- <h4 class="modal-title">Cleaners</h4> -->
-                <button type="button" class="close" data-dismiss="modal" id="times2">&times;</button>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <div id="sw-time" style="display: none">00:00:00</div>
+        <!-- <h4 class="modal-title">Cleaners</h4> -->
+        <button type="button" class="close" data-dismiss="modal" id="times2">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <fieldset>
+          <!-- <div class="col-sm-6">
+            <div class="form-group">
+              <label>Project Type</label>
+              <select class="form-control digits" id="dp">
+                <option value="Daily Itinerary">Daily Itinerary</option>
+                <option value="fix">Fix price</option>
+              </select>
             </div>
-            <div class="modal-body">
-                <fieldset>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <!-- <label>Project Type</label> -->
-                            <select class="form-control digits" id="dp">
-                                <option value="Daily Itinerary">Daily Itinerary</option>
-                                <!-- <option value="fix">Fix price</option> -->
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <!-- <label >Subject</label> -->
-                                <input class="form-control" id="subject" type="text" placeholder="Subject" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <!-- <label >Subject</label> -->
-                                <input class="form-control" id="location" type="text" placeholder="location" disabled>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <!-- <label >Subject</label> -->
-                                <input class="form-control" id="dateStart2" type="text" disabled>
-                            </div>
-                        </div>
-                        <div class="checkbox checkbox-success col-sm-6">
-                            <!-- <div id="txt"></div> -->
-                            <!-- <input class="form-control" id="txt" type="text"> -->
-                            <div id="clock">8:10:45</div>
-                        </div>
-                    </div>
-                    <div class="card-body animate-chk" style="display: none;" id="list">
-                        <h5>Lists</h5>
-                        <div class="row">
-                            <div class="col">
-                                <label class="d-block" for="chk-ani">
-                                    <input class="checkbox_animated" id="chk-ani" type="checkbox"> Option 1
-                                </label>
-                                <label class="d-block" for="chk-ani1">
-                                    <input class="checkbox_animated" id="chk-ani1" type="checkbox"> Option 2
-                                </label>
-                                <label class="d-block" for="chk-ani2">
-                                    <input class="checkbox_animated" id="chk-ani2" type="checkbox"> Option 3
-                                </label>
-                                <label class="d-block" for="chk-ani3">
-                                    <input class="checkbox_animated" id="chk-ani3" type="checkbox"> Option 4
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-
-                <!-- <p>{{gadd}}</p> -->
-
-                <!-- <div id="sw-time">00:00:00</div> -->
-
+          </div> -->
+          <div class="row">
+            <div class="col">
+              <div class="form-group d-flex justify-content-start">
+                <h6 class="px-4 py-2 m-0 w-25 text-left">Title:</h6>
+                <input
+                  class="form-control w-75"
+                  id="c-subject"
+                  type="text"
+                  placeholder="Subject"
+                  disabled
+                />
+              </div>
             </div>
-            <div class="modal-footer">
-                <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
-                <input type="button" value="Start" id="sw-go" disabled />
-                <input type="button" value="Save" style="display: none;" id="sw-save" disabled />
-                <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group d-flex justify-content-start">
+                <h6 class="px-4 py-2 m-0 w-25 text-left">Location:</h6>
+                <input
+                  class="form-control w-75"
+                  id="c-location"
+                  type="text"
+                  placeholder="Location"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div
+              class="checkbox checkbox-success col-sm-12 d-flex justify-content-center"
+            >
+              <!-- <div id="txt"></div> -->
+              <!-- <input class="form-control" id="txt" type="text"> -->
+              <div id="clock"></div>
+            </div>
+          </div>
+          <div
+            class="card-body animate-chk text-left"
+            style="display: none"
+            id="list"
+          >
+            <h6>Tasks</h6>
+            <div class="row">
+              <div class="col" id="event-tasks"></div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- <p>{{gadd}}</p> -->
+
+        <!-- <div id="sw-time">00:00:00</div> -->
+      </div>
+      <div class="modal-footer">
+        <input
+          type="button"
+          value="Save"
+          class="btn btn-success"
+          style="display: none"
+          id="sw-save"
+          disabled
+        />
+        <input
+          type="button"
+          value="Close"
+          class="btn btn-danger ml-4"
+          style="display: none"
+          id="sw-rst"
+          disabled
+        />
+        <input
+          type="button"
+          class="btn btn-primary"
+          value="Start"
+          id="sw-go"
+          disabled
+        />
+        <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-            </div>
-        </div>
-
+      </div>
     </div>
+  </div>
 </div>
-
-
 
 <div class="modal fade" id="myModal3" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <div id="sw-time" style="display: none;">00:00:00</div> -->
-                <!-- <h4 class="modal-title">Cleaners</h4> -->
-                <button type="button" class="close" data-dismiss="modal" id="times2">&times;</button>
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <div id="sw-time" style="display: none;">00:00:00</div> -->
+        <!-- <h4 class="modal-title">Cleaners</h4> -->
+        <button type="button" class="close" data-dismiss="modal" id="times3">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <span id="myAdd">You are @ :{{gadd}}</span> -->
+        <object
+          data="./assets/geolocate2.html"
+          width="100%"
+          height="500"
+        ></object>
+        <fieldset>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <!-- <label >Subject</label> -->
+                <select
+                  class="form-control"
+                  id="emp-name"
+                  type="text"
+                  placeholder="Employee's Name"
+                  required
+                  autocomplete="off"
+                ></select>
+              </div>
             </div>
-            <div class="modal-body">
-                <!-- <span id="myAdd">You are @ :{{gadd}}</span> -->
-                <object data="./assets/geolocate2.html" width="100%" height="500"></object>
-                <fieldset>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <!-- <label>Project Type</label> -->
-                            <select class="form-control digits" id="dp">
-                                <option value="Daily Itinerary">Daily Itinerary</option>
-                                <!-- <option value="fix">Fix price</option> -->
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <!-- <label >Subject</label> -->
-                                <input class="form-control" id="subject2" type="text" placeholder="Subject">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <!-- <label >Subject</label> -->
-                                <input class="form-control" id="location3" type="text" placeholder="location">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <!-- <label >Subject</label> -->
-                                <input class="form-control" id="dateStart3" type="text">
-                            </div>
-                        </div>
-                        <!-- <div class="checkbox checkbox-success col-sm-6">
-                            <div id="clock">8:10:45</div>
-                        </div> -->
-                    </div>
-                    <!-- <div class="card-body animate-chk" style="display: none;" id="list">
-                        <h5>Lists</h5>
-                        <div class="row">
-                            <div class="col">
-                                <label class="d-block" for="chk-ani">
-                                    <input class="checkbox_animated" id="chk-ani" type="checkbox"> Option 1
-                                </label>
-                                <label class="d-block" for="chk-ani1">
-                                    <input class="checkbox_animated" id="chk-ani1" type="checkbox"> Option 2
-                                </label>
-                                <label class="d-block" for="chk-ani2">
-                                    <input class="checkbox_animated" id="chk-ani2" type="checkbox"> Option 3
-                                </label>
-                                <label class="d-block" for="chk-ani3">
-                                    <input class="checkbox_animated" id="chk-ani3" type="checkbox"> Option 4
-                                </label>
-                            </div>
-                        </div>
-                    </div> -->
-                </fieldset>
-
-
-                <!-- <p>{{gadd}}</p> -->
-
-                <!-- <div id="sw-time">00:00:00</div> -->
-
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <!-- <label >Subject</label> -->
+                <input
+                  class="form-control"
+                  id="subject3"
+                  type="text"
+                  placeholder="Subject"
+                />
+              </div>
             </div>
-            <div class="modal-footer">
-                <!-- <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <!-- <label >Subject</label> -->
+                <input
+                  class="form-control"
+                  id="location3"
+                  type="text"
+                  placeholder="location"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- <div class="col-sm-6" style="display: none">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  id="dateStart"
+                  type="text"
+                  disabled
+                />
+              </div>
+            </div> -->
+            <div class="col-sm-12 d-flex">
+              <ul
+                class="fc-color-picker d-flex justify-content-around w-50"
+                id="color-chooser"
+              >
+                <li>
+                  <a
+                    class="bg-primary"
+                    onclick="pickEColor('#7366ff')"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: block;
+                      border-radius: 3px;
+                    "
+                    href="javascript:void(0)"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="bg-warning"
+                    onclick="pickEColor('#f8d62b')"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: block;
+                      border-radius: 3px;
+                    "
+                    href="javascript:void(0)"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="bg-success"
+                    onclick="pickEColor('#51bb25')"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: block;
+                      border-radius: 3px;
+                    "
+                    href="javascript:void(0)"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="bg-danger"
+                    onclick="pickEColor('#dc3545')"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: block;
+                      border-radius: 3px;
+                    "
+                    href="javascript:void(0)"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    class="bg-info"
+                    onclick="pickEColor('#a927f9')"
+                    style="
+                      height: 25px;
+                      width: 25px;
+                      display: block;
+                      border-radius: 3px;
+                    "
+                    href="javascript:void(0)"
+                  ></a>
+                </li>
+              </ul>
+              <div class="form-group w-50">
+                <input
+                  type="color"
+                  class="p-0"
+                  id="eColor"
+                  name="eColor"
+                  style="width: 75%; height: 25px"
+                  value="#ffffff"
+                />
+              </div>
+            </div>
+            <!-- <div class="checkbox checkbox-success col-sm-6">
+                              <div id="clock">8:10:45</div>
+                          </div> -->
+          </div>
+          <!-- <div class="btn-group btn-group-sm pull-right">
+            <button type="button" class="btn btn-success" onclick="addTask()">
+              <i class="fa fa-plus-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-danger" onclick="removeTask()">
+              <i class="fa fa-minus-circle"></i>
+            </button>
+          </div> -->
+          <div class="w-100 d-flex justify-content-around py-2">
+            <span class="w-25">Number</span>
+            <span class="w-50 text-left pl-2">Task</span>
+            <span class="w-25">Status</span>
+          </div>
+          <div id="e-tasks"></div>
+        </fieldset>
+
+        <!-- <p>{{gadd}}</p> -->
+
+        <!-- <div id="sw-time">00:00:00</div> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
                 <input type="button" value="Start" id="sw-go" disabled />
                 <input type="button" value="Save" style="display: none;" id="sw-save" disabled /> -->
-                <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
+        <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="save2-admin"
-                    value="Save">Save</button>
-            </div>
-        </div>
-
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          id="save2-admin"
+          value="Save"
+          onclick="eUpdateAdmin()"
+        >
+          Save
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
-
-
-<script src="assets/js/calendar/tui-code-snippet.min.js"></script>
-<script src="assets/js/calendar/tui-time-picker.min.js"></script>
-<script src="assets/js/calendar/tui-date-picker.min.js"></script>
-<script src="assets/js/calendar/moment.min.js"></script>
-<script src="assets/js/calendar/chance.min.js"></script>
-<script src="assets/js/calendar/tui-calendar.js"></script>
-<script src="assets/js/calendar/calendars.js"></script>
-<script src="assets/js/calendar/schedules.js"></script>
-<script src="assets/js/calendar/app.js"></script>
-
-<!-- <script>
-    // Google api console clientID and apiKey 
-
-    var clientId = '252751we734600-se6610ol8twerwern886jj7gc5m2ugaai.apps.googleuserecontent.com';
-    var apiKey = 'AIzaSyCnk5CDEX3Pvwerwerwe0OpnVf4eW_Lmeere80';
-
-    // enter the scope of current project (this API must be turned on in the Google console)
-    var scopes = 'https://www.googleapis.com/auth/calendar';
-
-
-    // OAuth2 functions
-    function handleClientLoad() {
-        gapi.client.setApiKey(apiKey);
-        window.setTimeout(checkAuth, 1);
-    }
-
-    //To authenticate
-    function checkAuth() {
-        gapi.auth.authorize({
-            client_id: clientId,
-            scope: scopes,
-            immediate: true
-        }, handleAuthResult);
-    }
-
-    // This is the resource we will pass while calling api function
-    var resource = {
-        "summary": "My Event",
-        "start": {
-            "dateTime": today
-        },
-        "end": {
-            "dateTime": twoHoursLater
-        },
-        "description": "We are organizing events",
-        "location": "US",
-        "attendees": [{
-                "email": "attendee1@gmail.com",
-                "displayName": "Jhon",
-                "organizer": true,
-                "self": false,
-                "resource": false,
-                "optional": false,
-                "responseStatus": "needsAction",
-                "comment": "This is my demo event",
-                "additionalGuests": 3
-
-            },
-            {
-                "email": "attendee2@gmail.com",
-                "displayName": "Marry",
-                "organizer": true,
-                "self": false,
-                "resource": false,
-                "optional": false,
-                "responseStatus": "needsAction",
-                "comment": "This is an official event",
-                "additionalGuests": 3
-            }
-        ],
-    };
-
-    function makeApiCall() {
-        gapi.client.load('calendar', 'v3', function () { // load the calendar api (version 3)
-            var request = gapi.client.calendar.events.insert({
-                'calendarId': '24tn4fht2tr6m86efdiqqlsedk@group.calendar.google.com',
-                // calendar ID which id of Google Calendar where you are creating events. this can be copied from your Google Calendar user view.
-
-                "resource": resource // above resource will be passed here
-            });
-        });
-    }
-</script> -->
-
 <script>
-    setInterval(showTime, 1000);
+  setInterval(showTime, 1000);
 
-    function showTime() {
-        let time = new Date();
-        let hour = time.getHours();
-        let min = time.getMinutes();
-        let sec = time.getSeconds();
-        am_pm = "AM";
+  function showTime() {
+    let time = new Date();
+    let hour = time.getHours();
+    let min = time.getMinutes();
+    let sec = time.getSeconds();
+    am_pm = "AM";
 
-        if (hour > 12) {
-            hour -= 12;
-            am_pm = "PM";
-        }
-        if (hour == 0) {
-            hr = 12;
-            am_pm = "AM";
-        }
-
-        hour = hour < 10 ? "0" + hour : hour;
-        min = min < 10 ? "0" + min : min;
-        sec = sec < 10 ? "0" + sec : sec;
-
-        let currentTime = hour + ":" +
-            min + ":" + sec + am_pm;
-
-        document.getElementById("clock")
-            .innerHTML = currentTime;
+    if (hour > 12) {
+      hour -= 12;
+      am_pm = "PM";
+    }
+    if (hour == 0) {
+      hr = 12;
+      am_pm = "AM";
     }
 
-
-
-    showTime();
-    var arr = [];
-    let lat;
-    let lng;
-
-    $(document).ready(function () {
-
-        // Initialize select2
-        $("#selUser").select2();
-
-        // Read selected option
-        $('#but_read').click(function () {
-            var username = $('#selUser option:selected').text();
-            var userid = $('#selUser').val();
-
-            $('#result').html("id : " + userid + ", name : " + username);
-
-        });
-
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        // function startTime() {
-        //     var today = new Date();
-        //     var h = today.getHours();
-        //     var m = today.getMinutes();
-        //     var s = today.getSeconds();
-        //     // add a zero in front of numbers<10
-        //     m = checkTime(m);
-        //     s = checkTime(s);
-        //     document.getElementById("txt").innerHTML = h + ":" + m + ":" + s;
-        //     var t = setTimeout(function () {
-        //         startTime()
-        //     }, 500);
-        // }
-
-        // function checkTime(i) {
-        //     if (i < 10) {
-        //         i = "0" + i;
-        //     }
-        //     return i;
-        // }
-
-        var data = [];
-        var settings = {
-            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcalendar",
-            "method": "GET",
-            "timeout": 0,
-        };
-
-        var settings2 = {
-            "url": "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcalendar",
-            "method": "GET",
-            "timeout": 0,
-        };
-
-        $.ajax(settings).done(function (response) {
-            // console.log(response);
-            var count = response.Count;
-
-
-
-            // console.log(response);
-            for (var i = 0; i < count; i++) {
-
-                arr[i] = {
-                    id: response.Items[i].id.S,
-                    comid: response.Items[i].comid.S,
-                    email: response.Items[i].email.S,
-                    title: response.Items[i].title.S,
-                    location: response.Items[i].location.S,
-                    day: response.Items[i].day.S,
-                    month: response.Items[i].month.S,
-                    year: response.Items[i].year.S,
-                    allDay: response.Items[i].allDay.S,
-                    hr: response.Items[i].hr.S,
-                    mins: response.Items[i].mins.S,
-                    secs: response.Items[i].secs.S,
-                }
-                data.push(arr[i]);
-
-
-
-            }
-
-            // console.log(arr);
-
-            // var filtered = $scope.arr.filter(function (comid) {
-            //     return comid.comid == userComID;
-            // });
-
-
-            var newFiltered = arr.map((users) => {
-                // if(users.year == 12)
-                // var y2 = users.year - 1;
-                // var m2 = users.month - 1;
-                // var d2 = users.day + 1;
-                var user = {
-                    id: users.id,
-                    title: users.title,
-                    location: users.location,
-                    start: new Date(users.year, users.month, users.day)
-                    // start: new Date(y, m, 30)
-                }
-
-                return user
-            });
-            console.log(newFiltered);
-
-            var events = [{
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1)
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d - 3, 16, 0),
-                    allDay: false,
-                    className: 'info'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d + 4, 16, 0),
-                    allDay: false,
-                    className: 'info'
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false,
-                    className: 'important'
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    className: 'important'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false,
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 29),
-                    end: new Date(y, m, 30),
-                    url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-                    className: 'success'
-                }
-            ];
-
-            // console.log(events);
-            // console.log(newFiltered);
-            sessionStorage.setItem("newFiltered", JSON.stringify(newFiltered));
-
-            // console.log(JSON.stringify(newFiltered));
-            // console.log(JSON.parse(sessionStorage.getItem("newFiltered")));
-            // console.log(JSON.stringify(newFiltered));
-
-        });
-
-        /*  className colors
-        
-        className: default(transparent), important(red), chill(pink), success(green), info(blue)
-        
-        */
-
-
-        /* initialize the external events
-        -----------------------------------------------------------------*/
-
-        $('#external-events div.external-event').each(function () {
-
-            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-            // it doesn't need to have a start or end
-            var eventObject = {
-                title: $.trim($(this).text()) // use the element's text as the event title
-            };
-
-            // store the Event Object in the DOM element so we can get to it later
-            $(this).data('eventObject', eventObject);
-
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 999,
-                revert: true, // will cause the event to go back to its
-                revertDuration: 0 //  original position after the drag
-            });
-
-        });
-
-
-        /* initialize the calendar
-        -----------------------------------------------------------------*/
-
-        var calendar = $('#calendar').fullCalendar({
-            header: {
-                left: 'title',
-                center: 'agendaDay,agendaWeek,month',
-                right: 'prev,next today'
-            },
-            editable: true,
-            firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-            selectable: true,
-            defaultView: 'month',
-
-            axisFormat: 'h:mm',
-            columnFormat: {
-                month: 'ddd', // Mon
-                week: 'ddd d', // Mon 7
-                day: 'dddd M/d', // Monday 9/7
-                agendaDay: 'dddd d'
-            },
-            titleFormat: {
-                month: 'MMMM yyyy', // September 2009
-                week: "MMMM yyyy", // September 2009
-                day: 'MMMM yyyy' // Tuesday, Sep 8, 2009
-            },
-            allDaySlot: false,
-            selectHelper: true,
-            select: function (start, end, allDay) {
-
-                document.getElementById("location").value = sessionStorage.getItem('gadd');
-                var subject = document.getElementById("subject").value =
-                    "Cleaning manhattan madison sqr. garden";
-                
-                // console.log(start);
-                // console.log(end);
-                // console.log(allDay);
-                // var arr2 = arr1[1].split(',');
-                // console.log(end);
-                // console.log('Day: ', arr1[0]);
-                // console.log('Month: ', arr1[1]);
-                // console.log('Date: ', arr1[2]);
-                // console.log('Year: ', arr1[3]);
-                const stringNew = new String(start);
-                var arr1 = stringNew.split(' ');
-                var fixMonth;
-                var dayAdded = arr1[2] * 1;
-                var dayAdded = dayAdded + 1;
-                if (arr1[1] == "Jan") {
-                    fixMonth = 00;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Feb") {
-                    fixMonth = 01;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Mar") {
-                    fixMonth = 02;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Apr") {
-                    fixMonth = 03;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "May") {
-                    fixMonth = 04;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Jun") {
-                    fixMonth = 05;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Jul") {
-                    fixMonth = 06;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Aug") {
-                    fixMonth = 07;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Sep") {
-                    fixMonth = 08;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Oct") {
-                    fixMonth = 09;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Nov") {
-                    fixMonth = 10;
-                    // console.log(fixMonth);
-                } else if (arr1[1] == "Dec") {
-                    fixMonth = 11;
-                    // console.log(fixMonth);
-                }
-                document.getElementById("dateStart").value = arr1[2] + "/" + fixMonth + "/" + arr1[
-                    3];
-                document.getElementById("dateStart2").value = arr1[2] + "/" + fixMonth + "/" + arr1[
-                    3];
-                // $("#dateStart").val(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
-                console.log(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
-                // var title = prompt('Event Title:');
-                let role = sessionStorage.getItem('role');
-                if (role == 1) {
-                    $("#myModal").modal();
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            var c = position.coords;
-                            // $scope.updatePosition(c.latitude, c.longitude);
-                            lat = c.latitude;
-                            lng = c.longitude;
-                            console.log(c.latitude);
-                            console.log(c.longitude);
-                        });
-
-                    }
-
-                } else if (role == 2) {
-                    $("#myModal2").modal();
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            var c = position.coords;
-                            // $scope.updatePosition(c.latitude, c.longitude);
-                            lat = c.latitude;
-                            lng = c.longitude;
-                            console.log(c.latitude);
-                            console.log(c.longitude);
-                        });
-
-                    } else {
-                        alert("Geolocation is not supported by this browser.");
-                    }
-                } else {
-                    $("#myModal2").modal();
-                }
-                $("#sw-save").click(function () {
-                    console.log("Save2");
-                    var gadd = sessionStorage.getItem('gadd');
-                    if (gadd) {
-                        calendar.fullCalendar('renderEvent', {
-                                title: subject,
-                                start: start,
-                                end: end,
-                                allDay: allDay
-                            },
-                            true // make the event "stick"
-                        );
-                        document.getElementById("sw-save").style.display = "none";
-                        document.getElementById("sw-rst").style.display = "none";
-                        document.getElementById("sw-time").style.display = "none";
-                        document.getElementById("list").style.display = "none";
-                        var button = document.getElementById("times");
-                        button.disabled = false;
-                        var userComID = sessionStorage.getItem("comid");
-                        var userEmail = sessionStorage.getItem("user");
-                        var myData2 = JSON.stringify({
-
-                            //     // "count": "13",
-                            //     // "domain": "www.done.com"
-                            "comid": userComID,
-                            "email": userEmail,
-                            // "comid": $('#email').val(),
-                            "title": document.getElementById("subject").value,
-                            "location": gadd,
-                            "day": dayAdded,
-                            "month": fixMonth,
-                            "year": arr1[3],
-                            "start": start,
-                            "end": end,
-                            "allDay": allDay,
-                            "hr": sessionStorage.getItem('hr'),
-                            "mins": sessionStorage.getItem('mins'),
-                            "secs": sessionStorage.getItem('secs')
-
-                            // "password": Base64.encode(pwd.value),
-                            // "role": ""
-
-                        });
-
-                        // console.log(myData2);
-
-                        $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
-                            data: myData2,
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            success: function (data) {
-                                console.log(data);
-                                // console.log("Success");
-                                // localStorage.setItem("fullname", $('#fullname').val());
-                                // sessionStorage.setItem("state", 1);
-                                // sessionStorage.setItem("role", 1);
-                                // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
-                                // setTimeout(function(){ 
-                                // $('#registerStyle').hide();
-                                // $('#forgotStyle').hide();
-                                // $('#loginStyle').show();
-                                // },3000);
-                                // $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .')
-
-                                console.log("Saved!");
-
-                                // document.getElementById("messages").innerHTML =
-                                //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
-
-
-                                // window.location.href = './index.html';
-                            },
-                            error: function (response) {
-                                console.log(response);
-                                console.log("Error");
-
-                            }
-                        });
-
-
-                        $('#myModal').modal('hide');
-
-                        setTimeout(() => {
-
-                            setTimeout(() => {
-
-                                // window.location.href = '#';
-                                // window.location.href = '#calendar';
-                                console.log("refreshed!")
-                                location.reload();
-                            }, 1000);
-                            window.location.href = '#';
-                            window.location.href = '#calendar';
-                            // location.reload();
-                        }, 500);
-                    }
-                });
-
-                $("#save-admin").click(function () {
-                    var title = document.getElementById("title").value =
-                        $("#title").val();
-                    var timeAdmin = $("#timeAdmin").val();
-                    var tagColor = $("#tagColor").val();
-                    // console.log("save admin!");
-                    console.log(title);
-                    console.log(tagColor);
-                    //   console.log($scope.tojson(obj))
-                    var gadd = sessionStorage.getItem('gadd');
-                    if (gadd) {
-                        calendar.fullCalendar('renderEvent', {
-                                title: title,
-                                start: start,
-                                end: end,
-                                allDay: allDay
-                            },
-                            true // make the event "stick"
-                        );
-                        var button = document.getElementById("times");
-                        button.disabled = false;
-                        var userComID = sessionStorage.getItem("comid");
-                        var userEmail = sessionStorage.getItem("user");
-                        var myData2 = JSON.stringify({
-
-                            //     // "count": "13",
-                            //     // "domain": "www.done.com"
-                            "comid": userComID,
-                            "email": userEmail,
-                            // "comid": $('#email').val(),
-                            "cleanerID": document.getElementById("cleanersID")
-                                .value,
-                            "title": document.getElementById("title").value,
-                            "location": gadd,
-                            "day": dayAdded,
-                            "month": fixMonth,
-                            "year": arr1[3],
-                            "start": start,
-                            "end": end,
-                            "allDay": allDay,
-                            // "hr": sessionStorage.getItem('hr'),
-                            // "mins": sessionStorage.getItem('mins'),
-                            // "secs": sessionStorage.getItem('secs')
-
-                            // "password": Base64.encode(pwd.value),
-                            // "role": ""
-
-                        });
-
-                        // console.log(myData2);
-
-                        $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
-                            data: myData2,
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            success: function (data) {
-                                console.log(data);
-
-
-                                console.log("Saved!");
-
-                                // document.getElementById("messages").innerHTML =
-                                //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
-
-
-                                // window.location.href = './index.html';
-                            },
-                            error: function (response) {
-                                console.log(response);
-                                console.log("Error");
-
-                            }
-                        });
-
-
-                        setTimeout(() => {
-
-                            setTimeout(() => {
-
-                                // window.location.href = '#';
-                                // window.location.href = '#calendar';
-                                console.log("refreshed!")
-                                location.reload();
-                            }, 1000);
-                            window.location.href = '#';
-                            window.location.href = '#calendar';
-                            // location.reload();
-                        }, 500);
-                    }
-                });
-                calendar.fullCalendar('unselect');
-
-                $("#times").click(function () {
-                    $('#myModal').modal('hide');
-                    setTimeout(() => {
-                        window.location.href = '#';
-                        window.location.href = '#calendar';
-                    }, 500);
-                    calendar.fullCalendar('unselect');
-                });
-                $("#times2").click(function () {
-                    $('#myModal').modal('hide');
-                    setTimeout(() => {
-                        window.location.href = '#';
-                        window.location.href = '#calendar';
-                    }, 500);
-                    calendar.fullCalendar('unselect');
-                });
-
-                // $scope.gadd = sessionStorage.getItem('gadd');
-                // if (title) {
-                //     calendar.fullCalendar('renderEvent', {
-                //             title: title,
-                //             start: start,
-                //             end: end,
-                //             allDay: allDay
-                //         },
-                //         true // make the event "stick"
-                //     );
-                // }
-
-                // calendar.fullCalendar('unselect');
-            },
-            droppable: true, // this allows things to be dropped onto the calendar !!!
-            drop: function (date, allDay) { // this function is called when something is dropped
-
-                // retrieve the dropped element's stored Event Object
-                var originalEventObject = $(this).data('eventObject');
-
-                // we need to copy it, so that multiple events don't have a reference to the same object
-                var copiedEventObject = $.extend({}, originalEventObject);
-
-                // assign it the date that was reported
-                copiedEventObject.start = date;
-                copiedEventObject.allDay = allDay;
-
-                // render the event on the calendar
-                // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
-
-            },
-            events: JSON.parse(sessionStorage.getItem("newFiltered")),
-            // events: newFiltered,
-
-            // events: [{
-            //         title: 'All Day Event',
-            //         start: new Date(y, m, 1)
-            //     },
-            //     {
-            //         id: 999,
-            //         title: 'Repeating Event',
-            //         start: new Date(y, m, d - 3, 16, 0),
-            //         allDay: false,
-            //         className: 'info'
-            //     },
-            //     {
-            //         id: 999,
-            //         title: 'Repeating Event',
-            //         start: new Date(y, m, d + 4, 16, 0),
-            //         allDay: false,
-            //         className: 'info'
-            //     },
-            //     {
-            //         title: 'Meeting',
-            //         start: new Date(y, m, d, 10, 30),
-            //         allDay: false,
-            //         className: 'important'
-            //     },
-            //     {
-            //         title: 'Lunch',
-            //         start: new Date(y, m, d, 12, 0),
-            //         end: new Date(y, m, d, 14, 0),
-            //         allDay: false,
-            //         className: 'important'
-            //     },
-            //     {
-            //         title: 'Birthday Party',
-            //         start: new Date(y, m, d + 1, 19, 0),
-            //         end: new Date(y, m, d + 1, 22, 30),
-            //         allDay: false,
-            //     },
-            //     {
-            //         title: 'Click for Google',
-            //         start: new Date(y, m, 29),
-            //         end: new Date(y, m, 30),
-            //         url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-            //         className: 'success'
-            //     }
-            // ],
-
-        });
-
-
+    hour = hour < 10 ? "0" + hour : hour;
+    min = min < 10 ? "0" + min : min;
+    sec = sec < 10 ? "0" + sec : sec;
+
+    let currentTime = hour + ":" + min + ":" + sec + am_pm;
+    document.getElementById("clock").innerHTML = currentTime;
+
+    return currentTime;
+  }
+
+  function pickColor(color) {
+    $("#tagColor").val(color);
+  }
+
+  function pickEColor(color) {
+    $("#eColor").val(color);
+  }
+
+  showTime();
+  var arr = [];
+  var arr2 = [];
+  var eventTasks = [];
+  var calendar;
+
+  $(document).ready(async () => {
+    // Initialize select2
+    $("#selUser").select2();
+
+    // Read selected option
+    $("#but_read").click(function () {
+      var username = $("#selUser option:selected").text();
+      var userid = $("#selUser").val();
+
+      $("#result").html("id : " + userid + ", name : " + username);
     });
 
-    function displayEvent(eventId) {
+    // SW Init
+    sw.init();
 
-        var role = sessionStorage.getItem('role');
-        const events = arr
-        // console.log(eventId);
-        // console.log(events);
-        const e = events.filter(event => event.id == eventId)[0];
-        console.log(e);
-        document.getElementById("location3").value = e.location;
-        document.getElementById("subject2").value = e.title;
-        document.getElementById("dateStart3").value = e.month + "/" + e.day + "/" + e.year;
-        // console.log(lat)
-        // console.log(lng)
-        sessionStorage.setItem('lat', lat);
-        sessionStorage.setItem('lng', lng);
-        if (role == 1) {
-            $("#myModal3").modal();
-        } else {
-            console.log("You're not an Admin!");
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    var users = [];
+    var data2 = [];
+    var settings2 = {
+      url:
+        "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
+      method: "GET",
+      timeout: 0,
+    };
+
+    await $.ajax(settings2)
+      .done((response) => {
+        var count2 = response.Count;
+        for (var i = 0; i < count2; i++) {
+          arr2 = {
+            fullname: response.Items[i].fullname.S,
+            role: response.Items[i].role.S,
+            email: response.Items[i].email.S,
+          };
+
+          data2.push(arr2);
         }
+      })
+      .fail((err) => {
+        console.log(err);
+      });
+
+    var employee = data2.filter((user) => user.role === "ordinary");
+
+    for (var j = 0; j < employee.length; j++) {
+      var e = employee[j];
+      $("#cleanersID").append(
+        `<option value="${e.email}">${e.fullname}&nbsp;&lt;${e.email}&gt;</option>`
+      );
     }
+
+    for (var j = 0; j < employee.length; j++) {
+      var e = employee[j];
+      $("#emp-name").append(
+        `<option value="${e.email}">${e.fullname}&nbsp;&lt;${e.email}&gt;</option>`
+      );
+    }
+
+    var data = [];
+    var settings = {
+      url:
+        "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcalendar",
+      method: "GET",
+      timeout: 0,
+    };
+
+    var newFiltered;
+
+    $.ajax(settings).done(function (response) {
+      var count = response.Count;
+      // console.log(response.Items[0]);
+      for (var i = 0; i < count; i++) {
+        var res = response.Items[i];
+        arr[i] = {
+          adminEmail: res.adminEmail.S,
+          allDay: res.allDay.S,
+          cLocation: res.cLocation.S,
+          cStartingTime: res.cStartingTime.S,
+          color: res.color.S,
+          comid: res.comid.S,
+          day: res.day.S,
+          employeeEmail: res.employeeEmail.S,
+          employeeName: res.employeeName.S,
+          end: res.end.S,
+          hr: res.hr.S,
+          id: res.id.S,
+          lat: res.lat.S,
+          lng: res.lng.S,
+          location: res.location.S,
+          mins: res.mins.S,
+          month: res.month.S,
+          secs: res.secs.S,
+          start: res.start.S,
+          startingTime: res.startingTime.S,
+          task: res.task.L,
+          title: res.title.S,
+          year: res.year.S,
+        };
+        data.push(arr[i]);
+      }
+
+      var role = sessionStorage.getItem("role");
+      var userEmail = sessionStorage.getItem("user");
+      if (role == 1) {
+        newFiltered = arr.map((users) => {
+          var user = {
+            id: users.id,
+            title: users.title,
+            location: users.location,
+            tasks: users.task,
+            color: users.color,
+            employeeEmail: users.employeeEmail,
+            start: new Date(users.year, users.month, users.day),
+          };
+
+          return user;
+        });
+      } else if (role == 2) {
+        var eventFilter = arr.map((events) => {
+          var event = {
+            id: events.id,
+            title: events.title,
+            location: events.location,
+            tasks: events.task,
+            color: events.color,
+            employeeEmail: events.employeeEmail,
+            tasks: events.task,
+            start: new Date(events.year, events.month, events.day),
+          };
+
+          return event;
+        });
+        newFiltered = eventFilter.filter(
+          (event) => event.employeeEmail === userEmail
+        );
+      }
+
+      // var tasks = [];
+      // for (let i = 0; i < newFiltered.length; i++) {
+      //   let e = newFiltered[i];
+      //   let t = e.tasks;
+
+      // }
+
+      // console.log(newFiltered);
+
+      // $("#external-events div.external-event").each(function () {
+      //   // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+      //   // it doesn't need to have a start or end
+      //   var eventObject = {
+      //     title: $.trim($(this).text()), // use the element's text as the event title
+      //   };
+
+      //   // store the Event Object in the DOM element so we can get to it later
+      //   $(this).data("eventObject", eventObject);
+
+      //   // make the event draggable using jQuery UI
+      //   $(this).draggable({
+      //     zIndex: 999,
+      //     revert: true, // will cause the event to go back to its
+      //     revertDuration: 0, //  original position after the drag
+      //   });
+      // });
+
+      /* initialize the calendar
+                -----------------------------------------------------------------*/
+      calendar = $("#calendar").fullCalendar({
+        header: {
+          left: "title",
+          center: "agendaDay,agendaWeek,month",
+          right: "prev,next today",
+        },
+        editable: true,
+        firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+        selectable: true,
+        defaultView: "month",
+
+        axisFormat: "h:mm",
+        columnFormat: {
+          month: "ddd", // Mon
+          week: "ddd d", // Mon 7
+          day: "dddd M/d", // Monday 9/7
+          agendaDay: "dddd d",
+        },
+        titleFormat: {
+          month: "MMMM yyyy", // September 2009
+          week: "MMMM yyyy", // September 2009
+          day: "MMMM yyyy", // Tuesday, Sep 8, 2009
+        },
+        allDaySlot: false,
+        selectHelper: true,
+        select: function (start, end, allDay) {
+          // document.getElementById("location").value = sessionStorage.getItem(
+          //   "gadd"
+          // );
+          $("#save-admin").prop("disabled", false);
+          const stringNew = new String(start);
+          var arr1 = stringNew.split(" ");
+          var fixMonth;
+          var dayAdded = arr1[2] * 1;
+          var dayAdded = dayAdded;
+          if (arr1[1] == "Jan") {
+            fixMonth = 00;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Feb") {
+            fixMonth = 01;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Mar") {
+            fixMonth = 02;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Apr") {
+            fixMonth = 03;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "May") {
+            fixMonth = 04;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Jun") {
+            fixMonth = 05;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Jul") {
+            fixMonth = 06;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Aug") {
+            fixMonth = 07;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Sep") {
+            fixMonth = 08;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Oct") {
+            fixMonth = 09;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Nov") {
+            fixMonth = 10;
+            // console.log(fixMonth);
+          } else if (arr1[1] == "Dec") {
+            fixMonth = 11;
+            // console.log(fixMonth);
+          }
+          // document.getElementById("dateStart").value =
+          //   arr1[2] + "/" + fixMonth + "/" + arr1[3];
+          // document.getElementById("dateStart2").value =
+          //   arr1[2] + "/" + fixMonth + "/" + arr1[3];
+          // $("#dateStart").val(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
+          // console.log(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
+          // var title = prompt('Event Title:');
+          let role = sessionStorage.getItem("role");
+          if (role == 1) {
+            $("#myModal").modal({ backdrop: "static", keyboard: false });
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function (position) {
+                var c = position.coords;
+                // $scope.updatePosition(c.latitude, c.longitude);
+                lat = c.latitude;
+                lng = c.longitude;
+                console.log(c.latitude);
+                console.log(c.longitude);
+              });
+            }
+          } else if (role == 2) {
+            calendar.fullCalendar("unselect");
+          }
+
+          function getTask() {
+            var tasks = [];
+            var taskNames = document.querySelectorAll(".task-name");
+            var taskNumber = document.querySelectorAll(".task-number");
+            var taskStatus = document.querySelectorAll(".task-status");
+
+            for (let i = 0; i < taskNames.length; i++) {
+              const task = {
+                number: taskNumber[i].innerHTML,
+                taskItem: taskNames[i].value,
+                status: taskStatus[i].checked,
+              };
+
+              tasks.push(task);
+            }
+
+            return tasks;
+          }
+
+          $("#save-admin").click(function () {
+            var title = (document.getElementById("title").value = $(
+              "#title"
+            ).val());
+            var timeAdmin = document.getElementById("timeAdmin").value;
+            var adminHr = parseInt(timeAdmin.substring(0, 2), 0);
+            var adminMn = timeAdmin.substring(2);
+            var startingTime = "";
+            if (adminHr >= 12) {
+              startingTime = `${adminHr - 12}${adminMn} PM`;
+            } else if (adminHr == 24) {
+              startingTime = `${adminHr - 12}${adminMn} AM`;
+            } else {
+              startingTime = `${timeAdmin} AM`;
+            }
+            var tagColor = $("#tagColor").val();
+            var adminLocation = $("#a-location").val();
+            var cleanersID = $("#cleanersID option:selected").text();
+            var id_split = cleanersID.split("<");
+            var employeeName = id_split[0];
+            var employeeEmail = $("#cleanersID").val();
+            var tasks = getTask();
+            var gadd = sessionStorage.getItem("gadd");
+            var button = document.getElementById("times");
+            // button.disabled = false;
+            var userComID = sessionStorage.getItem("comid");
+            var userEmail = sessionStorage.getItem("user");
+            var myData2 = JSON.stringify({
+              comid: userComID,
+              task: tasks,
+              startingTime: startingTime,
+              adminEmail: userEmail,
+              employeeName: employeeName,
+              employeeEmail: employeeEmail,
+              title: title,
+              color: tagColor,
+              location: adminLocation,
+              day: dayAdded,
+              month: fixMonth,
+              year: arr1[3],
+              start: start,
+              end: end,
+              allDay: allDay,
+              hr: sessionStorage.getItem("hr"),
+              mins: sessionStorage.getItem("mins"),
+              secs: sessionStorage.getItem("secs"),
+            });
+            // console.log(startingTime);
+            calendar.fullCalendar(
+              "renderEvent",
+              {
+                title: title,
+                start: start,
+                end: end,
+                allDay: allDay,
+                color: tagColor,
+              },
+              true // make the event "stick"
+            );
+
+            $.ajax({
+              type: "POST",
+              dataType: "json",
+              url:
+                "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+              data: myData2,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              success: function (data) {
+                console.log(data);
+                $("#save-admin").prop("disabled", true);
+                calendar.fullCalendar("unselect");
+                console.log("Saved!");
+              },
+              error: function (response) {
+                console.log(response);
+                console.log("Error");
+              },
+            });
+          });
+          // $scope.gadd = sessionStorage.getItem('gadd');
+          // if (title) {
+          //     calendar.fullCalendar('renderEvent', {
+          //             title: title,
+          //             start: start,
+          //             end: end,
+          //             allDay: allDay
+          //         },
+          //         true // make the event "stick"
+          //     );
+          // }
+
+          // calendar.fullCalendar('unselect');
+        },
+        droppable: true, // this allows things to be dropped onto the calendar !!!
+        drop: function (date, allDay) {
+          // this function is called when something is dropped
+
+          // retrieve the dropped element's stored Event Object
+          var originalEventObject = $(this).data("eventObject");
+
+          // we need to copy it, so that multiple events don't have a reference to the same object
+          var copiedEventObject = $.extend({}, originalEventObject);
+
+          // assign it the date that was reported
+          copiedEventObject.start = date;
+          copiedEventObject.allDay = allDay;
+
+          // render the event on the calendar
+          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+          $("#calendar").fullCalendar("renderEvent", copiedEventObject, true);
+
+          // is the "remove after drop" checkbox checked?
+          if ($("#drop-remove").is(":checked")) {
+            // if so, remove the element from the "Draggable Events" list
+            $(this).remove();
+          }
+        },
+        events: newFiltered,
+      });
+    });
+
+    /*  className colors
+
+            className: default(transparent), important(red), chill(pink), success(green), info(blue)
+
+            */
+
+    /* initialize the external events
+            -----------------------------------------------------------------*/
+  });
+
+  var forUpdate = {
+    adminEmail: "",
+    allDay: "",
+    cLocation: "",
+    cStartingTime: "",
+    color: "",
+    comid: "",
+    day: "",
+    employeeEmail: "",
+    employeeName: "",
+    end: "",
+    hr: "",
+    id: "",
+    lat: "",
+    lng: "",
+    location: "",
+    mins: "",
+    month: "",
+    secs: "",
+    start: "",
+    startingTime: "",
+    task: [],
+    title: "",
+    year: "",
+  };
+
+  var e;
+
+  function swSave() {
+    console.log("Save2");
+    document.getElementById("sw-save").style.display = "none";
+    // document.getElementById("sw-rst").style.display = "none";
+    document.getElementById("sw-time").style.display = "none";
+    document.getElementById("list").style.display = "none";
+    var myData2 = JSON.stringify(forUpdate);
+
+    $.ajax({
+      type: "DELETE",
+      url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/${forUpdate.id}`,
+      success: (data) => {
+        console.log(data);
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+          url:
+            "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/" +
+            forUpdate.id,
+          data: myData2,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          success: function (data) {
+            console.log(data);
+            console.log("Saved!");
+            window.location.href = "#calendar";
+          },
+          error: function (response) {
+            console.log(response);
+            console.log("Error");
+          },
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
+    $("#myModal2").modal("hide");
+  }
+
+  function eUpdateAdmin() {
+    var cleanersID = $("#emp-name option:selected").text();
+    var id_split = cleanersID.split("<");
+    var employeeName = id_split[0];
+    var eventId = e.id;
+    var myData2 = JSON.stringify({
+      adminEmail: e.adminEmail,
+      allDay: e.allDay,
+      cLocation: e.cLocation,
+      cStartingTime: e.cStartingTime,
+      color: $("#eColor").val(),
+      comid: e.comid,
+      day: e.day,
+      employeeEmail: $("#emp-name").val(),
+      employeeName: employeeName,
+      end: e.end,
+      hr: e.hr,
+      id: eventId,
+      lat: e.lat,
+      lng: e.lat,
+      location: $("#location3").val(),
+      mins: e.mins,
+      month: e.month,
+      secs: e.secs,
+      start: e.start,
+      startingTime: e.startingTime,
+      task: getATask(),
+      title: $("#subject3").val(),
+      year: e.year,
+    });
+
+    console.log(myData2);
+
+    $.ajax({
+      type: "DELETE",
+      url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/${eventId}`,
+      success: (data) => {
+        console.log(data);
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+          url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/${eventId}`,
+          data: myData2,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          success: function (data) {
+            console.log(data);
+            console.log("Saved!");
+            window.location.href = "#calendar";
+          },
+          error: function (response) {
+            console.log(response);
+            console.log("Error");
+          },
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
+    $("#myModal3").modal("hide");
+  }
+
+  function getCTask() {
+    var cTasks = [];
+    var taskNames = document.querySelectorAll(".c-task-name");
+    var taskStatus = document.querySelectorAll(".c-task-status");
+
+    for (let i = 0; i < taskNames.length; i++) {
+      const task = {
+        taskItem: taskNames[i].innerHTML,
+        number: i + 1,
+        status: taskStatus[i].checked,
+      };
+
+      cTasks.push(task);
+    }
+
+    return cTasks;
+  }
+
+  function getATask() {
+    var aTasks = [];
+    var taskNames = document.querySelectorAll(".a-task-name");
+    var taskNumber = document.querySelectorAll(".a-task-number");
+    var taskStatus = document.querySelectorAll(".a-task-status");
+
+    for (let i = 0; i < taskNames.length; i++) {
+      const task = {
+        number: taskNumber[i].innerHTML,
+        taskItem: taskNames[i].value,
+        status: taskStatus[i].checked,
+      };
+
+      aTasks.push(task);
+    }
+
+    return aTasks;
+  }
+
+  function displayEvent(eventId) {
+    sessionStorage.setItem("eventId", eventId);
+    const events = arr;
+    e = events.filter((event) => event.id == eventId)[0];
+    const tasks = e.task;
+    var role = sessionStorage.getItem("role");
+    var eventTasks = $("#event-tasks");
+    var eTasks = $("#e-tasks");
+    var cLocation = $("#c-location").val();
+    $("#c-subject").val(e.title);
+    for (let i = 0; i < tasks.length; i++) {
+      let task = tasks[i].M;
+      let c = "";
+      if (task.status.S === "true") {
+        c = "checked";
+      } else {
+        c = "";
+      }
+      eventTasks.append(`<div class="w-100 d-flex justify-content-start py-1 e-task">
+          <label class="input p-2 m-0">
+              <input class="checkbox_animated c-task-status" type="checkbox" ${c}>
+          </label>
+          <span class="text-left p-2 c-task-name" id="task${task.number.S}">${task.taskItem.S}</span>
+        </div>`);
+      eTasks.append(`<div class="w-100 d-flex justify-content-around py-1 eTask">
+    <span class="w-25 p-2 fs-6 font-bold a-task-number">${task.number.S}</span>
+    <input type="text" name="task" class="w-50 form-control a-task-name" id="task${task.number.S}" placeholder="Task #${task.number.S}" value="${task.taskItem.S}">
+    <label class="input w-25 p-2 m-0">
+        <input class="checkbox_animated a-task-status" type="checkbox" ${c}>
+    </label>
+    </div>`);
+    }
+    forUpdate = {
+      adminEmail: e.adminEmail,
+      allDay: e.allDay,
+      cLocation: cLocation,
+      color: e.color,
+      comid: e.comid,
+      day: e.day,
+      employeeEmail: e.employeeEmail,
+      employeeName: e.employeeName,
+      end: e.end,
+      id: e.id,
+      lat: lat,
+      lng: lng,
+      location: e.location,
+      month: e.month,
+      start: e.start,
+      startingTime: e.startingTime,
+      title: e.title,
+      year: e.year,
+    };
+    $("#location3").val(e.location);
+    $("#subject3").val(e.title);
+    $("#emp-name").val(e.employeeEmail);
+    $("#eColor").val(e.color);
+
+    if (role == 1) {
+      $("#myModal3").modal({ backdrop: "static", keyboard: false });
+    } else {
+      $("#myModal2").modal({ backdrop: "static", keyboard: false });
+    }
+  }
+
+  var lat, lng;
+
+  function initMap() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          const geocoder = new google.maps.Geocoder();
+          const latlng = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          geocoder.geocode(
+            {
+              location: latlng,
+            },
+            (results, status) => {
+              if (status === "OK") {
+                if (results[0]) {
+                  lat = pos.lat;
+                  lng = pos.lng;
+                  let loc = document.getElementById("c-location");
+                  loc.value = results[0].formatted_address;
+                } else {
+                  window.alert("No results found");
+                }
+              } else {
+                window.alert("Geocoder failed due to: " + status);
+              }
+            }
+          );
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  }
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(
+      browserHasGeolocation
+        ? "Error: The Geolocation service failed."
+        : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open(map);
+  }
+
+  $("#times").click(function () {
+    $("#myModal").modal("hide");
+    calendar.fullCalendar("unselect");
+  });
+
+  $("#times3").click(function () {
+    $("#myModal3").modal("hide");
+    calendar.fullCalendar("unselect");
+    $("#e-tasks .eTask").remove();
+  });
+
+  $("#times2").click(function () {
+    $("#myModal2").modal("hide");
+    document.getElementById("sw-time").style.display = "none";
+    calendar.fullCalendar("unselect");
+    $("#event-tasks .e-task").remove();
+  });
+
+  var sw = {
+    // (A) INITIALIZE
+    etime: null, // HTML time display
+    erst: null, // HTML reset button
+    ego: null, // HTML start/stop button
+    init: function () {
+      // (A1) GET HTML ELEMENTS
+      sw.etime = document.getElementById("sw-time");
+      sw.erst = document.getElementById("sw-rst");
+      sw.ego = document.getElementById("sw-go");
+      sw.esave = document.getElementById("sw-save");
+
+      // (A2) ENABLE BUTTON CONTROLS
+      sw.erst.addEventListener("click", sw.reset);
+      sw.erst.disabled = false;
+      sw.ego.addEventListener("click", sw.start);
+      sw.ego.disabled = false;
+      sw.esave.addEventListener("click", sw.save);
+      sw.esave.disabled = false;
+    },
+
+    // (B) TIMER ACTION
+    timer: null, // timer object
+    now: 0, // current elapsed time
+    tick: function () {
+      // (B1) CALCULATE HOURS, MINS, SECONDS
+      sw.now++;
+      var remain = sw.now;
+      var hours = Math.floor(remain / 3600);
+      remain -= hours * 3600;
+      var mins = Math.floor(remain / 60);
+      remain -= mins * 60;
+      var secs = remain;
+      // (B2) UPDATE THE DISPLAY TIMER
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (mins < 10) {
+        mins = "0" + mins;
+      }
+      if (secs < 10) {
+        secs = "0" + secs;
+      }
+      sw.etime.innerHTML = hours + ":" + mins + ":" + secs;
+    },
+
+    // (C) START!
+    start: function () {
+      forUpdate.cStartingTime = showTime();
+      sw.now = 0;
+      sw.timer = setInterval(sw.tick, 1000);
+      sw.ego.value = "Stop";
+      document.getElementById("sw-time").style.display = "block";
+      document.getElementById("list").style.display = "block";
+      document.getElementById("sw-save").style.display = "none";
+      sw.ego.removeEventListener("click", sw.start);
+      sw.ego.addEventListener("click", sw.stop);
+    },
+
+    // (D) STOP
+    stop: function () {
+      clearInterval(sw.timer);
+      var remain = sw.now;
+      var hours = Math.floor(remain / 3600);
+      remain -= hours * 3600;
+      var mins = Math.floor(remain / 60);
+      remain -= mins * 60;
+      var secs = remain;
+      forUpdate.hr = hours.toString();
+      forUpdate.mins = mins.toString();
+      forUpdate.secs = secs.toString();
+      forUpdate.task = getCTask();
+      console.log(forUpdate);
+      sw.timer = null;
+      sw.ego.value = "Start";
+      document.getElementById("sw-go").style.display = "none";
+      document.getElementById("sw-save").style.display = "block";
+      document.getElementById("sw-rst").style.display = "block";
+      sw.ego.removeEventListener("click", sw.stop);
+      sw.ego.addEventListener("click", sw.start);
+    },
+
+    // (E) RESET
+    reset: function () {
+      if (sw.timer != null) {
+        sw.stop();
+      }
+      sw.now = 0;
+      sw.tick();
+      document.getElementById("sw-go").style.display = "block";
+      document.getElementById("sw-rst").style.display = "none";
+      document.getElementById("sw-save").style.display = "none";
+      document.getElementById("list").style.display = "none";
+      var button = document.getElementById("times2");
+      button.click();
+    },
+
+    save: function () {
+      swSave();
+    },
+  };
 </script>
+
+<!-- Google Api -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly"></script>

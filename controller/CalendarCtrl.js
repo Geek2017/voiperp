@@ -1,25 +1,23 @@
-angular.module('fvs').controller('CalendarCtrl', function ($scope) {
-
+angular.module("fvs").controller("CalendarCtrl", function ($scope) {
   var obj;
-    $scope.tojson = function(obj) {
-
-        var table = $('#convert-table').tableToJSON({
-
-            extractor: function(cellIndex, $cell) {
-                return $cell.find('input').val() || $cell.text() || $cell.find('.textarea').val();
-            }
-
-
-        })
-        return table;
-
-    }
-
-    $('#newEvent').on('submit', function(e) {
-      // var timeAdmin = $("#timeAdmin").val();
-      // console.log("save admin!");
-      // console.log(timeAdmin);
+  $scope.tojson = function (obj) {
+    var table = $("#convert-table").tableToJSON({
+      extractor: function (cellIndex, $cell) {
+        return (
+          $cell.find("input").val() ||
+          $cell.text() ||
+          $cell.find(".textarea").val()
+        );
+      },
     });
+    return table;
+  };
+
+  $("#newEvent").on("submit", function (e) {
+    // var timeAdmin = $("#timeAdmin").val();
+    // console.log("save admin!");
+    // console.log(timeAdmin);
+  });
   //   $("#save-admin").click(function () {
   //     var timeAdmin = $("#timeAdmin").val();
   //     var tagColor = $("#tagColor").val();
@@ -80,12 +78,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
   //             success: function (data) {
   //                 console.log(data);
 
-
   //                 console.log("Saved!");
 
   //                 // document.getElementById("messages").innerHTML =
   //                 //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
-
 
   //                 // window.location.href = './index.html';
   //             },
@@ -95,7 +91,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
   //             }
   //         });
-
 
   //         setTimeout(() => {
 
@@ -113,45 +108,67 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
   //     }
   // });
 
-    var cnt = 0;
-    $scope.addtr = function() {
-        $("#appendhere").append(' <tr class="row_to_clone"><td class="col-md-6"><label class="input"> <input type="text" placeholder="List"></label></td></td><td class="col-md-1"><label class="input"> <input type="text"  placeholder="hrs"></label></td></td><td class="col-md-1"><label class="input"> <input class="checkbox_animated" id="chk-ani" type="checkbox"></label></td></tr>');
-        cnt++;
-        $('table thead th').each(function(i) {
+  var cnt = 1;
+  for (let j = 0; j < cnt; j++) {
+    $("#appendhere")
+      .append(`<div class="w-100 d-flex justify-content-around py-1">
+    <span class="w-25 p-2 fs-6 font-bold task-number">${cnt}</span>
+    <input type="text" name="task" class="w-50 form-control task-name" id="task${cnt}" placeholder="Task #${cnt}">
+    <label class="input w-25 p-2 m-0">
+        <input class="checkbox_animated task-status" type="checkbox">
+    </label>
+    </div>`);
+  }
+  $scope.addtr = function () {
+    cnt++;
+    $("#appendhere")
+      .append(`<div class="w-100 d-flex justify-content-around py-1">
+    <span class="w-25 p-2 fs-6 font-bold task-number">${cnt}</span>
+    <input type="text" name="task" class="w-50 form-control task-name" id="task${cnt}" placeholder="Task #${cnt}">
+    <label class="input w-25 p-2 m-0">
+        <input class="checkbox_animated task-status" type="checkbox">
+    </label>
+    </div>`);
+    // $('table thead th').each(function (i) {
 
-        });
+    // });
+  };
+  $scope.removetr = function () {
+    var appendhere = document.getElementById("appendhere");
+    var childCount = appendhere.childElementCount;
 
+    // console.log(appendhere.childNodes);
+    if (cnt > 0) {
+      appendhere.removeChild(appendhere.childNodes[childCount + 2]);
+      cnt = cnt - 1;
     }
-    $scope.removetr = function() {
 
-        $('#appendhere tr:last').remove();
-        $('table thead th').each(function(i) {
+    // $('#appendhere tr:last').remove();
+    // $('table thead th').each(function (i) {
 
-        });
-    }
+    // });
+  };
 
-    $("#appendhere").on('click', '.deleteb', function() {
-        $(this).closest("tr").remove();
-        $('table thead th').each(function(i) {
+  $("#appendhere").on("click", ".deleteb", function () {
+    $(this).closest("tr").remove();
+    $("table thead th").each(function (i) {});
+  });
 
-        });
-    });
+  //   setTimeout(() => {
 
-//   setTimeout(() => {
+  //     setTimeout(() => {
 
-//     setTimeout(() => {
+  //       window.location.href = '#';
+  //       window.location.href = '#calendar';
+  //         console.log("refreshed!")
+  //         // location.reload();
+  //     }, 1000);
+  //     window.location.href = '#';
+  //     window.location.href = '#calendar';
+  //     // location.reload();
+  // }, 500);
 
-//       window.location.href = '#';
-//       window.location.href = '#calendar';
-//         console.log("refreshed!")
-//         // location.reload();
-//     }, 1000);
-//     window.location.href = '#';
-//     window.location.href = '#calendar';
-//     // location.reload();
-// }, 500);
-
-  $scope.gadd = sessionStorage.getItem('gadd');
+  $scope.gadd = sessionStorage.getItem("gadd");
 
   // var myVar = setInterval(myTimer, 500);
 
@@ -169,24 +186,19 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
   // }
 
   (function ($, undefined) {
-
-
-    ;;
-
     var defaults = {
-
       // display
-      defaultView: 'month',
+      defaultView: "month",
       aspectRatio: 1.35,
       header: {
-        left: 'title',
-        center: '',
-        right: 'today prev,next'
+        left: "title",
+        center: "",
+        right: "today prev,next",
       },
       weekends: true,
       weekNumbers: false,
-      weekNumberCalculation: 'iso',
-      weekNumberTitle: 'W',
+      weekNumberCalculation: "iso",
+      weekNumberTitle: "W",
 
       // editing
       //editable: false,
@@ -198,103 +210,130 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
       // event ajax
       lazyFetching: true,
-      startParam: 'start',
-      endParam: 'end',
+      startParam: "start",
+      endParam: "end",
 
       // time formats
       titleFormat: {
-        month: 'MMMM yyyy',
+        month: "MMMM yyyy",
         week: "MMM d[ yyyy]{ '—'[ MMM] d yyyy}",
-        day: 'dddd, MMM d, yyyy'
+        day: "dddd, MMM d, yyyy",
       },
       columnFormat: {
-        month: 'ddd',
-        week: 'ddd M/d',
-        day: 'dddd M/d'
+        month: "ddd",
+        week: "ddd M/d",
+        day: "dddd M/d",
       },
-      timeFormat: { // for event elements
-        '': 'h(:mm)t' // default
+      timeFormat: {
+        // for event elements
+        "": "h(:mm)t", // default
       },
 
       // locale
       isRTL: false,
       firstDay: 0,
-      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      monthNames: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      monthNamesShort: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+      dayNames: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       buttonText: {
         prev: "<span class='fc-text-arrow'>‹</span>",
         next: "<span class='fc-text-arrow'>›</span>",
         prevYear: "<span class='fc-text-arrow'>«</span>",
         nextYear: "<span class='fc-text-arrow'>»</span>",
-        today: 'today',
-        month: 'month',
-        week: 'week',
-        day: 'day'
+        today: "today",
+        month: "month",
+        week: "week",
+        day: "day",
       },
 
       // jquery-ui theming
       theme: false,
       buttonIcons: {
-        prev: 'circle-triangle-w',
-        next: 'circle-triangle-e'
+        prev: "circle-triangle-w",
+        next: "circle-triangle-e",
       },
 
       //selectable: false,
       unselectAuto: true,
 
-      dropAccept: '*',
+      dropAccept: "*",
 
-      handleWindowResize: true
-
+      handleWindowResize: true,
     };
 
     // right-to-left defaults
     var rtlDefaults = {
       header: {
-        left: 'next,prev today',
-        center: '',
-        right: 'title'
+        left: "next,prev today",
+        center: "",
+        right: "title",
       },
       buttonText: {
         prev: "<span class='fc-text-arrow'>›</span>",
         next: "<span class='fc-text-arrow'>‹</span>",
         prevYear: "<span class='fc-text-arrow'>»</span>",
-        nextYear: "<span class='fc-text-arrow'>«</span>"
+        nextYear: "<span class='fc-text-arrow'>«</span>",
       },
       buttonIcons: {
-        prev: 'circle-triangle-e',
-        next: 'circle-triangle-w'
-      }
+        prev: "circle-triangle-e",
+        next: "circle-triangle-w",
+      },
     };
 
-
-
-    ;;
-
-    var fc = $.fullCalendar = {
-      version: "1.6.4"
-    };
-    var fcViews = fc.views = {};
-
+    var fc = ($.fullCalendar = {
+      version: "1.6.4",
+    });
+    var fcViews = (fc.views = {});
 
     $.fn.fullCalendar = function (options) {
-
-
       // method calling
-      if (typeof options == 'string') {
+      if (typeof options == "string") {
         var args = Array.prototype.slice.call(arguments, 1);
         var res;
         this.each(function () {
-          var calendar = $.data(this, 'fullCalendar');
+          var calendar = $.data(this, "fullCalendar");
           if (calendar && $.isFunction(calendar[options])) {
             var r = calendar[options].apply(calendar, args);
             if (res === undefined) {
               res = r;
             }
-            if (options == 'destroy') {
-              $.removeData(this, 'fullCalendar');
+            if (options == "destroy") {
+              $.removeData(this, "fullCalendar");
             }
           }
         });
@@ -314,40 +353,33 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         delete options.events;
       }
 
-
-      options = $.extend(true, {},
+      options = $.extend(
+        true,
+        {},
         defaults,
-        (options.isRTL || options.isRTL === undefined && defaults.isRTL) ? rtlDefaults : {},
+        options.isRTL || (options.isRTL === undefined && defaults.isRTL)
+          ? rtlDefaults
+          : {},
         options
       );
-
 
       this.each(function (i, _element) {
         var element = $(_element);
         var calendar = new Calendar(element, options, eventSources);
-        element.data('fullCalendar', calendar); // TODO: look into memory leak implications
+        element.data("fullCalendar", calendar); // TODO: look into memory leak implications
         calendar.render();
       });
 
-
       return this;
-
     };
-
 
     // function for adding/overriding defaults
     function setDefaults(d) {
       $.extend(true, defaults, d);
     }
 
-
-
-    ;;
-
-
     function Calendar(element, options, eventSources) {
       var t = this;
-
 
       // exports
       t.options = options;
@@ -368,22 +400,40 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.gotoDate = gotoDate;
       t.incrementDate = incrementDate;
       t.formatDate = function (format, date) {
-        return formatDate(format, date, options)
+        return formatDate(format, date, options);
       };
       t.formatDates = function (format, date1, date2) {
-        return formatDates(format, date1, date2, options)
+        return formatDates(format, date1, date2, options);
       };
       t.getDate = getDate;
       t.getView = getView;
       t.option = option;
       t.trigger = trigger;
 
-
       // imports
       EventManager.call(t, options, eventSources);
       var isFetchNeeded = t.isFetchNeeded;
       var fetchEvents = t.fetchEvents;
 
+      let req = new XMLHttpRequest();
+
+      req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE) {
+          // console.log(req.responseText);
+          window.jresponce = req.responseText;
+        }
+      };
+
+      req.open(
+        "GET",
+        "https://api.jsonbin.io/b/5ff999f5a58c8a62ee93e12e",
+        true
+      );
+      req.setRequestHeader(
+        "secret-key",
+        "$2b$10$w3QL2GtSSp01vuCsvfgf9ObbQ8cRY2UlEOuEsPfPWmMCM2sbN/pQa"
+      );
+      req.send();
 
       // locals
       var _element = element[0];
@@ -400,14 +450,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var events = [];
       var _dragElement;
 
-
-
       /* Main Rendering
       -----------------------------------------------------------------------------*/
 
-
       setYMD(date, options.year, options.month, options.date);
-
 
       function render(inc) {
         if (!content) {
@@ -419,21 +465,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function initialRender() {
-        tm = options.theme ? 'ui' : 'fc';
-        element.addClass('fc');
+        tm = options.theme ? "ui" : "fc";
+        element.addClass("fc");
         if (options.isRTL) {
-          element.addClass('fc-rtl');
+          element.addClass("fc-rtl");
         } else {
-          element.addClass('fc-ltr');
+          element.addClass("fc-ltr");
         }
         if (options.theme) {
-          element.addClass('ui-widget');
+          element.addClass("ui-widget");
         }
 
-        content = $("<div class='fc-content' style='position:relative'/>")
-          .prependTo(element);
+        content = $(
+          "<div class='fc-content' style='position:relative'/>"
+        ).prependTo(element);
 
         header = new Header(t, options);
         headerElement = header.render();
@@ -453,47 +499,41 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       // called when we know the calendar couldn't be rendered when it was initialized,
       // but we think it's ready now
       function lateRender() {
-        setTimeout(function () { // IE7 needs this so dimensions are calculated correctly
-          if (!currentView.start && bodyVisible()) { // !currentView.start makes sure this never happens more than once
+        setTimeout(function () {
+          // IE7 needs this so dimensions are calculated correctly
+          if (!currentView.start && bodyVisible()) {
+            // !currentView.start makes sure this never happens more than once
             renderView();
           }
         }, 0);
       }
 
-
       function destroy() {
-
         if (currentView) {
-          trigger('viewDestroy', currentView, currentView, currentView.element);
+          trigger("viewDestroy", currentView, currentView, currentView.element);
           currentView.triggerEventDestroy();
         }
 
-        $(window).unbind('resize', windowResize);
+        $(window).unbind("resize", windowResize);
 
         header.destroy();
         content.remove();
-        element.removeClass('fc fc-rtl ui-widget');
+        element.removeClass("fc fc-rtl ui-widget");
       }
-
 
       function elementVisible() {
-        return element.is(':visible');
+        return element.is(":visible");
       }
-
 
       function bodyVisible() {
-        return $('body').is(':visible');
+        return $("body").is(":visible");
       }
-
-
 
       /* View Rendering
       -----------------------------------------------------------------------------*/
-
 
       function changeView(newViewName) {
         if (!currentView || newViewName != currentView.name) {
@@ -501,12 +541,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function _changeView(newViewName) {
         ignoreWindowResize++;
 
         if (currentView) {
-          trigger('viewDestroy', currentView, currentView, currentView.element);
+          trigger("viewDestroy", currentView, currentView, currentView.element);
           unselect();
           currentView.triggerEventDestroy(); // trigger 'eventDestroy' for each event
           freezeContentHeight();
@@ -517,8 +556,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         header.activateButton(newViewName);
 
         currentView = new fcViews[newViewName](
-          $("<div class='fc-view fc-view-" + newViewName + "' style='position:relative'/>")
-          .appendTo(content),
+          $(
+            "<div class='fc-view fc-view-" +
+              newViewName +
+              "' style='position:relative'/>"
+          ).appendTo(content),
           t // the calendar object
         );
 
@@ -528,11 +570,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         ignoreWindowResize--;
       }
 
-
       function renderView(inc) {
         if (
           !currentView.start || // never rendered before
-          inc || date < currentView.start || date >= currentView.end // or new date range
+          inc ||
+          date < currentView.start ||
+          date >= currentView.end // or new date range
         ) {
           if (elementVisible()) {
             _renderView(inc);
@@ -540,12 +583,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-      function _renderView(inc) { // assumes elementVisible
+      function _renderView(inc) {
+        // assumes elementVisible
         ignoreWindowResize++;
 
-        if (currentView.start) { // already been rendered?
-          trigger('viewDestroy', currentView, currentView, currentView.element);
+        if (currentView.start) {
+          // already been rendered?
+          trigger("viewDestroy", currentView, currentView, currentView.element);
           unselect();
           clearEvents();
         }
@@ -559,19 +603,16 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         updateTitle();
         updateTodayButton();
 
-        trigger('viewRender', currentView, currentView, currentView.element);
-        currentView.trigger('viewDisplay', _element); // deprecated
+        trigger("viewRender", currentView, currentView, currentView.element);
+        currentView.trigger("viewDisplay", _element); // deprecated
 
         ignoreWindowResize--;
 
         getAndRenderEvents();
       }
 
-
-
       /* Resizing
       -----------------------------------------------------------------------------*/
-
 
       function updateSize() {
         if (elementVisible()) {
@@ -583,19 +624,24 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-      function calcSize() { // assumes elementVisible
+      function calcSize() {
+        // assumes elementVisible
         if (options.contentHeight) {
           suggestedViewHeight = options.contentHeight;
         } else if (options.height) {
-          suggestedViewHeight = options.height - (headerElement ? headerElement.height() : 0) - vsides(content);
+          suggestedViewHeight =
+            options.height -
+            (headerElement ? headerElement.height() : 0) -
+            vsides(content);
         } else {
-          suggestedViewHeight = Math.round(content.width() / Math.max(options.aspectRatio, .5));
+          suggestedViewHeight = Math.round(
+            content.width() / Math.max(options.aspectRatio, 0.5)
+          );
         }
       }
 
-
-      function setSize() { // assumes elementVisible
+      function setSize() {
+        // assumes elementVisible
 
         if (suggestedViewHeight === undefined) {
           calcSize(); // for first time
@@ -611,17 +657,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         elementOuterWidth = element.outerWidth();
       }
 
-
       function windowResize() {
         if (!ignoreWindowResize) {
-          if (currentView.start) { // view has already been rendered
+          if (currentView.start) {
+            // view has already been rendered
             var uid = ++resizeUID;
-            setTimeout(function () { // add a delay
+            setTimeout(function () {
+              // add a delay
               if (uid == resizeUID && !ignoreWindowResize && elementVisible()) {
-                if (elementOuterWidth != (elementOuterWidth = element.outerWidth())) {
+                if (
+                  elementOuterWidth !=
+                  (elementOuterWidth = element.outerWidth())
+                ) {
                   ignoreWindowResize++; // in case the windowResize callback changes the height
                   updateSize();
-                  currentView.trigger('windowResize', _element);
+                  currentView.trigger("windowResize", _element);
                   ignoreWindowResize--;
                 }
               }
@@ -633,33 +683,30 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-
       /* Event Fetching/Rendering
       -----------------------------------------------------------------------------*/
       // TODO: going forward, most of this stuff should be directly handled by the view
 
-
-      function refetchEvents() { // can be called as an API method
+      function refetchEvents() {
+        // can be called as an API method
         clearEvents();
         fetchAndRenderEvents();
       }
 
-
-      function rerenderEvents(modifiedEventID) { // can be called as an API method
+      function rerenderEvents(modifiedEventID) {
+        // can be called as an API method
         clearEvents();
         renderEvents(modifiedEventID);
       }
 
-
-      function renderEvents(modifiedEventID) { // TODO: remove modifiedEventID hack
+      function renderEvents(modifiedEventID) {
+        // TODO: remove modifiedEventID hack
         if (elementVisible()) {
           currentView.setEventData(events); // for View.js, TODO: unify with renderEvents
           currentView.renderEvents(events, modifiedEventID); // actually render the DOM elements
-          currentView.trigger('eventAfterAllRender');
+          currentView.trigger("eventAfterAllRender");
         }
       }
-
 
       function clearEvents() {
         currentView.triggerEventDestroy(); // trigger 'eventDestroy' for each event
@@ -668,13 +715,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
 
       function getAndRenderEvents() {
-        if (!options.lazyFetching || isFetchNeeded(currentView.visStart, currentView.visEnd)) {
+        if (
+          !options.lazyFetching ||
+          isFetchNeeded(currentView.visStart, currentView.visEnd)
+        ) {
           fetchAndRenderEvents();
         } else {
           renderEvents();
         }
       }
-
 
       function fetchAndRenderEvents() {
         fetchEvents(currentView.visStart, currentView.visEnd);
@@ -682,89 +731,72 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         // ... which will call renderEvents
       }
 
-
       // called when event data arrives
       function reportEvents(_events) {
         events = _events;
         renderEvents();
       }
 
-
       // called when a single event's data has been changed
       function reportEventChange(eventID) {
         rerenderEvents(eventID);
       }
 
-
-
       /* Header Updating
       -----------------------------------------------------------------------------*/
-
 
       function updateTitle() {
         header.updateTitle(currentView.title);
       }
 
-
       function updateTodayButton() {
         var today = new Date();
         if (today >= currentView.start && today < currentView.end) {
-          header.disableButton('today');
+          header.disableButton("today");
         } else {
-          header.enableButton('today');
+          header.enableButton("today");
         }
       }
 
-
-
       /* Selection
       -----------------------------------------------------------------------------*/
-
 
       function select(start, end, allDay) {
         currentView.select(start, end, allDay === undefined ? true : allDay);
       }
 
-
-      function unselect() { // safe to be called before renderView
+      function unselect() {
+        // safe to be called before renderView
         if (currentView) {
           currentView.unselect();
         }
       }
 
-
-
       /* Date
       -----------------------------------------------------------------------------*/
-
 
       function prev() {
         renderView(-1);
       }
 
-
       function next() {
         renderView(1);
       }
-
 
       function prevYear() {
         addYears(date, -1);
         renderView();
       }
 
-
       function nextYear() {
         addYears(date, 1);
         renderView();
       }
 
-
       function today() {
         date = new Date();
         renderView();
       }
-
 
       function gotoDate(year, month, dateOfMonth) {
         if (year instanceof Date) {
@@ -774,7 +806,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
         renderView();
       }
-
 
       function incrementDate(years, months, days) {
         if (years !== undefined) {
@@ -789,55 +820,49 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         renderView();
       }
 
-
       function getDate() {
         return cloneDate(date);
       }
 
-
-
       /* Height "Freezing"
       -----------------------------------------------------------------------------*/
 
-
       function freezeContentHeight() {
         content.css({
-          width: '100%',
+          width: "100%",
           height: content.height(),
-          overflow: 'hidden'
+          overflow: "hidden",
         });
       }
-
 
       function unfreezeContentHeight() {
         content.css({
-          width: '',
-          height: '',
-          overflow: ''
+          width: "",
+          height: "",
+          overflow: "",
         });
       }
 
-
-
       /* Misc
       -----------------------------------------------------------------------------*/
-
 
       function getView() {
         return currentView;
       }
 
-
       function option(name, value) {
         if (value === undefined) {
           return options[name];
         }
-        if (name == 'height' || name == 'contentHeight' || name == 'aspectRatio') {
+        if (
+          name == "height" ||
+          name == "contentHeight" ||
+          name == "aspectRatio"
+        ) {
           options[name] = value;
           updateSize();
         }
       }
-
 
       function trigger(name, thisObj) {
         if (options[name]) {
@@ -848,17 +873,16 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-
       /* External Dragging
       ------------------------------------------------------------------------*/
 
       if (options.droppable) {
         $(document)
-          .bind('dragstart', function (ev, ui) {
+          .bind("dragstart", function (ev, ui) {
             var _e = ev.target;
             var e = $(_e);
-            if (!e.parents('.fc').length) { // not already inside a calendar
+            if (!e.parents(".fc").length) {
+              // not already inside a calendar
               var accept = options.dropAccept;
               if ($.isFunction(accept) ? accept.call(_e, e) : e.is(accept)) {
                 _dragElement = _e;
@@ -866,22 +890,17 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               }
             }
           })
-          .bind('dragstop', function (ev, ui) {
+          .bind("dragstop", function (ev, ui) {
             if (_dragElement) {
               currentView.dragStop(_dragElement, ev, ui);
               _dragElement = null;
             }
           });
       }
-
-
     }
-
-    ;;
 
     function Header(calendar, options) {
       var t = this;
-
 
       // exports
       t.render = render;
@@ -892,48 +911,42 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.disableButton = disableButton;
       t.enableButton = enableButton;
 
-
       // locals
       var element = $([]);
       var tm;
 
-
-
       function render() {
-        tm = options.theme ? 'ui' : 'fc';
+        tm = options.theme ? "ui" : "fc";
         var sections = options.header;
         if (sections) {
-          element = $("<table class='fc-header' style='width:100%'/>")
-            .append(
-              $("<tr/>")
-              .append(renderSection('left'))
-              .append(renderSection('center'))
-              .append(renderSection('right'))
-            );
+          element = $("<table class='fc-header' style='width:100%'/>").append(
+            $("<tr/>")
+              .append(renderSection("left"))
+              .append(renderSection("center"))
+              .append(renderSection("right"))
+          );
           return element;
         }
       }
-
 
       function destroy() {
         element.remove();
       }
 
-
       function renderSection(position) {
         var e = $("<td class='fc-header-" + position + "'/>");
         var buttonStr = options.header[position];
         if (buttonStr) {
-          $.each(buttonStr.split(' '), function (i) {
+          $.each(buttonStr.split(" "), function (i) {
             if (i > 0) {
               e.append("<span class='fc-header-space'/>");
             }
             var prevButton;
-            $.each(this.split(','), function (j, buttonName) {
-              if (buttonName == 'title') {
+            $.each(this.split(","), function (j, buttonName) {
+              if (buttonName == "title") {
                 e.append("<span class='fc-header-title'><h2> </h2></span>");
                 if (prevButton) {
-                  prevButton.addClass(tm + '-corner-right');
+                  prevButton.addClass(tm + "-corner-right");
                 }
                 prevButton = null;
               } else {
@@ -942,116 +955,115 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
                   buttonClick = calendar[buttonName]; // calendar method
                 } else if (fcViews[buttonName]) {
                   buttonClick = function () {
-                    button.removeClass(tm + '-state-hover'); // forget why
+                    button.removeClass(tm + "-state-hover"); // forget why
                     calendar.changeView(buttonName);
                   };
                 }
                 if (buttonClick) {
-                  var icon = options.theme ? smartProperty(options.buttonIcons, buttonName) : null; // why are we using smartProperty here?
+                  var icon = options.theme
+                    ? smartProperty(options.buttonIcons, buttonName)
+                    : null; // why are we using smartProperty here?
                   var text = smartProperty(options.buttonText, buttonName); // why are we using smartProperty here?
                   var button = $(
-                      "<span class='fc-button fc-button-" + buttonName + " " + tm + "-state-default'>" +
-                      (icon ?
-                        "<span class='fc-icon-wrap'>" +
-                        "<span class='ui-icon ui-icon-" + icon + "'/>" +
-                        "</span>" :
-                        text
-                      ) +
+                    "<span class='fc-button fc-button-" +
+                      buttonName +
+                      " " +
+                      tm +
+                      "-state-default'>" +
+                      (icon
+                        ? "<span class='fc-icon-wrap'>" +
+                          "<span class='ui-icon ui-icon-" +
+                          icon +
+                          "'/>" +
+                          "</span>"
+                        : text) +
                       "</span>"
-                    )
+                  )
                     .click(function () {
-                      if (!button.hasClass(tm + '-state-disabled')) {
+                      if (!button.hasClass(tm + "-state-disabled")) {
                         buttonClick();
                       }
                     })
                     .mousedown(function () {
                       button
-                        .not('.' + tm + '-state-active')
-                        .not('.' + tm + '-state-disabled')
-                        .addClass(tm + '-state-down');
+                        .not("." + tm + "-state-active")
+                        .not("." + tm + "-state-disabled")
+                        .addClass(tm + "-state-down");
                     })
                     .mouseup(function () {
-                      button.removeClass(tm + '-state-down');
+                      button.removeClass(tm + "-state-down");
                     })
                     .hover(
                       function () {
                         button
-                          .not('.' + tm + '-state-active')
-                          .not('.' + tm + '-state-disabled')
-                          .addClass(tm + '-state-hover');
+                          .not("." + tm + "-state-active")
+                          .not("." + tm + "-state-disabled")
+                          .addClass(tm + "-state-hover");
                       },
                       function () {
                         button
-                          .removeClass(tm + '-state-hover')
-                          .removeClass(tm + '-state-down');
+                          .removeClass(tm + "-state-hover")
+                          .removeClass(tm + "-state-down");
                       }
                     )
                     .appendTo(e);
                   disableTextSelection(button);
                   if (!prevButton) {
-                    button.addClass(tm + '-corner-left');
+                    button.addClass(tm + "-corner-left");
                   }
                   prevButton = button;
                 }
               }
             });
             if (prevButton) {
-              prevButton.addClass(tm + '-corner-right');
+              prevButton.addClass(tm + "-corner-right");
             }
           });
         }
         return e;
       }
 
-
       function updateTitle(html) {
-        element.find('h2')
-          .html(html);
+        element.find("h2").html(html);
       }
-
 
       function activateButton(buttonName) {
-        element.find('span.fc-button-' + buttonName)
-          .addClass(tm + '-state-active');
+        element
+          .find("span.fc-button-" + buttonName)
+          .addClass(tm + "-state-active");
       }
-
 
       function deactivateButton(buttonName) {
-        element.find('span.fc-button-' + buttonName)
-          .removeClass(tm + '-state-active');
+        element
+          .find("span.fc-button-" + buttonName)
+          .removeClass(tm + "-state-active");
       }
-
 
       function disableButton(buttonName) {
-        element.find('span.fc-button-' + buttonName)
-          .addClass(tm + '-state-disabled');
+        element
+          .find("span.fc-button-" + buttonName)
+          .addClass(tm + "-state-disabled");
       }
-
 
       function enableButton(buttonName) {
-        element.find('span.fc-button-' + buttonName)
-          .removeClass(tm + '-state-disabled');
+        element
+          .find("span.fc-button-" + buttonName)
+          .removeClass(tm + "-state-disabled");
       }
-
-
     }
-
-    ;;
 
     fc.sourceNormalizers = [];
     fc.sourceFetchers = [];
 
     var ajaxDefaults = {
-      dataType: 'json',
-      cache: false
+      dataType: "json",
+      cache: false,
     };
 
     var eventGUID = 1;
 
-
     function EventManager(options, _sources) {
       var t = this;
-
 
       // exports
       t.isFetchNeeded = isFetchNeeded;
@@ -1064,16 +1076,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.clientEvents = clientEvents;
       t.normalizeEvent = normalizeEvent;
 
-
       // imports
       var trigger = t.trigger;
       var getView = t.getView;
       var reportEvents = t.reportEvents;
 
-
       // locals
       var stickySource = {
-        events: []
+        events: [],
       };
       var sources = [stickySource];
       var rangeStart, rangeEnd;
@@ -1082,21 +1092,16 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var loadingLevel = 0;
       var cache = [];
 
-
       for (var i = 0; i < _sources.length; i++) {
         _addEventSource(_sources[i]);
       }
 
-
-
       /* Fetching
       -----------------------------------------------------------------------------*/
-
 
       function isFetchNeeded(start, end) {
         return !rangeStart || start < rangeStart || end > rangeEnd;
       }
-
 
       function fetchEvents(start, end) {
         rangeStart = start;
@@ -1110,12 +1115,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function fetchEventSource(source, fetchID) {
         _fetchEventSource(source, function (events) {
           if (fetchID == currentFetchID) {
             if (events) {
-
               if (options.eventDataTransform) {
                 events = $.map(events, options.eventDataTransform);
               }
@@ -1139,7 +1142,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         });
       }
 
-
       function _fetchEventSource(source, callback) {
         var i;
         var fetchers = fc.sourceFetchers;
@@ -1149,7 +1151,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           if (res === true) {
             // the fetcher is in charge. made its own async request
             return;
-          } else if (typeof res == 'object') {
+          } else if (typeof res == "object") {
             // the fetcher returned a new source. process it
             _fetchEventSource(res, callback);
             return;
@@ -1159,10 +1161,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         if (events) {
           if ($.isFunction(events)) {
             pushLoading();
-            events(cloneDate(rangeStart), cloneDate(rangeEnd), function (events) {
-              callback(events);
-              popLoading();
-            });
+            events(
+              cloneDate(rangeStart),
+              cloneDate(rangeEnd),
+              function (events) {
+                callback(events);
+                popLoading();
+              }
+            );
           } else if ($.isArray(events)) {
             callback(events);
           } else {
@@ -1189,7 +1195,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             // and not affect the passed-in object.
             var data = $.extend({}, customData || {});
 
-            var startParam = firstDefined(source.startParam, options.startParam);
+            var startParam = firstDefined(
+              source.startParam,
+              options.startParam
+            );
             var endParam = firstDefined(source.endParam, options.endParam);
             if (startParam) {
               data[startParam] = Math.round(+rangeStart / 1000);
@@ -1199,36 +1208,35 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             }
 
             pushLoading();
-            $.ajax($.extend({}, ajaxDefaults, source, {
-              data: data,
-              success: function (events) {
-                events = events || [];
-                var res = applyAll(success, this, arguments);
-                if ($.isArray(res)) {
-                  events = res;
-                }
-                callback(events);
-              },
-              error: function () {
-                applyAll(error, this, arguments);
-                callback();
-              },
-              complete: function () {
-                applyAll(complete, this, arguments);
-                popLoading();
-              }
-            }));
+            $.ajax(
+              $.extend({}, ajaxDefaults, source, {
+                data: data,
+                success: function (events) {
+                  events = events || [];
+                  var res = applyAll(success, this, arguments);
+                  if ($.isArray(res)) {
+                    events = res;
+                  }
+                  callback(events);
+                },
+                error: function () {
+                  applyAll(error, this, arguments);
+                  callback();
+                },
+                complete: function () {
+                  applyAll(complete, this, arguments);
+                  popLoading();
+                },
+              })
+            );
           } else {
             callback();
           }
         }
       }
 
-
-
       /* Sources
       -----------------------------------------------------------------------------*/
-
 
       function addEventSource(source) {
         source = _addEventSource(source);
@@ -1238,24 +1246,22 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function _addEventSource(source) {
         if ($.isFunction(source) || $.isArray(source)) {
           source = {
-            events: source
+            events: source,
           };
-        } else if (typeof source == 'string') {
+        } else if (typeof source == "string") {
           source = {
-            url: source
+            url: source,
           };
         }
-        if (typeof source == 'object') {
+        if (typeof source == "object") {
           normalizeSource(source);
           sources.push(source);
           return source;
         }
       }
-
 
       function removeEventSource(source) {
         sources = $.grep(sources, function (src) {
@@ -1268,21 +1274,19 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportEvents(cache);
       }
 
-
-
       /* Manipulation
       -----------------------------------------------------------------------------*/
 
-
-      function updateEvent(event) { // update an existing event
-        var i, len = cache.length,
+      function updateEvent(event) {
+        // update an existing event
+        var i,
+          len = cache.length,
           e,
           defaultEventEnd = getView().defaultEventEnd, // getView???
           startDelta = event.start - event._start,
-          endDelta = event.end ?
-          (event.end - (event._end || defaultEventEnd(event))) // event._end would be null if event.end
-          :
-          0; // was null and event was just resized
+          endDelta = event.end
+            ? event.end - (event._end || defaultEventEnd(event)) // event._end would be null if event.end
+            : 0; // was null and event was just resized
         for (i = 0; i < len; i++) {
           e = cache[i];
           if (e._id == event._id && e != event) {
@@ -1312,7 +1316,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportEvents(cache);
       }
 
-
       function renderEvent(event, stick) {
         normalizeEvent(event);
         if (!event.source) {
@@ -1325,9 +1328,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportEvents(cache);
       }
 
-
       function removeEvents(filter) {
-        if (!filter) { // remove all
+        if (!filter) {
+          // remove all
           cache = [];
           // clear all array sources
           for (var i = 0; i < sources.length; i++) {
@@ -1336,8 +1339,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             }
           }
         } else {
-          if (!$.isFunction(filter)) { // an event ID
-            var id = filter + '';
+          if (!$.isFunction(filter)) {
+            // an event ID
+            var id = filter + "";
             filter = function (e) {
               return e._id == id;
             };
@@ -1353,12 +1357,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportEvents(cache);
       }
 
-
       function clientEvents(filter) {
         if ($.isFunction(filter)) {
           return $.grep(cache, filter);
-        } else if (filter) { // an event ID
-          filter += '';
+        } else if (filter) {
+          // an event ID
+          filter += "";
           return $.grep(cache, function (e) {
             return e._id == filter;
           });
@@ -1366,52 +1370,55 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return cache; // else, return all
       }
 
-
-
       /* Loading State
       -----------------------------------------------------------------------------*/
 
-
       function pushLoading() {
         if (!loadingLevel++) {
-          trigger('loading', null, true, getView());
+          trigger("loading", null, true, getView());
         }
       }
-
 
       function popLoading() {
         if (!--loadingLevel) {
-          trigger('loading', null, false, getView());
+          trigger("loading", null, false, getView());
         }
       }
-
-
 
       /* Event Normalization
       -----------------------------------------------------------------------------*/
 
-
       function normalizeEvent(event) {
         var source = event.source || {};
-        var ignoreTimezone = firstDefined(source.ignoreTimezone, options.ignoreTimezone);
-        event._id = event._id || (event.id === undefined ? '_fc' + eventGUID++ : event.id + '');
+        var ignoreTimezone = firstDefined(
+          source.ignoreTimezone,
+          options.ignoreTimezone
+        );
+        event._id =
+          event._id ||
+          (event.id === undefined ? "_fc" + eventGUID++ : event.id + "");
         if (event.date) {
           if (!event.start) {
             event.start = event.date;
           }
           delete event.date;
         }
-        event._start = cloneDate(event.start = parseDate(event.start, ignoreTimezone));
+        event._start = cloneDate(
+          (event.start = parseDate(event.start, ignoreTimezone))
+        );
         event.end = parseDate(event.end, ignoreTimezone);
         if (event.end && event.end <= event.start) {
           event.end = null;
         }
         event._end = event.end ? cloneDate(event.end) : null;
         if (event.allDay === undefined) {
-          event.allDay = firstDefined(source.allDayDefault, options.allDayDefault);
+          event.allDay = firstDefined(
+            source.allDayDefault,
+            options.allDayDefault
+          );
         }
         if (event.className) {
-          if (typeof event.className == 'string') {
+          if (typeof event.className == "string") {
             event.className = event.className.split(/\s+/);
           }
         } else {
@@ -1420,16 +1427,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         // TODO: if there is no start date, return false to indicate an invalid event
       }
 
-
-
       /* Utils
       ------------------------------------------------------------------------------*/
-
 
       function normalizeSource(source) {
         if (source.className) {
           // TODO: repeat code, same code for event classNames
-          if (typeof source.className == 'string') {
+          if (typeof source.className == "string") {
             source.className = source.className.split(/\s+/);
           }
         } else {
@@ -1441,21 +1445,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function isSourcesEqual(source1, source2) {
-        return source1 && source2 && getSourcePrimitive(source1) == getSourcePrimitive(source2);
+        return (
+          source1 &&
+          source2 &&
+          getSourcePrimitive(source1) == getSourcePrimitive(source2)
+        );
       }
-
 
       function getSourcePrimitive(source) {
-        return ((typeof source == 'object') ? (source.events || source.url) : '') || source;
+        return (
+          (typeof source == "object" ? source.events || source.url : "") ||
+          source
+        );
       }
-
-
     }
-
-    ;;
-
 
     fc.addDays = addDays;
     fc.cloneDate = cloneDate;
@@ -1465,16 +1469,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
     fc.formatDate = formatDate;
     fc.formatDates = formatDates;
 
-
-
     /* Date Math
     -----------------------------------------------------------------------------*/
 
-    var dayIDs = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
+    var dayIDs = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
       DAY_MS = 86400000,
       HOUR_MS = 3600000,
       MINUTE_MS = 60000;
-
 
     function addYears(d, n, keepTime) {
       d.setFullYear(d.getFullYear() + n);
@@ -1484,9 +1485,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return d;
     }
 
-
-    function addMonths(d, n, keepTime) { // prevents day overflow/underflow
-      if (+d) { // prevent infinite looping on invalid dates
+    function addMonths(d, n, keepTime) {
+      // prevents day overflow/underflow
+      if (+d) {
+        // prevent infinite looping on invalid dates
         var m = d.getMonth() + n,
           check = cloneDate(d);
         check.setDate(1);
@@ -1502,8 +1504,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return d;
     }
 
-
-    function addDays(d, n, keepTime) { // deals with daylight savings
+    function addDays(d, n, keepTime) {
+      // deals with daylight savings
       if (+d) {
         var dd = d.getDate() + n,
           check = cloneDate(d);
@@ -1518,21 +1520,20 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return d;
     }
 
-
-    function fixDate(d, check) { // force d to be on check's YMD, for daylight savings purposes
-      if (+d) { // prevent infinite looping on invalid dates
+    function fixDate(d, check) {
+      // force d to be on check's YMD, for daylight savings purposes
+      if (+d) {
+        // prevent infinite looping on invalid dates
         while (d.getDate() != check.getDate()) {
           d.setTime(+d + (d < check ? 1 : -1) * HOUR_MS);
         }
       }
     }
 
-
     function addMinutes(d, n) {
       d.setMinutes(d.getMinutes() + n);
       return d;
     }
-
 
     function clearTime(d) {
       d.setHours(0);
@@ -1542,7 +1543,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return d;
     }
 
-
     function cloneDate(d, dontKeepTime) {
       if (dontKeepTime) {
         return clearTime(new Date(+d));
@@ -1550,8 +1550,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return new Date(+d);
     }
 
-
-    function zeroDate() { // returns a Date with time 00:00:00 and dateOfMonth=1
+    function zeroDate() {
+      // returns a Date with time 00:00:00 and dateOfMonth=1
       var i = 0,
         d;
       do {
@@ -1560,11 +1560,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return d;
     }
 
-
-    function dayDiff(d1, d2) { // d1 - d2
+    function dayDiff(d1, d2) {
+      // d1 - d2
       return Math.round((cloneDate(d1, true) - cloneDate(d2, true)) / DAY_MS);
     }
-
 
     function setYMD(date, y, m, d) {
       if (y !== undefined && y != date.getFullYear()) {
@@ -1581,21 +1580,22 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
-
     /* Date Parsing
     -----------------------------------------------------------------------------*/
 
-
-    function parseDate(s, ignoreTimezone) { // ignoreTimezone defaults to true
-      if (typeof s == 'object') { // already a Date object
+    function parseDate(s, ignoreTimezone) {
+      // ignoreTimezone defaults to true
+      if (typeof s == "object") {
+        // already a Date object
         return s;
       }
-      if (typeof s == 'number') { // a UNIX timestamp
+      if (typeof s == "number") {
+        // a UNIX timestamp
         return new Date(s * 1000);
       }
-      if (typeof s == 'string') {
-        if (s.match(/^\d+(\.\d+)?$/)) { // a UNIX timestamp
+      if (typeof s == "string") {
+        if (s.match(/^\d+(\.\d+)?$/)) {
+          // a UNIX timestamp
           return new Date(parseFloat(s) * 1000);
         }
         if (ignoreTimezone === undefined) {
@@ -1607,11 +1607,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return null;
     }
 
-
-    function parseISO8601(s, ignoreTimezone) { // ignoreTimezone defaults to false
+    function parseISO8601(s, ignoreTimezone) {
+      // ignoreTimezone defaults to false
       // derived from http://delete.me.uk/2005/03/iso8601.html
       // TODO: for a know glitch/feature, read tests/issue_206_parseDate_dst.html
-      var m = s.match(/^([0-9]{4})(-([0-9]{2})(-([0-9]{2})([T ]([0-9]{2}):([0-9]{2})(:([0-9]{2})(\.([0-9]+))?)?(Z|(([-+])([0-9]{2})(:?([0-9]{2}))?))?)?)?)?$/);
+      var m = s.match(
+        /^([0-9]{4})(-([0-9]{2})(-([0-9]{2})([T ]([0-9]{2}):([0-9]{2})(:([0-9]{2})(\.([0-9]+))?)?(Z|(([-+])([0-9]{2})(:?([0-9]{2}))?))?)?)?)?$/
+      );
       if (!m) {
         return null;
       }
@@ -1641,11 +1643,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
         fixDate(date, check);
       } else {
-        date.setUTCFullYear(
-          m[1],
-          m[3] ? m[3] - 1 : 0,
-          m[5] || 1
-        );
+        date.setUTCFullYear(m[1], m[3] ? m[3] - 1 : 0, m[5] || 1);
         date.setUTCHours(
           m[7] || 0,
           m[8] || 0,
@@ -1654,19 +1652,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         );
         if (m[14]) {
           var offset = Number(m[16]) * 60 + (m[18] ? Number(m[18]) : 0);
-          offset *= m[15] == '-' ? 1 : -1;
-          date = new Date(+date + (offset * 60 * 1000));
+          offset *= m[15] == "-" ? 1 : -1;
+          date = new Date(+date + offset * 60 * 1000);
         }
       }
       return date;
     }
 
-
-    function parseTime(s) { // returns minutes since start of day
-      if (typeof s == 'number') { // an hour
+    function parseTime(s) {
+      // returns minutes since start of day
+      if (typeof s == "number") {
+        // an hour
         return s * 60;
       }
-      if (typeof s == 'object') { // a Date object
+      if (typeof s == "object") {
+        // a Date object
         return s.getHours() * 60 + s.getMinutes();
       }
       var m = s.match(/(\d+)(?::(\d+))?\s*(\w+)?/);
@@ -1674,7 +1674,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var h = parseInt(m[1], 10);
         if (m[3]) {
           h %= 12;
-          if (m[3].toLowerCase().charAt(0) == 'p') {
+          if (m[3].toLowerCase().charAt(0) == "p") {
             h += 12;
           }
         }
@@ -1682,26 +1682,24 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
-
     /* Date Formatting
     -----------------------------------------------------------------------------*/
     // TODO: use same function formatDate(date, [date2], format, [options])
-
 
     function formatDate(date, format, options) {
       return formatDates(date, null, format, options);
     }
 
-
     function formatDates(date1, date2, format, options) {
       options = options || defaults;
       var date = date1,
         otherDate = date2,
-        i, len = format.length,
+        i,
+        len = format.length,
         c,
-        i2, formatter,
-        res = '';
+        i2,
+        formatter,
+        res = "";
       for (i = 0; i < len; i++) {
         c = format.charAt(i);
         if (c == "'") {
@@ -1718,20 +1716,24 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               break;
             }
           }
-        } else if (c == '(') {
+        } else if (c == "(") {
           for (i2 = i + 1; i2 < len; i2++) {
-            if (format.charAt(i2) == ')') {
-              var subres = formatDate(date, format.substring(i + 1, i2), options);
-              if (parseInt(subres.replace(/\D/, ''), 10)) {
+            if (format.charAt(i2) == ")") {
+              var subres = formatDate(
+                date,
+                format.substring(i + 1, i2),
+                options
+              );
+              if (parseInt(subres.replace(/\D/, ""), 10)) {
                 res += subres;
               }
               i = i2;
               break;
             }
           }
-        } else if (c == '[') {
+        } else if (c == "[") {
           for (i2 = i + 1; i2 < len; i2++) {
-            if (format.charAt(i2) == ']') {
+            if (format.charAt(i2) == "]") {
               var subformat = format.substring(i + 1, i2);
               var subres = formatDate(date, subformat, options);
               if (subres != formatDate(otherDate, subformat, options)) {
@@ -1741,15 +1743,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               break;
             }
           }
-        } else if (c == '{') {
+        } else if (c == "{") {
           date = date2;
           otherDate = date1;
-        } else if (c == '}') {
+        } else if (c == "}") {
           date = date1;
           otherDate = date2;
         } else {
           for (i2 = len; i2 > i; i2--) {
-            if (formatter = dateFormatters[format.substring(i, i2)]) {
+            if ((formatter = dateFormatters[format.substring(i, i2)])) {
               if (date) {
                 res += formatter(date, options);
               }
@@ -1765,98 +1767,98 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
       return res;
-    };
-
+    }
 
     var dateFormatters = {
       s: function (d) {
-        return d.getSeconds()
+        return d.getSeconds();
       },
       ss: function (d) {
-        return zeroPad(d.getSeconds())
+        return zeroPad(d.getSeconds());
       },
       m: function (d) {
-        return d.getMinutes()
+        return d.getMinutes();
       },
       mm: function (d) {
-        return zeroPad(d.getMinutes())
+        return zeroPad(d.getMinutes());
       },
       h: function (d) {
-        return d.getHours() % 12 || 12
+        return d.getHours() % 12 || 12;
       },
       hh: function (d) {
-        return zeroPad(d.getHours() % 12 || 12)
+        return zeroPad(d.getHours() % 12 || 12);
       },
       H: function (d) {
-        return d.getHours()
+        return d.getHours();
       },
       HH: function (d) {
-        return zeroPad(d.getHours())
+        return zeroPad(d.getHours());
       },
       d: function (d) {
-        return d.getDate()
+        return d.getDate();
       },
       dd: function (d) {
-        return zeroPad(d.getDate())
+        return zeroPad(d.getDate());
       },
       ddd: function (d, o) {
-        return o.dayNamesShort[d.getDay()]
+        return o.dayNamesShort[d.getDay()];
       },
       dddd: function (d, o) {
-        return o.dayNames[d.getDay()]
+        return o.dayNames[d.getDay()];
       },
       M: function (d) {
-        return d.getMonth() + 1
+        return d.getMonth() + 1;
       },
       MM: function (d) {
-        return zeroPad(d.getMonth() + 1)
+        return zeroPad(d.getMonth() + 1);
       },
       MMM: function (d, o) {
-        return o.monthNamesShort[d.getMonth()]
+        return o.monthNamesShort[d.getMonth()];
       },
       MMMM: function (d, o) {
-        return o.monthNames[d.getMonth()]
+        return o.monthNames[d.getMonth()];
       },
       yy: function (d) {
-        return (d.getFullYear() + '').substring(2)
+        return (d.getFullYear() + "").substring(2);
       },
       yyyy: function (d) {
-        return d.getFullYear()
+        return d.getFullYear();
       },
       t: function (d) {
-        return d.getHours() < 12 ? 'a' : 'p'
+        return d.getHours() < 12 ? "a" : "p";
       },
       tt: function (d) {
-        return d.getHours() < 12 ? 'am' : 'pm'
+        return d.getHours() < 12 ? "am" : "pm";
       },
       T: function (d) {
-        return d.getHours() < 12 ? 'A' : 'P'
+        return d.getHours() < 12 ? "A" : "P";
       },
       TT: function (d) {
-        return d.getHours() < 12 ? 'AM' : 'PM'
+        return d.getHours() < 12 ? "AM" : "PM";
       },
       u: function (d) {
-        return formatDate(d, "yyyy-MM-dd'T'HH:mm:ss'Z'")
+        return formatDate(d, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       },
       S: function (d) {
         var date = d.getDate();
         if (date > 10 && date < 20) {
-          return 'th';
+          return "th";
         }
-        return ['st', 'nd', 'rd'][date % 10 - 1] || 'th';
+        return ["st", "nd", "rd"][(date % 10) - 1] || "th";
       },
-      w: function (d, o) { // local
+      w: function (d, o) {
+        // local
         return o.weekNumberCalculation(d);
       },
-      W: function (d) { // ISO
+      W: function (d) {
+        // ISO
         return iso8601Week(d);
-      }
+      },
     };
     fc.dateFormatters = dateFormatters;
 
-
     /* thanks jQuery UI (https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.datepicker.js)
-     * 
+     *
      * Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
      * `date` - the date to get the week for
      * `number` - the number of the week within the year that contains this date
@@ -1874,15 +1876,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
     }
 
-
-    ;;
-
     fc.applyAll = applyAll;
-
 
     /* Event Date Math
     -----------------------------------------------------------------------------*/
-
 
     function exclEndDay(event) {
       if (event.end) {
@@ -1892,24 +1889,23 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     function _exclEndDay(end, allDay) {
       end = cloneDate(end);
-      return allDay || end.getHours() || end.getMinutes() ? addDays(end, 1) : clearTime(end);
+      return allDay || end.getHours() || end.getMinutes()
+        ? addDays(end, 1)
+        : clearTime(end);
       // why don't we check for seconds/ms too?
     }
-
-
 
     /* Event Element Binding
     -----------------------------------------------------------------------------*/
 
-
     function lazySegBind(container, segs, bindHandlers) {
-      container.unbind('mouseover').mouseover(function (ev) {
+      container.unbind("mouseover").mouseover(function (ev) {
         var parent = ev.target,
           e,
-          i, seg;
+          i,
+          seg;
         while (parent != this) {
           e = parent;
           parent = parent.parentNode;
@@ -1924,11 +1920,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       });
     }
 
-
-
     /* Element Dimensions
     -----------------------------------------------------------------------------*/
-
 
     function setOuterWidth(element, width, includeMargins) {
       for (var i = 0, e; i < element.length; i++) {
@@ -1937,7 +1930,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     function setOuterHeight(element, height, includeMargins) {
       for (var i = 0, e; i < element.length; i++) {
         e = $(element[i]);
@@ -1945,81 +1937,86 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     function hsides(element, includeMargins) {
-      return hpadding(element) + hborders(element) + (includeMargins ? hmargins(element) : 0);
+      return (
+        hpadding(element) +
+        hborders(element) +
+        (includeMargins ? hmargins(element) : 0)
+      );
     }
-
 
     function hpadding(element) {
-      return (parseFloat($.css(element[0], 'paddingLeft', true)) || 0) +
-        (parseFloat($.css(element[0], 'paddingRight', true)) || 0);
+      return (
+        (parseFloat($.css(element[0], "paddingLeft", true)) || 0) +
+        (parseFloat($.css(element[0], "paddingRight", true)) || 0)
+      );
     }
-
 
     function hmargins(element) {
-      return (parseFloat($.css(element[0], 'marginLeft', true)) || 0) +
-        (parseFloat($.css(element[0], 'marginRight', true)) || 0);
+      return (
+        (parseFloat($.css(element[0], "marginLeft", true)) || 0) +
+        (parseFloat($.css(element[0], "marginRight", true)) || 0)
+      );
     }
-
 
     function hborders(element) {
-      return (parseFloat($.css(element[0], 'borderLeftWidth', true)) || 0) +
-        (parseFloat($.css(element[0], 'borderRightWidth', true)) || 0);
+      return (
+        (parseFloat($.css(element[0], "borderLeftWidth", true)) || 0) +
+        (parseFloat($.css(element[0], "borderRightWidth", true)) || 0)
+      );
     }
-
 
     function vsides(element, includeMargins) {
-      return vpadding(element) + vborders(element) + (includeMargins ? vmargins(element) : 0);
+      return (
+        vpadding(element) +
+        vborders(element) +
+        (includeMargins ? vmargins(element) : 0)
+      );
     }
-
 
     function vpadding(element) {
-      return (parseFloat($.css(element[0], 'paddingTop', true)) || 0) +
-        (parseFloat($.css(element[0], 'paddingBottom', true)) || 0);
+      return (
+        (parseFloat($.css(element[0], "paddingTop", true)) || 0) +
+        (parseFloat($.css(element[0], "paddingBottom", true)) || 0)
+      );
     }
-
 
     function vmargins(element) {
-      return (parseFloat($.css(element[0], 'marginTop', true)) || 0) +
-        (parseFloat($.css(element[0], 'marginBottom', true)) || 0);
+      return (
+        (parseFloat($.css(element[0], "marginTop", true)) || 0) +
+        (parseFloat($.css(element[0], "marginBottom", true)) || 0)
+      );
     }
-
 
     function vborders(element) {
-      return (parseFloat($.css(element[0], 'borderTopWidth', true)) || 0) +
-        (parseFloat($.css(element[0], 'borderBottomWidth', true)) || 0);
+      return (
+        (parseFloat($.css(element[0], "borderTopWidth", true)) || 0) +
+        (parseFloat($.css(element[0], "borderBottomWidth", true)) || 0)
+      );
     }
-
-
 
     /* Misc Utils
     -----------------------------------------------------------------------------*/
 
-
     //TODO: arraySlice
     //TODO: isFunction, grep ?
 
-
     function noop() {}
-
 
     function dateCompare(a, b) {
       return a - b;
     }
 
-
     function arrayMax(a) {
       return Math.max.apply(Math, a);
     }
 
-
     function zeroPad(n) {
-      return (n < 10 ? '0' : '') + n;
+      return (n < 10 ? "0" : "") + n;
     }
 
-
-    function smartProperty(obj, name) { // get a camel-cased/namespaced property of an object
+    function smartProperty(obj, name) {
+      // get a camel-cased/namespaced property of an object
       if (obj[name] !== undefined) {
         return obj[name];
       }
@@ -2032,29 +2029,27 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           return res;
         }
       }
-      return obj[''];
+      return obj[""];
     }
-
 
     function htmlEscape(s) {
-      return s.replace(/&/g, '&')
-        .replace(/</g, '<')
-        .replace(/>/g, '>')
-        .replace(/'/g, '\'')
+      return s
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/'/g, "'")
         .replace(/"/g, '"')
-        .replace(/\n/g, '<br />');
+        .replace(/\n/g, "<br />");
     }
-
 
     function disableTextSelection(element) {
       element
-        .attr('unselectable', 'on')
-        .css('MozUserSelect', 'none')
-        .bind('selectstart.ui', function () {
+        .attr("unselectable", "on")
+        .css("MozUserSelect", "none")
+        .bind("selectstart.ui", function () {
           return false;
         });
     }
-
 
     /*
     function enableTextSelection(element) {
@@ -2065,62 +2060,59 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
     }
     */
 
-
     function markFirstLast(e) {
       e.children()
-        .removeClass('fc-first fc-last')
-        .filter(':first-child')
-        .addClass('fc-first')
+        .removeClass("fc-first fc-last")
+        .filter(":first-child")
+        .addClass("fc-first")
         .end()
-        .filter(':last-child')
-        .addClass('fc-last');
+        .filter(":last-child")
+        .addClass("fc-last");
     }
-
 
     function setDayID(cell, date) {
       cell.each(function (i, _cell) {
-        _cell.className = _cell.className.replace(/^fc-\w*/, 'fc-' + dayIDs[date.getDay()]);
+        _cell.className = _cell.className.replace(
+          /^fc-\w*/,
+          "fc-" + dayIDs[date.getDay()]
+        );
         // TODO: make a way that doesn't rely on order of classes
       });
     }
-
 
     function getSkinCss(event, opt) {
       var source = event.source || {};
       var eventColor = event.color;
       var sourceColor = source.color;
-      var optionColor = opt('eventColor');
+      var optionColor = opt("eventColor");
       var backgroundColor =
         event.backgroundColor ||
         eventColor ||
         source.backgroundColor ||
         sourceColor ||
-        opt('eventBackgroundColor') ||
+        opt("eventBackgroundColor") ||
         optionColor;
       var borderColor =
         event.borderColor ||
         eventColor ||
         source.borderColor ||
         sourceColor ||
-        opt('eventBorderColor') ||
+        opt("eventBorderColor") ||
         optionColor;
       var textColor =
-        event.textColor ||
-        source.textColor ||
-        opt('eventTextColor');
+        event.textColor || source.textColor || opt("eventTextColor");
       var statements = [];
       if (backgroundColor) {
-        statements.push('background-color:' + backgroundColor);
+        statements.push("background-color:" + backgroundColor);
       }
       if (borderColor) {
-        statements.push('border-color:' + borderColor);
+        statements.push("border-color:" + borderColor);
       }
       if (textColor) {
-        statements.push('color:' + textColor);
+        statements.push("color:" + textColor);
       }
-      return statements.join(';');
+      return statements.join(";");
     }
-
 
     function applyAll(functions, thisObj, args) {
       if ($.isFunction(functions)) {
@@ -2136,7 +2128,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     function firstDefined() {
       for (var i = 0; i < arguments.length; i++) {
         if (arguments[i] !== undefined) {
@@ -2145,36 +2136,29 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
-    ;;
-
     fcViews.month = MonthView;
 
     function MonthView(element, calendar) {
       var t = this;
 
-
       // exports
       t.render = render;
 
-
       // imports
-      BasicView.call(t, element, calendar, 'month');
+      BasicView.call(t, element, calendar, "month");
       var opt = t.opt;
       var renderBasic = t.renderBasic;
       var skipHiddenDays = t.skipHiddenDays;
       var getCellsPerWeek = t.getCellsPerWeek;
       var formatDate = calendar.formatDate;
 
-
       function render(date, delta) {
-
         if (delta) {
           addMonths(date, delta);
           date.setDate(1);
         }
 
-        var firstDay = opt('firstDay');
+        var firstDay = opt("firstDay");
 
         var start = cloneDate(date, true);
         start.setDate(1);
@@ -2192,12 +2176,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var colCnt = getCellsPerWeek();
         var rowCnt = Math.round(dayDiff(visEnd, visStart) / 7); // should be no need for Math.round
 
-        if (opt('weekMode') == 'fixed') {
+        if (opt("weekMode") == "fixed") {
           addDays(visEnd, (6 - rowCnt) * 7); // add weeks to make up for it
           rowCnt = 6;
         }
 
-        t.title = formatDate(start, opt('titleFormat'));
+        t.title = formatDate(start, opt("titleFormat"));
 
         t.start = start;
         t.end = end;
@@ -2206,38 +2190,33 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         renderBasic(rowCnt, colCnt, true);
       }
-
-
     }
-
-    ;;
 
     fcViews.basicWeek = BasicWeekView;
 
     function BasicWeekView(element, calendar) {
       var t = this;
 
-
       // exports
       t.render = render;
 
-
       // imports
-      BasicView.call(t, element, calendar, 'basicWeek');
+      BasicView.call(t, element, calendar, "basicWeek");
       var opt = t.opt;
       var renderBasic = t.renderBasic;
       var skipHiddenDays = t.skipHiddenDays;
       var getCellsPerWeek = t.getCellsPerWeek;
       var formatDates = calendar.formatDates;
 
-
       function render(date, delta) {
-
         if (delta) {
           addDays(date, delta * 7);
         }
 
-        var start = addDays(cloneDate(date), -((date.getDay() - opt('firstDay') + 7) % 7));
+        var start = addDays(
+          cloneDate(date),
+          -((date.getDay() - opt("firstDay") + 7) % 7)
+        );
         var end = addDays(cloneDate(start), 7);
 
         var visStart = cloneDate(start);
@@ -2256,38 +2235,29 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         t.title = formatDates(
           visStart,
           addDays(cloneDate(visEnd), -1),
-          opt('titleFormat')
+          opt("titleFormat")
         );
 
         renderBasic(1, colCnt, false);
       }
-
-
     }
 
-    ;;
-
     fcViews.basicDay = BasicDayView;
-
 
     function BasicDayView(element, calendar) {
       var t = this;
 
-
       // exports
       t.render = render;
 
-
       // imports
-      BasicView.call(t, element, calendar, 'basicDay');
+      BasicView.call(t, element, calendar, "basicDay");
       var opt = t.opt;
       var renderBasic = t.renderBasic;
       var skipHiddenDays = t.skipHiddenDays;
       var formatDate = calendar.formatDate;
 
-
       function render(date, delta) {
-
         if (delta) {
           addDays(date, delta);
         }
@@ -2296,27 +2266,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var start = cloneDate(date, true);
         var end = addDays(cloneDate(start), 1);
 
-        t.title = formatDate(date, opt('titleFormat'));
+        t.title = formatDate(date, opt("titleFormat"));
 
         t.start = t.visStart = start;
         t.end = t.visEnd = end;
 
         renderBasic(1, 1, false);
       }
-
-
     }
 
-    ;;
-
     setDefaults({
-      weekMode: 'fixed'
+      weekMode: "fixed",
     });
-
 
     function BasicView(element, calendar, viewName) {
       var t = this;
-
 
       // exports
       t.renderBasic = renderBasic;
@@ -2331,29 +2295,28 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.dragStop = dragStop;
       t.defaultEventEnd = defaultEventEnd;
       t.getHoverListener = function () {
-        return hoverListener
+        return hoverListener;
       };
       t.colLeft = colLeft;
       t.colRight = colRight;
       t.colContentLeft = colContentLeft;
       t.colContentRight = colContentRight;
       t.getIsCellAllDay = function () {
-        return true
+        return true;
       };
       t.allDayRow = allDayRow;
       t.getRowCnt = function () {
-        return rowCnt
+        return rowCnt;
       };
       t.getColCnt = function () {
-        return colCnt
+        return colCnt;
       };
       t.getColWidth = function () {
-        return colWidth
+        return colWidth;
       };
       t.getDaySegmentContainer = function () {
-        return daySegmentContainer
+        return daySegmentContainer;
       };
-
 
       // imports
       View.call(t, element, calendar, viewName);
@@ -2369,7 +2332,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var dateToCell = t.dateToCell;
       var rangeToSegments = t.rangeToSegments;
       var formatDate = calendar.formatDate;
-
 
       // locals
 
@@ -2402,14 +2364,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var weekNumberTitle;
       var weekNumberFormat;
 
-
-
       /* Rendering
       ------------------------------------------------------------*/
 
-
-      disableTextSelection(element.addClass('fc-grid'));
-
+      disableTextSelection(element.addClass("fc-grid"));
 
       function renderBasic(_rowCnt, _colCnt, _showNumbers) {
         rowCnt = _rowCnt;
@@ -2424,28 +2382,25 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         buildTable();
       }
 
-
       function updateOptions() {
-        tm = opt('theme') ? 'ui' : 'fc';
-        colFormat = opt('columnFormat');
+        tm = opt("theme") ? "ui" : "fc";
+        colFormat = opt("columnFormat");
 
         // week # options. (TODO: bad, logic also in other views)
-        showWeekNumbers = opt('weekNumbers');
-        weekNumberTitle = opt('weekNumberTitle');
-        if (opt('weekNumberCalculation') != 'iso') {
+        showWeekNumbers = opt("weekNumbers");
+        weekNumberTitle = opt("weekNumberTitle");
+        if (opt("weekNumberCalculation") != "iso") {
           weekNumberFormat = "w";
         } else {
           weekNumberFormat = "W";
         }
       }
 
-
       function buildEventContainer() {
-        daySegmentContainer =
-          $("<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>")
-          .appendTo(element);
+        daySegmentContainer = $(
+          "<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>"
+        ).appendTo(element);
       }
-
 
       function buildTable() {
         var html = buildTableHTML();
@@ -2455,37 +2410,33 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
         table = $(html).appendTo(element);
 
-        head = table.find('thead');
-        headCells = head.find('.fc-day-header');
-        body = table.find('tbody');
-        bodyRows = body.find('tr');
-        bodyCells = body.find('.fc-day');
-        bodyFirstCells = bodyRows.find('td:first-child');
+        head = table.find("thead");
+        headCells = head.find(".fc-day-header");
+        body = table.find("tbody");
+        bodyRows = body.find("tr");
+        bodyCells = body.find(".fc-day");
+        bodyFirstCells = bodyRows.find("td:first-child");
 
-        firstRowCellInners = bodyRows.eq(0).find('.fc-day > div');
-        firstRowCellContentInners = bodyRows.eq(0).find('.fc-day-content > div');
+        firstRowCellInners = bodyRows.eq(0).find(".fc-day > div");
+        firstRowCellContentInners = bodyRows
+          .eq(0)
+          .find(".fc-day-content > div");
 
-        markFirstLast(head.add(head.find('tr'))); // marks first+last tr/th's
+        markFirstLast(head.add(head.find("tr"))); // marks first+last tr/th's
         markFirstLast(bodyRows); // marks first+last td's
-        bodyRows.eq(0).addClass('fc-first');
-        bodyRows.filter(':last').addClass('fc-last');
+        bodyRows.eq(0).addClass("fc-first");
+        bodyRows.filter(":last").addClass("fc-last");
 
         bodyCells.each(function (i, _cell) {
-          var date = cellToDate(
-            Math.floor(i / colCnt),
-            i % colCnt
-          );
-          trigger('dayRender', t, date, $(_cell));
+          var date = cellToDate(Math.floor(i / colCnt), i % colCnt);
+          trigger("dayRender", t, date, $(_cell));
         });
 
         dayBind(bodyCells);
       }
 
-
-
       /* HTML Building
       -----------------------------------------------------------*/
-
 
       function buildTableHTML() {
         var html =
@@ -2497,10 +2448,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return html;
       }
 
-
       function buildHeadHTML() {
         var headerClass = tm + "-widget-header";
-        var html = '';
+        var html = "";
         var col;
         var date;
 
@@ -2508,7 +2458,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         if (showWeekNumbers) {
           html +=
-            "<th class='fc-week-number " + headerClass + "'>" +
+            "<th class='fc-week-number " +
+            headerClass +
+            "'>" +
             htmlEscape(weekNumberTitle) +
             "</th>";
         }
@@ -2516,7 +2468,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         for (col = 0; col < colCnt; col++) {
           date = cellToDate(0, col);
           html +=
-            "<th class='fc-day-header fc-" + dayIDs[date.getDay()] + " " + headerClass + "'>" +
+            "<th class='fc-day-header fc-" +
+            dayIDs[date.getDay()] +
+            " " +
+            headerClass +
+            "'>" +
             htmlEscape(formatDate(date, colFormat)) +
             "</th>";
         }
@@ -2526,10 +2482,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return html;
       }
 
-
       function buildBodyHTML() {
         var contentClass = tm + "-widget-content";
-        var html = '';
+        var html = "";
         var row;
         var col;
         var date;
@@ -2537,13 +2492,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         html += "<tbody>";
 
         for (row = 0; row < rowCnt; row++) {
-
           html += "<tr class='fc-week'>";
 
           if (showWeekNumbers) {
             date = cellToDate(row, 0);
             html +=
-              "<td class='fc-week-number " + contentClass + "'>" +
+              "<td class='fc-week-number " +
+              contentClass +
+              "'>" +
               "<div>" +
               htmlEscape(formatDate(date, weekNumberFormat)) +
               "</div>" +
@@ -2563,36 +2519,36 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return html;
       }
 
-
       function buildCellHTML(date) {
         var contentClass = tm + "-widget-content";
         var month = t.start.getMonth();
         var today = clearTime(new Date());
-        var html = '';
+        var html = "";
         var classNames = [
-          'fc-day',
-          'fc-' + dayIDs[date.getDay()],
-          contentClass
+          "fc-day",
+          "fc-" + dayIDs[date.getDay()],
+          contentClass,
         ];
 
         if (date.getMonth() != month) {
-          classNames.push('fc-other-month');
+          classNames.push("fc-other-month");
         }
         if (+date == +today) {
-          classNames.push(
-            'fc-today',
-            tm + '-state-highlight'
-          );
+          classNames.push("fc-today", tm + "-state-highlight");
         } else if (date < today) {
-          classNames.push('fc-past');
+          classNames.push("fc-past");
         } else {
-          classNames.push('fc-future');
+          classNames.push("fc-future");
         }
 
         html +=
           "<td" +
-          " class='" + classNames.join(' ') + "'" +
-          " data-date='" + formatDate(date, 'yyyy-MM-dd') + "'" +
+          " class='" +
+          classNames.join(" ") +
+          "'" +
+          " data-date='" +
+          formatDate(date, "yyyy-MM-dd") +
+          "'" +
           ">" +
           "<div>";
 
@@ -2610,11 +2566,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return html;
       }
 
-
-
       /* Dimensions
       -----------------------------------------------------------*/
-
 
       function setHeight(height) {
         viewHeight = height;
@@ -2624,8 +2577,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var rowHeightLast;
         var cell;
 
-        if (opt('weekMode') == 'variable') {
-          rowHeight = rowHeightLast = Math.floor(bodyHeight / (rowCnt == 1 ? 2 : 6));
+        if (opt("weekMode") == "variable") {
+          rowHeight = rowHeightLast = Math.floor(
+            bodyHeight / (rowCnt == 1 ? 2 : 6)
+          );
         } else {
           rowHeight = Math.floor(bodyHeight / rowCnt);
           rowHeightLast = bodyHeight - rowHeight * (rowCnt - 1);
@@ -2634,15 +2589,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         bodyFirstCells.each(function (i, _cell) {
           if (i < rowCnt) {
             cell = $(_cell);
-            cell.find('> div').css(
-              'min-height',
-              (i == rowCnt - 1 ? rowHeightLast : rowHeight) - vsides(cell)
-            );
+            cell
+              .find("> div")
+              .css(
+                "min-height",
+                (i == rowCnt - 1 ? rowHeightLast : rowHeight) - vsides(cell)
+              );
           }
         });
-
       }
-
 
       function setWidth(width) {
         viewWidth = width;
@@ -2651,40 +2606,38 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         weekNumberWidth = 0;
         if (showWeekNumbers) {
-          weekNumberWidth = head.find('th.fc-week-number').outerWidth();
+          weekNumberWidth = head.find("th.fc-week-number").outerWidth();
         }
 
         colWidth = Math.floor((viewWidth - weekNumberWidth) / colCnt);
         setOuterWidth(headCells.slice(0, -1), colWidth);
       }
 
-
-
       /* Day clicking and binding
       -----------------------------------------------------------*/
 
-
       function dayBind(days) {
-        days.click(dayClick)
-          .mousedown(daySelectionMousedown);
+        days.click(dayClick).mousedown(daySelectionMousedown);
       }
-
 
       function dayClick(ev) {
-        if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
-          var date = parseISO8601($(this).data('date'));
-          trigger('dayClick', this, date, true, ev);
+        if (!opt("selectable")) {
+          // if selectable, SelectionManager will worry about dayClick
+          var date = parseISO8601($(this).data("date"));
+          trigger("dayClick", this, date, true, ev);
         }
       }
-
-
 
       /* Semi-transparent Overlay Helpers
       ------------------------------------------------------*/
       // TODO: should be consolidated with AgendaView's methods
 
-
-      function renderDayOverlay(overlayStart, overlayEnd, refreshCoordinateGrid) { // overlayEnd is exclusive
+      function renderDayOverlay(
+        overlayStart,
+        overlayEnd,
+        refreshCoordinateGrid
+      ) {
+        // overlayEnd is exclusive
 
         if (refreshCoordinateGrid) {
           coordinateGrid.build();
@@ -2705,44 +2658,35 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-      function renderCellOverlay(row0, col0, row1, col1) { // row1,col1 is inclusive
+      function renderCellOverlay(row0, col0, row1, col1) {
+        // row1,col1 is inclusive
         var rect = coordinateGrid.rect(row0, col0, row1, col1, element);
         return renderOverlay(rect, element);
       }
 
-
-
       /* Selection
       -----------------------------------------------------------------------*/
-
 
       function defaultSelectionEnd(startDate, allDay) {
         return cloneDate(startDate);
       }
 
-
       function renderSelection(startDate, endDate, allDay) {
         renderDayOverlay(startDate, addDays(cloneDate(endDate), 1), true); // rebuild every time???
       }
-
 
       function clearSelection() {
         clearOverlays();
       }
 
-
       function reportDayClick(date, allDay, ev) {
         var cell = dateToCell(date);
         var _element = bodyCells[cell.row * colCnt + cell.col];
-        trigger('dayClick', _element, date, allDay, ev);
+        trigger("dayClick", _element, date, allDay, ev);
       }
-
-
 
       /* External Dragging
       -----------------------------------------------------------------------*/
-
 
       function dragStart(_dragElement, ev, ui) {
         hoverListener.start(function (cell) {
@@ -2753,26 +2697,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }, ev);
       }
 
-
       function dragStop(_dragElement, ev, ui) {
         var cell = hoverListener.stop();
         clearOverlays();
         if (cell) {
           var d = cellToDate(cell);
-          trigger('drop', _dragElement, d, true, ev, ui);
+          trigger("drop", _dragElement, d, true, ev, ui);
         }
       }
-
-
 
       /* Utilities
       --------------------------------------------------------*/
 
-
       function defaultEventEnd(event) {
         return cloneDate(event.start);
       }
-
 
       coordinateGrid = new CoordinateGrid(function (rows, cols) {
         var e, n, p;
@@ -2800,7 +2739,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         p[1] = n + e.outerHeight();
       });
 
-
       hoverListener = new HoverListener(coordinateGrid);
 
       colPositions = new HorizontalPositionCache(function (col) {
@@ -2811,90 +2749,73 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return firstRowCellContentInners.eq(col);
       });
 
-
       function colLeft(col) {
         return colPositions.left(col);
       }
-
 
       function colRight(col) {
         return colPositions.right(col);
       }
 
-
       function colContentLeft(col) {
         return colContentPositions.left(col);
       }
-
 
       function colContentRight(col) {
         return colContentPositions.right(col);
       }
 
-
       function allDayRow(i) {
         return bodyRows.eq(i);
       }
-
     }
-
-    ;;
 
     function BasicEventRenderer() {
       var t = this;
-
 
       // exports
       t.renderEvents = renderEvents;
       t.clearEvents = clearEvents;
 
-
       // imports
       DayEventRenderer.call(t);
-
 
       function renderEvents(events, modifiedEventId) {
         t.renderDayEvents(events, modifiedEventId);
       }
 
-
       function clearEvents() {
         t.getDaySegmentContainer().empty();
       }
 
-
       // TODO: have this class (and AgendaEventRenderer) be responsible for creating the event container div
-
     }
-
-    ;;
 
     fcViews.agendaWeek = AgendaWeekView;
 
     function AgendaWeekView(element, calendar) {
       var t = this;
 
-
       // exports
       t.render = render;
 
-
       // imports
-      AgendaView.call(t, element, calendar, 'agendaWeek');
+      AgendaView.call(t, element, calendar, "agendaWeek");
       var opt = t.opt;
       var renderAgenda = t.renderAgenda;
       var skipHiddenDays = t.skipHiddenDays;
       var getCellsPerWeek = t.getCellsPerWeek;
       var formatDates = calendar.formatDates;
 
-
       function render(date, delta) {
-
         if (delta) {
           addDays(date, delta * 7);
         }
 
-        var start = addDays(cloneDate(date), -((date.getDay() - opt('firstDay') + 7) % 7));
+        var start = addDays(
+          cloneDate(date),
+          -((date.getDay() - opt("firstDay") + 7) % 7)
+        );
         var end = addDays(cloneDate(start), 7);
 
         var visStart = cloneDate(start);
@@ -2908,7 +2829,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         t.title = formatDates(
           visStart,
           addDays(cloneDate(visEnd), -1),
-          opt('titleFormat')
+          opt("titleFormat")
         );
 
         t.start = start;
@@ -2918,32 +2839,24 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         renderAgenda(colCnt);
       }
-
     }
 
-    ;;
-
     fcViews.agendaDay = AgendaDayView;
-
 
     function AgendaDayView(element, calendar) {
       var t = this;
 
-
       // exports
       t.render = render;
 
-
       // imports
-      AgendaView.call(t, element, calendar, 'agendaDay');
+      AgendaView.call(t, element, calendar, "agendaDay");
       var opt = t.opt;
       var renderAgenda = t.renderAgenda;
       var skipHiddenDays = t.skipHiddenDays;
       var formatDate = calendar.formatDate;
 
-
       function render(date, delta) {
-
         if (delta) {
           addDays(date, delta);
         }
@@ -2952,45 +2865,38 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var start = cloneDate(date, true);
         var end = addDays(cloneDate(start), 1);
 
-        t.title = formatDate(date, opt('titleFormat'));
+        t.title = formatDate(date, opt("titleFormat"));
 
         t.start = t.visStart = start;
         t.end = t.visEnd = end;
 
         renderAgenda(1);
       }
-
-
     }
-
-    ;;
 
     setDefaults({
       allDaySlot: true,
-      allDayText: 'all-day',
+      allDayText: "all-day",
       firstHour: 6,
       slotMinutes: 30,
       defaultEventMinutes: 120,
-      axisFormat: 'h(:mm)tt',
+      axisFormat: "h(:mm)tt",
       timeFormat: {
-        agenda: 'h:mm{ - h:mm}'
+        agenda: "h:mm{ - h:mm}",
       },
       dragOpacity: {
-        agenda: .5
+        agenda: 0.5,
       },
       minTime: 0,
       maxTime: 24,
-      slotEventOverlap: true
+      slotEventOverlap: true,
     });
-
 
     // TODO: make it work in quirks mode (event corners, all-day height)
     // TODO: test liquid width, especially in IE6
 
-
     function AgendaView(element, calendar, viewName) {
       var t = this;
-
 
       // exports
       t.renderAgenda = renderAgenda;
@@ -3002,44 +2908,44 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.getIsCellAllDay = getIsCellAllDay;
       t.allDayRow = getAllDayRow;
       t.getCoordinateGrid = function () {
-        return coordinateGrid
+        return coordinateGrid;
       }; // specifically for AgendaEventRenderer
       t.getHoverListener = function () {
-        return hoverListener
+        return hoverListener;
       };
       t.colLeft = colLeft;
       t.colRight = colRight;
       t.colContentLeft = colContentLeft;
       t.colContentRight = colContentRight;
       t.getDaySegmentContainer = function () {
-        return daySegmentContainer
+        return daySegmentContainer;
       };
       t.getSlotSegmentContainer = function () {
-        return slotSegmentContainer
+        return slotSegmentContainer;
       };
       t.getMinMinute = function () {
-        return minMinute
+        return minMinute;
       };
       t.getMaxMinute = function () {
-        return maxMinute
+        return maxMinute;
       };
       t.getSlotContainer = function () {
-        return slotContainer
+        return slotContainer;
       };
       t.getRowCnt = function () {
-        return 1
+        return 1;
       };
       t.getColCnt = function () {
-        return colCnt
+        return colCnt;
       };
       t.getColWidth = function () {
-        return colWidth
+        return colWidth;
       };
       t.getSnapHeight = function () {
-        return snapHeight
+        return snapHeight;
       };
       t.getSnapMinutes = function () {
-        return snapMinutes
+        return snapMinutes;
       };
       t.defaultSelectionEnd = defaultSelectionEnd;
       t.renderDayOverlay = renderDayOverlay;
@@ -3048,7 +2954,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.reportDayClick = reportDayClick; // selection mousedown hack
       t.dragStart = dragStart;
       t.dragStop = dragStop;
-
 
       // imports
       View.call(t, element, calendar, viewName);
@@ -3067,7 +2972,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var dateToCell = t.dateToCell;
       var rangeToSegments = t.rangeToSegments;
       var formatDate = calendar.formatDate;
-
 
       // locals
 
@@ -3117,52 +3021,44 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var weekNumberTitle;
       var weekNumberFormat;
 
-
-
       /* Rendering
       -----------------------------------------------------------------------------*/
 
-
-      disableTextSelection(element.addClass('fc-agenda'));
-
+      disableTextSelection(element.addClass("fc-agenda"));
 
       function renderAgenda(c) {
         colCnt = c;
         updateOptions();
 
-        if (!dayTable) { // first time rendering?
+        if (!dayTable) {
+          // first time rendering?
           buildSkeleton(); // builds day table, slot area, events containers
         } else {
           buildDayTable(); // rebuilds day table
         }
       }
 
-
       function updateOptions() {
-
-        tm = opt('theme') ? 'ui' : 'fc';
-        rtl = opt('isRTL')
-        minMinute = parseTime(opt('minTime'));
-        maxMinute = parseTime(opt('maxTime'));
-        colFormat = opt('columnFormat');
+        tm = opt("theme") ? "ui" : "fc";
+        rtl = opt("isRTL");
+        minMinute = parseTime(opt("minTime"));
+        maxMinute = parseTime(opt("maxTime"));
+        colFormat = opt("columnFormat");
 
         // week # options. (TODO: bad, logic also in other views)
-        showWeekNumbers = opt('weekNumbers');
-        weekNumberTitle = opt('weekNumberTitle');
-        if (opt('weekNumberCalculation') != 'iso') {
+        showWeekNumbers = opt("weekNumbers");
+        weekNumberTitle = opt("weekNumberTitle");
+        if (opt("weekNumberCalculation") != "iso") {
           weekNumberFormat = "w";
         } else {
           weekNumberFormat = "W";
         }
 
-        snapMinutes = opt('snapMinutes') || opt('slotMinutes');
+        snapMinutes = opt("snapMinutes") || opt("slotMinutes");
       }
-
-
 
       /* Build DOM
       -----------------------------------------------------------------------*/
-
 
       function buildSkeleton() {
         var headerClass = tm + "-widget-header";
@@ -3172,58 +3068,62 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var i;
         var maxd;
         var minutes;
-        var slotNormal = opt('slotMinutes') % 15 == 0;
+        var slotNormal = opt("slotMinutes") % 15 == 0;
 
         buildDayTable();
 
-        slotLayer =
-          $("<div style='position:absolute;z-index:2;left:0;width:100%'/>")
-          .appendTo(element);
+        slotLayer = $(
+          "<div style='position:absolute;z-index:2;left:0;width:100%'/>"
+        ).appendTo(element);
 
-        if (opt('allDaySlot')) {
-
-          daySegmentContainer =
-            $("<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>")
-            .appendTo(slotLayer);
+        if (opt("allDaySlot")) {
+          daySegmentContainer = $(
+            "<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>"
+          ).appendTo(slotLayer);
 
           s =
             "<table style='width:100%' class='fc-agenda-allday' cellspacing='0'>" +
             "<tr>" +
-            "<th class='" + headerClass + " fc-agenda-axis'>" + opt('allDayText') + "</th>" +
+            "<th class='" +
+            headerClass +
+            " fc-agenda-axis'>" +
+            opt("allDayText") +
+            "</th>" +
             "<td>" +
             "<div class='fc-day-content'><div style='position:relative'/></div>" +
             "</td>" +
-            "<th class='" + headerClass + " fc-agenda-gutter'> </th>" +
+            "<th class='" +
+            headerClass +
+            " fc-agenda-gutter'> </th>" +
             "</tr>" +
             "</table>";
           allDayTable = $(s).appendTo(slotLayer);
-          allDayRow = allDayTable.find('tr');
+          allDayRow = allDayTable.find("tr");
 
-          dayBind(allDayRow.find('td'));
+          dayBind(allDayRow.find("td"));
 
           slotLayer.append(
-            "<div class='fc-agenda-divider " + headerClass + "'>" +
-            "<div class='fc-agenda-divider-inner'/>" +
-            "</div>"
+            "<div class='fc-agenda-divider " +
+              headerClass +
+              "'>" +
+              "<div class='fc-agenda-divider-inner'/>" +
+              "</div>"
           );
-
         } else {
-
           daySegmentContainer = $([]); // in jQuery 1.4, we can just do $()
-
         }
 
-        slotScroller =
-          $("<div style='position:absolute;width:100%;overflow-x:hidden;overflow-y:auto'/>")
-          .appendTo(slotLayer);
+        slotScroller = $(
+          "<div style='position:absolute;width:100%;overflow-x:hidden;overflow-y:auto'/>"
+        ).appendTo(slotLayer);
 
-        slotContainer =
-          $("<div style='position:relative;width:100%;overflow:hidden'/>")
-          .appendTo(slotScroller);
+        slotContainer = $(
+          "<div style='position:relative;width:100%;overflow:hidden'/>"
+        ).appendTo(slotScroller);
 
-        slotSegmentContainer =
-          $("<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>")
-          .appendTo(slotContainer);
+        slotSegmentContainer = $(
+          "<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>"
+        ).appendTo(slotContainer);
 
         s =
           "<table class='fc-agenda-slots' style='width:100%' cellspacing='0'>" +
@@ -3235,30 +3135,33 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         for (i = 0; d < maxd; i++) {
           minutes = d.getMinutes();
           s +=
-            "<tr class='fc-slot" + i + ' ' + (!minutes ? '' : 'fc-minor') + "'>" +
-            "<th class='fc-agenda-axis " + headerClass + "'>" +
-            ((!slotNormal || !minutes) ? formatDate(d, opt('axisFormat')) : ' ') +
+            "<tr class='fc-slot" +
+            i +
+            " " +
+            (!minutes ? "" : "fc-minor") +
+            "'>" +
+            "<th class='fc-agenda-axis " +
+            headerClass +
+            "'>" +
+            (!slotNormal || !minutes ? formatDate(d, opt("axisFormat")) : " ") +
             "</th>" +
-            "<td class='" + contentClass + "'>" +
+            "<td class='" +
+            contentClass +
+            "'>" +
             "<div style='position:relative'> </div>" +
             "</td>" +
             "</tr>";
-          addMinutes(d, opt('slotMinutes'));
+          addMinutes(d, opt("slotMinutes"));
           slotCnt++;
         }
-        s +=
-          "</tbody>" +
-          "</table>";
+        s += "</tbody>" + "</table>";
         slotTable = $(s).appendTo(slotContainer);
 
-        slotBind(slotTable.find('td'));
+        slotBind(slotTable.find("td"));
       }
-
-
 
       /* Build Day Table
       -----------------------------------------------------------------------*/
-
 
       function buildDayTable() {
         var html = buildDayTableHTML();
@@ -3268,22 +3171,21 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
         dayTable = $(html).appendTo(element);
 
-        dayHead = dayTable.find('thead');
-        dayHeadCells = dayHead.find('th').slice(1, -1); // exclude gutter
-        dayBody = dayTable.find('tbody');
-        dayBodyCells = dayBody.find('td').slice(0, -1); // exclude gutter
-        dayBodyCellInners = dayBodyCells.find('> div');
-        dayBodyCellContentInners = dayBodyCells.find('.fc-day-content > div');
+        dayHead = dayTable.find("thead");
+        dayHeadCells = dayHead.find("th").slice(1, -1); // exclude gutter
+        dayBody = dayTable.find("tbody");
+        dayBodyCells = dayBody.find("td").slice(0, -1); // exclude gutter
+        dayBodyCellInners = dayBodyCells.find("> div");
+        dayBodyCellContentInners = dayBodyCells.find(".fc-day-content > div");
 
         dayBodyFirstCell = dayBodyCells.eq(0);
         dayBodyFirstCellStretcher = dayBodyCellInners.eq(0);
 
-        markFirstLast(dayHead.add(dayHead.find('tr')));
-        markFirstLast(dayBody.add(dayBody.find('tr')));
+        markFirstLast(dayHead.add(dayHead.find("tr")));
+        markFirstLast(dayBody.add(dayBody.find("tr")));
 
         // TODO: now that we rebuild the cells every time, we should call dayRender
       }
-
 
       function buildDayTableHTML() {
         var html =
@@ -3295,17 +3197,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return html;
       }
 
-
       function buildDayTableHeadHTML() {
         var headerClass = tm + "-widget-header";
         var date;
-        var html = '';
+        var html = "";
         var weekText;
         var col;
 
-        html +=
-          "<thead>" +
-          "<tr>";
+        html += "<thead>" + "<tr>";
 
         if (showWeekNumbers) {
           date = cellToDate(0, 0);
@@ -3316,7 +3215,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             weekText = weekNumberTitle + weekText;
           }
           html +=
-            "<th class='fc-agenda-axis fc-week-number " + headerClass + "'>" +
+            "<th class='fc-agenda-axis fc-week-number " +
+            headerClass +
+            "'>" +
             htmlEscape(weekText) +
             "</th>";
         } else {
@@ -3326,19 +3227,26 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         for (col = 0; col < colCnt; col++) {
           date = cellToDate(0, col);
           html +=
-            "<th class='fc-" + dayIDs[date.getDay()] + " fc-col" + col + ' ' + headerClass + "'>" +
+            "<th class='fc-" +
+            dayIDs[date.getDay()] +
+            " fc-col" +
+            col +
+            " " +
+            headerClass +
+            "'>" +
             htmlEscape(formatDate(date, colFormat)) +
             "</th>";
         }
 
         html +=
-          "<th class='fc-agenda-gutter " + headerClass + "'> </th>" +
+          "<th class='fc-agenda-gutter " +
+          headerClass +
+          "'> </th>" +
           "</tr>" +
           "</thead>";
 
         return html;
       }
-
 
       function buildDayTableBodyHTML() {
         var headerClass = tm + "-widget-header"; // TODO: make these when updateOptions() called
@@ -3349,37 +3257,37 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var cellsHTML;
         var cellHTML;
         var classNames;
-        var html = '';
+        var html = "";
 
         html +=
           "<tbody>" +
           "<tr>" +
-          "<th class='fc-agenda-axis " + headerClass + "'> </th>";
+          "<th class='fc-agenda-axis " +
+          headerClass +
+          "'> </th>";
 
-        cellsHTML = '';
+        cellsHTML = "";
 
         for (col = 0; col < colCnt; col++) {
-
           date = cellToDate(0, col);
 
           classNames = [
-            'fc-col' + col,
-            'fc-' + dayIDs[date.getDay()],
-            contentClass
+            "fc-col" + col,
+            "fc-" + dayIDs[date.getDay()],
+            contentClass,
           ];
           if (+date == +today) {
-            classNames.push(
-              tm + '-state-highlight',
-              'fc-today'
-            );
+            classNames.push(tm + "-state-highlight", "fc-today");
           } else if (date < today) {
-            classNames.push('fc-past');
+            classNames.push("fc-past");
           } else {
-            classNames.push('fc-future');
+            classNames.push("fc-future");
           }
 
           cellHTML =
-            "<td class='" + classNames.join(' ') + "'>" +
+            "<td class='" +
+            classNames.join(" ") +
+            "'>" +
             "<div>" +
             "<div class='fc-day-content'>" +
             "<div style='position:relative'> </div>" +
@@ -3392,21 +3300,19 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         html += cellsHTML;
         html +=
-          "<td class='fc-agenda-gutter " + contentClass + "'> </td>" +
+          "<td class='fc-agenda-gutter " +
+          contentClass +
+          "'> </td>" +
           "</tr>" +
           "</tbody>";
 
         return html;
       }
 
-
       // TODO: data-date on the cells
-
-
 
       /* Dimensions
       -----------------------------------------------------------------------*/
-
 
       function setHeight(height) {
         if (height === undefined) {
@@ -3417,51 +3323,50 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         var headHeight = dayBody.position().top;
         var allDayHeight = slotScroller.position().top; // including divider
-        var bodyHeight = Math.min( // total body height, including borders
+        var bodyHeight = Math.min(
+          // total body height, including borders
           height - headHeight, // when scrollbars
           slotTable.height() + allDayHeight + 1 // when no scrollbars. +1 for bottom border
         );
 
-        dayBodyFirstCellStretcher
-          .height(bodyHeight - vsides(dayBodyFirstCell));
+        dayBodyFirstCellStretcher.height(bodyHeight - vsides(dayBodyFirstCell));
 
-        slotLayer.css('top', headHeight);
+        slotLayer.css("top", headHeight);
 
         slotScroller.height(bodyHeight - allDayHeight - 1);
 
         // the stylesheet guarantees that the first row has no border.
         // this allows .height() to work well cross-browser.
-        slotHeight = slotTable.find('tr:first').height() + 1; // +1 for bottom border
+        slotHeight = slotTable.find("tr:first").height() + 1; // +1 for bottom border
 
-        snapRatio = opt('slotMinutes') / snapMinutes;
+        snapRatio = opt("slotMinutes") / snapMinutes;
         snapHeight = slotHeight / snapRatio;
       }
-
 
       function setWidth(width) {
         viewWidth = width;
         colPositions.clear();
         colContentPositions.clear();
 
-        var axisFirstCells = dayHead.find('th:first');
+        var axisFirstCells = dayHead.find("th:first");
         if (allDayTable) {
-          axisFirstCells = axisFirstCells.add(allDayTable.find('th:first'));
+          axisFirstCells = axisFirstCells.add(allDayTable.find("th:first"));
         }
-        axisFirstCells = axisFirstCells.add(slotTable.find('th:first'));
+        axisFirstCells = axisFirstCells.add(slotTable.find("th:first"));
 
         axisWidth = 0;
         setOuterWidth(
-          axisFirstCells
-          .width('')
-          .each(function (i, _cell) {
+          axisFirstCells.width("").each(function (i, _cell) {
             axisWidth = Math.max(axisWidth, $(_cell).outerWidth());
           }),
           axisWidth
         );
 
-        var gutterCells = dayTable.find('.fc-agenda-gutter');
+        var gutterCells = dayTable.find(".fc-agenda-gutter");
         if (allDayTable) {
-          gutterCells = gutterCells.add(allDayTable.find('th.fc-agenda-gutter'));
+          gutterCells = gutterCells.add(
+            allDayTable.find("th.fc-agenda-gutter")
+          );
         }
 
         var slotTableWidth = slotScroller[0].clientWidth; // needs to be done after axisWidth (for IE7)
@@ -3469,31 +3374,22 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         gutterWidth = slotScroller.width() - slotTableWidth;
         if (gutterWidth) {
           setOuterWidth(gutterCells, gutterWidth);
-          gutterCells
-            .show()
-            .prev()
-            .removeClass('fc-last');
+          gutterCells.show().prev().removeClass("fc-last");
         } else {
-          gutterCells
-            .hide()
-            .prev()
-            .addClass('fc-last');
+          gutterCells.hide().prev().addClass("fc-last");
         }
 
         colWidth = Math.floor((slotTableWidth - axisWidth) / colCnt);
         setOuterWidth(dayHeadCells.slice(0, -1), colWidth);
       }
 
-
-
       /* Scrolling
       -----------------------------------------------------------------------*/
-
 
       function resetScroll() {
         var d0 = zeroDate();
         var scrollDate = cloneDate(d0);
-        scrollDate.setHours(opt('firstHour'));
+        scrollDate.setHours(opt("firstHour"));
         var top = timePosition(d0, scrollDate) + 1; // +1 for the border
         function scroll() {
           slotScroller.scrollTop(top);
@@ -3502,54 +3398,55 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         setTimeout(scroll, 0); // overrides any previous scroll state made by the browser
       }
 
-
-      function afterRender() { // after the view has been freshly rendered and sized
+      function afterRender() {
+        // after the view has been freshly rendered and sized
         resetScroll();
       }
-
-
 
       /* Slot/Day clicking and binding
       -----------------------------------------------------------------------*/
 
-
       function dayBind(cells) {
-        cells.click(slotClick)
-          .mousedown(daySelectionMousedown);
+        cells.click(slotClick).mousedown(daySelectionMousedown);
       }
-
 
       function slotBind(cells) {
-        cells.click(slotClick)
-          .mousedown(slotSelectionMousedown);
+        cells.click(slotClick).mousedown(slotSelectionMousedown);
       }
 
-
       function slotClick(ev) {
-        if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
-          var col = Math.min(colCnt - 1, Math.floor((ev.pageX - dayTable.offset().left - axisWidth) / colWidth));
+        if (!opt("selectable")) {
+          // if selectable, SelectionManager will worry about dayClick
+          var col = Math.min(
+            colCnt - 1,
+            Math.floor(
+              (ev.pageX - dayTable.offset().left - axisWidth) / colWidth
+            )
+          );
           var date = cellToDate(0, col);
           var rowMatch = this.parentNode.className.match(/fc-slot(\d+)/); // TODO: maybe use data
           if (rowMatch) {
-            var mins = parseInt(rowMatch[1]) * opt('slotMinutes');
+            var mins = parseInt(rowMatch[1]) * opt("slotMinutes");
             var hours = Math.floor(mins / 60);
             date.setHours(hours);
-            date.setMinutes(mins % 60 + minMinute);
-            trigger('dayClick', dayBodyCells[col], date, false, ev);
+            date.setMinutes((mins % 60) + minMinute);
+            trigger("dayClick", dayBodyCells[col], date, false, ev);
           } else {
-            trigger('dayClick', dayBodyCells[col], date, true, ev);
+            trigger("dayClick", dayBodyCells[col], date, true, ev);
           }
         }
       }
-
-
 
       /* Semi-transparent Overlay Helpers
       -----------------------------------------------------*/
       // TODO: should be consolidated with BasicView's methods
 
-
-      function renderDayOverlay(overlayStart, overlayEnd, refreshCoordinateGrid) { // overlayEnd is exclusive
+      function renderDayOverlay(
+        overlayStart,
+        overlayEnd,
+        refreshCoordinateGrid
+      ) {
+        // overlayEnd is exclusive
 
         if (refreshCoordinateGrid) {
           coordinateGrid.build();
@@ -3570,12 +3467,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-      function renderCellOverlay(row0, col0, row1, col1) { // only for all-day?
+      function renderCellOverlay(row0, col0, row1, col1) {
+        // only for all-day?
         var rect = coordinateGrid.rect(row0, col0, row1, col1, slotLayer);
         return renderOverlay(rect, slotLayer);
       }
-
 
       function renderSlotOverlay(overlayStart, overlayEnd) {
         for (var i = 0; i < colCnt; i++) {
@@ -3589,18 +3485,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             var bottom = timePosition(dayStart, stretchEnd);
             rect.top = top;
             rect.height = bottom - top;
-            slotBind(
-              renderOverlay(rect, slotContainer)
-            );
+            slotBind(renderOverlay(rect, slotContainer));
           }
         }
       }
 
-
-
       /* Coordinate Utilities
       -----------------------------------------------------------------------------*/
-
 
       coordinateGrid = new CoordinateGrid(function (rows, cols) {
         var e, n, p;
@@ -3614,7 +3505,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           cols[i] = p;
         });
         p[1] = n + e.outerWidth();
-        if (opt('allDaySlot')) {
+        if (opt("allDaySlot")) {
           e = allDayRow;
           n = e.offset().top;
           rows[0] = [n, n + e.outerHeight()];
@@ -3626,14 +3517,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         function constrain(n) {
           return Math.max(slotScrollerTop, Math.min(slotScrollerBottom, n));
         }
-        for (var i = 0; i < slotCnt * snapRatio; i++) { // adapt slot count to increased/decreased selection slot count
+        for (var i = 0; i < slotCnt * snapRatio; i++) {
+          // adapt slot count to increased/decreased selection slot count
           rows.push([
             constrain(slotTableTop + snapHeight * i),
-            constrain(slotTableTop + snapHeight * (i + 1))
+            constrain(slotTableTop + snapHeight * (i + 1)),
           ]);
         }
       });
-
 
       hoverListener = new HoverListener(coordinateGrid);
 
@@ -3645,36 +3536,31 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return dayBodyCellContentInners.eq(col);
       });
 
-
       function colLeft(col) {
         return colPositions.left(col);
       }
-
 
       function colContentLeft(col) {
         return colContentPositions.left(col);
       }
 
-
       function colRight(col) {
         return colPositions.right(col);
       }
-
 
       function colContentRight(col) {
         return colContentPositions.right(col);
       }
 
-
       function getIsCellAllDay(cell) {
-        return opt('allDaySlot') && !cell.row;
+        return opt("allDaySlot") && !cell.row;
       }
 
-
-      function realCellToDate(cell) { // ugh "real" ... but blame it on our abuse of the "cell" system
+      function realCellToDate(cell) {
+        // ugh "real" ... but blame it on our abuse of the "cell" system
         var d = cellToDate(0, cell.col);
         var slotIndex = cell.row;
-        if (opt('allDaySlot')) {
+        if (opt("allDaySlot")) {
           slotIndex--;
         }
         if (slotIndex >= 0) {
@@ -3683,9 +3569,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return d;
       }
 
-
       // get the Y coordinate of the given time on the given day (both Date objects)
-      function timePosition(day, time) { // both date objects. day holds 00:00 of current day
+      function timePosition(day, time) {
+        // both date objects. day holds 00:00 of current day
         day = cloneDate(day, true);
         if (time < addMinutes(cloneDate(day), minMinute)) {
           return 0;
@@ -3693,53 +3579,53 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         if (time >= addMinutes(cloneDate(day), maxMinute)) {
           return slotTable.height();
         }
-        var slotMinutes = opt('slotMinutes'),
+        var slotMinutes = opt("slotMinutes"),
           minutes = time.getHours() * 60 + time.getMinutes() - minMinute,
           slotI = Math.floor(minutes / slotMinutes),
           slotTop = slotTopCache[slotI];
         if (slotTop === undefined) {
-          slotTop = slotTopCache[slotI] =
-            slotTable.find('tr').eq(slotI).find('td div')[0].offsetTop;
+          slotTop = slotTopCache[slotI] = slotTable
+            .find("tr")
+            .eq(slotI)
+            .find("td div")[0].offsetTop;
           // .eq() is faster than ":eq()" selector
           // [0].offsetTop is faster than .position().top (do we really need this optimization?)
           // a better optimization would be to cache all these divs
         }
-        return Math.max(0, Math.round(
-          slotTop - 1 + slotHeight * ((minutes % slotMinutes) / slotMinutes)
-        ));
+        return Math.max(
+          0,
+          Math.round(
+            slotTop - 1 + slotHeight * ((minutes % slotMinutes) / slotMinutes)
+          )
+        );
       }
-
 
       function getAllDayRow(index) {
         return allDayRow;
       }
-
 
       function defaultEventEnd(event) {
         var start = cloneDate(event.start);
         if (event.allDay) {
           return start;
         }
-        return addMinutes(start, opt('defaultEventMinutes'));
+        return addMinutes(start, opt("defaultEventMinutes"));
       }
-
-
 
       /* Selection
       ---------------------------------------------------------------------------------*/
-
 
       function defaultSelectionEnd(startDate, allDay) {
         if (allDay) {
           return cloneDate(startDate);
         }
-        return addMinutes(cloneDate(startDate), opt('slotMinutes'));
+        return addMinutes(cloneDate(startDate), opt("slotMinutes"));
       }
 
-
-      function renderSelection(startDate, endDate, allDay) { // only for all-day
+      function renderSelection(startDate, endDate, allDay) {
+        // only for all-day
         if (allDay) {
-          if (opt('allDaySlot')) {
+          if (opt("allDaySlot")) {
             renderDayOverlay(startDate, addDays(cloneDate(endDate), 1), true);
           }
         } else {
@@ -3747,17 +3633,18 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function renderSlotSelection(startDate, endDate) {
-        var helperOption = opt('selectHelper');
+        var helperOption = opt("selectHelper");
         coordinateGrid.build();
         if (helperOption) {
           var col = dateToCell(startDate).col;
-          if (col >= 0 && col < colCnt) { // only works when times are on same day
+          if (col >= 0 && col < colCnt) {
+            // only works when times are on same day
             var rect = coordinateGrid.rect(0, col, 0, col, slotContainer); // only for horizontal coords
             var top = timePosition(startDate, startDate);
             var bottom = timePosition(startDate, endDate);
-            if (bottom > top) { // protect against selections that are entirely before or after visible range
+            if (bottom > top) {
+              // protect against selections that are entirely before or after visible range
               rect.top = top;
               rect.height = bottom - top;
               rect.left += 2;
@@ -3765,7 +3652,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               if ($.isFunction(helperOption)) {
                 var helperRes = helperOption(startDate, endDate);
                 if (helperRes) {
-                  rect.position = 'absolute';
+                  rect.position = "absolute";
                   selectionHelper = $(helperRes)
                     .css(rect)
                     .appendTo(slotContainer);
@@ -3773,16 +3660,19 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               } else {
                 rect.isStart = true; // conside rect a "seg" now
                 rect.isEnd = true; //
-                selectionHelper = $(slotSegHtml({
-                    title: '',
-                    start: startDate,
-                    end: endDate,
-                    className: ['fc-select-helper'],
-                    editable: false
-                  },
-                  rect
-                ));
-                selectionHelper.css('opacity', opt('dragOpacity'));
+                selectionHelper = $(
+                  slotSegHtml(
+                    {
+                      title: "",
+                      start: startDate,
+                      end: endDate,
+                      className: ["fc-select-helper"],
+                      editable: false,
+                    },
+                    rect
+                  )
+                );
+                selectionHelper.css("opacity", opt("dragOpacity"));
               }
               if (selectionHelper) {
                 slotBind(selectionHelper);
@@ -3797,7 +3687,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function clearSelection() {
         clearOverlays();
         if (selectionHelper) {
@@ -3806,9 +3695,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function slotSelectionMousedown(ev) {
-        if (ev.which == 1 && opt('selectable')) { // ev.which==1 means left mouse button
+        if (ev.which == 1 && opt("selectable")) {
+          // ev.which==1 means left mouse button
           unselect(ev);
           var dates;
           hoverListener.start(function (cell, origCell) {
@@ -3818,16 +3707,16 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               var d2 = realCellToDate(cell);
               dates = [
                 d1,
-                addMinutes(cloneDate(d1), snapMinutes), // calculate minutes depending on selection slot minutes 
+                addMinutes(cloneDate(d1), snapMinutes), // calculate minutes depending on selection slot minutes
                 d2,
-                addMinutes(cloneDate(d2), snapMinutes)
+                addMinutes(cloneDate(d2), snapMinutes),
               ].sort(dateCompare);
               renderSlotSelection(dates[0], dates[3]);
             } else {
               dates = null;
             }
           }, ev);
-          $(document).one('mouseup', function (ev) {
+          $(document).one("mouseup", function (ev) {
             hoverListener.stop();
             if (dates) {
               if (+dates[0] == +dates[1]) {
@@ -3839,16 +3728,18 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function reportDayClick(date, allDay, ev) {
-        trigger('dayClick', dayBodyCells[dateToCell(date).col], date, allDay, ev);
+        trigger(
+          "dayClick",
+          dayBodyCells[dateToCell(date).col],
+          date,
+          allDay,
+          ev
+        );
       }
-
-
 
       /* External Dragging
       --------------------------------------------------------------------------------*/
-
 
       function dragStart(_dragElement, ev, ui) {
         hoverListener.start(function (cell) {
@@ -3858,36 +3749,36 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               renderCellOverlay(cell.row, cell.col, cell.row, cell.col);
             } else {
               var d1 = realCellToDate(cell);
-              var d2 = addMinutes(cloneDate(d1), opt('defaultEventMinutes'));
+              var d2 = addMinutes(cloneDate(d1), opt("defaultEventMinutes"));
               renderSlotOverlay(d1, d2);
             }
           }
         }, ev);
       }
 
-
       function dragStop(_dragElement, ev, ui) {
         var cell = hoverListener.stop();
         clearOverlays();
         if (cell) {
-          trigger('drop', _dragElement, realCellToDate(cell), getIsCellAllDay(cell), ev, ui);
+          trigger(
+            "drop",
+            _dragElement,
+            realCellToDate(cell),
+            getIsCellAllDay(cell),
+            ev,
+            ui
+          );
         }
       }
-
-
     }
-
-    ;;
 
     function AgendaEventRenderer() {
       var t = this;
-
 
       // exports
       t.renderEvents = renderEvents;
       t.clearEvents = clearEvents;
       t.slotSegHtml = slotSegHtml;
-
 
       // imports
       DayEventRenderer.call(t);
@@ -3925,18 +3816,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var formatDate = calendar.formatDate;
       var formatDates = calendar.formatDates;
 
-
       // overrides
       t.draggableDayEvent = draggableDayEvent;
-
-
 
       /* Rendering
       ----------------------------------------------------------------------------*/
 
-
       function renderEvents(events, modifiedEventId) {
-        var i, len = events.length,
+        var i,
+          len = events.length,
           dayEvents = [],
           slotEvents = [];
         for (i = 0; i < len; i++) {
@@ -3947,7 +3835,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           }
         }
 
-        if (opt('allDaySlot')) {
+        if (opt("allDaySlot")) {
           renderDayEvents(dayEvents, modifiedEventId);
           setHeight(); // no params means set to viewHeight
         }
@@ -3955,12 +3843,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         renderSlotSegs(compileSlotSegs(slotEvents), modifiedEventId);
       }
 
-
       function clearEvents() {
         getDaySegmentContainer().empty();
         getSlotSegmentContainer().empty();
       }
-
 
       function compileSlotSegs(events) {
         var colCnt = getColCnt(),
@@ -3969,12 +3855,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           d,
           visEventEnds = $.map(events, slotEventEnd),
           i,
-          j, seg,
+          j,
+          seg,
           colSegs,
           segs = [];
 
         for (i = 0; i < colCnt; i++) {
-
           d = cellToDate(0, i);
           addMinutes(d, minMinute);
 
@@ -3997,14 +3883,17 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return segs;
       }
 
-
       function sliceSegs(events, visEventEnds, start, end) {
         var segs = [],
-          i, len = events.length,
+          i,
+          len = events.length,
           event,
-          eventStart, eventEnd,
-          segStart, segEnd,
-          isStart, isEnd;
+          eventStart,
+          eventEnd,
+          segStart,
+          segEnd,
+          isStart,
+          isEnd;
         for (i = 0; i < len; i++) {
           event = events[i];
           eventStart = event.start;
@@ -4029,30 +3918,28 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               start: segStart,
               end: segEnd,
               isStart: isStart,
-              isEnd: isEnd
+              isEnd: isEnd,
             });
           }
         }
         return segs.sort(compareSlotSegs);
       }
 
-
       function slotEventEnd(event) {
         if (event.end) {
           return cloneDate(event.end);
         } else {
-          return addMinutes(cloneDate(event.start), opt('defaultEventMinutes'));
+          return addMinutes(cloneDate(event.start), opt("defaultEventMinutes"));
         }
       }
-
 
       // renders events in the 'time slots' at the bottom
       // TODO: when we refactor this, when user returns `false` eventRender, don't have empty space
       // TODO: refactor will include using pixels to detect collisions instead of dates (handy for seg cmp)
 
       function renderSlotSegs(segs, modifiedEventId) {
-
-        var i, segCnt = segs.length,
+        var i,
+          segCnt = segs.length,
           seg,
           event,
           top,
@@ -4063,14 +3950,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           width,
           left,
           right,
-          html = '',
+          html = "",
           eventElements,
           eventElement,
           triggerRes,
           titleElement,
           height,
           slotSegmentContainer = getSlotSegmentContainer(),
-          isRTL = opt('isRTL');
+          isRTL = opt("isRTL");
 
         // calculate position/dimensions, create html
         for (i = 0; i < segCnt; i++) {
@@ -4084,16 +3971,16 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
           // shave off space on right near scrollbars (2.5%)
           // TODO: move this to CSS somehow
-          columnRight -= columnWidth * .025;
+          columnRight -= columnWidth * 0.025;
           columnWidth = columnRight - columnLeft;
 
           width = columnWidth * (seg.forwardCoord - seg.backwardCoord);
 
-          if (opt('slotEventOverlap')) {
+          if (opt("slotEventOverlap")) {
             // double the width while making sure resize handle is visible
             // (assumed to be 20px wide)
             width = Math.max(
-              (width - (20 / 2)) * 2,
+              (width - 20 / 2) * 2,
               width // narrow columns will want to make the segment smaller than
               // the natural width. don't allow it
             );
@@ -4127,7 +4014,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           seg = segs[i];
           event = seg.event;
           eventElement = $(eventElements[i]); // faster than eq()
-          triggerRes = trigger('eventRender', event, event, eventElement);
+          triggerRes = trigger("eventRender", event, event, eventElement);
           if (triggerRes === false) {
             eventElement.remove();
           } else {
@@ -4135,9 +4022,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               eventElement.remove();
               eventElement = $(triggerRes)
                 .css({
-                  position: 'absolute',
+                  position: "absolute",
                   top: seg.top,
-                  left: seg.left
+                  left: seg.left,
                 })
                 .appendTo(slotSegmentContainer);
             }
@@ -4156,10 +4043,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         // record event sides and title positions
         for (i = 0; i < segCnt; i++) {
           seg = segs[i];
-          if (eventElement = seg.element) {
+          if ((eventElement = seg.element)) {
             seg.vsides = vsides(eventElement, true);
             seg.hsides = hsides(eventElement, true);
-            titleElement = eventElement.find('.fc-event-title');
+            titleElement = eventElement.find(".fc-event-title");
             if (titleElement.length) {
               seg.contentTop = titleElement[0].offsetTop;
             }
@@ -4169,38 +4056,41 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         // set all positions/dimensions at once
         for (i = 0; i < segCnt; i++) {
           seg = segs[i];
-          if (eventElement = seg.element) {
-            eventElement[0].style.width = Math.max(0, seg.outerWidth - seg.hsides) + 'px';
+          if ((eventElement = seg.element)) {
+            eventElement[0].style.width =
+              Math.max(0, seg.outerWidth - seg.hsides) + "px";
             height = Math.max(0, seg.outerHeight - seg.vsides);
-            eventElement[0].style.height = height + 'px';
+            eventElement[0].style.height = height + "px";
             event = seg.event;
             if (seg.contentTop !== undefined && height - seg.contentTop < 10) {
               // not enough room for title, put it in the time (TODO: maybe make both display:inline instead)
-              eventElement.find('div.fc-event-time')
-                .text(formatDate(event.start, opt('timeFormat')) + ' - ' + event.title);
-              eventElement.find('div.fc-event-title')
-                .remove();
+              eventElement
+                .find("div.fc-event-time")
+                .text(
+                  formatDate(event.start, opt("timeFormat")) +
+                    " - " +
+                    event.title
+                );
+              eventElement.find("div.fc-event-title").remove();
             }
-            trigger('eventAfterRender', event, event, eventElement);
+            trigger("eventAfterRender", event, event, eventElement);
           }
         }
-
       }
-
 
       function slotSegHtml(event, seg) {
         var html = "<";
         var url = event.url;
         var skinCss = getSkinCss(event, opt);
-        var classes = ['fc-event', 'fc-event-vert'];
+        var classes = ["fc-event", "fc-event-vert"];
         if (isEventDraggable(event)) {
-          classes.push('fc-event-draggable');
+          classes.push("fc-event-draggable");
         }
         if (seg.isStart) {
-          classes.push('fc-event-start');
+          classes.push("fc-event-start");
         }
         if (seg.isEnd) {
-          classes.push('fc-event-end');
+          classes.push("fc-event-end");
         }
         classes = classes.concat(event.className);
         if (event.source) {
@@ -4212,36 +4102,39 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           html += "div";
         }
         html +=
-          " class='" + classes.join(' ') + "'" +
+          " class='" +
+          classes.join(" ") +
+          "'" +
           " style=" +
           "'" +
           "position:absolute;" +
-          "top:" + seg.top + "px;" +
-          "left:" + seg.left + "px;" +
+          "top:" +
+          seg.top +
+          "px;" +
+          "left:" +
+          seg.left +
+          "px;" +
           skinCss +
           "'" +
           ">" +
           "<div class='fc-event-inner'>" +
           "<div class='fc-event-time'>" +
-          htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
+          htmlEscape(formatDates(event.start, event.end, opt("timeFormat"))) +
           "</div>" +
           "<div class='fc-event-title'>" +
-          htmlEscape(event.title || '') +
+          htmlEscape(event.title || "") +
           "</div>" +
           "</div>" +
           "<div class='fc-event-bg'></div>";
         if (seg.isEnd && isEventResizable(event)) {
-          html +=
-            "<div class='ui-resizable-handle ui-resizable-s'>=</div>";
+          html += "<div class='ui-resizable-handle ui-resizable-s'>=</div>";
         }
-        html +=
-          "</" + (url ? "a" : "div") + ">";
+        html += "</" + (url ? "a" : "div") + ">";
         return html;
       }
 
-
       function bindSlotSeg(event, eventElement, seg) {
-        var timeElement = eventElement.find('div.fc-event-time');
+        var timeElement = eventElement.find("div.fc-event-time");
         if (isEventDraggable(event)) {
           draggableSlotEvent(event, eventElement, timeElement);
         }
@@ -4251,11 +4144,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         eventElementHandlers(event, eventElement);
       }
 
-
-
       /* Dragging
       -----------------------------------------------------------------------------------*/
-
 
       // when event starts out FULL-DAY
       // overrides DayEventRenderer's version because it needs to account for dragging elements
@@ -4273,88 +4163,98 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var snapMinutes = getSnapMinutes();
         var minMinute = getMinMinute();
         eventElement.draggable({
-          opacity: opt('dragOpacity', 'month'), // use whatever the month view was using
-          revertDuration: opt('dragRevertDuration'),
+          opacity: opt("dragOpacity", "month"), // use whatever the month view was using
+          revertDuration: opt("dragRevertDuration"),
           start: function (ev, ui) {
-            trigger('eventDragStart', eventElement, event, ev, ui);
+            trigger("eventDragStart", eventElement, event, ev, ui);
             hideEvents(event, eventElement);
             origWidth = eventElement.width();
-            hoverListener.start(function (cell, origCell) {
-              clearOverlays();
-              if (cell) {
-                revert = false;
-                var origDate = cellToDate(0, origCell.col);
-                var date = cellToDate(0, cell.col);
-                dayDelta = dayDiff(date, origDate);
-                if (!cell.row) {
-                  // on full-days
-                  renderDayOverlay(
-                    addDays(cloneDate(event.start), dayDelta),
-                    addDays(exclEndDay(event), dayDelta)
-                  );
-                  resetElement();
-                } else {
-                  // mouse is over bottom slots
-                  if (isStart) {
-                    if (allDay) {
-                      // convert event to temporary slot-event
-                      eventElement.width(colWidth - 10); // don't use entire width
-                      setOuterHeight(
-                        eventElement,
-                        snapHeight * Math.round(
-                          (event.end ? ((event.end - event.start) / MINUTE_MS) : opt('defaultEventMinutes')) /
-                          snapMinutes
-                        )
-                      );
-                      eventElement.draggable('option', 'grid', [colWidth, 1]);
-                      allDay = false;
-                    }
+            hoverListener.start(
+              function (cell, origCell) {
+                clearOverlays();
+                if (cell) {
+                  revert = false;
+                  var origDate = cellToDate(0, origCell.col);
+                  var date = cellToDate(0, cell.col);
+                  dayDelta = dayDiff(date, origDate);
+                  if (!cell.row) {
+                    // on full-days
+                    renderDayOverlay(
+                      addDays(cloneDate(event.start), dayDelta),
+                      addDays(exclEndDay(event), dayDelta)
+                    );
+                    resetElement();
                   } else {
-                    revert = true;
+                    // mouse is over bottom slots
+                    if (isStart) {
+                      if (allDay) {
+                        // convert event to temporary slot-event
+                        eventElement.width(colWidth - 10); // don't use entire width
+                        setOuterHeight(
+                          eventElement,
+                          snapHeight *
+                            Math.round(
+                              (event.end
+                                ? (event.end - event.start) / MINUTE_MS
+                                : opt("defaultEventMinutes")) / snapMinutes
+                            )
+                        );
+                        eventElement.draggable("option", "grid", [colWidth, 1]);
+                        allDay = false;
+                      }
+                    } else {
+                      revert = true;
+                    }
                   }
+                  revert = revert || (allDay && !dayDelta);
+                } else {
+                  resetElement();
+                  revert = true;
                 }
-                revert = revert || (allDay && !dayDelta);
-              } else {
-                resetElement();
-                revert = true;
-              }
-              eventElement.draggable('option', 'revert', revert);
-            }, ev, 'drag');
+                eventElement.draggable("option", "revert", revert);
+              },
+              ev,
+              "drag"
+            );
           },
           stop: function (ev, ui) {
             hoverListener.stop();
             clearOverlays();
-            trigger('eventDragStop', eventElement, event, ev, ui);
+            trigger("eventDragStop", eventElement, event, ev, ui);
             if (revert) {
               // hasn't moved or is out of bounds (draggable has already reverted)
               resetElement();
-              eventElement.css('filter', ''); // clear IE opacity side-effects
+              eventElement.css("filter", ""); // clear IE opacity side-effects
               showEvents(event, eventElement);
             } else {
               // changed!
               var minuteDelta = 0;
               if (!allDay) {
-                minuteDelta = Math.round((eventElement.offset().top - getSlotContainer().offset().top) / snapHeight) *
-                  snapMinutes +
+                minuteDelta =
+                  Math.round(
+                    (eventElement.offset().top -
+                      getSlotContainer().offset().top) /
+                      snapHeight
+                  ) *
+                    snapMinutes +
                   minMinute -
                   (event.start.getHours() * 60 + event.start.getMinutes());
               }
               eventDrop(this, event, dayDelta, minuteDelta, allDay, ev, ui);
             }
-          }
+          },
         });
 
         function resetElement() {
           if (!allDay) {
             eventElement
               .width(origWidth)
-              .height('')
-              .draggable('option', 'grid', null);
+              .height("")
+              .draggable("option", "grid", null);
             allDay = true;
           }
         }
       }
-
 
       // when event starts out IN TIMESLOTS
 
@@ -4377,12 +4277,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         eventElement.draggable({
           scroll: false,
           grid: [colWidth, snapHeight],
-          axis: colCnt == 1 ? 'y' : false,
-          opacity: opt('dragOpacity'),
-          revertDuration: opt('dragRevertDuration'),
+          axis: colCnt == 1 ? "y" : false,
+          opacity: opt("dragOpacity"),
+          revertDuration: opt("dragRevertDuration"),
           start: function (ev, ui) {
-
-            trigger('eventDragStart', eventElement, event, ev, ui);
+            trigger("eventDragStart", eventElement, event, ev, ui);
             hideEvents(event, eventElement);
 
             coordinateGrid.build();
@@ -4395,10 +4294,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             colDelta = prevColDelta = 0;
             dayDelta = 0;
             minuteDelta = prevMinuteDelta = 0;
-
           },
           drag: function (ev, ui) {
-
             // NOTE: this `cell` value is only useful for determining in-bounds and all-day.
             // Bad for anything else due to the discrepancy between the mouse position and the
             // element position while snapping. (problem revealed in PR #55)
@@ -4413,7 +4310,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               isAllDay = getIsCellAllDay(cell);
 
               // calculate column delta
-              colDelta = Math.round((ui.position.left - origPosition.left) / colWidth);
+              colDelta = Math.round(
+                (ui.position.left - origPosition.left) / colWidth
+              );
               if (colDelta != prevColDelta) {
                 // calculate the day delta based off of the original clicked column and the column delta
                 var origDate = cellToDate(0, origCell.col);
@@ -4426,7 +4325,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
               // calculate minute delta (only if over slots)
               if (!isAllDay) {
-                minuteDelta = Math.round((ui.position.top - origPosition.top) / snapHeight) * snapMinutes;
+                minuteDelta =
+                  Math.round(
+                    (ui.position.top - origPosition.top) / snapHeight
+                  ) * snapMinutes;
               }
             }
 
@@ -4437,7 +4339,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               colDelta != prevColDelta ||
               minuteDelta != prevMinuteDelta
             ) {
-
               updateUI();
 
               // update previous states for next time
@@ -4448,17 +4349,25 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             }
 
             // if out-of-bounds, revert when done, and vice versa.
-            eventElement.draggable('option', 'revert', !isInBounds);
-
+            eventElement.draggable("option", "revert", !isInBounds);
           },
           stop: function (ev, ui) {
-
             clearOverlays();
-            trigger('eventDragStop', eventElement, event, ev, ui);
+            trigger("eventDragStop", eventElement, event, ev, ui);
 
-            if (isInBounds && (isAllDay || dayDelta || minuteDelta)) { // changed!
-              eventDrop(this, event, dayDelta, isAllDay ? 0 : minuteDelta, isAllDay, ev, ui);
-            } else { // either no change or out-of-bounds (draggable has already reverted)
+            if (isInBounds && (isAllDay || dayDelta || minuteDelta)) {
+              // changed!
+              eventDrop(
+                this,
+                event,
+                dayDelta,
+                isAllDay ? 0 : minuteDelta,
+                isAllDay,
+                ev,
+                ui
+              );
+            } else {
+              // either no change or out-of-bounds (draggable has already reverted)
 
               // reset states for next time, and for updateUI()
               isInBounds = true;
@@ -4468,7 +4377,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               minuteDelta = 0;
 
               updateUI();
-              eventElement.css('filter', ''); // clear IE opacity side-effects
+              eventElement.css("filter", ""); // clear IE opacity side-effects
 
               // sometimes fast drags make event revert to wrong position, so reset.
               // also, if we dragged the element out of the area because of snapping,
@@ -4477,7 +4386,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
               showEvents(event, eventElement);
             }
-          }
+          },
         });
 
         function updateUI() {
@@ -4485,15 +4394,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           if (isInBounds) {
             if (isAllDay) {
               timeElement.hide();
-              eventElement.draggable('option', 'grid', null); // disable grid snapping
+              eventElement.draggable("option", "grid", null); // disable grid snapping
               renderDayOverlay(
                 addDays(cloneDate(event.start), dayDelta),
                 addDays(exclEndDay(event), dayDelta)
               );
             } else {
               updateTimeText(minuteDelta);
-              timeElement.css('display', ''); // show() was causing display=inline
-              eventElement.draggable('option', 'grid', [colWidth, snapHeight]); // re-enable grid snapping
+              timeElement.css("display", ""); // show() was causing display=inline
+              eventElement.draggable("option", "grid", [colWidth, snapHeight]); // re-enable grid snapping
             }
           }
         }
@@ -4504,16 +4413,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           if (event.end) {
             newEnd = addMinutes(cloneDate(event.end), minuteDelta);
           }
-          timeElement.text(formatDates(newStart, newEnd, opt('timeFormat')));
+          timeElement.text(formatDates(newStart, newEnd, opt("timeFormat")));
         }
-
       }
-
-
 
       /* Resizing
       --------------------------------------------------------------------------------------*/
-
 
       function resizableSlotEvent(event, eventElement, timeElement) {
         var snapDelta, prevSnapDelta;
@@ -4521,49 +4426,49 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var snapMinutes = getSnapMinutes();
         eventElement.resizable({
           handles: {
-            s: '.ui-resizable-handle'
+            s: ".ui-resizable-handle",
           },
           grid: snapHeight,
           start: function (ev, ui) {
             snapDelta = prevSnapDelta = 0;
             hideEvents(event, eventElement);
-            trigger('eventResizeStart', this, event, ev, ui);
+            trigger("eventResizeStart", this, event, ev, ui);
           },
           resize: function (ev, ui) {
             // don't rely on ui.size.height, doesn't take grid into account
-            snapDelta = Math.round((Math.max(snapHeight, eventElement.height()) - ui.originalSize.height) / snapHeight);
+            snapDelta = Math.round(
+              (Math.max(snapHeight, eventElement.height()) -
+                ui.originalSize.height) /
+                snapHeight
+            );
             if (snapDelta != prevSnapDelta) {
               timeElement.text(
                 formatDates(
                   event.start,
-                  (!snapDelta && !event.end) ? null : // no change, so don't display time range
-                  addMinutes(eventEnd(event), snapMinutes * snapDelta),
-                  opt('timeFormat')
+                  !snapDelta && !event.end
+                    ? null // no change, so don't display time range
+                    : addMinutes(eventEnd(event), snapMinutes * snapDelta),
+                  opt("timeFormat")
                 )
               );
               prevSnapDelta = snapDelta;
             }
           },
           stop: function (ev, ui) {
-            trigger('eventResizeStop', this, event, ev, ui);
+            trigger("eventResizeStop", this, event, ev, ui);
             if (snapDelta) {
               eventResize(this, event, 0, snapMinutes * snapDelta, ev, ui);
             } else {
               showEvents(event, eventElement);
               // BUG: if event was really short, need to put title back in span
             }
-          }
+          },
         });
       }
-
-
     }
-
-
 
     /* Agenda Event Segment Utilities
     -----------------------------------------------------------------------------*/
-
 
     // Sets the seg.backwardCoord and seg.forwardCoord on each segment and returns a new
     // list in the order they should be placed into the DOM (an implicit z-index).
@@ -4575,7 +4480,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       computeForwardSlotSegs(levels);
 
       if (level0) {
-
         for (i = 0; i < level0.length; i++) {
           computeSlotSegPressures(level0[i]);
         }
@@ -4587,7 +4491,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
       return flattenSlotSegLevels(levels);
     }
-
 
     // Builds an array of segments "levels". The first level will be the leftmost tier of segments
     // if the calendar is left-to-right, or the rightmost if the calendar is right-to-left.
@@ -4612,7 +4515,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return levels;
     }
 
-
     // For every segment, figure out the other segments that are in subsequent
     // levels that also occupy the same vertical space. Accumulate in seg.forwardSegs
     function computeForwardSlotSegs(levels) {
@@ -4634,7 +4536,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     // Figure out which path forward (via seg.forwardSegs) results in the longest path until
     // the furthest edge is reached. The number of segments in this path will be seg.forwardPressure
     function computeSlotSegPressures(seg) {
@@ -4642,7 +4543,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var forwardPressure = 0;
       var i, forwardSeg;
 
-      if (seg.forwardPressure === undefined) { // not already computed
+      if (seg.forwardPressure === undefined) {
+        // not already computed
 
         for (i = 0; i < forwardSegs.length; i++) {
           forwardSeg = forwardSegs[i];
@@ -4662,7 +4564,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     // Calculate seg.forwardCoord and seg.backwardCoord for the segment, where both values range
     // from 0 to 1. If the calendar is left-to-right, the seg.backwardCoord maps to "left" and
     // seg.forwardCoord maps to "right" (via percentage). Vice-versa if the calendar is right-to-left.
@@ -4671,31 +4572,39 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
     // who's width is unknown until an edge has been hit. `seriesBackwardPressure` is the number of
     // segments behind this one in the current series, and `seriesBackwardCoord` is the starting
     // coordinate of the first segment in the series.
-    function computeSlotSegCoords(seg, seriesBackwardPressure, seriesBackwardCoord) {
+    function computeSlotSegCoords(
+      seg,
+      seriesBackwardPressure,
+      seriesBackwardCoord
+    ) {
       var forwardSegs = seg.forwardSegs;
       var i;
 
-      if (seg.forwardCoord === undefined) { // not already computed
+      if (seg.forwardCoord === undefined) {
+        // not already computed
 
         if (!forwardSegs.length) {
-
           // if there are no forward segments, this segment should butt up against the edge
           seg.forwardCoord = 1;
         } else {
-
           // sort highest pressure first
           forwardSegs.sort(compareForwardSlotSegs);
 
           // this segment's forwardCoord will be calculated from the backwardCoord of the
           // highest-pressure forward segment.
-          computeSlotSegCoords(forwardSegs[0], seriesBackwardPressure + 1, seriesBackwardCoord);
+          computeSlotSegCoords(
+            forwardSegs[0],
+            seriesBackwardPressure + 1,
+            seriesBackwardCoord
+          );
           seg.forwardCoord = forwardSegs[0].backwardCoord;
         }
 
         // calculate the backwardCoord from the forwardCoord. consider the series
-        seg.backwardCoord = seg.forwardCoord -
+        seg.backwardCoord =
+          seg.forwardCoord -
           (seg.forwardCoord - seriesBackwardCoord) / // available width for series
-          (seriesBackwardPressure + 1); // # of segments in the series
+            (seriesBackwardPressure + 1); // # of segments in the series
 
         // use this segment's coordinates to computed the coordinates of the less-pressurized
         // forward segments
@@ -4704,7 +4613,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
     }
-
 
     // Outputs a flat array of segments, from lowest to highest level
     function flattenSlotSegLevels(levels) {
@@ -4723,7 +4631,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return segs;
     }
 
-
     // Find all the segments in `otherSegs` that vertically collide with `seg`.
     // Append into an optionally-supplied `results` array and return.
     function computeSlotSegCollisions(seg, otherSegs, results) {
@@ -4738,39 +4645,35 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return results;
     }
 
-
     // Do these segments occupy the same vertical space?
     function isSlotSegCollision(seg1, seg2) {
       return seg1.end > seg2.start && seg1.start < seg2.end;
     }
 
-
     // A cmp function for determining which forward segment to rely on more when computing coordinates.
     function compareForwardSlotSegs(seg1, seg2) {
       // put higher-pressure first
-      return seg2.forwardPressure - seg1.forwardPressure ||
+      return (
+        seg2.forwardPressure - seg1.forwardPressure ||
         // put segments that are closer to initial edge first (and favor ones with no coords yet)
         (seg1.backwardCoord || 0) - (seg2.backwardCoord || 0) ||
         // do normal sorting...
-        compareSlotSegs(seg1, seg2);
+        compareSlotSegs(seg1, seg2)
+      );
     }
-
 
     // A cmp function for determining which segment should be closer to the initial edge
     // (the left edge on a left-to-right calendar).
     function compareSlotSegs(seg1, seg2) {
-      return seg1.start - seg2.start || // earlier start time goes first
-        (seg2.end - seg2.start) - (seg1.end - seg1.start) || // tie? longer-duration goes first
-        (seg1.event.title || '').localeCompare(seg2.event.title); // tie? alphabetically by title
+      return (
+        seg1.start - seg2.start || // earlier start time goes first
+        seg2.end - seg2.start - (seg1.end - seg1.start) || // tie? longer-duration goes first
+        (seg1.event.title || "").localeCompare(seg2.event.title)
+      ); // tie? alphabetically by title
     }
-
-
-    ;;
-
 
     function View(element, calendar, viewName) {
       var t = this;
-
 
       // exports
       t.element = element;
@@ -4794,20 +4697,16 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       // t.start, t.end
       // t.visStart, t.visEnd
 
-
       // imports
       var defaultEventEnd = t.defaultEventEnd;
       var normalizeEvent = calendar.normalizeEvent; // in EventManager
       var reportEventChange = calendar.reportEventChange;
-
 
       // locals
       var eventsByID = {}; // eventID mapped to array of events (there can be multiple b/c of repeating events)
       var eventElementsByID = {}; // eventID mapped to array of jQuery elements
       var eventElementCouples = []; // array of objects, { event, element } // TODO: unify with segment system
       var options = calendar.options;
-
-
 
       function opt(name, viewNameOverride) {
         var v = options[name];
@@ -4817,56 +4716,56 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return v;
       }
 
-
       function trigger(name, thisObj) {
         return calendar.trigger.apply(
           calendar,
-          [name, thisObj || t].concat(Array.prototype.slice.call(arguments, 2), [t])
+          [name, thisObj || t].concat(
+            Array.prototype.slice.call(arguments, 2),
+            [t]
+          )
         );
       }
-
-
 
       /* Event Editable Boolean Calculations
       ------------------------------------------------------------------------------*/
 
-
       function isEventDraggable(event) {
         var source = event.source || {};
-        return firstDefined(
+        return (
+          firstDefined(
             event.startEditable,
             source.startEditable,
-            opt('eventStartEditable'),
+            opt("eventStartEditable"),
             event.editable,
             source.editable,
-            opt('editable')
-          ) &&
-          !opt('disableDragging'); // deprecated
+            opt("editable")
+          ) && !opt("disableDragging")
+        ); // deprecated
       }
 
-
-      function isEventResizable(event) { // but also need to make sure the seg.isEnd == true
+      function isEventResizable(event) {
+        // but also need to make sure the seg.isEnd == true
         var source = event.source || {};
-        return firstDefined(
+        return (
+          firstDefined(
             event.durationEditable,
             source.durationEditable,
-            opt('eventDurationEditable'),
+            opt("eventDurationEditable"),
             event.editable,
             source.editable,
-            opt('editable')
-          ) &&
-          !opt('disableResizing'); // deprecated
+            opt("editable")
+          ) && !opt("disableResizing")
+        ); // deprecated
       }
-
-
 
       /* Event Data
       ------------------------------------------------------------------------------*/
 
-
-      function setEventData(events) { // events are already normalized at this point
+      function setEventData(events) {
+        // events are already normalized at this point
         eventsByID = {};
-        var i, len = events.length,
+        var i,
+          len = events.length,
           event;
         for (i = 0; i < len; i++) {
           event = events[i];
@@ -4878,30 +4777,25 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function clearEventData() {
         eventsByID = {};
         eventElementsByID = {};
         eventElementCouples = [];
       }
 
-
       // returns a Date object for an event's end
       function eventEnd(event) {
         return event.end ? cloneDate(event.end) : defaultEventEnd(event);
       }
 
-
-
       /* Event Elements
       ------------------------------------------------------------------------------*/
-
 
       // report when view creates an element for an event
       function reportEventElement(event, element) {
         eventElementCouples.push({
           event: event,
-          element: element
+          element: element,
         });
         if (eventElementsByID[event._id]) {
           eventElementsByID[event._id].push(element);
@@ -4910,51 +4804,49 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function triggerEventDestroy() {
         $.each(eventElementCouples, function (i, couple) {
-          t.trigger('eventDestroy', couple.event, couple.event, couple.element);
+          t.trigger("eventDestroy", couple.event, couple.event, couple.element);
         });
       }
-
 
       // attaches eventClick, eventMouseover, eventMouseout
       function eventElementHandlers(event, eventElement) {
         eventElement
           .click(function (ev) {
-            if (!eventElement.hasClass('ui-draggable-dragging') &&
-              !eventElement.hasClass('ui-resizable-resizing')) {
-              return trigger('eventClick', this, event, ev);
+            if (
+              !eventElement.hasClass("ui-draggable-dragging") &&
+              !eventElement.hasClass("ui-resizable-resizing")
+            ) {
+              return trigger("eventClick", this, event, ev);
             }
           })
           .hover(
             function (ev) {
-              trigger('eventMouseover', this, event, ev);
+              trigger("eventMouseover", this, event, ev);
             },
             function (ev) {
-              trigger('eventMouseout', this, event, ev);
+              trigger("eventMouseout", this, event, ev);
             }
           );
         // TODO: don't fire eventMouseover/eventMouseout *while* dragging is occuring (on subject element)
         // TODO: same for resizing
       }
 
-
       function showEvents(event, exceptElement) {
-        eachEventElement(event, exceptElement, 'show');
+        eachEventElement(event, exceptElement, "show");
       }
-
 
       function hideEvents(event, exceptElement) {
-        eachEventElement(event, exceptElement, 'hide');
+        eachEventElement(event, exceptElement, "hide");
       }
-
 
       function eachEventElement(event, exceptElement, funcName) {
         // NOTE: there may be multiple events per ID (repeating events)
         // and multiple segments per event
         var elements = eventElementsByID[event._id],
-          i, len = elements.length;
+          i,
+          len = elements.length;
         for (i = 0; i < len; i++) {
           if (!exceptElement || elements[i][0] != exceptElement[0]) {
             elements[i][funcName]();
@@ -4962,18 +4854,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-
       /* Event Modification Reporting
       ---------------------------------------------------------------------------------*/
-
 
       function eventDrop(e, event, dayDelta, minuteDelta, allDay, ev, ui) {
         var oldAllDay = event.allDay;
         var eventId = event._id;
         moveEvents(eventsByID[eventId], dayDelta, minuteDelta, allDay);
         trigger(
-          'eventDrop',
+          "eventDrop",
           e,
           event,
           dayDelta,
@@ -4990,12 +4879,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportEventChange(eventId);
       }
 
-
       function eventResize(e, event, dayDelta, minuteDelta, ev, ui) {
         var eventId = event._id;
         elongateEvents(eventsByID[eventId], dayDelta, minuteDelta);
         trigger(
-          'eventResize',
+          "eventResize",
           e,
           event,
           dayDelta,
@@ -5011,11 +4899,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportEventChange(eventId);
       }
 
-
-
       /* Event Modification Math
       ---------------------------------------------------------------------------------*/
-
 
       function moveEvents(events, dayDelta, minuteDelta, allDay) {
         minuteDelta = minuteDelta || 0;
@@ -5032,7 +4917,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       function elongateEvents(events, dayDelta, minuteDelta) {
         minuteDelta = minuteDelta || 0;
         for (var e, len = events.length, i = 0; i < len; i++) {
@@ -5042,8 +4926,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-
       // ====================================================================================================
       // Utilities for day "cells"
       // ====================================================================================================
@@ -5052,7 +4934,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       // This was the obvious common place to put these utilities, but they should be abstracted out into
       // a more meaningful class (like DayEventRenderer).
       // ====================================================================================================
-
 
       // For determining how a given "cell" translates into a "date":
       //
@@ -5064,7 +4945,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       // 3. Convert the "day offset" into a "date" (a JavaScript Date object).
       //
       // The reverse transformation happens when transforming a date into a cell.
-
 
       // exports
       t.isHiddenDay = isHiddenDay;
@@ -5080,20 +4960,17 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       t.dayOffsetToDate = dayOffsetToDate;
       t.rangeToSegments = rangeToSegments;
 
-
       // internals
-      var hiddenDays = opt('hiddenDays') || []; // array of day-of-week indices that are hidden
+      var hiddenDays = opt("hiddenDays") || []; // array of day-of-week indices that are hidden
       var isHiddenDayHash = []; // is the day-of-week hidden? (hash with day-of-week-index -> bool)
       var cellsPerWeek;
       var dayToCellMap = []; // hash from dayIndex -> cellIndex, for one week
       var cellToDayMap = []; // hash from cellIndex -> dayIndex, for one week
-      var isRTL = opt('isRTL');
-
+      var isRTL = opt("isRTL");
 
       // initialize important internal variables
       (function () {
-
-        if (opt('weekends') === false) {
+        if (opt("weekends") === false) {
           hiddenDays.push(0, 6); // 0=sunday, 6=saturday
         }
 
@@ -5110,26 +4987,22 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         cellsPerWeek = cellIndex;
         if (!cellsPerWeek) {
-          throw 'invalid hiddenDays'; // all days were hidden? bad.
+          throw "invalid hiddenDays"; // all days were hidden? bad.
         }
-
       })();
-
 
       // Is the current day hidden?
       // `day` is a day-of-week index (0-6), or a Date object
       function isHiddenDay(day) {
-        if (typeof day == 'object') {
+        if (typeof day == "object") {
           day = day.getDay();
         }
         return isHiddenDayHash[day];
       }
 
-
       function getCellsPerWeek() {
         return cellsPerWeek;
       }
-
 
       // Keep incrementing the current day until it is no longer a hidden day.
       // If the initial value of `date` is not a hidden day, don't do anything.
@@ -5143,7 +5016,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           addDays(date, inc);
         }
       }
-
 
       //
       // TRANSFORMATIONS: cell -> cell offset -> day offset -> date
@@ -5171,7 +5043,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var dis = isRTL ? -1 : 1;
         var dit = isRTL ? colCnt - 1 : 0;
 
-        if (typeof row == 'object') {
+        if (typeof row == "object") {
           col = row.col;
           row = row.row;
         }
@@ -5184,12 +5056,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       function cellOffsetToDayOffset(cellOffset) {
         var day0 = t.visStart.getDay(); // first date's day of week
         cellOffset += dayToCellMap[day0]; // normlize cellOffset to beginning-of-week
-        return Math.floor(cellOffset / cellsPerWeek) * 7 // # of days from full weeks
-          +
+        return (
+          Math.floor(cellOffset / cellsPerWeek) * 7 + // # of days from full weeks
           cellToDayMap[ // # of days from partial last week
-            (cellOffset % cellsPerWeek + cellsPerWeek) % cellsPerWeek // crazy math to handle negative cellOffsets
+            ((cellOffset % cellsPerWeek) + cellsPerWeek) % cellsPerWeek // crazy math to handle negative cellOffsets
           ] -
-          day0; // adjustment for beginning-of-week normalization
+          day0
+        ); // adjustment for beginning-of-week normalization
       }
 
       // day offset -> date (JavaScript Date object)
@@ -5198,7 +5071,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         addDays(date, dayOffset);
         return date;
       }
-
 
       //
       // TRANSFORMATIONS: date -> day offset -> cell offset -> cell
@@ -5221,12 +5093,13 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       function dayOffsetToCellOffset(dayOffset) {
         var day0 = t.visStart.getDay(); // first date's day of week
         dayOffset += day0; // normalize dayOffset to beginning-of-week
-        return Math.floor(dayOffset / 7) * cellsPerWeek // # of cells from full weeks
-          +
+        return (
+          Math.floor(dayOffset / 7) * cellsPerWeek + // # of cells from full weeks
           dayToCellMap[ // # of cells from partial last week
-            (dayOffset % 7 + 7) % 7 // crazy math to handle negative dayOffsets
+            ((dayOffset % 7) + 7) % 7 // crazy math to handle negative dayOffsets
           ] -
-          dayToCellMap[day0]; // adjustment for beginning-of-week normalization
+          dayToCellMap[day0]
+        ); // adjustment for beginning-of-week normalization
       }
 
       // cell offset -> cell (object with row & col keys)
@@ -5238,13 +5111,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var dit = isRTL ? colCnt - 1 : 0;
 
         var row = Math.floor(cellOffset / colCnt);
-        var col = ((cellOffset % colCnt + colCnt) % colCnt) * dis + dit; // column, adjusted for RTL (dis & dit)
+        var col = (((cellOffset % colCnt) + colCnt) % colCnt) * dis + dit; // column, adjusted for RTL (dis & dit)
         return {
           row: row,
-          col: col
+          col: col,
         };
       }
-
 
       //
       // Converts a date range into an array of segment objects.
@@ -5271,18 +5143,22 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         // loop through all the rows in the view
         for (var row = 0; row < rowCnt; row++) {
-
           // first and last cell offset for the row
           var rowCellOffsetFirst = row * colCnt;
           var rowCellOffsetLast = rowCellOffsetFirst + colCnt - 1;
 
           // get the segment's cell offsets by constraining the range's cell offsets to the bounds of the row
-          var segmentCellOffsetFirst = Math.max(rangeCellOffsetFirst, rowCellOffsetFirst);
-          var segmentCellOffsetLast = Math.min(rangeCellOffsetLast, rowCellOffsetLast);
+          var segmentCellOffsetFirst = Math.max(
+            rangeCellOffsetFirst,
+            rowCellOffsetFirst
+          );
+          var segmentCellOffsetLast = Math.min(
+            rangeCellOffsetLast,
+            rowCellOffsetLast
+          );
 
           // make sure segment's offsets are valid and in view
           if (segmentCellOffsetFirst <= segmentCellOffsetLast) {
-
             // translate to cells
             var segmentCellFirst = cellOffsetToCell(segmentCellOffsetFirst);
             var segmentCellLast = cellOffsetToCell(segmentCellOffsetLast);
@@ -5294,36 +5170,34 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             // We need to compare "day offset" because "cell offsets" are often ambiguous and
             // can translate to multiple days, and an edge case reveals itself when we the
             // range's first cell is hidden (we don't want isStart to be true).
-            var isStart = cellOffsetToDayOffset(segmentCellOffsetFirst) == rangeDayOffsetStart;
-            var isEnd = cellOffsetToDayOffset(segmentCellOffsetLast) + 1 == rangeDayOffsetEnd; // +1 for comparing exclusively
+            var isStart =
+              cellOffsetToDayOffset(segmentCellOffsetFirst) ==
+              rangeDayOffsetStart;
+            var isEnd =
+              cellOffsetToDayOffset(segmentCellOffsetLast) + 1 ==
+              rangeDayOffsetEnd; // +1 for comparing exclusively
 
             segments.push({
               row: row,
               leftCol: cols[0],
               rightCol: cols[1],
               isStart: isStart,
-              isEnd: isEnd
+              isEnd: isEnd,
             });
           }
         }
 
         return segments;
       }
-
-
     }
-
-    ;;
 
     function DayEventRenderer() {
       var t = this;
-
 
       // exports
       t.renderDayEvents = renderDayEvents;
       t.draggableDayEvent = draggableDayEvent; // made public so that subclasses can override
       t.resizableDayEvent = resizableDayEvent; // "
-
 
       // imports
       var opt = t.opt;
@@ -5359,12 +5233,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var dateToDayOffset = t.dateToDayOffset;
       var dayOffsetToCellOffset = t.dayOffsetToCellOffset;
 
-
       // Render `events` onto the calendar, attach mouse event handlers, and call the `eventAfterRender` callback for each.
       // Mouse event will be lazily applied, except if the event has an ID of `modifiedEventId`.
       // Can only be called when the event container is empty (because it wipes out all innerHTML).
       function renderDayEvents(events, modifiedEventId) {
-
         // do the actual rendering. Receive the intermediate "segment" data structures.
         var segments = _renderDayEvents(
           events,
@@ -5382,10 +5254,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         // call `eventAfterRender` callback for each event
         segmentElementEach(segments, function (segment, element) {
-          trigger('eventAfterRender', segment.event, segment.event, element);
+          trigger("eventAfterRender", segment.event, segment.event, element);
         });
       }
-
 
       // Render an event on the calendar, but don't report them anywhere, and don't attach mouse handlers.
       // Append this event element to the event container, which might already be populated with events.
@@ -5393,7 +5264,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       // This hack is used to maintain continuity when user is manually resizing an event.
       // Returns an array of DOM elements for the event.
       function renderTempDayEvent(event, adjustRow, adjustTop) {
-
         // actually render the event. `true` for appending element to container.
         // Recieve the intermediate "segment" data structures.
         var segments = _renderDayEvents(
@@ -5407,7 +5277,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         // Adjust certain elements' top coordinates
         segmentElementEach(segments, function (segment, element) {
           if (segment.row === adjustRow) {
-            element.css('top', adjustTop);
+            element.css("top", adjustTop);
           }
           elements.push(element[0]); // accumulate DOM nodes
         });
@@ -5415,13 +5285,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return elements;
       }
 
-
       // Render events onto the calendar. Only responsible for the VISUAL aspect.
       // Not responsible for attaching handlers or calling callbacks.
       // Set `doAppend` to `true` for rendering elements without clearing the existing container.
       // Set `doRowHeights` to allow setting the height of each row, to compensate for vertical event overflow.
       function _renderDayEvents(events, doAppend, doRowHeights) {
-
         // where the DOM nodes will eventually end up
         var finalContainer = getDaySegmentContainer();
 
@@ -5464,9 +5332,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
 
         // Set the width of each element
         segmentElementEach(segments, function (segment, element) {
-          element.width(
-            Math.max(0, segment.outerWidth - segment.hsides)
-          );
+          element.width(Math.max(0, segment.outerWidth - segment.hsides));
         });
 
         // Grab each element's outerHeight (setVerticals uses this).
@@ -5481,7 +5347,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return segments;
       }
 
-
       // Generate an array of "segments" for all events.
       function buildSegments(events) {
         var segments = [];
@@ -5491,7 +5356,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
         return segments;
       }
-
 
       // Generate an array of segments for a single event.
       // A "segment" is the same data structure that View.rangeToSegments produces,
@@ -5506,11 +5370,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return segments;
       }
 
-
       // Sets the `left` and `outerWidth` property of each segment.
       // These values are the desired dimensions for the eventual DOM elements.
       function calculateHorizontals(segments) {
-        var isRTL = opt('isRTL');
+        var isRTL = opt("isRTL");
         for (var i = 0; i < segments.length; i++) {
           var segment = segments[i];
 
@@ -5519,8 +5382,12 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           // NOTE:
           // colLeft/colRight returns the coordinate butting up the edge of the cell.
           // colContentLeft/colContentRight is indented a little bit from the edge.
-          var leftFunc = (isRTL ? segment.isEnd : segment.isStart) ? colContentLeft : colLeft;
-          var rightFunc = (isRTL ? segment.isStart : segment.isEnd) ? colContentRight : colRight;
+          var leftFunc = (isRTL ? segment.isEnd : segment.isStart)
+            ? colContentLeft
+            : colLeft;
+          var rightFunc = (isRTL ? segment.isStart : segment.isEnd)
+            ? colContentRight
+            : colRight;
 
           var left = leftFunc(segment.leftCol);
           var right = rightFunc(segment.rightCol);
@@ -5529,37 +5396,35 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       // Build a concatenated HTML string for an array of segments
       function buildHTML(segments) {
-        var html = '';
+        var html = "";
         for (var i = 0; i < segments.length; i++) {
           html += buildHTMLForSegment(segments[i]);
         }
         return html;
       }
 
-
       // Build an HTML string for a single segment.
       // Relies on the following properties:
       // - `segment.event` (from `buildSegmentsForEvent`)
       // - `segment.left` (from `calculateHorizontals`)
       function buildHTMLForSegment(segment) {
-        var html = '';
-        var isRTL = opt('isRTL');
+        var html = "";
+        var isRTL = opt("isRTL");
         var event = segment.event;
         var url = event.url;
 
         // generate the list of CSS classNames
-        var classNames = ['fc-event', 'fc-event-hori'];
+        var classNames = ["fc-event", "fc-event-hori"];
         if (isEventDraggable(event)) {
-          classNames.push('fc-event-draggable');
+          classNames.push("fc-event-draggable");
         }
         if (segment.isStart) {
-          classNames.push('fc-event-start');
+          classNames.push("fc-event-start");
         }
         if (segment.isEnd) {
-          classNames.push('fc-event-end');
+          classNames.push("fc-event-end");
         }
         // use the event's configured classNames
         // guaranteed to be an array via `normalizeEvent`
@@ -5579,11 +5444,15 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           html += `<div onclick="displayEvent('${event.id}')"`;
         }
         html +=
-          " class='" + classNames.join(' ') + "'" +
+          " class='" +
+          classNames.join(" ") +
+          "'" +
           " style=" +
           "'" +
           "position:absolute;" +
-          "left:" + segment.left + "px;" +
+          "left:" +
+          segment.left +
+          "px;" +
           skinCss +
           "'" +
           ">" +
@@ -5591,22 +5460,24 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         if (!event.allDay && segment.isStart) {
           html +=
             "<span class='fc-event-time'>" +
-            htmlEscape(
-              formatDates(event.start, event.end, opt('timeFormat'))
-            ) +
+            htmlEscape(formatDates(event.start, event.end, opt("timeFormat"))) +
             "</span>";
         }
         html +=
-        // `<span class='fc-event-title'>${htmlEscape(event.title || '')}</span><input class='btn btn-xs' type='button'  value='edit'></div>`
-        `<span class='fc-event-title'>${htmlEscape(event.title || '')}</span></div>`
-          // "<span class='fc-event-title'>" +
-          // htmlEscape(event.id || '') +
-          // "</span>" +
-          // "<input class='btn btn-xs' type='button'  value='edit'>" +
-          // "</div>";
+          // `<span class='fc-event-title'>${htmlEscape(event.title || '')}</span><input class='btn btn-xs' type='button'  value='edit'></div>`
+          `<span class='fc-event-title'>${htmlEscape(
+            event.title || ""
+          )}</span></div>`;
+        // "<span class='fc-event-title'>" +
+        // htmlEscape(event.id || '') +
+        // "</span>" +
+        // "<input class='btn btn-xs' type='button'  value='edit'>" +
+        // "</div>";
         if (segment.isEnd && isEventResizable(event)) {
           html +=
-            "<div class='ui-resizable-handle ui-resizable-" + (isRTL ? 'w' : 'e') + "'>" +
+            "<div class='ui-resizable-handle ui-resizable-" +
+            (isRTL ? "w" : "e") +
+            "'>" +
             "   " + // makes hit area a lot better for IE6/7
             "</div>";
         }
@@ -5635,7 +5506,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           var element = elements.eq(i);
 
           // call the trigger with the original element
-          var triggerRes = trigger('eventRender', event, event, element);
+          var triggerRes = trigger("eventRender", event, event, element);
 
           if (triggerRes === false) {
             // if `false`, remove the event from the DOM and don't assign it to `segment.event`
@@ -5645,11 +5516,10 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
               // the trigger returned a new element, but not `true` (which means keep the existing element)
 
               // re-assign the important CSS dimension properties that were already assigned in `buildHTMLForSegment`
-              triggerRes = $(triggerRes)
-                .css({
-                  position: 'absolute',
-                  left: segment.left
-                });
+              triggerRes = $(triggerRes).css({
+                position: "absolute",
+                left: segment.left,
+              });
 
               element.replaceWith(triggerRes);
               element = triggerRes;
@@ -5660,11 +5530,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
-
       /* Top-coordinate Methods
       -------------------------------------------------------------------------------------------------*/
-
 
       // Sets the "top" CSS property for each element.
       // If `doRowHeights` is `true`, also sets each row's first cell to an explicit height,
@@ -5684,21 +5551,18 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         // Get each row's top, relative to the views's origin.
         // Important to do this after setting each row's height.
         for (var i = 0; i < rowContentElements.length; i++) {
-          rowContentTops.push(
-            rowContentElements[i].position().top
-          );
+          rowContentTops.push(rowContentElements[i].position().top);
         }
 
         // Set each segment element's CSS "top" property.
         // Each segment object has a "top" property, which is relative to the row's top, but...
         segmentElementEach(segments, function (segment, element) {
           element.css(
-            'top',
+            "top",
             rowContentTops[segment.row] + segment.top // ...now, relative to views's origin
           );
         });
       }
-
 
       // Calculate the "top" coordinate for each segment, relative to the "top" of the row.
       // Also, return an array that contains the "content" height for each row
@@ -5746,7 +5610,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return rowContentHeights;
       }
 
-
       // Build an array of segment arrays, each representing the segments that will
       // be in a row of the grid, sorted by which event should be closest to the top.
       function buildSegmentRows(segments) {
@@ -5760,7 +5623,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         for (segmentI = 0; segmentI < segments.length; segmentI++) {
           segment = segments[segmentI];
           rowI = segment.row;
-          if (segment.element) { // was rendered?
+          if (segment.element) {
+            // was rendered?
             if (segmentRows[rowI]) {
               // already other segments. append to array
               segmentRows[rowI].push(segment);
@@ -5781,7 +5645,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return segmentRows;
       }
 
-
       // Sort an array of segments according to which segment should appear closest to the top
       function sortSegmentRow(segments) {
         var sortedSegments = [];
@@ -5797,11 +5660,9 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return sortedSegments;
       }
 
-
       // Take an array of segments, which are all assumed to be in the same row,
       // and sort into subrows.
       function buildSegmentSubrows(segments) {
-
         // Give preference to elements with certain criteria, so they have
         // a chance to be closer to the top.
         segments.sort(compareDaySegments);
@@ -5828,7 +5689,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return subrows;
       }
 
-
       // Return an array of jQuery objects for the placeholder content containers of each row.
       // The content containers don't actually contain anything, but their dimensions should match
       // the events that are overlaid on top.
@@ -5837,18 +5697,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         var rowCnt = getRowCnt();
         var rowDivs = [];
         for (i = 0; i < rowCnt; i++) {
-          rowDivs[i] = allDayRow(i)
-            .find('div.fc-day-content > div');
+          rowDivs[i] = allDayRow(i).find("div.fc-day-content > div");
         }
         return rowDivs;
       }
 
-
-
       /* Mouse Handlers
       ---------------------------------------------------------------------------------------------------*/
       // TODO: better documentation!
-
 
       function attachHandlers(segments, modifiedEventId) {
         var segmentContainer = getDaySegmentContainer();
@@ -5865,9 +5721,7 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         lazySegBind(segmentContainer, segments, bindDaySeg);
       }
 
-
       function bindDaySeg(event, eventElement, segment) {
-
         if (isEventDraggable(event)) {
           t.draggableDayEvent(event, eventElement, segment); // use `t` so subclasses can override
         }
@@ -5884,58 +5738,65 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         eventElementHandlers(event, eventElement);
       }
 
-
       function draggableDayEvent(event, eventElement) {
         var hoverListener = getHoverListener();
         var dayDelta;
         eventElement.draggable({
           delay: 50,
-          opacity: opt('dragOpacity'),
-          revertDuration: opt('dragRevertDuration'),
+          opacity: opt("dragOpacity"),
+          revertDuration: opt("dragRevertDuration"),
           start: function (ev, ui) {
-            trigger('eventDragStart', eventElement, event, ev, ui);
+            trigger("eventDragStart", eventElement, event, ev, ui);
             hideEvents(event, eventElement);
-            hoverListener.start(function (cell, origCell, rowDelta, colDelta) {
-              eventElement.draggable('option', 'revert', !cell || !rowDelta && !colDelta);
-              clearOverlays();
-              if (cell) {
-                var origDate = cellToDate(origCell);
-                var date = cellToDate(cell);
-                dayDelta = dayDiff(date, origDate);
-                renderDayOverlay(
-                  addDays(cloneDate(event.start), dayDelta),
-                  addDays(exclEndDay(event), dayDelta)
+            hoverListener.start(
+              function (cell, origCell, rowDelta, colDelta) {
+                eventElement.draggable(
+                  "option",
+                  "revert",
+                  !cell || (!rowDelta && !colDelta)
                 );
-              } else {
-                dayDelta = 0;
-              }
-            }, ev, 'drag');
+                clearOverlays();
+                if (cell) {
+                  var origDate = cellToDate(origCell);
+                  var date = cellToDate(cell);
+                  dayDelta = dayDiff(date, origDate);
+                  renderDayOverlay(
+                    addDays(cloneDate(event.start), dayDelta),
+                    addDays(exclEndDay(event), dayDelta)
+                  );
+                } else {
+                  dayDelta = 0;
+                }
+              },
+              ev,
+              "drag"
+            );
           },
           stop: function (ev, ui) {
             hoverListener.stop();
             clearOverlays();
-            trigger('eventDragStop', eventElement, event, ev, ui);
+            trigger("eventDragStop", eventElement, event, ev, ui);
             if (dayDelta) {
               eventDrop(this, event, dayDelta, 0, event.allDay, ev, ui);
             } else {
-              eventElement.css('filter', ''); // clear IE opacity side-effects
+              eventElement.css("filter", ""); // clear IE opacity side-effects
               showEvents(event, eventElement);
             }
-          }
+          },
         });
       }
 
-
       function resizableDayEvent(event, element, segment) {
-        var isRTL = opt('isRTL');
-        var direction = isRTL ? 'w' : 'e';
-        var handle = element.find('.ui-resizable-' + direction); // TODO: stop using this class because we aren't using jqui for this
+        var isRTL = opt("isRTL");
+        var direction = isRTL ? "w" : "e";
+        var handle = element.find(".ui-resizable-" + direction); // TODO: stop using this class because we aren't using jqui for this
         var isResizing = false;
 
         // TODO: look into using jquery-ui mouse widget for this stuff
         disableTextSelection(element); // prevent native <a> selection for IE
         element
-          .mousedown(function (ev) { // prevent native <a> selection for others
+          .mousedown(function (ev) {
+            // prevent native <a> selection for others
             ev.preventDefault();
           })
           .click(function (ev) {
@@ -5954,19 +5815,20 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           var hoverListener = getHoverListener();
           var rowCnt = getRowCnt();
           var colCnt = getColCnt();
-          var elementTop = element.css('top');
+          var elementTop = element.css("top");
           var dayDelta;
           var helpers;
           var eventCopy = $.extend({}, event);
-          var minCellOffset = dayOffsetToCellOffset(dateToDayOffset(event.start));
+          var minCellOffset = dayOffsetToCellOffset(
+            dateToDayOffset(event.start)
+          );
           clearSelection();
-          $('body')
-            .css('cursor', direction + '-resize')
-            .one('mouseup', mouseup);
-          trigger('eventResizeStart', this, event, ev);
+          $("body")
+            .css("cursor", direction + "-resize")
+            .one("mouseup", mouseup);
+          trigger("eventResizeStart", this, event, ev);
           hoverListener.start(function (cell, origCell) {
             if (cell) {
-
               var origCellOffset = cellToCellOffset(origCell);
               var cellOffset = cellToCellOffset(cell);
 
@@ -5981,10 +5843,14 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
                 eventCopy.end = addDays(eventEnd(event), dayDelta, true);
                 var oldHelpers = helpers;
 
-                helpers = renderTempDayEvent(eventCopy, segment.row, elementTop);
+                helpers = renderTempDayEvent(
+                  eventCopy,
+                  segment.row,
+                  elementTop
+                );
                 helpers = $(helpers); // turn array into a jQuery object
 
-                helpers.find('*').css('cursor', direction + '-resize');
+                helpers.find("*").css("cursor", direction + "-resize");
                 if (oldHelpers) {
                   oldHelpers.remove();
                 }
@@ -5998,7 +5864,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
                 }
               }
               clearOverlays();
-              renderDayOverlay( // coordinate grid already rebuilt with hoverListener.start()
+              renderDayOverlay(
+                // coordinate grid already rebuilt with hoverListener.start()
                 event.start,
                 addDays(exclEndDay(event), dayDelta)
                 // TODO: instead of calling renderDayOverlay() with dates,
@@ -6008,8 +5875,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           }, ev);
 
           function mouseup(ev) {
-            trigger('eventResizeStop', this, event, ev);
-            $('body').css('cursor', '');
+            trigger("eventResizeStop", this, event, ev);
+            $("body").css("cursor", "");
             hoverListener.stop();
             clearOverlays();
             if (dayDelta) {
@@ -6018,21 +5885,17 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             }
             // otherwise, the drag handler already restored the old events
 
-            setTimeout(function () { // make this happen after the element's click event
+            setTimeout(function () {
+              // make this happen after the element's click event
               isResizing = false;
             }, 0);
           }
         });
       }
-
-
     }
-
-
 
     /* Generalized Segment Utilities
     -------------------------------------------------------------------------------------------------*/
-
 
     function isDaySegmentCollision(segment, otherSegments) {
       for (var i = 0; i < otherSegments.length; i++) {
@@ -6047,8 +5910,8 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       return false;
     }
 
-
-    function segmentElementEach(segments, callback) { // TODO: use in AgendaView?
+    function segmentElementEach(segments, callback) {
+      // TODO: use in AgendaView?
       for (var i = 0; i < segments.length; i++) {
         var segment = segments[i];
         var element = segment.element;
@@ -6058,30 +5921,26 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       }
     }
 
-
     // A cmp function for determining which segments should appear higher up
     function compareDaySegments(a, b) {
-      return (b.rightCol - b.leftCol) - (a.rightCol - a.leftCol) || // put wider events first
+      return (
+        b.rightCol - b.leftCol - (a.rightCol - a.leftCol) || // put wider events first
         b.event.allDay - a.event.allDay || // if tie, put all-day events first (booleans cast to 0/1)
         a.event.start - b.event.start || // if a tie, sort by event start date
-        (a.event.title || '').localeCompare(b.event.title) // if a tie, sort by event title
+        (a.event.title || "").localeCompare(b.event.title)
+      ); // if a tie, sort by event title
     }
-
-
-    ;;
 
     //BUG: unselect needs to be triggered when events are dragged+dropped
 
     function SelectionManager() {
       var t = this;
 
-
       // exports
       t.select = select;
       t.unselect = unselect;
       t.reportSelection = reportSelection;
       t.daySelectionMousedown = daySelectionMousedown;
-
 
       // imports
       var opt = t.opt;
@@ -6090,25 +5949,22 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
       var renderSelection = t.renderSelection;
       var clearSelection = t.clearSelection;
 
-
       // locals
       var selected = false;
 
-
-
       // unselectAuto
-      if (opt('selectable') && opt('unselectAuto')) {
+      if (opt("selectable") && opt("unselectAuto")) {
         $(document).mousedown(function (ev) {
-          var ignore = opt('unselectCancel');
+          var ignore = opt("unselectCancel");
           if (ignore) {
-            if ($(ev.target).parents(ignore).length) { // could be optimized to stop after first match
+            if ($(ev.target).parents(ignore).length) {
+              // could be optimized to stop after first match
               return;
             }
           }
           unselect(ev);
         });
       }
-
 
       function select(startDate, endDate, allDay) {
         unselect();
@@ -6119,41 +5975,43 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         reportSelection(startDate, endDate, allDay);
       }
 
-
       function unselect(ev) {
         if (selected) {
           selected = false;
           clearSelection();
-          trigger('unselect', null, ev);
+          trigger("unselect", null, ev);
         }
       }
 
-
       function reportSelection(startDate, endDate, allDay, ev) {
         selected = true;
-        trigger('select', null, startDate, endDate, allDay, ev);
+        trigger("select", null, startDate, endDate, allDay, ev);
       }
 
-
-      function daySelectionMousedown(ev) { // not really a generic manager method, oh well
+      function daySelectionMousedown(ev) {
+        // not really a generic manager method, oh well
         var cellToDate = t.cellToDate;
         var getIsCellAllDay = t.getIsCellAllDay;
         var hoverListener = t.getHoverListener();
         var reportDayClick = t.reportDayClick; // this is hacky and sort of weird
-        if (ev.which == 1 && opt('selectable')) { // which==1 means left mouse button
+        if (ev.which == 1 && opt("selectable")) {
+          // which==1 means left mouse button
           unselect(ev);
           var _mousedownElement = this;
           var dates;
-          hoverListener.start(function (cell, origCell) { // TODO: maybe put cellToDate/getIsCellAllDay info in cell
+          hoverListener.start(function (cell, origCell) {
+            // TODO: maybe put cellToDate/getIsCellAllDay info in cell
             clearSelection();
             if (cell && getIsCellAllDay(cell)) {
-              dates = [cellToDate(origCell), cellToDate(cell)].sort(dateCompare);
+              dates = [cellToDate(origCell), cellToDate(cell)].sort(
+                dateCompare
+              );
               renderSelection(dates[0], dates[1], true);
             } else {
               dates = null;
             }
           }, ev);
-          $(document).one('mouseup', function (ev) {
+          $(document).one("mouseup", function (ev) {
             hoverListener.stop();
             if (dates) {
               if (+dates[0] == +dates[1]) {
@@ -6164,30 +6022,25 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
           });
         }
       }
-
-
     }
-
-    ;;
 
     function OverlayManager() {
       var t = this;
-
 
       // exports
       t.renderOverlay = renderOverlay;
       t.clearOverlays = clearOverlays;
 
-
       // locals
       var usedOverlays = [];
       var unusedOverlays = [];
 
-
       function renderOverlay(rect, parent) {
         var e = unusedOverlays.shift();
         if (!e) {
-          e = $("<div class='fc-cell-overlay' style='position:absolute;z-index:3'/>");
+          e = $(
+            "<div class='fc-cell-overlay' style='position:absolute;z-index:3'/>"
+          );
         }
         if (e[0].parentNode != parent[0]) {
           e.appendTo(parent);
@@ -6196,25 +6049,18 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         return e;
       }
 
-
       function clearOverlays() {
         var e;
-        while (e = usedOverlays.shift()) {
+        while ((e = usedOverlays.shift())) {
           unusedOverlays.push(e.hide().unbind());
         }
       }
-
-
     }
 
-    ;;
-
     function CoordinateGrid(buildFunc) {
-
       var t = this;
       var rows;
       var cols;
-
 
       t.build = function () {
         rows = [];
@@ -6222,11 +6068,11 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         buildFunc(rows, cols);
       };
 
-
       t.cell = function (x, y) {
         var rowCnt = rows.length;
         var colCnt = cols.length;
-        var i, r = -1,
+        var i,
+          r = -1,
           c = -1;
         for (i = 0; i < rowCnt; i++) {
           if (y >= rows[i][0] && y < rows[i][1]) {
@@ -6240,56 +6086,59 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
             break;
           }
         }
-        return (r >= 0 && c >= 0) ? {
-          row: r,
-          col: c
-        } : null;
+        return r >= 0 && c >= 0
+          ? {
+              row: r,
+              col: c,
+            }
+          : null;
       };
 
-
-      t.rect = function (row0, col0, row1, col1, originElement) { // row1,col1 is inclusive
+      t.rect = function (row0, col0, row1, col1, originElement) {
+        // row1,col1 is inclusive
         var origin = originElement.offset();
         return {
           top: rows[row0][0] - origin.top,
           left: cols[col0][0] - origin.left,
           width: cols[col1][1] - cols[col0][0],
-          height: rows[row1][1] - rows[row0][0]
+          height: rows[row1][1] - rows[row0][0],
         };
       };
-
     }
 
-    ;;
-
     function HoverListener(coordinateGrid) {
-
-
       var t = this;
       var bindType;
       var change;
       var firstCell;
       var cell;
 
-
       t.start = function (_change, ev, _bindType) {
         change = _change;
         firstCell = cell = null;
         coordinateGrid.build();
         mouse(ev);
-        bindType = _bindType || 'mousemove';
+        bindType = _bindType || "mousemove";
         $(document).bind(bindType, mouse);
       };
-
 
       function mouse(ev) {
         _fixUIEvent(ev); // see below
         var newCell = coordinateGrid.cell(ev.pageX, ev.pageY);
-        if (!newCell != !cell || newCell && (newCell.row != cell.row || newCell.col != cell.col)) {
+        if (
+          !newCell != !cell ||
+          (newCell && (newCell.row != cell.row || newCell.col != cell.col))
+        ) {
           if (newCell) {
             if (!firstCell) {
               firstCell = newCell;
             }
-            change(newCell, firstCell, newCell.row - firstCell.row, newCell.col - firstCell.col);
+            change(
+              newCell,
+              firstCell,
+              newCell.row - firstCell.row,
+              newCell.col - firstCell.col
+            );
           } else {
             change(newCell, firstCell);
           }
@@ -6297,46 +6146,43 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         }
       }
 
-
       t.stop = function () {
         $(document).unbind(bindType, mouse);
         return cell;
       };
-
-
     }
-
-
 
     // this fix was only necessary for jQuery UI 1.8.16 (and jQuery 1.7 or 1.7.1)
     // upgrading to jQuery UI 1.8.17 (and using either jQuery 1.7 or 1.7.1) fixed the problem
     // but keep this in here for 1.8.16 users
     // and maybe remove it down the line
 
-    function _fixUIEvent(event) { // for issue 1168
+    function _fixUIEvent(event) {
+      // for issue 1168
       if (event.pageX === undefined) {
         event.pageX = event.originalEvent.pageX;
         event.pageY = event.originalEvent.pageY;
       }
-    };;
+    }
 
     function HorizontalPositionCache(getElement) {
-
       var t = this,
         elements = {},
         lefts = {},
         rights = {};
 
       function e(i) {
-        return elements[i] = elements[i] || getElement(i);
+        return (elements[i] = elements[i] || getElement(i));
       }
 
       t.left = function (i) {
-        return lefts[i] = lefts[i] === undefined ? e(i).position().left : lefts[i];
+        return (lefts[i] =
+          lefts[i] === undefined ? e(i).position().left : lefts[i]);
       };
 
       t.right = function (i) {
-        return rights[i] = rights[i] === undefined ? t.left(i) + e(i).width() : rights[i];
+        return (rights[i] =
+          rights[i] === undefined ? t.left(i) + e(i).width() : rights[i]);
       };
 
       t.clear = function () {
@@ -6344,137 +6190,6 @@ angular.module('fvs').controller('CalendarCtrl', function ($scope) {
         lefts = {};
         rights = {};
       };
-
     }
-
-    ;;
-
   })(jQuery);
-
-
-  var sw = {
-    // (A) INITIALIZE
-    etime: null, // HTML time display
-    erst: null, // HTML reset button
-    ego: null, // HTML start/stop button
-    init: function () {
-      // (A1) GET HTML ELEMENTS
-      sw.etime = document.getElementById("sw-time");
-      sw.erst = document.getElementById("sw-rst");
-      sw.ego = document.getElementById("sw-go");
-      sw.esave = document.getElementById("sw-save");
-
-      // (A2) ENABLE BUTTON CONTROLS
-      sw.erst.addEventListener("click", sw.reset);
-      sw.erst.disabled = false;
-      sw.ego.addEventListener("click", sw.start);
-      sw.ego.disabled = false;
-      sw.esave.addEventListener("click", sw.save);
-      sw.esave.disabled = false;
-    },
-
-    // (B) TIMER ACTION
-    timer: null, // timer object
-    now: 0, // current elapsed time
-    tick: function () {
-      // (B1) CALCULATE HOURS, MINS, SECONDS
-      sw.now++;
-      var remain = sw.now;
-      var hours = Math.floor(remain / 3600);
-      remain -= hours * 3600;
-      var mins = Math.floor(remain / 60);
-      remain -= mins * 60;
-      var secs = remain;
-      // (B2) UPDATE THE DISPLAY TIMER
-      if (hours < 10) {
-        hours = "0" + hours;
-      }
-      if (mins < 10) {
-        mins = "0" + mins;
-      }
-      if (secs < 10) {
-        secs = "0" + secs;
-      }
-      sw.etime.innerHTML = hours + ":" + mins + ":" + secs;
-    },
-
-    // (C) START!
-    start: function () {
-      sw.now = -1;
-      sw.timer = setInterval(sw.tick, 1000);
-      sw.ego.value = "Stop";
-      document.getElementById("sw-time").style.display = "block";
-      document.getElementById("list").style.display = "block";
-      document.getElementById("sw-save").style.display = "none";
-      var button = document.getElementById("times");
-      button.disabled = true;
-      sw.ego.removeEventListener("click", sw.start);
-      sw.ego.addEventListener("click", sw.stop);
-    },
-
-    // (D) STOP
-    stop: function () {
-      clearInterval(sw.timer);
-      var remain = sw.now;
-      // if (sw.timer != null) {
-      //   sw.stop();
-      // }
-      // sw.now = -1;
-      // sw.tick();
-      var hours = Math.floor(remain / 3600);
-      remain -= hours * 3600;
-      var mins = Math.floor(remain / 60);
-      remain -= mins * 60;
-      var secs = remain;
-      sessionStorage.setItem("hr", hours);
-      sessionStorage.setItem("mins", mins);
-      sessionStorage.setItem("secs", secs);
-      // console.log(sw.now);
-      // console.log(hours);
-      // console.log(mins);
-      // console.log(secs);
-      sw.timer = null;
-      sw.ego.value = "Start";
-      document.getElementById("sw-save").style.display = "block";
-      // document.getElementById("sw-rst").style.display = "block";
-      var button = document.getElementById("times");
-      button.disabled = false;
-      sw.ego.removeEventListener("click", sw.stop);
-      sw.ego.addEventListener("click", sw.start);
-    },
-
-    // (E) RESET
-    reset: function () {
-      if (sw.timer != null) {
-        sw.stop();
-      }
-      sw.now = -1;
-      sw.tick();
-      // document.getElementById("sw-rst").style.display = "none";
-      document.getElementById("sw-save").style.display = "none";
-      document.getElementById("list").style.display = "none";
-      var button = document.getElementById("times");
-      button.disabled = false;
-    },
-
-    save: function () {
-      sw.now = -1;
-      sw.tick();
-      // console.log("Save");
-      // $scope.gadd = sessionStorage.getItem('gadd');
-      //   if ($scope.gadd) {
-      //       calendar.fullCalendar('renderEvent', {
-      //               title: 'title',
-      //               start: 'start',
-      //               end: 'end',
-      //               allDay: 'allDay'
-      //           },
-      //           true // make the event "stick"
-      //       );
-      //   }
-      //   calendar.fullCalendar('unselect');
-    }
-  };
-  window.addEventListener("load", sw.init);
-
 });
