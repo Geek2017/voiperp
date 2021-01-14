@@ -117,14 +117,14 @@
   }
 </style>
 
-<link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" /> -->
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/calendar.css" /> -->
 <link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
 <link href="/assets/fullcalendar/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
 <!-- <script src="../lib/jquery.min.js"></script>
 <script src="../lib/jquery-ui.custom.min.js"></script> -->
 <script src="/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-<script src="/assets/js/select2.min.js"></script>
+<!-- <script src="/assets/js/select2.min.js"></script> -->
 
 <!-- Select2 CSS -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />  -->
@@ -695,15 +695,15 @@
 
   $(document).ready(async () => {
     // Initialize select2
-    $("#selUser").select2();
+    // $("#selUser").select2();
 
-    // Read selected option
-    $("#but_read").click(function () {
-      var username = $("#selUser option:selected").text();
-      var userid = $("#selUser").val();
+    // // Read selected option
+    // $("#but_read").click(function () {
+    //   var username = $("#selUser option:selected").text();
+    //   var userid = $("#selUser").val();
 
-      $("#result").html("id : " + userid + ", name : " + username);
-    });
+    //   $("#result").html("id : " + userid + ", name : " + username);
+    // });
 
     var date = new Date();
     var d = date.getDate();
