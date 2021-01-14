@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Geolocation</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
+
+<head>
+  <title>Geolocation</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly"
+    defer></script>
+  <style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
+    #map {
+      height: 100%;
+    }
 
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    /* Optional: Makes the sample page fill the window. */
 
-      .custom-map-control-button {
-        appearance: button;
-        background-color: #fff;
-        border: 0;
-        border-radius: 2px;
-        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-        margin: 10px;
-        padding: 0 0.5em;
-        height: 40px;
-        font: 400 18px Roboto, Arial, sans-serif;
-        overflow: hidden;
-      }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-      .custom-map-control-button:hover {
-        background: #ebebeb;
-      }
-    </style>
-    <script src="/assets/geolocate.js"></script>
-  </head>
+    .custom-map-control-button {
+      appearance: button;
+      background-color: #fff;
+      border: 0;
+      border-radius: 2px;
+      box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      margin: 10px;
+      padding: 0 0.5em;
+      height: 40px;
+      font: 400 18px Roboto, Arial, sans-serif;
+      overflow: hidden;
+    }
 
-  <body>
-    <div id="map"></div>
-  </body>
+    .custom-map-control-button:hover {
+      background: #ebebeb;
+    }
+  </style>
+  <script src="/assets/geolocate.js"></script>
+</head>
+
+<body onload="loadBody()" onunload="unloadBody()">
+  <div id="map"></div>
+</body>
+
 </html>

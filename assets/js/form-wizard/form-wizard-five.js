@@ -234,38 +234,39 @@
             image = localStorage.getItem("picture"),
             password = $('#password').val();
 
-            fileSelect = document.getElementById("comLogo").files;
-            fileSelect2 = document.getElementById("picture").files;
-            if (fileSelect.length > 0) {
-                var fileSelect = fileSelect[0];
-                var fileReader = new FileReader();
+        fileSelect = document.getElementById("comLogo").files;
+        fileSelect2 = document.getElementById("picture").files;
+        var logo, picture;
+        if (fileSelect.length > 0) {
+            var fileSelect = fileSelect[0];
+            var fileReader = new FileReader();
 
-                fileReader.onload = function (FileLoadEvent) {
-                    var data = FileLoadEvent.target.result;
-                    logo = data;
-                    // console.log(data);
-                    localStorage.setItem("logo", data);
-                    sessionStorage.setItem("comPhoto", data);
+            fileReader.onload = function (FileLoadEvent) {
+                var data = FileLoadEvent.target.result;
+                logo = data;
+                // console.log(data);
+                localStorage.setItem("logo", data);
+                sessionStorage.setItem("comPhoto", data);
 
-                }
-                fileReader.readAsDataURL(fileSelect);
             }
+            fileReader.readAsDataURL(fileSelect);
+        }
 
-            if (fileSelect2.length > 0) {
-                var fileSelect2 = fileSelect2[0];
-                var fileReader2 = new FileReader();
+        if (fileSelect2.length > 0) {
+            var fileSelect2 = fileSelect2[0];
+            var fileReader2 = new FileReader();
 
-                fileReader2.onload = function (FileLoadEvent) {
-                    var data2 = FileLoadEvent.target.result;
-                    picture = data2;
-                    // console.log(data2);
-                    localStorage.setItem("picture", data2);
-                    sessionStorage.setItem("picture", data2);
+            fileReader2.onload = function (FileLoadEvent) {
+                var data2 = FileLoadEvent.target.result;
+                picture = data2;
+                // console.log(data2);
+                localStorage.setItem("picture", data2);
+                sessionStorage.setItem("picture", data2);
 
-                }
-                fileReader2.readAsDataURL(fileSelect2);
             }
-            
+            fileReader2.readAsDataURL(fileSelect2);
+        }
+
         if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
 
             var logo, picture;
@@ -381,8 +382,8 @@
                             }
 
 
-                            var service_id = "fvs2";
-                            var template_id = "template_3hi63vh";
+                            var service_id = "service_fvs";
+                            var template_id = "template_4cj69ab";
                             emailjs.send(service_id, template_id, template_params);
 
                             console.log("Sent");

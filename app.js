@@ -81,8 +81,12 @@ angular
         templateUrl: 'views/Reports.html',
         controller: 'ReportsCtrl'
       })
-    .when('/calendar', {
-      templateUrl : 'views/calendar.html',
-      controller  : 'CalendarCtrl'
-    });
+      .when('/email', {
+        templateUrl: 'views/email.html',
+        controller: 'emailCtrl'
+      })
+      .when('/calendar', {
+        templateUrl: 'views/calendar.html',
+        controller: 'CalendarCtrl'
+      });
   });

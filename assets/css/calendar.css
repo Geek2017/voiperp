@@ -295,7 +295,7 @@ span.fc-button {
 ------------------------------------------------------------------------*/
 
 .fc-event-container > * {
-  z-index: 8;
+  z-index: 0 !important;
 }
 
 .fc-event-container > .ui-draggable-dragging,

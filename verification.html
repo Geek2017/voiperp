@@ -8,7 +8,7 @@
         <p id="verify" style="font-size:20px;">Verifying . . .</p>
     </h1>
     <div id="display" style="display: none;">
-         <a href="./login.html" id="toLogin"><span>Click here to login</span></a>
+        <a href="./login.html" id="toLogin"><span>Click here to login</span></a>
     </div>
 
 </body>
@@ -47,6 +47,9 @@
                 "image": response.image,
                 "password": response.password,
                 "role": response.role,
+                "rate": response.rate,
+                "workingHr": response.workingHr,
+                "toPay": response.toPay,
                 "verification": "verified"
 
             });
@@ -79,7 +82,7 @@
             document.getElementById("verify").innerHTML = "There's an error verifying this account! Try again.";
         }
 
-        if(response.verification == "verified"){
+        if (response.verification == "verified") {
             document.getElementById("verify").innerHTML = "Your account is already verified";
             document.getElementById("display").style.display = "block";
         }

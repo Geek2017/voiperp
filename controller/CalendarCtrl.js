@@ -15,16 +15,16 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
   $("#newEvent").on("submit", function (e) {
     // var timeAdmin = $("#timeAdmin").val();
-    // console.log("save admin!");
-    // console.log(timeAdmin);
+    // //console.log("save admin!");
+    // //console.log(timeAdmin);
   });
   //   $("#save-admin").click(function () {
   //     var timeAdmin = $("#timeAdmin").val();
   //     var tagColor = $("#tagColor").val();
-  //     // console.log("save admin!");
-  //     // console.log(timeAdmin);
-  //     console.log(tagColor);
-  //     console.log($scope.tojson(obj))
+  //     // //console.log("save admin!");
+  //     // //console.log(timeAdmin);
+  //     //console.log(tagColor);
+  //     //console.log($scope.tojson(obj))
   //     var gadd = sessionStorage.getItem('gadd');
   //     if (gadd) {
   //         calendar.fullCalendar('renderEvent', {
@@ -64,7 +64,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
   //         });
 
-  //         // console.log(myData2);
+  //         // //console.log(myData2);
 
   //         $.ajax({
   //             type: "POST",
@@ -76,9 +76,9 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
   //                 "Content-Type": "application/json"
   //             },
   //             success: function (data) {
-  //                 console.log(data);
+  //                 //console.log(data);
 
-  //                 console.log("Saved!");
+  //                 //console.log("Saved!");
 
   //                 // document.getElementById("messages").innerHTML =
   //                 //     "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
@@ -86,8 +86,8 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
   //                 // window.location.href = './index.html';
   //             },
   //             error: function (response) {
-  //                 console.log(response);
-  //                 console.log("Error");
+  //                 //console.log(response);
+  //                 //console.log("Error");
 
   //             }
   //         });
@@ -98,7 +98,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
   //                 // window.location.href = '#';
   //                 // window.location.href = '#calendar';
-  //                 console.log("refreshed!")
+  //                 //console.log("refreshed!")
   //                 location.reload();
   //             }, 1000);
   //             window.location.href = '#';
@@ -112,7 +112,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
   for (let j = 0; j < cnt; j++) {
     $("#appendhere")
       .append(`<div class="w-100 d-flex justify-content-around py-1">
-    <span class="w-25 p-2 fs-6 font-bold task-number">${cnt}</span>
+    <span class="w-25 py-2 px-4 fs-6 font-bold text-left task-number">${cnt}</span>
     <input type="text" name="task" class="w-50 form-control task-name" id="task${cnt}" placeholder="Task #${cnt}">
     <label class="input w-25 p-2 m-0">
         <input class="checkbox_animated task-status" type="checkbox">
@@ -122,8 +122,8 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
   $scope.addtr = function () {
     cnt++;
     $("#appendhere")
-      .append(`<div class="w-100 d-flex justify-content-around py-1">
-    <span class="w-25 p-2 fs-6 font-bold task-number">${cnt}</span>
+      .append(`<div class="w-100 d-flex justify-content-around py-1 task-${cnt}">
+    <span class="w-25 py-2 px-4 fs-6 font-bold task-number text-left">${cnt}</span>
     <input type="text" name="task" class="w-50 form-control task-name" id="task${cnt}" placeholder="Task #${cnt}">
     <label class="input w-25 p-2 m-0">
         <input class="checkbox_animated task-status" type="checkbox">
@@ -134,25 +134,16 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
     // });
   };
   $scope.removetr = function () {
-    var appendhere = document.getElementById("appendhere");
-    var childCount = appendhere.childElementCount;
-
-    // console.log(appendhere.childNodes);
-    if (cnt > 0) {
-      appendhere.removeChild(appendhere.childNodes[childCount + 2]);
+    if (cnt > 1) {
+      $(`#appendhere .task-${cnt}`).remove();
       cnt = cnt - 1;
     }
-
-    // $('#appendhere tr:last').remove();
-    // $('table thead th').each(function (i) {
-
-    // });
   };
 
-  $("#appendhere").on("click", ".deleteb", function () {
-    $(this).closest("tr").remove();
-    $("table thead th").each(function (i) {});
-  });
+  // $("#appendhere").on("click", ".deleteb", function () {
+  //   $(this).closest("tr").remove();
+  //   $("table thead th").each(function (i) {});
+  // });
 
   //   setTimeout(() => {
 
@@ -160,7 +151,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
   //       window.location.href = '#';
   //       window.location.href = '#calendar';
-  //         console.log("refreshed!")
+  //         //console.log("refreshed!")
   //         // location.reload();
   //     }, 1000);
   //     window.location.href = '#';
@@ -174,14 +165,14 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
   // function myTimer() {
   //   if (sessionStorage.getItem('gadd')) {
-  //     console.log(window.location.href);
-  //     console.log(sessionStorage.getItem('gadd'));
+  //     //console.log(window.location.href);
+  //     //console.log(sessionStorage.getItem('gadd'));
   //     document.getElementById("myAdd").textContent = "You are @ :" + sessionStorage.getItem('gadd');
   //     // window.location.href = "#";
   //     // window.location.href = "#calendar";
   //     clearInterval(myVar);
   //   } else {
-  //     console.log("Nothing");
+  //     //console.log("Nothing");
   //   }
   // }
 
@@ -419,7 +410,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
       req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE) {
-          // console.log(req.responseText);
+          // //console.log(req.responseText);
           window.jresponce = req.responseText;
         }
       };
@@ -456,6 +447,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
       setYMD(date, options.year, options.month, options.date);
 
       function render(inc) {
+        //console.log("rendered");
         if (!content) {
           initialRender();
         } else if (elementVisible()) {
@@ -689,17 +681,20 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
       function refetchEvents() {
         // can be called as an API method
+        //console.log("refetch");
         clearEvents();
         fetchAndRenderEvents();
       }
 
       function rerenderEvents(modifiedEventID) {
+        ////console.log("rerender");
         // can be called as an API method
         clearEvents();
         renderEvents(modifiedEventID);
       }
 
       function renderEvents(modifiedEventID) {
+        //console.log("render events");
         // TODO: remove modifiedEventID hack
         if (elementVisible()) {
           currentView.setEventData(events); // for View.js, TODO: unify with renderEvents
@@ -2398,7 +2393,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
 
       function buildEventContainer() {
         daySegmentContainer = $(
-          "<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>"
+          "<div class='fc-event-container' style='position:absolute;z-index:1;top:0;left:0'/>"
         ).appendTo(element);
       }
 
@@ -5441,7 +5436,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
         if (url) {
           html += "<a href='" + htmlEscape(url) + "'";
         } else {
-          html += `<div onclick="displayEvent('${event.id}')"`;
+          html += `<div onclick="displayEvent('${event.id}')" id="e-${event.id}"`;
         }
         html +=
           " class='" +
@@ -5492,7 +5487,7 @@ angular.module("fvs").controller("CalendarCtrl", function ($scope) {
       }
 
       // $scope.displayEvent = function(eventId) {
-      //   console.log(eventId);
+      //   //console.log(eventId);
       // }
 
       // Associate each segment (an object) with an element (a jQuery object),

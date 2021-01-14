@@ -163,7 +163,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                     var data = FileLoadEvent.target.result;
                     // logo = data;
                     // console.log(data);
-                    localStorage.setItem("newUserphoto", data);
+                    sessionStorage.setItem("newUserphoto", data);
                     // sessionStorage.setItem("comPhoto", data);
 
                 }
@@ -181,12 +181,15 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                 "comid": userComID,
                 // "comid": $('#email').val(),
                 "contact": $('#newUserContact').val(),
+                "rate": $('#newUserRate').val(),
                 "designation": $('#newUserDesignation').val(),
                 "fullname": $('#newUserFullname').val(),
-                "image": localStorage.getItem("newUserphoto"),
+                "image": sessionStorage.getItem("newUserphoto"),
                 "password": Base64.encode(pwd.value),
                 "role": "ordinary",
-                "verification": "not verify"
+                "verification": "not verify",
+                "workingHr": "0",
+                "toPay": "0"
 
                 // "password": Base64.encode(pwd.value),
                 // "role": ""
@@ -227,8 +230,8 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                     }
 
 
-                    var service_id = "fvs2";
-                    var template_id = "template_3hi63vh";
+                    var service_id = "service_fvs";
+                    var template_id = "template_4cj69ab";
                     emailjs.send(service_id, template_id, template_params);
 
                     console.log("Sent");
@@ -237,6 +240,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                     document.getElementById("newUserDesignation").value = "";
                     document.getElementById("newUserFullname").value = "";
                     document.getElementById("newUserPassword").value = "";
+                    document.getElementById("newUserRate").value = "";
 
                     document.getElementById("messages").innerHTML =
                         "A verification email has been sent to the user! He/She needs to verify the email before logging in.";

@@ -1,64 +1,70 @@
 <div ng-controller="NewUsersCtrl">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="text-danger wrapper text-center" id="messages"></div>
-                        <div class="text-success wrapper text-center" id="success"></div>
-                        <br>
-                        <h5>Add New User</h5>
-                    </div>
-                    <form class="form theme-form">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="newUserFullname">Fullname</label>
-                                        <input class="form-control" id="newUserFullname" type="text" placeholder=""
-                                            required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="newUserEmail">Email address</label>
-                                        <input class="form-control" id="newUserEmail" type="email" placeholder=""
-                                            required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="newUserPassword">Password</label>
-                                        <input class="form-control" id="newUserPassword" type="password" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="newUserPicture" name="newUserPicture">
-                                <label id="pictureLabel" class="custom-file-label" for="exampleInputFile">User's
-                                    Picture</label> <br><br>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="newUserDesignation">Designation</label>
-                                        <input class="form-control" id="newUserDesignation" type="text" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="newUserContact">Contact</label>
-                                        <input class="form-control" id="newUserContact" type="text" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="row">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="text-danger wrapper text-center" id="messages"></div>
+            <div class="text-success wrapper text-center" id="success"></div>
+            <br>
+            <h5>Add New User</h5>
+          </div>
+          <form class="form theme-form">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="newUserFullname">Fullname</label>
+                    <input class="form-control" id="newUserFullname" type="text" placeholder="" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="newUserEmail">Email address</label>
+                    <input class="form-control" id="newUserEmail" type="email" placeholder="" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="newUserPassword">Password</label>
+                    <input class="form-control" id="newUserPassword" type="password" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="newUserPicture" name="newUserPicture">
+                <label id="pictureLabel" class="custom-file-label" for="exampleInputFile">User's
+                  Picture</label> <br><br>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="newUserDesignation">Designation</label>
+                    <input class="form-control" id="newUserDesignation" type="text" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="newUserContact">Contact</label>
+                    <input class="form-control" id="newUserContact" type="text" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="newUserContact">Rate per hr (in USD)</label>
+                    <input class="form-control" id="newUserRate" type="text" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect9">Example select</label>
@@ -95,14 +101,14 @@
                                     </div>
                                 </div>
                             </div> -->
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-primary" type="button" id="addNew">Submit</button>
-                            <input class="btn btn-light" type="reset" value="Cancel">
-                        </div>
-                    </form>
-                </div>
-                <!-- <div class="card">
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary" type="button" id="addNew">Submit</button>
+              <input class="btn btn-light" type="reset" value="Cancel">
+            </div>
+          </form>
+        </div>
+        <!-- <div class="card">
               <div class="card-header">
                 <h5>Basic HTML input control</h5>
               </div>
@@ -602,8 +608,8 @@
                 </div>
               </form>
             </div> -->
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
 </div>

@@ -1,12 +1,12 @@
 <br>
 <div class="">
-    <h5>&nbsp;&nbsp;&nbsp;&nbsp;Project List</h5>
-    <br>
-    <!-- <span>Fundamentally, each button is described by an object - this object is read by Buttons and displayed as appropriate. There are a number of parameters that Buttons will automatically look for in the button description object such as buttons.buttons.text and buttons.buttons.action which are the two fundamental parameters (button text and the action to take when activated).</span> -->
-  </div>
-  <!-- Container-fluid starts-->
+  <h5>&nbsp;&nbsp;&nbsp;&nbsp;Project List</h5>
+  <br>
+  <!-- <span>Fundamentally, each button is described by an object - this object is read by Buttons and displayed as appropriate. There are a number of parameters that Buttons will automatically look for in the button description object such as buttons.buttons.text and buttons.buttons.action which are the two fundamental parameters (button text and the action to take when activated).</span> -->
+</div>
+<!-- Container-fluid starts-->
 
-  <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+<link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
 <!-- ico-font-->
 <link rel="stylesheet" type="text/css" href="assets/css/icofont.css">
 <!-- Themify icon-->
@@ -29,154 +29,162 @@
 
 <style>
   /* The Modal (background) */
-  
+
   .modal {
-      display: none;
-      /* Hidden by default */
-      position: fixed;
-      /* Stay in place */
-      z-index: 1;
-      /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%;
-      /* Full width */
-      height: 100%;
-      /* Full height */
-      overflow: auto;
-      /* Enable scroll if needed */
-      background-color: rgb(0, 0, 0);
-      /* Fallback color */
-      background-color: rgba(0, 0, 0, 0.4);
-      /* Black w/ opacity */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
   }
+
   /* Modal Content/Box */
-  
+
   .modal-content {
-      color: #414242;
-      margin: 15% auto;
-      /* 15% from the top and centered */
-      padding: 30px 60px;
-      width: 500px;
-      /* Could be more or less, depending on screen size */
-      font-family: Lato;
-      font-size: 16px;
-      line-height: 28px;
-      letter-spacing: 0.5px;
-      -webkit-font-smoothing: antialiased;
-      /* Rectangle 2 Copy 3: */
-      background: #FFFFFF;
-      border: 1px solid #9B9C9D;
-      box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.20);
-      border-radius: 6px;
+    color: #414242;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 30px 60px;
+    width: 500px;
+    /* Could be more or less, depending on screen size */
+    font-family: Lato;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    -webkit-font-smoothing: antialiased;
+    /* Rectangle 2 Copy 3: */
+    background: #FFFFFF;
+    border: 1px solid #9B9C9D;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.20);
+    border-radius: 6px;
   }
-  
+
   .modal-content a {
-      color: #636464;
+    color: #636464;
   }
-  
+
   .modal-content>h1 {
-      display: block;
-      width: 100%;
-      text-align: center;
+    display: block;
+    width: 100%;
+    text-align: center;
   }
-  
+
   button#accept {
-      margin: 30px auto;
-      display: block;
-      border: 1px solid #fc4c02;
-      border-radius: 3px;
-      background: #fff;
-      color: #fc4c02;
-      font-size: 16px;
-      height: 48px;
-      padding: 0 20px;
-      cursor: pointer;
+    margin: 30px auto;
+    display: block;
+    border: 1px solid #fc4c02;
+    border-radius: 3px;
+    background: #fff;
+    color: #fc4c02;
+    font-size: 16px;
+    height: 48px;
+    padding: 0 20px;
+    cursor: pointer;
   }
-  
+
   .safety {
-      color: #9B9C9D;
-      font-size: 12px;
-      text-align: center;
-      display: block;
-      text-decoration: none;
+    color: #9B9C9D;
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
   }
-  
+
   .close {
-      background: #606061;
-      color: #FFFFFF;
-      line-height: 25px;
-      position: absolute;
-      right: -12px;
-      text-align: center;
-      top: -10px;
-      width: 24px;
-      text-decoration: none;
-      font-weight: bold;
-      -webkit-border-radius: 12px;
-      -moz-border-radius: 12px;
-      border-radius: 12px;
-      -moz-box-shadow: 1px 1px 3px #000;
-      -webkit-box-shadow: 1px 1px 3px #000;
-      box-shadow: 1px 1px 3px #000;
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
   }
-  
+
   .close:hover {
-      background: #00d9ff;
+    background: #00d9ff;
   }
 </style>
 
-  <div class="container-fluid" style="display: none;">
-    <div class="page-header">
-      <div class="row">
-        <div class="col-6">
-          <h3>
-             Project List</h3>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-            <li class="breadcrumb-item">Dashboard</li>
-          </ol>
-        </div>
-        <div class="col-6">
-          <!-- Bookmark Start-->
-          <div class="bookmark pull-right">
-            <ul>
-              <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-              <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-              <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-              <li><a href="#"><i class="bookmark-search" data-feather="star"></i></a>
-                <form class="form-inline search-form" action="#" method="get">
-                  <div class="form-group form-control-search">
-                    <div class="Typeahead Typeahead--twitterUsers">
-                      <div class="u-posRelative">
-                        <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search.." name="q" title="" autofocus>
-                        <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div>
-                      </div>
-                      <div class="Typeahead-menu"></div>
-                      <script id="result-template" type="text/x-handlebars-template">
-                        <div class="ProfileCard u-cf">                        
+<div class="container-fluid" style="display: none;">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-6">
+        <h3>
+          Project List</h3>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+          <li class="breadcrumb-item">Dashboard</li>
+        </ol>
+      </div>
+      <div class="col-6">
+        <!-- Bookmark Start-->
+        <div class="bookmark pull-right">
+          <ul>
+            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title=""
+                data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title=""
+                data-original-title="Icons"><i data-feather="command"></i></a></li>
+            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title=""
+                data-original-title="Learning"><i data-feather="layers"></i></a></li>
+            <li><a href="#"><i class="bookmark-search" data-feather="star"></i></a>
+              <form class="form-inline search-form" action="#" method="get">
+                <div class="form-group form-control-search">
+                  <div class="Typeahead Typeahead--twitterUsers">
+                    <div class="u-posRelative">
+                      <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
+                        placeholder="Search.." name="q" title="" autofocus>
+                      <div class="spinner-border Typeahead-spinner" role="status"><span
+                          class="sr-only">Loading...</span></div>
+                    </div>
+                    <div class="Typeahead-menu"></div>
+                    <script id="result-template" type="text/x-handlebars-template">
+                      <div class="ProfileCard u-cf">                        
                         <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
                         <div class="ProfileCard-details">
                         <div class="ProfileCard-realName">{{name}}</div>
                         </div>
                         </div>
                       </script>
-                      <script id="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
-                    </div>
+                    <script id="empty-template" type="text/x-handlebars-template">
+                      <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
+                    </script>
                   </div>
-                </form>
-              </li>
-            </ul>
-          </div>
-          <!-- Bookmark Ends-->
+                </div>
+              </form>
+            </li>
+          </ul>
         </div>
+        <!-- Bookmark Ends-->
       </div>
     </div>
   </div>
-  <!-- Container-fluid starts-->
-  <div class="container-fluid">
-    <div class="row">
-      <!-- <div class="col-md-12 project-list">
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <!-- <div class="col-md-12 project-list">
         <div class="card">
           <div class="row">
             <div class="col-sm-6">
@@ -194,18 +202,18 @@
           </div>
         </div>
       </div> -->
-      <div class="col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="dt-ext table-responsive">
-                <input type="file" id="FileUpload1" style="display: none" />
-                <div id="myContacts">
-                  <p>&nbsp;&nbsp;You have zero Leads</p>
-              </div>
-              
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="dt-ext table-responsive">
+            <input type="file" id="FileUpload1" style="display: none" />
+            <div id="myContacts">
+              <p>&nbsp;&nbsp;You have zero Leads</p>
             </div>
+
           </div>
-          <!-- <div class="card-body">
+        </div>
+        <!-- <div class="card-body">
             <div class="tab-content" id="top-tabContent">
               <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                 <div class="row">
@@ -905,80 +913,80 @@
               </div>
             </div>
           </div> -->
-        </div>
       </div>
     </div>
   </div>
+</div>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 
 
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Edit Project</h4>
-            <button type="button" ng-click="close()">&times;</button>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Project</h4>
+      <button type="button" ng-click="close()">&times;</button>
 
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Project Title</label>
-            <input class="form-control" type="text" id="editProjectName" placeholder="Project name *">
-          </div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Project Title</label>
+        <input class="form-control" type="text" id="editProjectName" placeholder="Project name *">
+      </div>
 
-          <div class="form-group">
-            <label>Client name</label>
-            <input class="form-control" type="text" id="editClientName" placeholder="Name client or company name">
-          </div>
-          <div class="form-group">
-            <label>Project Rate</label>
-            <input class="form-control" type="text" id="editProjectRate" placeholder="Enter project Rate">
-          </div>
-          <div class="form-group">
-            <label>Project Type</label>
-            <select class="form-control digits" id="editProjectType">
-              <option value="hourly">Hourly</option>
-              <option value="fix">Fix price</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Priority</label>
-            <select class="form-control digits" id="editPriority">
-              <option value="low">Low</option>
-              <option value="meduim">Medium</option>
-              <option value="high">High</option>
-              <option value="urgent">Urgent</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Project Size</label>
-            <select class="form-control digits" id="editProjectSize">
-              <option value="small">Small</option>
-              <option value="meduim">Medium</option>
-              <option value="big">Big</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Starting date</label>
-            <input class="datepicker-here form-control" id="editStartingDate" type="text" data-language="en">
-          </div>
-          <div class="form-group">
-            <label>Ending date</label>
-            <input class="datepicker-here form-control" id="editEndingDate" type="text" data-language="en">
-          </div>
-          <div class="form-group">
-            <label for="task-title">Task Title</label>
-            <input class="form-control" id="editTaskTitle" type="text" required="" autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label for="sub-task">Sub task</label>
-            <input class="form-control" id="editSubTask" type="text" required="" autocomplete="off">
-          </div>
-          <!-- <div class="form-group">
+      <div class="form-group">
+        <label>Client name</label>
+        <input class="form-control" type="text" id="editClientName" placeholder="Name client or company name">
+      </div>
+      <div class="form-group">
+        <label>Project Rate</label>
+        <input class="form-control" type="text" id="editProjectRate" placeholder="Enter project Rate">
+      </div>
+      <div class="form-group">
+        <label>Project Type</label>
+        <select class="form-control digits" id="editProjectType">
+          <option value="hourly">Hourly</option>
+          <option value="fix">Fix price</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <select class="form-control digits" id="editPriority">
+          <option value="low">Low</option>
+          <option value="meduim">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Project Size</label>
+        <select class="form-control digits" id="editProjectSize">
+          <option value="small">Small</option>
+          <option value="meduim">Medium</option>
+          <option value="big">Big</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Starting date</label>
+        <input class="datepicker-here form-control" id="editStartingDate" type="text" data-language="en">
+      </div>
+      <div class="form-group">
+        <label>Ending date</label>
+        <input class="datepicker-here form-control" id="editEndingDate" type="text" data-language="en">
+      </div>
+      <div class="form-group">
+        <label for="task-title">Task Title</label>
+        <input class="form-control" id="editTaskTitle" type="text" required="" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="sub-task">Sub task</label>
+        <input class="form-control" id="editSubTask" type="text" required="" autocomplete="off">
+      </div>
+      <!-- <div class="form-group">
             <select class="js-example-basic-single">
               <option value="task">My Task</option>
             </select>
@@ -988,17 +996,17 @@
               <option value="general">General</option>
             </select>
           </div> -->
-          <div class="form-group">
-            <label>Enter some Details</label>
-            <textarea class="form-control" id="editDetails" rows="3"></textarea>
-          </div>
+      <div class="form-group">
+        <label>Enter some Details</label>
+        <textarea class="form-control" id="editDetails" rows="3"></textarea>
+      </div>
 
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button>
-            <button type="button" class="btn btn btn-danger" ng-click="close()">Cancel</button>
-        </div>
     </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button>
+      <button type="button" class="btn btn btn-danger" ng-click="close()">Cancel</button>
+    </div>
+  </div>
 
 
 </div>
@@ -1007,66 +1015,66 @@
 
   <!-- Modal content -->
   <div class="modal-content">
-      <div class="modal-header">
-          <h4 class="modal-title">View Project</h4>
-          <button type="button" ng-click="close3()">&times;</button>
+    <div class="modal-header">
+      <h4 class="modal-title">View Project</h4>
+      <button type="button" ng-click="close3()">&times;</button>
 
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Project Title</label>
+        <input class="form-control" type="text" id="editProjectName2" placeholder="Project name *" disabled>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Project Title</label>
-          <input class="form-control" type="text" id="editProjectName2" placeholder="Project name *" disabled>
-        </div>
 
-        <div class="form-group">
-          <label>Client name</label>
-          <input class="form-control" type="text" id="editClientName2" placeholder="Name client or company name" disabled>
-        </div>
-        <div class="form-group">
-          <label>Project Rate</label>
-          <input class="form-control" type="text" id="editProjectRate2" placeholder="Enter project Rate" disabled>
-        </div>
-        <div class="form-group">
-          <label>Project Type</label>
-          <select class="form-control digits" id="editProjectType2" disabled>
-            <option value="hourly">Hourly</option>
-            <option value="fix">Fix price</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Priority</label>
-          <select class="form-control digits" id="editPriority2" disabled>
-            <option value="low">Low</option>
-            <option value="meduim">Medium</option>
-            <option value="high">High</option>
-            <option value="urgent">Urgent</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Project Size</label>
-          <select class="form-control digits" id="editProjectSize2" disabled>
-            <option value="small">Small</option>
-            <option value="meduim">Medium</option>
-            <option value="big">Big</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Starting date</label>
-          <input class="datepicker-here form-control" id="editStartingDate2" type="text" data-language="en" disabled>
-        </div>
-        <div class="form-group">
-          <label>Ending date</label>
-          <input class="datepicker-here form-control" id="editEndingDate2" type="text" data-language="en" disabled>
-        </div>
-        <div class="form-group">
-          <label for="task-title">Task Title</label>
-          <input class="form-control" id="editTaskTitle2" type="text" required="" autocomplete="off" disabled>
-        </div>
-        <div class="form-group">
-          <label for="sub-task">Sub task</label>
-          <input class="form-control" id="editSubTask2" type="text" required="" autocomplete="off" disabled>
-        </div>
-        <!-- <div class="form-group">
+      <div class="form-group">
+        <label>Client name</label>
+        <input class="form-control" type="text" id="editClientName2" placeholder="Name client or company name" disabled>
+      </div>
+      <div class="form-group">
+        <label>Project Rate</label>
+        <input class="form-control" type="text" id="editProjectRate2" placeholder="Enter project Rate" disabled>
+      </div>
+      <div class="form-group">
+        <label>Project Type</label>
+        <select class="form-control digits" id="editProjectType2" disabled>
+          <option value="hourly">Hourly</option>
+          <option value="fix">Fix price</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <select class="form-control digits" id="editPriority2" disabled>
+          <option value="low">Low</option>
+          <option value="meduim">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Project Size</label>
+        <select class="form-control digits" id="editProjectSize2" disabled>
+          <option value="small">Small</option>
+          <option value="meduim">Medium</option>
+          <option value="big">Big</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Starting date</label>
+        <input class="datepicker-here form-control" id="editStartingDate2" type="text" data-language="en" disabled>
+      </div>
+      <div class="form-group">
+        <label>Ending date</label>
+        <input class="datepicker-here form-control" id="editEndingDate2" type="text" data-language="en" disabled>
+      </div>
+      <div class="form-group">
+        <label for="task-title">Task Title</label>
+        <input class="form-control" id="editTaskTitle2" type="text" required="" autocomplete="off" disabled>
+      </div>
+      <div class="form-group">
+        <label for="sub-task">Sub task</label>
+        <input class="form-control" id="editSubTask2" type="text" required="" autocomplete="off" disabled>
+      </div>
+      <!-- <div class="form-group">
           <select class="js-example-basic-single">
             <option value="task">My Task</option>
           </select>
@@ -1076,16 +1084,16 @@
             <option value="general">General</option>
           </select>
         </div> -->
-        <div class="form-group">
-          <label>Enter some Details</label>
-          <textarea class="form-control" id="editDetails2" rows="3" disabled></textarea>
-        </div>
+      <div class="form-group">
+        <label>Enter some Details</label>
+        <textarea class="form-control" id="editDetails2" rows="3" disabled></textarea>
+      </div>
 
-      </div>
-      <div class="modal-footer">
-          <!-- <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button> -->
-          <button type="button" class="btn btn btn-danger" ng-click="close3()">Cancel</button>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button> -->
+      <button type="button" class="btn btn btn-danger" ng-click="close3()">Cancel</button>
+    </div>
   </div>
 
 
@@ -1095,24 +1103,24 @@
 <!-- The Modal -->
 <div id="myModal2" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Are you sure?</h4>
-            <button type="button" ng-click="close2()">&times;</button>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Are you sure?</h4>
+      <button type="button" ng-click="close2()">&times;</button>
 
-        </div>
-        <div class="modal-body">
-
-            <p>You want to delete <strong id="deleteUser" style="color: red;"></strong> Project?</p>
-            <!-- <p id="deleteUser" ></p> -->
-
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" ng-click="deleteUser()">Yes</button>
-            <button type="button" class="btn btn-info" ng-click="close2()">No</button>
-        </div>
     </div>
+    <div class="modal-body">
+
+      <p>You want to delete <strong id="deleteUser" style="color: red;"></strong> Project?</p>
+      <!-- <p id="deleteUser" ></p> -->
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" ng-click="deleteUser()">Yes</button>
+      <button type="button" class="btn btn-info" ng-click="close2()">No</button>
+    </div>
+  </div>
 
 
 </div>

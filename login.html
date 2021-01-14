@@ -41,7 +41,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
     <script type="text/javascript">
         (function () {
-            emailjs.init("user_r0ocDShgO3V3hH7Qw6juY");
+            emailjs.init("user_XyeMDfGDEOxxEmmgFlxqJ");
         })();
     </script>
 </head>
@@ -83,8 +83,7 @@
                                             <label for="checkbox1">Remember me</label>
                                         </div>
                                         <div class="form-group ">
-                                            <button class="btn btn-success btn-block" type="submit"
-                                                >LOGIN</button>
+                                            <button class="btn btn-success btn-block" type="submit">LOGIN</button>
                                         </div>
 
                                         <div>
@@ -94,8 +93,8 @@
                                             <!-- </p> -->
                                             <!-- <label>Forgot Password</label> -->
                                         </div>
-                                        <div class="login-divider"></div>
-                                        <div class="social mt-3">
+                                        <div class="login-divider" style="display: none;"></div>
+                                        <div class="social mt-3" style="display: none;">
                                             <div class="row btn-showcase">
                                                 <div class="col-md-4 col-sm-6">
                                                     <button class="btn social-btn btn-fb">Facebook</button>
@@ -140,6 +139,7 @@
                                                         <h6 class="text-center">Enter your Username and Password For
                                                             Signup</h6>
                                                         <br>
+                                                        <!-- <div class="card-body" style="height:300px;overflow:auto;"> -->
                                                         <div class="card-body">
                                                             <!-- Smart Wizard start-->
                                                             <div class="wizard-4" id="wizard">
@@ -241,22 +241,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div> -->
-                                                                <!-- <div id="step-4">
-                                                        <div class="col-sm-12 pl-0">
-                                                          <div class="form-group mb-3">
-                                                            <label class="control-label">Country</label>
-                                                            <input class="form-control mt-1" type="text" placeholder="Country" required="required">
-                                                          </div>
-                                                          <div class="form-group mb-3">
-                                                            <label class="control-label">State</label>
-                                                            <input class="form-control mt-1" type="text" placeholder="State" required="required">
-                                                          </div>
-                                                          <div class="form-group mb-3">
-                                                            <label class="control-label">City</label>
-                                                            <input class="form-control mt-1" type="text" placeholder="City" required="required">
-                                                          </div>
-                                                        </div>
-                                                      </div> -->
+
+                                                                <!-- <div class="form-divider"></div> -->
                                                             </div>
 
                                                             <!-- Smart Wizard Ends-->
@@ -680,6 +666,8 @@
                     $.ajax(settings).done(function (response2) {
                         sessionStorage.setItem("comPhoto", response2.logo);
                         sessionStorage.setItem("comid", response.comid);
+                        sessionStorage.setItem("name", response.fullname);
+                        sessionStorage.setItem("rate", response.rate);
                         var lsrole = 0;
                         var decodedPwd = Base64.decode(response.password);
                         // var role = response.role;
@@ -735,7 +723,7 @@
                                 },
                                 success: function (data) {
                                     console.log("T-Log");
-                                    
+
                                     window.location.href = './index.html';
                                 },
                                 error: function (response) {
@@ -846,8 +834,8 @@
                 }
 
 
-                var service_id = "fvs2";
-                var template_id = "template_qsp3n19";
+                var service_id = "service_fvs";
+                var template_id = "template_z3a494n";
                 emailjs.send(service_id, template_id, template_params);
 
                 console.log("Sent");

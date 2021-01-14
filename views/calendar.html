@@ -14,8 +14,6 @@
     width: 150px;
     /* margin: 200px;  */
     text-align: center;
-    border: 2px solid black;
-    border-radius: 20px;
   }
 
   #wrap {
@@ -121,19 +119,12 @@
 
 <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/calendar.css" /> -->
-<link
-  href="/assets/fullcalendar/fullcalendar/fullcalendar.css"
-  rel="stylesheet"
-/>
-<link
-  href="/assets/fullcalendar/fullcalendar/fullcalendar.print.css"
-  rel="stylesheet"
-  media="print"
-/>
-<script src="../lib/jquery.min.js"></script>
-<script src="../lib/jquery-ui.custom.min.js"></script>
+<link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+<link href="/assets/fullcalendar/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+<!-- <script src="../lib/jquery.min.js"></script>
+<script src="../lib/jquery-ui.custom.min.js"></script> -->
 <script src="/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-<script src="./assets/js/select2.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
 
 <!-- Select2 CSS -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />  -->
@@ -167,8 +158,8 @@
                         style="border-width: 0" width="950" height="520" frameborder="0" scrolling="no">
                     </iframe>
                 </div> -->
-        <div id="wrap" style="max-width: 100%; height: auto">
-          <div id="calendar"></div>
+        <div id="wrap" style="max-width: 100%; height: auto" class="p-2">
+          <div id="calendar" class="p-0 m-0"></div>
 
           <div style="clear: both"></div>
         </div>
@@ -233,12 +224,13 @@
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <!-- <h4 class="modal-title">Admin</h4> -->
-        <button type="button" class="close" data-dismiss="modal" id="">
+
+        <button type="button" class="close" data-dismiss="modal" id="times">
           &times;
         </button>
       </div>
@@ -265,14 +257,8 @@
               <div class="col">
                 <div class="form-group">
                   <!-- <label >Subject</label> -->
-                  <select
-                    class="form-control"
-                    id="cleanersID"
-                    type="text"
-                    placeholder="Cleaner's Name"
-                    required
-                    autocomplete="off"
-                  >
+                  <select class="form-control" id="cleanersID" type="text" placeholder="Cleaner's Name" required
+                    autocomplete="off">
                     <option value="0">Select User</option>
                   </select>
                 </div>
@@ -282,13 +268,7 @@
               <div class="col">
                 <div class="form-group">
                   <!-- <label >Subject</label> -->
-                  <input
-                    class="form-control"
-                    id="title"
-                    type="text"
-                    placeholder="Title"
-                    required
-                  />
+                  <input class="form-control" id="title" type="text" placeholder="Title" required />
                 </div>
               </div>
             </div>
@@ -296,12 +276,7 @@
               <div class="col">
                 <div class="form-group">
                   <!-- <label >Subject</label> -->
-                  <input
-                    class="form-control"
-                    id="a-location"
-                    type="text"
-                    placeholder="Location"
-                  />
+                  <input class="form-control" id="a-location" type="text" placeholder="Location" />
                 </div>
               </div>
             </div>
@@ -310,190 +285,112 @@
               <div class="col">
                 <div class="form-group">
                   <!-- <label >Subject</label> -->
-                  <input
-                    class="form-control"
-                    id="timeAdmin"
-                    type="time"
-                    placeholder="time"
-                    required
-                  />
+                  <input class="form-control" id="timeAdmin" type="time" placeholder="time" required />
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-sm-6" style="display: none">
-                <div class="form-group">
-                  <input
-                    class="form-control"
-                    id="dateStart"
-                    type="text"
-                    disabled
-                  />
+              <div class="col">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="eImages" name="eImages" required="required"
+                    accept="image/*" multiple />
+                  <label id="eImgLabel" class="custom-file-label text-left" style="border: none" for="eImages">Upload
+                    Images</label>
+                  <br /><br />
                 </div>
               </div>
+            </div>
+
+            <div class="row">
               <div class="col-sm-12 d-flex">
-                <ul
-                  class="fc-color-picker d-flex justify-content-around w-50"
-                  id="color-chooser"
-                >
+                <ul class="fc-color-picker d-flex justify-content-around w-50" id="color-chooser">
                   <li>
-                    <a
-                      class="bg-primary"
-                      onclick="pickColor('#7366ff')"
-                      style="
+                    <a class="bg-primary" onclick="pickColor('#7366ff')" style="
                         height: 25px;
                         width: 25px;
                         display: block;
                         border-radius: 3px;
-                      "
-                      href="javascript:void(0)"
-                    ></a>
+                      " href="javascript:void(0)"></a>
                   </li>
                   <li>
-                    <a
-                      class="bg-warning"
-                      onclick="pickColor('#f8d62b')"
-                      style="
+                    <a class="bg-warning" onclick="pickColor('#f8d62b')" style="
                         height: 25px;
                         width: 25px;
                         display: block;
                         border-radius: 3px;
-                      "
-                      href="javascript:void(0)"
-                    ></a>
+                      " href="javascript:void(0)"></a>
                   </li>
                   <li>
-                    <a
-                      class="bg-success"
-                      onclick="pickColor('#51bb25')"
-                      style="
+                    <a class="bg-success" onclick="pickColor('#51bb25')" style="
                         height: 25px;
                         width: 25px;
                         display: block;
                         border-radius: 3px;
-                      "
-                      href="javascript:void(0)"
-                    ></a>
+                      " href="javascript:void(0)"></a>
                   </li>
                   <li>
-                    <a
-                      class="bg-danger"
-                      onclick="pickColor('#dc3545')"
-                      style="
+                    <a class="bg-danger" onclick="pickColor('#dc3545')" style="
                         height: 25px;
                         width: 25px;
                         display: block;
                         border-radius: 3px;
-                      "
-                      href="javascript:void(0)"
-                    ></a>
+                      " href="javascript:void(0)"></a>
                   </li>
                   <li>
-                    <a
-                      class="bg-info"
-                      onclick="pickColor('#a927f9')"
-                      style="
+                    <a class="bg-info" onclick="pickColor('#a927f9')" style="
                         height: 25px;
                         width: 25px;
                         display: block;
                         border-radius: 3px;
-                      "
-                      href="javascript:void(0)"
-                    ></a>
+                      " href="javascript:void(0)"></a>
                   </li>
                 </ul>
                 <div class="form-group w-50">
-                  <input
-                    type="color"
-                    class="p-0"
-                    id="tagColor"
-                    name="tagColor"
-                    style="width: 75%; height: 25px"
-                    value="#ffffff"
-                  />
+                  <input type="color" class="p-0" id="tagColor" name="tagColor" style="width: 75%; height: 25px"
+                    value="#ffffff" />
                 </div>
               </div>
-              <!-- <div class="checkbox checkbox-success col-sm-6">
-                                <div id="clock">8:10:45</div>
-                            </div> -->
             </div>
             <div class="btn-group btn-group-sm pull-right">
               <button type="button" class="btn btn-success" ng-click="addtr()">
                 <i class="fa fa-plus-circle"></i>
               </button>
 
-              <button
-                type="button"
-                class="btn btn-danger"
-                ng-click="removetr()"
-              >
+              <button type="button" class="btn btn-danger" ng-click="removetr()">
                 <i class="fa fa-minus-circle"></i>
               </button>
             </div>
-            <!-- <table id="convert-table" class="table table-striped table-bordered table-hover" width="100%">
-                            <thead>
-
-                                <tr>
-                                    <th class="text-center text-primary">Number</th>
-                                    <th class="text-center text-primary">Task</th>
-                                    <th class="text-center text-primary">Status</th>
-
-                                </tr>
-                            </thead>
-                            <tbody id="appendhere">
-                                <tr class="row_to_clone">
-
-                                    <td class=""><label class="input">
-                                            <span>1</span>
-                                        </label></td>
-                                    </td>
-
-                                    <td class="col-md-1"><label class="input">
-                                            <input type="text" placeholder="Task">
-                                        </label></td>
-                                    </td>
-                                    <td class="col-md-1"><label class="input">
-                                            <input class="checkbox_animated" id="chk-ani" type="checkbox">
-                                        </label></td>
-                                </tr>
-                            </tbody>
-                        </table> -->
             <div class="w-100 d-flex justify-content-around py-2">
-              <span class="w-25">Number</span>
-              <span class="w-50 text-left pl-2">Task</span>
+              <span class="w-25 text-left" style="padding-left: 12px">Number</span>
+              <span class="w-50 text-left" style="padding-left: 12px">Task</span>
               <span class="w-25">Status</span>
             </div>
             <div id="appendhere"></div>
+            <div class="row mt-2">
+              <div class="col">
+                <div class="form-group">
+                  <!-- <label >Subject</label> -->
+                  <textarea class="form-control" name="aRemarks" id="aRemarks" cols="30" rows="3"
+                    placeholder="Remarks"></textarea>
+                </div>
+              </div>
+            </div>
           </fieldset>
         </form>
-
-        <!-- <p>{{gadd}}</p> -->
-
-        <!-- <div id="sw-time">00:00:00</div> -->
       </div>
       <div class="modal-footer">
-        <!-- <input type="button" value="Reset" style="display: none;" id="sw-rst" disabled />
-                <input type="button" value="Start" id="sw-go" disabled />
-                <input type="button" value="Save" style="display: none;" id="sw-save" /> -->
-        <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        <button
-          type="button"
-          class="btn btn-success"
-          data-dismiss="modal"
-          id="save-admin"
-          value="Save"
-        >
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="save-admin" value="Save">
           Save
         </button>
+        <button type="reset" id="rstBtn" style="display: none"></button>
       </div>
     </div>
   </div>
 </div>
 
 <div class="modal fade" id="myModal2" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -504,94 +401,83 @@
         </button>
       </div>
       <div class="modal-body">
-        <fieldset>
-          <!-- <div class="col-sm-6">
-            <div class="form-group">
-              <label>Project Type</label>
-              <select class="form-control digits" id="dp">
-                <option value="Daily Itinerary">Daily Itinerary</option>
-                <option value="fix">Fix price</option>
-              </select>
-            </div>
-          </div> -->
-          <div class="row">
-            <div class="col">
-              <div class="form-group d-flex justify-content-start">
-                <h6 class="px-4 py-2 m-0 w-25 text-left">Title:</h6>
-                <input
-                  class="form-control w-75"
-                  id="c-subject"
-                  type="text"
-                  placeholder="Subject"
-                  disabled
-                />
+        <form action="" id="eUpdateEvent">
+          <fieldset>
+            <div class="row mb-2" id="eClock">
+              <div class="col d-flex justify-content-start">
+                <h6 class="px-4 py-2 m-0 w-25 text-left">Clock:</h6>
+                <div id="clock" class="w-75"></div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="form-group d-flex justify-content-start">
-                <h6 class="px-4 py-2 m-0 w-25 text-left">Location:</h6>
-                <input
-                  class="form-control w-75"
-                  id="c-location"
-                  type="text"
-                  placeholder="Location"
-                  disabled
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div
-              class="checkbox checkbox-success col-sm-12 d-flex justify-content-center"
-            >
-              <!-- <div id="txt"></div> -->
-              <!-- <input class="form-control" id="txt" type="text"> -->
-              <div id="clock"></div>
-            </div>
-          </div>
-          <div
-            class="card-body animate-chk text-left"
-            style="display: none"
-            id="list"
-          >
-            <h6>Tasks</h6>
             <div class="row">
-              <div class="col" id="event-tasks"></div>
+              <div class="col">
+                <div class="form-group d-flex justify-content-start">
+                  <h6 class="px-4 py-2 m-0 w-25 text-left">Title:</h6>
+                  <input class="form-control w-75" id="c-subject" type="text" placeholder="Subject" disabled />
+                </div>
+              </div>
             </div>
-          </div>
-        </fieldset>
+            <div class="row">
+              <div class="col">
+                <div class="form-group d-flex justify-content-start">
+                  <h6 class="px-4 py-2 m-0 w-25 text-left">Location:</h6>
+                  <input class="form-control w-75" id="c-location" type="text" placeholder="Location" disabled />
+                </div>
+              </div>
+            </div>
+            <div class="row" id="empUpload" style="display: none">
+              <div class="col w-100 d-flex justify-content-end" style="padding-bottom: 20px">
+                <h6 class="px-4 py-2 m-0 w-25 text-left">Upload:</h6>
+                <div class="custom-file w-75">
+                  <input type="file" class="custom-file-input" id="empImages" name="empImages" required="required"
+                    accept="image/*" multiple />
+                  <label id="empImgLabel" class="custom-file-label text-left" style="border: none"
+                    for="empImages">Choose image</label>
+                  <br /><br />
+                </div>
+              </div>
+            </div>
+            <div class="row" id="empRemark" style="display: none">
+              <div class="col">
+                <div class="form-group d-flex justify-content-start">
+                  <h6 class="px-4 py-2 m-0 w-25 text-left">Remark:</h6>
+                  <textarea class="form-control w-75" name="empRemarks" id="empRemarks" cols="30" rows="3"
+                    style="resize: none" placeholder="Employee's remarks" disabled="true"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row" id="empUploads" style="display: none">
+              <div class="col">
+                <div class="form-group d-flex justify-content-start">
+                  <h6 class="px-4 py-2 m-0 w-25 text-left">Uploads:</h6>
+                  <div id="emplUploads" class="d-flex justify-content-start flex-sm-wrap mb-2 px-2 w-75"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body animate-chk text-left" style="display: none; padding-left: 24px" id="list">
+              <h6>Tasks</h6>
+              <div class="row">
+                <div class="col" id="event-tasks"></div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
 
         <!-- <p>{{gadd}}</p> -->
 
         <!-- <div id="sw-time">00:00:00</div> -->
       </div>
-      <div class="modal-footer">
-        <input
-          type="button"
-          value="Save"
-          class="btn btn-success"
-          style="display: none"
-          id="sw-save"
-          disabled
-        />
-        <input
-          type="button"
+      <div class="modal-footer" id="modFoot3">
+        <input type="button" value="Save" class="btn btn-success" style="display: none" id="sw-save" disabled />
+        <!-- <input
+          type="reset"
           value="Close"
           class="btn btn-danger ml-4"
           style="display: none"
           id="sw-rst"
           disabled
-        />
-        <input
-          type="button"
-          class="btn btn-primary"
-          value="Start"
-          id="sw-go"
-          disabled
-        />
+        /> -->
+        <input type="button" class="btn btn-primary" value="Start" id="sw-go" disabled />
         <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
       </div>
@@ -600,36 +486,29 @@
 </div>
 
 <div class="modal fade" id="myModal3" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <!-- <div id="sw-time" style="display: none;">00:00:00</div> -->
         <!-- <h4 class="modal-title">Cleaners</h4> -->
+        <button type="button" class="btn btn-danger" id="delBtn" onclick="deleteEvent()">
+          Delete
+        </button>
         <button type="button" class="close" data-dismiss="modal" id="times3">
           &times;
         </button>
       </div>
       <div class="modal-body">
         <!-- <span id="myAdd">You are @ :{{gadd}}</span> -->
-        <object
-          data="./assets/geolocate2.html"
-          width="100%"
-          height="500"
-        ></object>
+        <div id="objectMap"></div>
         <fieldset>
           <div class="row">
             <div class="col">
               <div class="form-group">
                 <!-- <label >Subject</label> -->
-                <select
-                  class="form-control"
-                  id="emp-name"
-                  type="text"
-                  placeholder="Employee's Name"
-                  required
-                  autocomplete="off"
-                ></select>
+                <select class="form-control" id="emp-name" type="text" placeholder="Employee's Name" required
+                  autocomplete="off"></select>
               </div>
             </div>
           </div>
@@ -637,12 +516,7 @@
             <div class="col">
               <div class="form-group">
                 <!-- <label >Subject</label> -->
-                <input
-                  class="form-control"
-                  id="subject3"
-                  type="text"
-                  placeholder="Subject"
-                />
+                <input class="form-control" id="subject3" type="text" placeholder="Subject" />
               </div>
             </div>
           </div>
@@ -650,127 +524,109 @@
             <div class="col">
               <div class="form-group">
                 <!-- <label >Subject</label> -->
-                <input
-                  class="form-control"
-                  id="location3"
-                  type="text"
-                  placeholder="location"
-                />
+                <input class="form-control" id="location3" type="text" placeholder="location" />
               </div>
             </div>
           </div>
           <div class="row">
-            <!-- <div class="col-sm-6" style="display: none">
-              <div class="form-group">
-                <input
-                  class="form-control"
-                  id="dateStart"
-                  type="text"
-                  disabled
-                />
-              </div>
-            </div> -->
-            <div class="col-sm-12 d-flex">
-              <ul
-                class="fc-color-picker d-flex justify-content-around w-50"
-                id="color-chooser"
-              >
+            <div class="col-sm-6 d-flex">
+              <ul class="fc-color-picker d-flex justify-content-around w-50" id="color-chooser">
                 <li>
-                  <a
-                    class="bg-primary"
-                    onclick="pickEColor('#7366ff')"
-                    style="
+                  <a class="bg-primary" onclick="pickEColor('#7366ff')" style="
                       height: 25px;
                       width: 25px;
                       display: block;
                       border-radius: 3px;
-                    "
-                    href="javascript:void(0)"
-                  ></a>
+                    " href="javascript:void(0)"></a>
                 </li>
                 <li>
-                  <a
-                    class="bg-warning"
-                    onclick="pickEColor('#f8d62b')"
-                    style="
+                  <a class="bg-warning" onclick="pickEColor('#f8d62b')" style="
                       height: 25px;
                       width: 25px;
                       display: block;
                       border-radius: 3px;
-                    "
-                    href="javascript:void(0)"
-                  ></a>
+                    " href="javascript:void(0)"></a>
                 </li>
                 <li>
-                  <a
-                    class="bg-success"
-                    onclick="pickEColor('#51bb25')"
-                    style="
+                  <a class="bg-success" onclick="pickEColor('#51bb25')" style="
                       height: 25px;
                       width: 25px;
                       display: block;
                       border-radius: 3px;
-                    "
-                    href="javascript:void(0)"
-                  ></a>
+                    " href="javascript:void(0)"></a>
                 </li>
                 <li>
-                  <a
-                    class="bg-danger"
-                    onclick="pickEColor('#dc3545')"
-                    style="
+                  <a class="bg-danger" onclick="pickEColor('#dc3545')" style="
                       height: 25px;
                       width: 25px;
                       display: block;
                       border-radius: 3px;
-                    "
-                    href="javascript:void(0)"
-                  ></a>
+                    " href="javascript:void(0)"></a>
                 </li>
                 <li>
-                  <a
-                    class="bg-info"
-                    onclick="pickEColor('#a927f9')"
-                    style="
+                  <a class="bg-info" onclick="pickEColor('#a927f9')" style="
                       height: 25px;
                       width: 25px;
                       display: block;
                       border-radius: 3px;
-                    "
-                    href="javascript:void(0)"
-                  ></a>
+                    " href="javascript:void(0)"></a>
                 </li>
               </ul>
-              <div class="form-group w-50">
-                <input
-                  type="color"
-                  class="p-0"
-                  id="eColor"
-                  name="eColor"
-                  style="width: 75%; height: 25px"
-                  value="#ffffff"
-                />
+              <div class="form-group w-50 ml-1">
+                <input type="color" class="p-0" id="eColor" name="eColor" style="width: 100%; height: 25px"
+                  value="#ffffff" />
               </div>
             </div>
-            <!-- <div class="checkbox checkbox-success col-sm-6">
-                              <div id="clock">8:10:45</div>
-                          </div> -->
+            <div class="col-sm-6">
+              <div class="w-100 text-right">
+                <a href="javascript:void(0)" class="py-1 px-4 bg-primary rounded mr-1" data-toggle="modal"
+                  data-target="#imageModal" onclick="displayImages()">View Images</a>
+              </div>
+            </div>
+            <div class="modal fade" id="imageModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+              aria-labelledby="imageModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                      Event Images
+                    </h5>
+                    <button type="button" id="times4" class="close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h6 class="block text-left">Admin Photos</h6>
+                    <div id="adminImages" class="d-flex justify-content-start flex-sm-wrap mb-2 px-2"></div>
+                    <h6 class="block text-left">Employee Photos</h6>
+                    <div id="emplImages" class="d-flex justify-content-start flex-sm-wrap mb-2 px-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- <div class="btn-group btn-group-sm pull-right">
-            <button type="button" class="btn btn-success" onclick="addTask()">
-              <i class="fa fa-plus-circle"></i>
-            </button>
-
-            <button type="button" class="btn btn-danger" onclick="removeTask()">
-              <i class="fa fa-minus-circle"></i>
-            </button>
-          </div> -->
           <div class="w-100 d-flex justify-content-around py-2">
             <span class="w-25">Number</span>
             <span class="w-50 text-left pl-2">Task</span>
             <span class="w-25">Status</span>
           </div>
           <div id="e-tasks"></div>
+          <div class="row mt-3">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="w-100 text-left pl-2">Remarks:</label>
+                <textarea class="form-control" name="a-remarks" id="a-remarks" cols="30" rows="3"
+                  placeholder="Admin remarks" style="resize: none"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="w-100 text-left pl-2">Employee's remarks:</label>
+                <textarea class="form-control" name="eRemarks" id="eRemarks" cols="30" rows="3"
+                  placeholder="Employee's remarks" style="resize: none"></textarea>
+              </div>
+            </div>
+          </div>
         </fieldset>
 
         <!-- <p>{{gadd}}</p> -->
@@ -783,16 +639,11 @@
                 <input type="button" value="Save" style="display: none;" id="sw-save" disabled /> -->
         <!-- <button type="button" class="btn btn-default" value="Reset">Start</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        <button
-          type="button"
-          class="btn btn-success"
-          data-dismiss="modal"
-          id="save2-admin"
-          value="Save"
-          onclick="eUpdateAdmin()"
-        >
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="save2-admin" value="Save"
+          onclick="eUpdateAdmin()">
           Save
         </button>
+        <button type="reset" style="display: none"></button>
       </div>
     </div>
   </div>
@@ -821,7 +672,7 @@
     min = min < 10 ? "0" + min : min;
     sec = sec < 10 ? "0" + sec : sec;
 
-    let currentTime = hour + ":" + min + ":" + sec + am_pm;
+    let currentTime = hour + ":" + min + ":" + sec + " " + am_pm;
     document.getElementById("clock").innerHTML = currentTime;
 
     return currentTime;
@@ -838,6 +689,7 @@
   showTime();
   var arr = [];
   var arr2 = [];
+  var newFiltered = [];
   var eventTasks = [];
   var calendar;
 
@@ -853,9 +705,6 @@
       $("#result").html("id : " + userid + ", name : " + username);
     });
 
-    // SW Init
-    sw.init();
-
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -863,8 +712,7 @@
     var users = [];
     var data2 = [];
     var settings2 = {
-      url:
-        "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
+      url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
       method: "GET",
       timeout: 0,
     };
@@ -904,13 +752,10 @@
 
     var data = [];
     var settings = {
-      url:
-        "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcalendar",
+      url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allcalendar",
       method: "GET",
       timeout: 0,
     };
-
-    var newFiltered;
 
     $.ajax(settings).done(function (response) {
       var count = response.Count;
@@ -941,6 +786,11 @@
           task: res.task.L,
           title: res.title.S,
           year: res.year.S,
+          aPhoto: res.aPhoto.L,
+          aRemarks: res.aRemarks.S,
+          cPhoto: res.cPhoto.L,
+          cRemarks: res.cRemarks.S,
+          workingHr: res.workingHr.S,
         };
         data.push(arr[i]);
       }
@@ -949,6 +799,10 @@
       var userEmail = sessionStorage.getItem("user");
       if (role == 1) {
         newFiltered = arr.map((users) => {
+          var startingTime = users.startingTime;
+          var time = startingTime.split(":");
+          var hr = time[0];
+          var min = time[1];
           var user = {
             id: users.id,
             title: users.title,
@@ -956,13 +810,20 @@
             tasks: users.task,
             color: users.color,
             employeeEmail: users.employeeEmail,
-            start: new Date(users.year, users.month, users.day),
+            start: new Date(users.year, users.month, users.day, hr, min),
+            end: users.end,
+            allDay: false,
           };
 
           return user;
         });
       } else if (role == 2) {
         var eventFilter = arr.map((events) => {
+          var startingTime = events.startingTime;
+          var time = startingTime.split(":");
+          var hr = time[0];
+          var min = time[1];
+          // console.log(hr)
           var event = {
             id: events.id,
             title: events.title,
@@ -971,7 +832,8 @@
             color: events.color,
             employeeEmail: events.employeeEmail,
             tasks: events.task,
-            start: new Date(events.year, events.month, events.day),
+            start: new Date(events.year, events.month, events.day, hr, min),
+            allDay: false,
           };
 
           return event;
@@ -981,32 +843,7 @@
         );
       }
 
-      // var tasks = [];
-      // for (let i = 0; i < newFiltered.length; i++) {
-      //   let e = newFiltered[i];
-      //   let t = e.tasks;
-
-      // }
-
-      // console.log(newFiltered);
-
-      // $("#external-events div.external-event").each(function () {
-      //   // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-      //   // it doesn't need to have a start or end
-      //   var eventObject = {
-      //     title: $.trim($(this).text()), // use the element's text as the event title
-      //   };
-
-      //   // store the Event Object in the DOM element so we can get to it later
-      //   $(this).data("eventObject", eventObject);
-
-      //   // make the event draggable using jQuery UI
-      //   $(this).draggable({
-      //     zIndex: 999,
-      //     revert: true, // will cause the event to go back to its
-      //     revertDuration: 0, //  original position after the drag
-      //   });
-      // });
+      // console.log(arr);
 
       /* initialize the calendar
                 -----------------------------------------------------------------*/
@@ -1017,7 +854,7 @@
           right: "prev,next today",
         },
         editable: true,
-        firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+        firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
         selectable: true,
         defaultView: "month",
 
@@ -1035,190 +872,152 @@
         },
         allDaySlot: false,
         selectHelper: true,
-        select: function (start, end, allDay) {
-          // document.getElementById("location").value = sessionStorage.getItem(
-          //   "gadd"
-          // );
-          $("#save-admin").prop("disabled", false);
-          const stringNew = new String(start);
-          var arr1 = stringNew.split(" ");
-          var fixMonth;
-          var dayAdded = arr1[2] * 1;
-          var dayAdded = dayAdded;
-          if (arr1[1] == "Jan") {
-            fixMonth = 00;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Feb") {
-            fixMonth = 01;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Mar") {
-            fixMonth = 02;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Apr") {
-            fixMonth = 03;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "May") {
-            fixMonth = 04;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Jun") {
-            fixMonth = 05;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Jul") {
-            fixMonth = 06;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Aug") {
-            fixMonth = 07;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Sep") {
-            fixMonth = 08;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Oct") {
-            fixMonth = 09;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Nov") {
-            fixMonth = 10;
-            // console.log(fixMonth);
-          } else if (arr1[1] == "Dec") {
-            fixMonth = 11;
-            // console.log(fixMonth);
-          }
-          // document.getElementById("dateStart").value =
-          //   arr1[2] + "/" + fixMonth + "/" + arr1[3];
-          // document.getElementById("dateStart2").value =
-          //   arr1[2] + "/" + fixMonth + "/" + arr1[3];
-          // $("#dateStart").val(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
-          // console.log(arr1[2] + "/" + fixMonth + "/" + arr1[3]);
-          // var title = prompt('Event Title:');
+        select: function (start, end) {
+          const today = Date.now();
+          const strt = Date.parse(start);
+          const diff = (today - strt) / 1000;
           let role = sessionStorage.getItem("role");
-          if (role == 1) {
-            $("#myModal").modal({ backdrop: "static", keyboard: false });
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function (position) {
-                var c = position.coords;
-                // $scope.updatePosition(c.latitude, c.longitude);
-                lat = c.latitude;
-                lng = c.longitude;
-                console.log(c.latitude);
-                console.log(c.longitude);
-              });
-            }
-          } else if (role == 2) {
-            calendar.fullCalendar("unselect");
-          }
-
-          function getTask() {
-            var tasks = [];
-            var taskNames = document.querySelectorAll(".task-name");
-            var taskNumber = document.querySelectorAll(".task-number");
-            var taskStatus = document.querySelectorAll(".task-status");
-
-            for (let i = 0; i < taskNames.length; i++) {
-              const task = {
-                number: taskNumber[i].innerHTML,
-                taskItem: taskNames[i].value,
-                status: taskStatus[i].checked,
-              };
-
-              tasks.push(task);
-            }
-
-            return tasks;
-          }
-
-          $("#save-admin").click(function () {
-            var title = (document.getElementById("title").value = $(
-              "#title"
-            ).val());
-            var timeAdmin = document.getElementById("timeAdmin").value;
-            var adminHr = parseInt(timeAdmin.substring(0, 2), 0);
-            var adminMn = timeAdmin.substring(2);
-            var startingTime = "";
-            if (adminHr >= 12) {
-              startingTime = `${adminHr - 12}${adminMn} PM`;
-            } else if (adminHr == 24) {
-              startingTime = `${adminHr - 12}${adminMn} AM`;
-            } else {
-              startingTime = `${timeAdmin} AM`;
-            }
-            var tagColor = $("#tagColor").val();
-            var adminLocation = $("#a-location").val();
-            var cleanersID = $("#cleanersID option:selected").text();
-            var id_split = cleanersID.split("<");
-            var employeeName = id_split[0];
-            var employeeEmail = $("#cleanersID").val();
-            var tasks = getTask();
-            var gadd = sessionStorage.getItem("gadd");
-            var button = document.getElementById("times");
-            // button.disabled = false;
-            var userComID = sessionStorage.getItem("comid");
-            var userEmail = sessionStorage.getItem("user");
-            var myData2 = JSON.stringify({
-              comid: userComID,
-              task: tasks,
-              startingTime: startingTime,
-              adminEmail: userEmail,
-              employeeName: employeeName,
-              employeeEmail: employeeEmail,
-              title: title,
-              color: tagColor,
-              location: adminLocation,
-              day: dayAdded,
-              month: fixMonth,
-              year: arr1[3],
-              start: start,
-              end: end,
-              allDay: allDay,
-              hr: sessionStorage.getItem("hr"),
-              mins: sessionStorage.getItem("mins"),
-              secs: sessionStorage.getItem("secs"),
+          if (role == 1 && diff < 86400) {
+            $("#myModal").modal({
+              backdrop: "static",
+              keyboard: false
             });
-            // console.log(startingTime);
-            calendar.fullCalendar(
-              "renderEvent",
-              {
+            $("#save-admin").prop("disabled", false);
+            const stringNew = new String(start);
+            var arr1 = stringNew.split(" ");
+            var fixMonth;
+            var dayAdded = arr1[2] * 1;
+            var dayAdded = dayAdded;
+            if (arr1[1] == "Jan") {
+              fixMonth = 00;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Feb") {
+              fixMonth = 01;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Mar") {
+              fixMonth = 02;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Apr") {
+              fixMonth = 03;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "May") {
+              fixMonth = 04;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Jun") {
+              fixMonth = 05;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Jul") {
+              fixMonth = 06;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Aug") {
+              fixMonth = 07;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Sep") {
+              fixMonth = 08;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Oct") {
+              fixMonth = 09;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Nov") {
+              fixMonth = 10;
+              // console.log(fixMonth);
+            } else if (arr1[1] == "Dec") {
+              fixMonth = 11;
+              // console.log(fixMonth);
+            }
+
+            $("#save-admin").click(function () {
+              var title = (document.getElementById("title").value = $(
+                "#title"
+              ).val());
+              var timeAdmin = document.getElementById("timeAdmin").value;
+              var time = timeAdmin.split(":");
+              var tagColor = $("#tagColor").val();
+              var adminLocation = $("#a-location").val();
+              var cleanersID = $("#cleanersID option:selected").text();
+              var remarks = $("#aRemarks").val();
+              var id_split = cleanersID.split("<");
+              var employeeName = id_split[0];
+              var employeeEmail = $("#cleanersID").val();
+              var tasks = getTask();
+              var userComID = sessionStorage.getItem("comid");
+              var userEmail = sessionStorage.getItem("user");
+              var myData2 = JSON.stringify({
+                comid: userComID,
+                task: tasks,
+                workingHr: "0",
+                startingTime: timeAdmin,
+                adminEmail: userEmail,
+                employeeName: employeeName,
+                employeeEmail: employeeEmail,
                 title: title,
+                color: tagColor,
+                aPhoto: images,
+                aRemarks: remarks,
+                location: adminLocation,
+                day: dayAdded,
+                month: fixMonth,
+                year: arr1[3],
                 start: start,
                 end: end,
-                allDay: allDay,
-                color: tagColor,
-              },
-              true // make the event "stick"
-            );
+                allDay: "false",
+                hr: sessionStorage.getItem("hr"),
+                mins: sessionStorage.getItem("mins"),
+                secs: sessionStorage.getItem("secs"),
+              });
+              // console.log(myData2);
+              calendar.fullCalendar(
+                "renderEvent", {
+                  title: title,
+                  start: new Date(
+                    arr1[3],
+                    fixMonth,
+                    dayAdded,
+                    time[0],
+                    time[1]
+                  ),
+                  end: end,
+                  allDay: false,
+                  color: tagColor,
+                },
+                true // make the event "stick"
+              );
 
-            $.ajax({
-              type: "POST",
-              dataType: "json",
-              url:
-                "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
-              data: myData2,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              success: function (data) {
-                console.log(data);
-                $("#save-admin").prop("disabled", true);
-                calendar.fullCalendar("unselect");
-                console.log("Saved!");
-              },
-              error: function (response) {
-                console.log(response);
-                console.log("Error");
-              },
+              $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+                data: myData2,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                success: function (data) {
+                  console.log(data);
+                  $("#save-admin").prop("disabled", true);
+                  images = [];
+                  calendar.fullCalendar("unselect");
+                  console.log("Saved!");
+                  // $("#times").click();
+                  $("#newEvent").trigger("reset");
+                  $("#appendhere .task").remove();
+                  $("#myModal").modal("hide");
+                  setTimeout(() => {
+                    window.location.href = "#calendar";
+                  }, 500);
+                },
+                error: function (response) {
+                  console.log(response);
+                  console.log("Error");
+                },
+              });
             });
-          });
-          // $scope.gadd = sessionStorage.getItem('gadd');
-          // if (title) {
-          //     calendar.fullCalendar('renderEvent', {
-          //             title: title,
-          //             start: start,
-          //             end: end,
-          //             allDay: allDay
-          //         },
-          //         true // make the event "stick"
-          //     );
-          // }
-
-          // calendar.fullCalendar('unselect');
+          } else if (role == 1 && diff > 86400) {
+            calendar.fullCalendar("unselect");
+          } else if (role == 2) {
+            calendar.fullCalendar("unselect");
+          } else {
+            calendar.fullCalendar("unselect");
+          }
         },
         droppable: true, // this allows things to be dropped onto the calendar !!!
         drop: function (date, allDay) {
@@ -1248,12 +1047,6 @@
       });
     });
 
-    /*  className colors
-
-            className: default(transparent), important(red), chill(pink), success(green), info(blue)
-
-            */
-
     /* initialize the external events
             -----------------------------------------------------------------*/
   });
@@ -1282,58 +1075,32 @@
     task: [],
     title: "",
     year: "",
+    aPhoto: [],
+    aRemarks: "",
+    cPhoto: [],
+    cRemarks: "",
+    workingHr: "",
   };
 
   var e;
-
-  function swSave() {
-    console.log("Save2");
-    document.getElementById("sw-save").style.display = "none";
-    // document.getElementById("sw-rst").style.display = "none";
-    document.getElementById("sw-time").style.display = "none";
-    document.getElementById("list").style.display = "none";
-    var myData2 = JSON.stringify(forUpdate);
-
-    $.ajax({
-      type: "DELETE",
-      url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/${forUpdate.id}`,
-      success: (data) => {
-        console.log(data);
-        $.ajax({
-          type: "POST",
-          dataType: "json",
-          // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-          url:
-            "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/" +
-            forUpdate.id,
-          data: myData2,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          success: function (data) {
-            console.log(data);
-            console.log("Saved!");
-            window.location.href = "#calendar";
-          },
-          error: function (response) {
-            console.log(response);
-            console.log("Error");
-          },
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-
-    $("#myModal2").modal("hide");
-  }
+  var images = [];
+  var empImages = [];
 
   function eUpdateAdmin() {
     var cleanersID = $("#emp-name option:selected").text();
     var id_split = cleanersID.split("<");
     var employeeName = id_split[0];
     var eventId = e.id;
+    var eImages = e.cPhoto.map((photo) => {
+      return {
+        file: photo.M.file.S,
+      };
+    });
+    var aImages = e.aPhoto.map((photo) => {
+      return {
+        file: photo.M.file.S,
+      };
+    });
     var myData2 = JSON.stringify({
       adminEmail: e.adminEmail,
       allDay: e.allDay,
@@ -1358,6 +1125,11 @@
       task: getATask(),
       title: $("#subject3").val(),
       year: e.year,
+      aRemarks: $("#a-remarks").val(),
+      aPhoto: aImages,
+      cRemarks: e.cRemarks,
+      cPhoto: eImages,
+      workingHr: e.workingHr,
     });
 
     console.log(myData2);
@@ -1393,6 +1165,105 @@
     });
 
     $("#myModal3").modal("hide");
+  }
+
+  function handleFileSelect() {
+    //Check File API support
+    if (window.File && window.FileList && window.FileReader) {
+      var files = event.target.files; //FileList object
+      console.log(files)
+      // if (files[0].size > 192281) {
+      //   console.log("Files too large")
+      // } else {
+      //   console.log("Accepted")
+      // }
+      for (var i = 0; i < files.length; i++) {
+        if (files.length > 5) {
+          alert("You can select up to 5 images only");
+          $("#times").click();
+        } else {
+          if (files[i].size <= 192281) {
+            var file = files[i];
+            //Only pics
+            if (!file.type.match("image")) continue;
+
+            var picReader = new FileReader();
+            picReader.addEventListener("load", function (event) {
+              var picFile = event.target;
+              var image = picFile.result;
+              images.push({
+                file: image
+              });
+            });
+            //Read the image
+            picReader.readAsDataURL(file);
+          } else {
+            alert("Files are too large!");
+            $("#times").click();
+          }
+        }
+      }
+    } else {
+      console.log("Your browser does not support File API");
+    }
+  }
+
+  function emphandleFileSelect() {
+    //Check File API support
+    if (window.File && window.FileList && window.FileReader) {
+      var files = event.target.files; //FileList object
+
+      for (var i = 0; i < files.length; i++) {
+        if (files.length > 5) {
+          alert("You can upload up to 5 images only");
+          $("#times2").click();
+        } else {
+          var file = files[i];
+          //Only pics
+          if (!file.type.match("image")) continue;
+
+          var picReader = new FileReader();
+          picReader.addEventListener("load", function (event) {
+            var picFile = event.target;
+            var image = picFile.result;
+            empImages.push({
+              file: image
+            });
+          });
+          //Read the image
+          picReader.readAsDataURL(file);
+        }
+      }
+    } else {
+      console.log("Your browser does not support File API");
+    }
+  }
+
+  document
+    .getElementById("eImages")
+    .addEventListener("change", handleFileSelect, false);
+
+  document
+    .getElementById("empImages")
+    .addEventListener("change", emphandleFileSelect, false);
+
+  function getTask() {
+    var tasks = [];
+    var taskNames = document.querySelectorAll(".task-name");
+    var taskNumber = document.querySelectorAll(".task-number");
+    var taskStatus = document.querySelectorAll(".task-status");
+
+    for (let i = 0; i < taskNames.length; i++) {
+      const task = {
+        number: taskNumber[i].innerHTML,
+        taskItem: taskNames[i].value,
+        status: taskStatus[i].checked,
+      };
+
+      tasks.push(task);
+    }
+
+    return tasks;
   }
 
   function getCTask() {
@@ -1432,142 +1303,482 @@
     return aTasks;
   }
 
+  function swSave() {
+    var usermail = sessionStorage.getItem("user");
+    console.log("Save2");
+    document.getElementById("sw-save").style.display = "none";
+    // document.getElementById("sw-rst").style.display = "none";
+    document.getElementById("sw-time").style.display = "none";
+    document.getElementById("list").style.display = "none";
+    var myData2 = JSON.stringify(forUpdate);
+
+
+    $.ajax({
+      type: "DELETE",
+      url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/${forUpdate.id}`,
+      success: (data) => {
+        console.log(data);
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+          url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/" +
+            forUpdate.id,
+          data: myData2,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          success: function (data) {
+
+
+            var settings = {
+              url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + usermail,
+              method: "GET",
+              timeout: 0,
+            };
+
+            $.ajax(settings).done(function (response) {
+              // var count = response.Count;
+              var myData3 = JSON.stringify({
+                email: response.email,
+                comid: response.comid,
+                contact: response.contact,
+                designation: response.designation,
+                fullname: response.fullname,
+                image: response.image,
+                password: response.password,
+                rate: response.rate,
+                role: response.role,
+                verification: response.verification,
+                workingHr: sessionStorage.getItem("workingHr"),
+                toPay: sessionStorage.getItem("toPay")
+              });
+
+              $.ajax({
+                type: "POST",
+                dataType: "json",
+                // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/" + response
+                  .email,
+                data: myData3,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                success: function (data) {
+
+                  window.location.href = "#calendar";
+                  console.log(data);
+                  console.log("Saved to users!");
+
+
+                },
+                error: function (response) {
+                  console.log(response);
+                  console.log("Error");
+                },
+              });
+
+
+
+
+
+            });
+
+            // window.location.href = "#calendar";
+            console.log(data);
+            console.log("Saved to calendar!");
+
+
+          },
+          error: function (response) {
+            console.log(response);
+            console.log("Error");
+          },
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
+    $("#myModal2").modal("hide");
+  }
+
+  var all = 0;
+  var toAdd;
+
   function displayEvent(eventId) {
-    sessionStorage.setItem("eventId", eventId);
     const events = arr;
+    sessionStorage.setItem("eventId", eventId);
     e = events.filter((event) => event.id == eventId)[0];
+    // console.log(arr);
+    var user = sessionStorage.getItem("user");
+    var cleaner = arr.filter((c) => c.employeeEmail === user);
+    console.log(cleaner);
+    for (let index = 0; index < cleaner.length; index++) {
+      var hr = cleaner[index].hr * 1;
+      var mn = cleaner[index].mins * 1;
+      var toHr = mn / 60;
+      all = all + toHr + hr;
+      toAdd = all
+      // console.log(all.toFixed(2));
+      // console.log(hr);
+      // console.log(toHr.toFixed(2));
+    }
+
+    sessionStorage.setItem("lat", e.lat);
+    sessionStorage.setItem("lng", e.lng);
     const tasks = e.task;
-    var role = sessionStorage.getItem("role");
-    var eventTasks = $("#event-tasks");
-    var eTasks = $("#e-tasks");
-    var cLocation = $("#c-location").val();
-    $("#c-subject").val(e.title);
-    for (let i = 0; i < tasks.length; i++) {
-      let task = tasks[i].M;
-      let c = "";
-      if (task.status.S === "true") {
-        c = "checked";
-      } else {
-        c = "";
+    if (role == 1) {
+      $("#myModal3").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+      $("#eColor").val(e.color);
+      $("#a-remarks").val(e.aRemarks);
+      $("#eRemarks").val(e.cRemarks);
+      $("#emp-name").val(e.employeeEmail);
+      $("#location3").val(e.location);
+      $("#subject3").val(e.title);
+      if (e.lat && e.lng) {
+        $("#objectMap").append(`<object
+              data="./assets/geolocate2.html"
+              width="100%"
+              height="500"
+              id="mapObj"
+            ></object>`);
       }
-      eventTasks.append(`<div class="w-100 d-flex justify-content-start py-1 e-task">
+      var eTasks = $("#e-tasks");
+      for (let i = 0; i < tasks.length; i++) {
+        let task = tasks[i].M;
+        let c = "";
+        if (task.status.S === "true") {
+          c = "checked";
+        } else {
+          c = "";
+        }
+        eTasks.append(`<div class="w-100 d-flex justify-content-around py-1 eTask">
+          <span class="w-25 p-2 fs-6 font-bold a-task-number">${task.number.S}</span>
+          <input type="text" name="task" class="w-50 form-control a-task-name" id="task${task.number.S}" placeholder="Task #${task.number.S}" value="${task.taskItem.S}">
+          <label class="input w-25 p-2 m-0">
+            <input class="checkbox_animated a-task-status" type="checkbox" ${c}>
+          </label>
+        </div>`);
+      }
+      var aPhotos = e.aPhoto;
+      var cLocation = $("#c-location").val();
+      var aImages = aPhotos.map((photo) => {
+        return {
+          file: photo.M.file.S,
+        };
+      });
+      forUpdate = {
+        adminEmail: e.adminEmail,
+        allDay: e.allDay,
+        cLocation: cLocation,
+        color: e.color,
+        comid: e.comid,
+        day: e.day,
+        employeeEmail: e.employeeEmail,
+        employeeName: e.employeeName,
+        end: e.end,
+        id: e.id,
+        lat: lat,
+        lng: lng,
+        location: e.location,
+        month: e.month,
+        start: e.start,
+        startingTime: e.startingTime,
+        title: e.title,
+        year: e.year,
+        aRemarks: e.aRemarks,
+        aPhoto: aImages,
+      };
+    } else {
+      $("#myModal2").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+      getLocation();
+      sw.init();
+      $("#empRemarks").val(e.cRemarks);
+      $("#c-subject").val(e.title);
+
+      var eventTasks = $("#event-tasks");
+      for (let i = 0; i < tasks.length; i++) {
+        let task = tasks[i].M;
+        let c = "";
+        if (task.status.S === "true") {
+          c = "checked";
+        } else {
+          c = "";
+        }
+        eventTasks.append(`<div class="w-100 d-flex justify-content-start py-1 e-task">
           <label class="input p-2 m-0">
-              <input class="checkbox_animated c-task-status" type="checkbox" ${c}>
+              <input class="checkbox_animated c-task-status" type="checkbox" name="taskcheckbox" ${c}>
           </label>
           <span class="text-left p-2 c-task-name" id="task${task.number.S}">${task.taskItem.S}</span>
         </div>`);
-      eTasks.append(`<div class="w-100 d-flex justify-content-around py-1 eTask">
-    <span class="w-25 p-2 fs-6 font-bold a-task-number">${task.number.S}</span>
-    <input type="text" name="task" class="w-50 form-control a-task-name" id="task${task.number.S}" placeholder="Task #${task.number.S}" value="${task.taskItem.S}">
-    <label class="input w-25 p-2 m-0">
-        <input class="checkbox_animated a-task-status" type="checkbox" ${c}>
-    </label>
-    </div>`);
-    }
-    forUpdate = {
-      adminEmail: e.adminEmail,
-      allDay: e.allDay,
-      cLocation: cLocation,
-      color: e.color,
-      comid: e.comid,
-      day: e.day,
-      employeeEmail: e.employeeEmail,
-      employeeName: e.employeeName,
-      end: e.end,
-      id: e.id,
-      lat: lat,
-      lng: lng,
-      location: e.location,
-      month: e.month,
-      start: e.start,
-      startingTime: e.startingTime,
-      title: e.title,
-      year: e.year,
-    };
-    $("#location3").val(e.location);
-    $("#subject3").val(e.title);
-    $("#emp-name").val(e.employeeEmail);
-    $("#eColor").val(e.color);
+      }
 
-    if (role == 1) {
-      $("#myModal3").modal({ backdrop: "static", keyboard: false });
-    } else {
-      $("#myModal2").modal({ backdrop: "static", keyboard: false });
+      var empUploads = e.cPhoto;
+      if (empUploads) {
+        for (let a = 0; a < empUploads.length; a++) {
+          const img = empUploads[a];
+          $("#emplUploads").append(`<div
+                          class="c-event-image d-flex align-items-center m-1 rounded p-1"
+                          style="
+                            width: 90px;
+                            height: 90px;
+                            background-color: #1d1e26;
+                          "
+                        >
+                          <img
+                            width="100%"
+                            src="${img.M.file.S}"
+                            alt="event-image-${a + 1}"
+                          />
+                        </div>`);
+        }
+      }
+
+      const taskStats = tasks.map((task) => {
+        return {
+          status: task.M.status.S,
+        };
+      });
+
+      const doneTask = taskStats.filter((task) => task.status === "true");
+
+      for (let k = 0; k < taskStats.length; k++) {
+        const t = taskStats[k];
+        if (t.status === "true") {
+          document.getElementById("list").style.display = "block";
+          document.getElementById("empRemark").style.display = "block";
+          document.getElementById("empUploads").style.display = "block";
+          document.getElementById("modFoot3").style.display = "none";
+          document.getElementById("eClock").style.display = "none";
+        } else if (t.status === "false") {
+          document.getElementById("list").style.display = "none";
+          document.getElementById("empRemark").style.display = "none";
+          document.getElementById("empUploads").style.display = "none";
+          document.getElementById("modFoot3").style.display = "flex";
+          document.getElementById("eClock").style.display = "flex";
+        }
+      }
+
+      checkedTask = doneTask.length;
+
+      $("input[name=taskcheckbox]").change(function () {
+        if ($(this).is(":checked")) {
+          checkedTask = checkedTask + 1;
+          if (checkedTask == taskStats.length) {
+            sw.ego.disabled = false;
+          } else {
+            sw.ego.disabled = true;
+          }
+        } else {
+          checkedTask = checkedTask - 1;
+          if (checkedTask == taskStats.length) {
+            sw.ego.disabled = false;
+          } else {
+            sw.ego.disabled = true;
+          }
+        }
+      });
     }
   }
 
-  var lat, lng;
+  function displayImages() {
+    var adminImages = e.aPhoto;
+    var empImages = e.cPhoto;
+    // console.log(empImages);
+    if (adminImages || empImages) {
+      for (let j = 0; j < adminImages.length; j++) {
+        const img = adminImages[j];
+        $("#adminImages").append(`<div
+                          class="event-image d-flex align-items-center m-1 rounded p-1"
+                          style="
+                            width: 140px;
+                            height: 140px;
+                            background-color: #1d1e26;
+                          "
+                        >
+                          <img
+                            width="100%"
+                            src="${img.M.file.S}"
+                            alt="event-image-${j + 1}"
+                          />
+                        </div>`);
+      }
 
-  function initMap() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
+      for (let i = 0; i < empImages.length; i++) {
+        const eImg = empImages[i];
+        $("#emplImages").append(`<div
+                          class="e-event-image d-flex align-items-center m-1 rounded p-1"
+                          style="
+                            width: 140px;
+                            height: 140px;
+                            background-color: #1d1e26;
+                          "
+                        >
+                          <img
+                            width="100%"
+                            src="${eImg.M.file.S}"
+                            alt="e-event-image-${i + 1}"
+                          />
+                        </div>`);
+      }
+    }
+  }
+
+  function deleteEvent() {
+    confirm("Delete this event?");
+    const eventId = sessionStorage.getItem("eventId");
+    $.ajax({
+      type: "DELETE",
+      url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/${eventId}`,
+      success: (data) => {
+        console.log(data);
+        newFiltered = newFiltered.filter((item) => item.id !== eventId);
+        // console.log(newFiltered);
+        $(`#e-${eventId}`).remove();
+        $("#times3").click();
+        // window.location.href = "#calendar";
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  var lat, lng;
+  var checkedTask = 0;
+
+  function getLocation() {
+    if (e.lat && e.lng) {
+      $.ajax({
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.lat},${e.lng}&key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k`,
+        method: "GET",
+        timeout: 0,
+      }).done(function (data) {
+        // console.log(data);
+        var results = data.results;
+        $("#c-location").val(results[0].formatted_address);
+      });
+    } else {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
           const pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
 
-          const geocoder = new google.maps.Geocoder();
-          const latlng = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          geocoder.geocode(
-            {
-              location: latlng,
-            },
-            (results, status) => {
-              if (status === "OK") {
-                if (results[0]) {
-                  lat = pos.lat;
-                  lng = pos.lng;
-                  let loc = document.getElementById("c-location");
-                  loc.value = results[0].formatted_address;
-                } else {
-                  window.alert("No results found");
-                }
-              } else {
-                window.alert("Geocoder failed due to: " + status);
-              }
-            }
-          );
-        },
-        () => {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
+          console.log(pos);
+
+          $.ajax({
+            url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.lat},${pos.lng}&key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k`,
+            method: "GET",
+            timeout: 0,
+          }).done(function (data) {
+            // console.log(data);
+            var results = data.results;
+            $("#c-location").val(results[0].formatted_address);
+          });
+        });
+      }
     }
   }
 
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(
-      browserHasGeolocation
-        ? "Error: The Geolocation service failed."
-        : "Error: Your browser doesn't support geolocation."
-    );
-    infoWindow.open(map);
-  }
+  // function initMap() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const pos = {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         };
+
+  //         const geocoder = new google.maps.Geocoder();
+  //         const latlng = {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         };
+  //         geocoder.geocode({
+  //             location: latlng,
+  //           },
+  //           (results, status) => {
+  //             if (status === "OK") {
+  //               if (results[0]) {
+  //                 lat = pos.lat;
+  //                 lng = pos.lng;
+  //                 let loc = document.getElementById("c-location");
+  //                 loc.value = results[0].formatted_address;
+  //               } else {
+  //                 window.alert("No results found");
+  //               }
+  //             } else {
+  //               window.alert("Geocoder failed due to: " + status);
+  //             }
+  //           }
+  //         );
+  //       },
+  //       () => {
+  //         handleLocationError(true, infoWindow, map.getCenter());
+  //       }
+  //     );
+  //   } else {
+  //     // Browser doesn't support Geolocation
+  //     handleLocationError(false, infoWindow, map.getCenter());
+  //   }
+  // }
+
+  // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  //   infoWindow.setPosition(pos);
+  //   infoWindow.setContent(
+  //     browserHasGeolocation ?
+  //     "Error: The Geolocation service failed." :
+  //     "Error: Your browser doesn't support geolocation."
+  //   );
+  //   infoWindow.open(map);
+  // }
 
   $("#times").click(function () {
-    $("#myModal").modal("hide");
     calendar.fullCalendar("unselect");
+    $("#newEvent").trigger("reset");
+    $("#appendhere .task").remove();
+    $("#myModal").modal("hide");
+    // setTimeout(() => {
+    //   window.location.href = "#calendar";
+    // }, 500);
   });
 
   $("#times3").click(function () {
-    $("#myModal3").modal("hide");
     calendar.fullCalendar("unselect");
     $("#e-tasks .eTask").remove();
+    $("#mapObj").remove();
+    $("#myModal3").modal("hide");
+    sessionStorage.removeItem("lat");
+    sessionStorage.removeItem("lng");
+  });
+
+  $("#times4").click(function () {
+    $("#imageModal").modal("hide");
+    $("#adminImages .event-image").remove();
+    $("#emplImages .e-event-image").remove();
   });
 
   $("#times2").click(function () {
-    $("#myModal2").modal("hide");
-    document.getElementById("sw-time").style.display = "none";
+    all = 0;
+    toAdd = 0;
+    forUpdate.workingHr = "0";
+    // console.log(forUpdate)
     calendar.fullCalendar("unselect");
+    document.getElementById("sw-time").style.display = "none";
     $("#event-tasks .e-task").remove();
+    $("#emplUploads .c-event-image").remove();
+    sw.reset();
+    $("#myModal2").modal("hide");
   });
 
   var sw = {
@@ -1578,13 +1789,10 @@
     init: function () {
       // (A1) GET HTML ELEMENTS
       sw.etime = document.getElementById("sw-time");
-      sw.erst = document.getElementById("sw-rst");
       sw.ego = document.getElementById("sw-go");
       sw.esave = document.getElementById("sw-save");
 
       // (A2) ENABLE BUTTON CONTROLS
-      sw.erst.addEventListener("click", sw.reset);
-      sw.erst.disabled = false;
       sw.ego.addEventListener("click", sw.start);
       sw.ego.disabled = false;
       sw.esave.addEventListener("click", sw.save);
@@ -1622,8 +1830,13 @@
       sw.now = 0;
       sw.timer = setInterval(sw.tick, 1000);
       sw.ego.value = "Stop";
+      sw.ego.disabled = true;
+
       document.getElementById("sw-time").style.display = "block";
       document.getElementById("list").style.display = "block";
+      document.getElementById("empUpload").style.display = "block";
+      document.getElementById("empRemark").style.display = "block";
+      document.getElementById("empRemarks").disabled = false;
       document.getElementById("sw-save").style.display = "none";
       sw.ego.removeEventListener("click", sw.start);
       sw.ego.addEventListener("click", sw.stop);
@@ -1631,6 +1844,9 @@
 
     // (D) STOP
     stop: function () {
+      var fix = 0;
+      var rate = sessionStorage.getItem("rate");
+      var toPay = 0;
       clearInterval(sw.timer);
       var remain = sw.now;
       var hours = Math.floor(remain / 3600);
@@ -1638,16 +1854,31 @@
       var mins = Math.floor(remain / 60);
       remain -= mins * 60;
       var secs = remain;
+
+      var minsToHr = mins / 60;
+      var working = hours + minsToHr;
+      fix = working + toAdd;
+      toPay = rate * fix.toFixed(2);
+      sessionStorage.setItem("toPay", toPay);
+      sessionStorage.setItem("workingHr", fix.toFixed(2));
+      // console.log(working.toFixed(2));
+      // console.log(toAdd.toFixed(2));
+
+      // console.log(fix.toFixed(2));
+      // console.log(toPay);
+
       forUpdate.hr = hours.toString();
       forUpdate.mins = mins.toString();
       forUpdate.secs = secs.toString();
+      forUpdate.workingHr = fix.toFixed(2).toString();
       forUpdate.task = getCTask();
+      forUpdate.cPhoto = empImages;
+      forUpdate.cRemarks = $("#empRemarks").val();
       console.log(forUpdate);
       sw.timer = null;
       sw.ego.value = "Start";
       document.getElementById("sw-go").style.display = "none";
       document.getElementById("sw-save").style.display = "block";
-      document.getElementById("sw-rst").style.display = "block";
       sw.ego.removeEventListener("click", sw.stop);
       sw.ego.addEventListener("click", sw.start);
     },
@@ -1660,11 +1891,13 @@
       sw.now = 0;
       sw.tick();
       document.getElementById("sw-go").style.display = "block";
-      document.getElementById("sw-rst").style.display = "none";
+      // document.getElementById("sw-go").disabled = false;
       document.getElementById("sw-save").style.display = "none";
+      document.getElementById("empUpload").style.display = "none";
+      document.getElementById("empRemark").style.display = "none";
       document.getElementById("list").style.display = "none";
-      var button = document.getElementById("times2");
-      button.click();
+      checkedTask = 0;
+      sw.ego.disabled = false;
     },
 
     save: function () {
@@ -1672,6 +1905,3 @@
     },
   };
 </script>
-
-<!-- Google Api -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k&callback=initMap&libraries=&v=weekly"></script>

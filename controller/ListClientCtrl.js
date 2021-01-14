@@ -27,6 +27,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
     var userComID = sessionStorage.getItem("comid");
     var user = sessionStorage.getItem("user");
+    var userEmail = sessionStorage.getItem("user");
     var role = sessionStorage.getItem("role");
     // console.log(userComID);
 
@@ -67,6 +68,11 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             return filter.toWhom == user;
         });
 
+        var filteredEmail = $scope.arr.filter(function (user) {
+            return user.email == userEmail;
+        });
+
+
         // console.log(filtered);
 
         var newFiltered = filtered.map((users) => {
@@ -84,10 +90,27 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             return user
         })
 
+        var newFilteredEmail = filteredEmail.map((users) => {
+            var user = {
+                email: users.email,
+                fullname: users.fullname,
+                designation: users.designation,
+                contact: users.contact,
+                role: users.role,
+                status: users.status,
+                rate: users.rate,
+                toPay: users.toPay,
+                workingHr: users.workingHr,
+                action: users.action
+            }
+
+            return user
+        })
+
         // console.log(newFiltered)
 
-        if (role == 0) {
-            var noOfContacts = $scope.arr.length;
+        if (role == 2) {
+            var noOfContacts = newFilteredEmail.length;
             if (noOfContacts > 0) {
 
 
@@ -103,7 +126,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
                 var col = []; // define an empty array
                 for (var i = 0; i < noOfContacts; i++) {
-                    for (var key in $scope.arr[i]) {
+                    for (var key in newFilteredEmail[i]) {
                         if (col.indexOf(key) === -1) {
                             col.push(key);
                         }
@@ -137,7 +160,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
                     for (var j = 0; j < col.length; j++) {
                         var td = document.createElement("td");
-                        td.innerHTML = $scope.arr[i][col[j]];
+                        td.innerHTML = newFilteredEmail[i][col[j]];
 
                         bRow.appendChild(td);
 
