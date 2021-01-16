@@ -968,18 +968,18 @@
               // console.log(myData2);
               calendar.fullCalendar(
                 "renderEvent", {
-                  title: title,
-                  start: new Date(
-                    arr1[3],
-                    fixMonth,
-                    dayAdded,
-                    time[0],
-                    time[1]
-                  ),
-                  end: end,
-                  allDay: false,
-                  color: tagColor,
-                },
+                title: title,
+                start: new Date(
+                  arr1[3],
+                  fixMonth,
+                  dayAdded,
+                  time[0],
+                  time[1]
+                ),
+                end: end,
+                allDay: false,
+                color: tagColor,
+              },
                 true // make the event "stick"
               );
 
@@ -1691,7 +1691,7 @@
   }
 
 
-var width = $(window).width();
+  var width = $(window).width();
   $(window).on("resize", function () {
     if ($(this).width() !== width) {
       width = $(this).width();
@@ -1703,7 +1703,7 @@ var width = $(window).width();
           "d-inline-flex justify-content-end w-50"
         );
       }
-      if(width > 425){
+      if (width > 425) {
         $(".fc-header-left").removeClass("d-block w-100");
         $(".fc-header-center").removeClass("d-inline-flex w-50");
         $(".fc-header-right").removeClass(
@@ -1711,7 +1711,7 @@ var width = $(window).width();
         );
       }
     }
-    
+
   });
   // function initMap() {
   //   if (navigator.geolocation) {
