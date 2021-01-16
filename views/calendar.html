@@ -1690,6 +1690,29 @@
     }
   }
 
+
+var width = $(window).width();
+  $(window).on("resize", function () {
+    if ($(this).width() !== width) {
+      width = $(this).width();
+      if (width <= 425) {
+        console.log(width);
+        $(".fc-header-left").addClass("d-block w-100");
+        $(".fc-header-center").addClass("d-inline-flex w-50");
+        $(".fc-header-right").addClass(
+          "d-inline-flex justify-content-end w-50"
+        );
+      }
+      if(width > 425){
+        $(".fc-header-left").removeClass("d-block w-100");
+        $(".fc-header-center").removeClass("d-inline-flex w-50");
+        $(".fc-header-right").removeClass(
+          "d-inline-flex justify-content-end w-50"
+        );
+      }
+    }
+    
+  });
   // function initMap() {
   //   if (navigator.geolocation) {
   //     navigator.geolocation.getCurrentPosition(
