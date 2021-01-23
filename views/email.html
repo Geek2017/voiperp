@@ -9,6 +9,7 @@
   var users = [];
   var employee = [];
   var admin = [];
+  var clients = [];
   var sortedUsers = [];
   var toEmail = [];
 
@@ -35,6 +36,31 @@
         console.log(err);
       });
 
+    var settings2 = {
+      url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allclients",
+      method: "GET",
+      timeout: 0,
+    };
+
+    await $.ajax(settings2)
+      .done((response) => {
+        var count = response.Count;
+        for (var i = 0; i < count; i++) {
+          var client = {
+            fullname: `${response.Items[i].firstname.S} ${response.Items[i].lastname.S}`,
+            role: "client",
+            email: response.Items[i].email.S,
+          };
+
+          users.push(client);
+        }
+      })
+      .fail((err) => {
+        console.log(err);
+      });
+
+    users = users.filter((user) => user.role != "ordinary");
+
     sortedUsers = users.sort((a, b) => {
       let fa = a.fullname.toLowerCase(),
         fb = b.fullname.toLowerCase();
@@ -48,7 +74,7 @@
       return 0;
     });
 
-    employee = users.filter((user) => user.role === "ordinary");
+    clients = users.filter((user) => user.role === "client");
     admin = users.filter((user) => user.role === "admin");
   });
 
@@ -210,10 +236,10 @@
         $("#sendToEmail .user-card").remove();
         sortedUsers = admin;
         displayUsers();
-      } else if (this.value == "ordinary") {
+      } else if (this.value == "client") {
         $("input[name=selectCheckbox]").prop("checked", false);
         $("#sendToEmail .user-card").remove();
-        sortedUsers = employee;
+        sortedUsers = clients;
         displayUsers();
       }
     }
@@ -579,9 +605,8 @@
                         </div>
                         <div class="form-check form-check-inline">
                           <label class="input m-0">
-                            <input class="radio_animated" type="radio" name="sortRadio" id="empRadio"
-                              value="ordinary" />
-                            Employee
+                            <input class="radio_animated" type="radio" name="sortRadio" id="empRadio" value="client" />
+                            Client
                           </label>
                         </div>
                       </div>

@@ -240,7 +240,7 @@
                   <div class="lang selected" data-value="en">
                     <i class="flag-icon flag-icon-us"></i><span class="lang-txt">English<span> (US)</span></span>
                   </div>
-                  <div class="lang" data-value="de">
+                  <!-- <div class="lang" data-value="de">
                     <i class="flag-icon flag-icon-de"></i><span class="lang-txt">Deutsch</span>
                   </div>
                   <div class="lang" data-value="es">
@@ -257,7 +257,7 @@
                   </div>
                   <div class="lang" data-value="ae">
                     <i class="flag-icon flag-icon-ae"></i><span class="lang-txt">لعربية <span> (ae)</span></span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </li>
@@ -266,40 +266,17 @@
             </li>
             <li class="onhover-dropdown">
               <div class="notification-box">
-                <i data-feather="bell"></i><span class="badge badge-pill badge-secondary">4</span>
+                <i data-feather="bell"></i><span class="badge badge-pill badge-secondary" id="notifBadge"></span>
               </div>
-              <ul class="notification-dropdown onhover-show-div">
-                <li class="bg-primary">
-                  <h6 class="f-18 mb-0">Notitication</h6>
-                  <p class="mb-0">You have 4 new notification</p>
+              <ul class="notification-dropdown onhover-show-div d-block" id="notifDropdown">
+                <li class="bg-primary mb-0">
+                  <h6 class="f-18 mb-0">Notification</h6>
+                  <p class="mb-0" id="notifMessage"></p>
                 </li>
+                <li id="notifContainer"></li>
                 <li>
-                  <p class="mb-0">
-                    <i class="fa fa-circle-o mr-3 font-primary"> </i>Delivery
-                    processing
-                    <span class="pull-right">10 min.</span>
-                  </p>
-                </li>
-                <li>
-                  <p class="mb-0">
-                    <i class="fa fa-circle-o mr-3 font-success"></i>Order
-                    Complete<span class="pull-right">1 hr</span>
-                  </p>
-                </li>
-                <li>
-                  <p class="mb-0">
-                    <i class="fa fa-circle-o mr-3 font-info"></i>Tickets
-                    Generated<span class="pull-right">3 hr</span>
-                  </p>
-                </li>
-                <li>
-                  <p class="mb-0">
-                    <i class="fa fa-circle-o mr-3 font-danger"></i>Delivery
-                    Complete <span class="pull-right">6 hr</span>
-                  </p>
-                </li>
-                <li>
-                  <a class="btn btn-primary" href="#">Check all notification</a>
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#notifModal" href="javascript:void(0)"
+                    onclick="displayAllNotif()">Check all notification</a>
                   <!--a.f-15.f-w-500.txt-dark(href="#") Check all notification-->
                 </li>
               </ul>
@@ -307,7 +284,7 @@
             <li>
               <div class="mode"><i class="fa fa-lightbulb-o"></i></div>
             </li>
-            <li class="cart-nav onhover-dropdown">
+            <!-- <li class="cart-nav onhover-dropdown">
               <div class="cart-box">
                 <i data-feather="shopping-cart"></i><span class="badge badge-pill badge-primary">2</span>
               </div>
@@ -371,8 +348,8 @@
                   </div>
                 </li>
               </ul>
-            </li>
-            <li class="onhover-dropdown">
+            </li> -->
+            <!-- <li class="onhover-dropdown">
               <i data-feather="message-square"></i>
               <ul class="chat-dropdown onhover-show-div">
                 <li class="bg-primary text-center">
@@ -416,9 +393,9 @@
                   <a class="btn btn-primary" href="#">View All </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <li class="maximize">
-              <a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a>
+              <a class="text-dark" href="" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a>
             </li>
             <li class="profile-nav onhover-dropdown p-0">
               <div class="media profile-media">
@@ -486,10 +463,10 @@
       <!-- Page Sidebar Start-->
       <header class="main-nav">
         <div class="logo-wrapper aligncenter">
-          <a href="#/"><img id="photoURL" class="img-fluid for-light" src="./assets/images/logo/logo.png" width="40%"
+          <a href="#/"><img id="photoURL" class="img-fluid for-light" src="./assets/images/logo/logo.png" width="70%"
               height="50%" style="text-align: center" alt="" />
-            <img id="photoURLDark" class="img-fluid for-dark" src="./assets/images/logo/logo.png" width="40%"
-              height="50%" style="text-align: center" alt="" /></a>
+            <img id="photoURLDark" class="img-fluid for-dark" src="./assets/images/logo/logo2.png"
+              style="text-align: center" width="70%" height="50%" alt="" /></a>
           <div class="back-btn"><i class="fa fa-angle-left"></i></div>
           <div class="toggle-sidebar">
             <i class="status_toggle middle" data-feather="grid" id="sidebar-toggle">
@@ -511,7 +488,7 @@
                       class="lan-6">Widgets</span></a>
                 </li>
 
-                <li class="sidebar-title">
+                <li class="sidebar-title" id="dash" style="display: none;">
                   <div>
                     <!-- <h6>Dashboard</h6> -->
                     <a href="#/">Dashboard</a>
@@ -519,7 +496,7 @@
                   </div>
                 </li>
 
-                <li id="projects" class="dropdown">
+                <li id="projects" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="box"></i><span>Projects</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/projectlist">Project List</a></li>
@@ -529,30 +506,30 @@
                   </ul>
                 </li>
 
-                <li id="projects2" class="dropdown">
+                <li id="projects2" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="box"></i><span>Projects</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/projectlist">Project List</a></li>
-                    <li><a href="#/projectcreate">Create New</a></li>
+                    <!-- <li><a href="#/projectcreate">Create New</a></li> -->
                     <li><a href="#/calendar">Schedule</a></li>
                     <!-- <li><a href="#/email">Email</a></li> -->
                   </ul>
                 </li>
 
-                <li id="marketing">
+                <li id="marketing" style="display: none;">
                   <a class="nav-link" href="#/marketing"><i data-feather="airplay"></i><span>Marketing</span></a>
                 </li>
-                <li id="sales">
+                <li id="sales" style="display: none;">
                   <a class="nav-link" href="#/sales"><i data-feather="shopping-bag"></i><span>Sales</span></a>
                 </li>
-                <li id="client" class="dropdown">
+                <li id="client" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="users"></i><span>Client</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/listClient">List</a></li>
                     <li><a href="#/newClient">New</a></li>
                   </ul>
                 </li>
-                <li id="leads" class="dropdown">
+                <li id="leads" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="crosshair"></i><span>Leads</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/leads">List</a></li>
@@ -560,7 +537,7 @@
                   </ul>
                 </li>
 
-                <li id="calls" class="dropdown">
+                <li id="calls" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="phone"></i><span>Calls</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/calls">Logs</a></li>
@@ -568,21 +545,21 @@
                   </ul>
                 </li>
 
-                <li id="users" class="dropdown">
+                <li id="users" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="user"></i><span>Users</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/listUsers">List</a></li>
                     <li><a href="#/newUser">New</a></li>
                   </ul>
                 </li>
-                <li id="users2" class="dropdown">
+                <li id="users2" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="user"></i><span>Users</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/listUsers">List</a></li>
                   </ul>
                 </li>
 
-                <li id="company" class="dropdown">
+                <li id="company" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="globe"></i><span>Company</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/listCompanies">List</a></li>
@@ -594,14 +571,14 @@
                                             data-feather="check-square"></i><span>Task</span></a>
                                 </li> -->
 
-                <li id="invoice">
+                <li id="invoice" style="display: none;">
                   <a class="nav-link" href="#/invoice"><i data-feather="file-text"></i><span>Invoice</span></a>
                 </li>
-                <li id="reports">
+                <li id="reports" style="display: none;">
                   <a class="nav-link" href="#/reports"><i data-feather="edit"></i><span>Reports</span></a>
                 </li>
 
-                <li id="logs" class="dropdown">
+                <li id="logs" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="terminal"></i><span>Logs</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="#/logs">List</a></li>
@@ -631,6 +608,20 @@
           </div>
         </div>
       </footer>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="notifModal" tabindex="-1" aria-labelledby="notifModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title ml-1" id="notifModalTitle"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="notifClose">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="notifModalBody"></div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- latest jquery-->
@@ -719,6 +710,293 @@
 
   <!-- must be below AngularJS imports -->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"></script>
+
+  <script>
+    var notifications = [];
+    var unreadNotif = [];
+    var sortedNotif = [];
+    var newNotif = [];
+    var settings = {
+      url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allnotifications",
+      method: "GET",
+      timeout: 0,
+    };
+
+    $(document).ready(async () => {
+      await $.ajax(settings)
+        .done((response) => {
+          var count = response.Count;
+          // console.log(response.Items);
+          for (let i = 0; i < count; i++) {
+            const res = response.Items[i];
+            var notif = {
+              title: res.title.S,
+              createdAt: res.createdAt.S,
+              unread: res.unread.S,
+              color: res.color.S,
+              id: res.id.S,
+              cPhoto: res.cPhoto.L,
+              cLocation: res.cLocation.S,
+              cRemarks: res.cRemarks.S,
+              task: res.task.L,
+              employeeName: res.employeeName.S,
+            };
+            notifications.push(notif);
+          }
+        })
+        .fail((err) => {
+          console.log(err);
+          console.log("Network problem.");
+        });
+
+      unreadNotif = notifications
+        .filter((notif) => notif.unread != "true")
+        .sort((a, b) => {
+          let fa = parseInt(a.createdAt, 10),
+            fb = parseInt(b.createdAt, 10);
+
+          return fb - fa;
+        });
+
+      sortedNotif = notifications.sort((a, b) => {
+        let fa = parseInt(a.createdAt, 10),
+          fb = parseInt(b.createdAt, 10);
+
+        return fb - fa;
+      });
+
+      newNotif = notifications.filter((notif) => {
+        var now = Date.now() - 86400000;
+        return parseInt(notif.createdAt, 10) > now;
+      });
+
+      // console.log(newNotif);
+
+      $("#notifBadge").text(sortedNotif.length);
+      $("#notifMessage").text(
+        `You have ${sortedNotif.length} new notifications`
+      );
+
+      var len = 0;
+      if (sortedNotif.length > 5) {
+        len = 5;
+      } else {
+        len = sortedNotif.length;
+      }
+
+      for (let k = 0; k < len; k++) {
+        const notif = sortedNotif[k];
+        var time = parseInt(notif.createdAt, 10);
+        var elapsed = moment(time).fromNow();
+        var unreadStat = "";
+        if (notif.unread == "false") {
+          unreadStat = "fa fa-circle-o font-primary";
+        } else {
+          unreadStat = "fa fa-circle font-primary";
+        }
+        $("#notifContainer").append(`<div
+                      onclick="displayNotification('${notif.id}')"
+                      data-toggle="modal"
+                      data-target="#notifModal"
+                      class="notif"
+                    >
+                      <p class="mb-0 d-flex align-items-center justify-content-between">
+                        <span style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <i class="${unreadStat} mr-3" > </i>
+                        ${notif.title}</span>
+                        <span class="pull-right">${elapsed}</span>
+                      </p>
+                    </div>`);
+      }
+    });
+
+    // var newNotifs = [];
+
+    setInterval(async () => {
+      await $.ajax(settings)
+        .done((response) => {
+          var count = response.Count;
+          // console.log(response.Items);
+          $("#notifContainer .notif").remove();
+          notifications = [];
+          for (let i = 0; i < count; i++) {
+            const res = response.Items[i];
+            var notif = {
+              title: res.title.S,
+              createdAt: res.createdAt.S,
+              unread: res.unread.S,
+              color: res.color.S,
+              id: res.id.S,
+              cPhoto: res.cPhoto.L,
+              cLocation: res.cLocation.S,
+              cRemarks: res.cRemarks.S,
+              task: res.task.L,
+              employeeName: res.employeeName.S,
+            };
+            notifications.push(notif);
+          }
+        })
+        .fail((err) => {
+          console.log(err);
+        });
+
+      unreadNotif = notifications
+        .filter((notif) => notif.unread != "true")
+        .sort((a, b) => {
+          let fa = parseInt(a.createdAt, 10),
+            fb = parseInt(b.createdAt, 10);
+
+          return fb - fa;
+        });
+
+      sortedNotif = notifications.sort((a, b) => {
+        let fa = parseInt(a.createdAt, 10),
+          fb = parseInt(b.createdAt, 10);
+
+        return fb - fa;
+      });
+
+      newNotif = notifications.filter((notif) => {
+        var now = Date.now() - 86400000;
+        return parseInt(notif.createdAt, 10) > now;
+      });
+
+      $("#notifBadge").text(sortedNotif.length);
+      $("#notifMessage").text(
+        `You have ${sortedNotif.length} new notifications`
+      );
+
+      var len = 0;
+      if (sortedNotif.length >= 5) {
+        len = 5;
+      } else {
+        len = sortedNotif.length;
+      }
+
+      for (let k = 0; k < len; k++) {
+        const notif = sortedNotif[k];
+        var time = parseInt(notif.createdAt, 10);
+        var elapsed = moment(time).fromNow();
+        var unreadStat = "";
+        if (notif.unread == "false") {
+          unreadStat = "fa fa-circle-o font-primary";
+        } else {
+          unreadStat = "fa fa-circle font-primary";
+        }
+        $("#notifContainer").append(`<div
+                      onclick="displayNotification('${notif.id}')"
+                      data-toggle="modal"
+                      data-target="#notifModal"
+                      class="notif"
+                    >
+                      <p class="mb-0 d-flex align-items-center justify-content-between">
+                        <span style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <i class="${unreadStat} mr-3" > </i>
+                        ${notif.title}</span>
+                        <span class="pull-right">${elapsed}</span>
+                      </p>
+                    </div>`);
+      }
+    }, 300000);
+
+    function displayNotification(id) {
+      const notif = notifications.filter((notif) => notif.id == id);
+      $("#notifModalTitle").text(notif[0].title);
+      var img = notif[0].cPhoto;
+      var task = notif[0].task;
+      var time = parseInt(notif[0].createdAt, 10);
+      var elapsed = moment(time).fromNow();
+      var toAppend = `<div class="p-2 rounded border border-dark e-notif">
+                <div class="d-flex">
+                  Reminder:
+                  <p class="mb-0 ml-2">
+                    <span class="font-weight-bold text-primary"
+                      >${notif[0].employeeName}</span
+                    >
+                    completed
+                    <span class="font-weight-bold text-primary">${task.length} tasks</span>
+                    and uploaded
+                    <span class="font-weight-bold text-primary">${img.length} images</span>
+                    @
+                    <span
+                      style="
+                        display: inline-flex;
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                      "
+                      >${notif[0].cLocation}</span
+                    >
+                  </p>
+                </div>
+                <div class="d-flex">
+                  Remarks:
+                  <p class="mb-0 ml-2">${notif[0].cRemarks}</p>
+                </div>
+                <span class="d-block text-right" style="font-size: x-small"
+                  >${elapsed}</span
+                >
+              </div>`;
+
+      $("#notifModalBody").append(toAppend);
+    }
+
+    function displayAllNotif() {
+      $("#notifModalTitle").text("All Notifications");
+      for (let i = 0; i < 10; i++) {
+        const notif = sortedNotif[i];
+        var img = notif.cPhoto;
+        var task = notif.task;
+        var time = parseInt(notif.createdAt, 10);
+        var elapsed = moment(time).fromNow();
+        var toAppend = `<div class="p-2 mb-1 rounded border border-dark e-notif">
+                <div class="d-flex">Title: <span class="mb-0 ml-2 w-100 text-left">${notif.title}</span></div>
+                <div class="d-flex">
+                  Reminder:
+                  <p class="mb-0 ml-2 w-100">
+                    <span class="font-weight-bold text-primary"
+                      >${notif.employeeName}</span
+                    >
+                    completed
+                    <span class="font-weight-bold text-primary">${task.length} tasks</span>
+                    and uploaded
+                    <span class="font-weight-bold text-primary">${img.length} images</span>
+                    @
+                    <span
+                      style="
+                        display: inline-flex;
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                      "
+                      >${notif.cLocation}</span
+                    >
+                  </p>
+                </div>
+                <div class="d-flex">
+                  Remarks:
+                  <p class="mb-0 ml-2 w-100 text-left">${notif.cRemarks}</p>
+                </div>
+                <span class="d-block text-right" style="font-size: x-small"
+                  >${elapsed}</span
+                >
+              </div>`;
+
+        $("#notifModalBody").append(toAppend);
+      }
+    }
+
+    $("#notifClose").click(function () {
+      $("#notifModalTitle").text("");
+      $("#notifModalBody .e-notif").remove();
+    });
+  </script>
+
   <script>
     // var user = sessionStorage.getItem("user");
 
@@ -749,27 +1027,45 @@
       }
       document.getElementById("username").innerHTML = fullname;
       if (role == 0) {
-        $("#users2").hide();
-        $("#projects2").hide();
+        $("#dash").show();
+        $("#projects").show();
+        $("#marketing").show();
+        $("#sales").show();
+        $("#client").show();
+        $("#leads").show();
+        $("#calls").show();
+        $("#users").show();
+        $("#company").show();
+        $("#invoice").show();
+        $("#reports").show();
+        $("#logs").show();
         // document.getElementById("photoURL").src = logo;
         // $("#ai").show();
         // $("#logs").hide();
       } else if (role == 1) {
-        $("#users2").hide();
-        $("#projects2").hide();
+        $("#dash").show();
+        $("#projects").show();
+        $("#marketing").show();
+        $("#sales").show();
+        $("#client").show();
+        $("#leads").show();
+        $("#calls").show();
+        $("#users").show();
+        $("#company").show();
+        $("#invoice").show();
+        $("#reports").show();
+        // $("#logs").show();
         // document.getElementById("photoURL").src = logo;
         // $("#ai").show();
         // $("#logs").hide();
       } else if (role == 2) {
         // document.getElementById("photoURL").src = logo;
-        $("#leads").hide();
-        $("#projects").hide();
-        $("#marketing").hide();
-        $("#sales").hide();
-        $("#users").hide();
-        $("#company").hide();
-        $("#logs").hide();
-        $("#reports").hide();
+        $("#dash").show();
+        $("#projects2").show();
+        // $("#client").show();
+        // $("#calls").show();
+        $("#users2").show();
+        // $("#invoice").show();
       }
     } else {
       window.location.href = "./login.html";

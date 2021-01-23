@@ -96,6 +96,22 @@ angular.module('fvs').controller('ProjectListCtrl', function ($scope) {
       return user
     })
 
+    var superFiltered = $scope.arr.map((users) => {
+      var user = {
+        name: users.name,
+        clientName: users.clientName,
+        rate: users.rate,
+        type: users.type,
+        priority: users.priority,
+        // size: users.size,
+        startingDate: users.startingDate,
+        endingDate: users.endingDate,
+        action: users.action
+      }
+
+      return user
+    })
+
     var newFilteredEmail = filteredEmail.map((users) => {
       var user = {
         email: users.email,
@@ -387,7 +403,7 @@ angular.module('fvs').controller('ProjectListCtrl', function ($scope) {
 
       }
     } else if (role == 0) {
-      var noOfContacts = $scope.arr.length;
+      var noOfContacts = superFiltered.length;
 
       if (noOfContacts > 0) {
 
@@ -404,7 +420,7 @@ angular.module('fvs').controller('ProjectListCtrl', function ($scope) {
 
         var col = []; // define an empty array
         for (var i = 0; i < noOfContacts; i++) {
-          for (var key in $scope.arr[i]) {
+          for (var key in superFiltered[i]) {
             if (col.indexOf(key) === -1) {
               col.push(key);
             }
@@ -438,13 +454,13 @@ angular.module('fvs').controller('ProjectListCtrl', function ($scope) {
 
           for (var j = 0; j < col.length; j++) {
             var td = document.createElement("td");
-            td.innerHTML = $scope.arr[i][col[j]];
+            td.innerHTML = superFiltered[i][col[j]];
 
             bRow.appendChild(td);
 
           }
           tBody.appendChild(bRow)
-          var entry = $scope.arr[i];
+          var entry = superFiltered[i];
           var buttons = [{
               value: "Edit",
               type: "button",
@@ -699,7 +715,7 @@ angular.module('fvs').controller('ProjectListCtrl', function ($scope) {
     $.ajax(settings).done(function (response) {
       console.log(response);
       window.location.hash = "#/";
-      window.location.hash = "#/projects";
+      window.location.hash = "#/projectlist";
       modal2.style.display = "none";
     });
   };

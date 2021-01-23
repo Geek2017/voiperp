@@ -5,9 +5,13 @@ angular
   .module('fvs', ['ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
+      // .when('/', {
+      //   templateUrl: 'views/dashboard.html',
+      //   controller: 'DashboardCtrl'
+      // })
       .when('/', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
+        templateUrl: 'views/calendar.html',
+        controller: 'CalendarCtrl'
       })
       .when('/projectlist', {
         templateUrl: 'views/ProjectList.html',

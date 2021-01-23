@@ -378,7 +378,7 @@
                                 // "reply_to": email,
                                 "from_name": "FVS Team",
                                 "to_name": "",
-                                "message_html": "http://52.87.240.93/zumecall/verification.html#" + res[0] + "#" + $('#email').val()
+                                "message_html": "http://34.233.168.91/zumecall/verification.html#" + res[0] + "#" + $('#email').val()
                             }
 
 

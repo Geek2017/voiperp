@@ -1,8 +1,6 @@
 <script src="./assets/jquery.tabletojson.min.js"></script>
 <style type="text/css">
   body {
-    margin-bottom: 40px;
-    margin-top: 40px;
     text-align: center;
     font-size: 14px;
     font-family: "Roboto", sans-serif;
@@ -159,6 +157,9 @@
                     </iframe>
                 </div> -->
         <div id="wrap" style="max-width: 100%; height: auto" class="p-2">
+          <img id="loadingImage"
+            src="https://cdn.dribbble.com/users/846207/screenshots/5568468/gradient-circle-loading.gif"
+            alt="loading-image" class="rounded" style="width: 100%; height: 100%" />
           <div id="calendar" class="p-0 m-0"></div>
 
           <div style="clear: both"></div>
@@ -797,7 +798,28 @@
 
       var role = sessionStorage.getItem("role");
       var userEmail = sessionStorage.getItem("user");
-      if (role == 1) {
+
+      if (role == 0) {
+        newFiltered = arr.map((users) => {
+          var startingTime = users.startingTime;
+          var time = startingTime.split(":");
+          var hr = time[0];
+          var min = time[1];
+          var user = {
+            id: users.id,
+            title: users.title,
+            location: users.location,
+            tasks: users.task,
+            color: users.color,
+            employeeEmail: users.employeeEmail,
+            start: new Date(users.year, users.month, users.day, hr, min),
+            end: users.end,
+            allDay: false,
+          };
+
+          return user;
+        });
+      } else if (role == 1) {
         newFiltered = arr.map((users) => {
           var startingTime = users.startingTime;
           var time = startingTime.split(":");
@@ -845,206 +867,214 @@
 
       // console.log(arr);
 
-      /* initialize the calendar
-                -----------------------------------------------------------------*/
-      calendar = $("#calendar").fullCalendar({
-        header: {
-          left: "title",
-          center: "agendaDay,agendaWeek,month",
-          right: "prev,next today",
-        },
-        editable: true,
-        firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-        selectable: true,
-        defaultView: "month",
+      if (arr.length == 0) {
+        $("#loadingImage").css("display", "block");
+        $("#calendar").css("display", "none");
+      } else {
+        $("#calendar").css("display", "block");
+        $("#loadingImage").css("display", "none");
 
-        axisFormat: "h:mm",
-        columnFormat: {
-          month: "ddd", // Mon
-          week: "ddd d", // Mon 7
-          day: "dddd M/d", // Monday 9/7
-          agendaDay: "dddd d",
-        },
-        titleFormat: {
-          month: "MMMM yyyy", // September 2009
-          week: "MMMM yyyy", // September 2009
-          day: "MMMM yyyy", // Tuesday, Sep 8, 2009
-        },
-        allDaySlot: false,
-        selectHelper: true,
-        select: function (start, end) {
-          const today = Date.now();
-          const strt = Date.parse(start);
-          const diff = (today - strt) / 1000;
-          let role = sessionStorage.getItem("role");
-          if (role == 1 && diff < 86400) {
-            $("#myModal").modal({
-              backdrop: "static",
-              keyboard: false
-            });
-            $("#save-admin").prop("disabled", false);
-            const stringNew = new String(start);
-            var arr1 = stringNew.split(" ");
-            var fixMonth;
-            var dayAdded = arr1[2] * 1;
-            var dayAdded = dayAdded;
-            if (arr1[1] == "Jan") {
-              fixMonth = 00;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Feb") {
-              fixMonth = 01;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Mar") {
-              fixMonth = 02;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Apr") {
-              fixMonth = 03;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "May") {
-              fixMonth = 04;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Jun") {
-              fixMonth = 05;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Jul") {
-              fixMonth = 06;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Aug") {
-              fixMonth = 07;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Sep") {
-              fixMonth = 08;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Oct") {
-              fixMonth = 09;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Nov") {
-              fixMonth = 10;
-              // console.log(fixMonth);
-            } else if (arr1[1] == "Dec") {
-              fixMonth = 11;
-              // console.log(fixMonth);
+        /* initialize the calendar
+                  -----------------------------------------------------------------*/
+        calendar = $("#calendar").fullCalendar({
+          header: {
+            left: "title",
+            center: "agendaDay,agendaWeek,month",
+            right: "prev,next today",
+          },
+          editable: true,
+          firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+          selectable: true,
+          defaultView: "month",
+
+          axisFormat: "h:mm",
+          columnFormat: {
+            month: "ddd", // Mon
+            week: "ddd d", // Mon 7
+            day: "dddd M/d", // Monday 9/7
+            agendaDay: "dddd d",
+          },
+          titleFormat: {
+            month: "MMMM yyyy", // September 2009
+            week: "MMMM yyyy", // September 2009
+            day: "MMMM yyyy", // Tuesday, Sep 8, 2009
+          },
+          allDaySlot: false,
+          selectHelper: true,
+          select: function (start, end) {
+            const today = Date.now();
+            const strt = Date.parse(start);
+            const diff = (today - strt) / 1000;
+            let role = sessionStorage.getItem("role");
+            if (role == 1 && diff < 86400 || role == 0 && diff < 86400) {
+              $("#myModal").modal({
+                backdrop: "static",
+                keyboard: false
+              });
+              $("#save-admin").prop("disabled", false);
+              const stringNew = new String(start);
+              var arr1 = stringNew.split(" ");
+              var fixMonth;
+              var dayAdded = arr1[2] * 1;
+              var dayAdded = dayAdded;
+              if (arr1[1] == "Jan") {
+                fixMonth = 00;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Feb") {
+                fixMonth = 01;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Mar") {
+                fixMonth = 02;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Apr") {
+                fixMonth = 03;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "May") {
+                fixMonth = 04;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Jun") {
+                fixMonth = 05;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Jul") {
+                fixMonth = 06;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Aug") {
+                fixMonth = 07;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Sep") {
+                fixMonth = 08;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Oct") {
+                fixMonth = 09;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Nov") {
+                fixMonth = 10;
+                // console.log(fixMonth);
+              } else if (arr1[1] == "Dec") {
+                fixMonth = 11;
+                // console.log(fixMonth);
+              }
+
+              $("#save-admin").click(function () {
+                var title = (document.getElementById("title").value = $(
+                  "#title"
+                ).val());
+                var timeAdmin = document.getElementById("timeAdmin").value;
+                var time = timeAdmin.split(":");
+                var tagColor = $("#tagColor").val();
+                var adminLocation = $("#a-location").val();
+                var cleanersID = $("#cleanersID option:selected").text();
+                var remarks = $("#aRemarks").val();
+                var id_split = cleanersID.split("<");
+                var employeeName = id_split[0];
+                var employeeEmail = $("#cleanersID").val();
+                var tasks = getTask();
+                var userComID = sessionStorage.getItem("comid");
+                var userEmail = sessionStorage.getItem("user");
+                var myData2 = JSON.stringify({
+                  comid: userComID,
+                  task: tasks,
+                  workingHr: "0",
+                  startingTime: timeAdmin,
+                  adminEmail: userEmail,
+                  employeeName: employeeName,
+                  employeeEmail: employeeEmail,
+                  title: title,
+                  color: tagColor,
+                  aPhoto: images,
+                  aRemarks: remarks,
+                  location: adminLocation,
+                  day: dayAdded,
+                  month: fixMonth,
+                  year: arr1[3],
+                  start: start,
+                  end: end,
+                  allDay: "false",
+                  hr: sessionStorage.getItem("hr"),
+                  mins: sessionStorage.getItem("mins"),
+                  secs: sessionStorage.getItem("secs"),
+                });
+                // console.log(myData2);
+                calendar.fullCalendar(
+                  "renderEvent", {
+                    title: title,
+                    start: new Date(
+                      arr1[3],
+                      fixMonth,
+                      dayAdded,
+                      time[0],
+                      time[1]
+                    ),
+                    end: end,
+                    allDay: false,
+                    color: tagColor,
+                  },
+                  true // make the event "stick"
+                );
+
+                $.ajax({
+                  type: "POST",
+                  dataType: "json",
+                  url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
+                  data: myData2,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  success: function (data) {
+                    console.log(data);
+                    $("#save-admin").prop("disabled", true);
+                    images = [];
+                    calendar.fullCalendar("unselect");
+                    console.log("Saved!");
+                    // $("#times").click();
+                    $("#newEvent").trigger("reset");
+                    $("#appendhere .task").remove();
+                    $("#myModal").modal("hide");
+                    setTimeout(() => {
+                      window.location.href = "#calendar";
+                    }, 500);
+                  },
+                  error: function (response) {
+                    console.log(response);
+                    console.log("Error");
+                  },
+                });
+              });
+            } else if (role == 1 && diff > 86400) {
+              calendar.fullCalendar("unselect");
+            } else if (role == 2) {
+              calendar.fullCalendar("unselect");
+            } else {
+              calendar.fullCalendar("unselect");
             }
+          },
+          droppable: true, // this allows things to be dropped onto the calendar !!!
+          drop: function (date, allDay) {
+            // this function is called when something is dropped
 
-            $("#save-admin").click(function () {
-              var title = (document.getElementById("title").value = $(
-                "#title"
-              ).val());
-              var timeAdmin = document.getElementById("timeAdmin").value;
-              var time = timeAdmin.split(":");
-              var tagColor = $("#tagColor").val();
-              var adminLocation = $("#a-location").val();
-              var cleanersID = $("#cleanersID option:selected").text();
-              var remarks = $("#aRemarks").val();
-              var id_split = cleanersID.split("<");
-              var employeeName = id_split[0];
-              var employeeEmail = $("#cleanersID").val();
-              var tasks = getTask();
-              var userComID = sessionStorage.getItem("comid");
-              var userEmail = sessionStorage.getItem("user");
-              var myData2 = JSON.stringify({
-                comid: userComID,
-                task: tasks,
-                workingHr: "0",
-                startingTime: timeAdmin,
-                adminEmail: userEmail,
-                employeeName: employeeName,
-                employeeEmail: employeeEmail,
-                title: title,
-                color: tagColor,
-                aPhoto: images,
-                aRemarks: remarks,
-                location: adminLocation,
-                day: dayAdded,
-                month: fixMonth,
-                year: arr1[3],
-                start: start,
-                end: end,
-                allDay: "false",
-                hr: sessionStorage.getItem("hr"),
-                mins: sessionStorage.getItem("mins"),
-                secs: sessionStorage.getItem("secs"),
-              });
-              // console.log(myData2);
-              calendar.fullCalendar(
-                "renderEvent", {
-                title: title,
-                start: new Date(
-                  arr1[3],
-                  fixMonth,
-                  dayAdded,
-                  time[0],
-                  time[1]
-                ),
-                end: end,
-                allDay: false,
-                color: tagColor,
-              },
-                true // make the event "stick"
-              );
+            // retrieve the dropped element's stored Event Object
+            var originalEventObject = $(this).data("eventObject");
 
-              $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/calendar/{id}",
-                data: myData2,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                success: function (data) {
-                  console.log(data);
-                  $("#save-admin").prop("disabled", true);
-                  images = [];
-                  calendar.fullCalendar("unselect");
-                  console.log("Saved!");
-                  // $("#times").click();
-                  $("#newEvent").trigger("reset");
-                  $("#appendhere .task").remove();
-                  $("#myModal").modal("hide");
-                  setTimeout(() => {
-                    window.location.href = "#calendar";
-                  }, 500);
-                },
-                error: function (response) {
-                  console.log(response);
-                  console.log("Error");
-                },
-              });
-            });
-          } else if (role == 1 && diff > 86400) {
-            calendar.fullCalendar("unselect");
-          } else if (role == 2) {
-            calendar.fullCalendar("unselect");
-          } else {
-            calendar.fullCalendar("unselect");
-          }
-        },
-        droppable: true, // this allows things to be dropped onto the calendar !!!
-        drop: function (date, allDay) {
-          // this function is called when something is dropped
+            // we need to copy it, so that multiple events don't have a reference to the same object
+            var copiedEventObject = $.extend({}, originalEventObject);
 
-          // retrieve the dropped element's stored Event Object
-          var originalEventObject = $(this).data("eventObject");
+            // assign it the date that was reported
+            copiedEventObject.start = date;
+            copiedEventObject.allDay = allDay;
 
-          // we need to copy it, so that multiple events don't have a reference to the same object
-          var copiedEventObject = $.extend({}, originalEventObject);
+            // render the event on the calendar
+            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+            $("#calendar").fullCalendar("renderEvent", copiedEventObject, true);
 
-          // assign it the date that was reported
-          copiedEventObject.start = date;
-          copiedEventObject.allDay = allDay;
-
-          // render the event on the calendar
-          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-          $("#calendar").fullCalendar("renderEvent", copiedEventObject, true);
-
-          // is the "remove after drop" checkbox checked?
-          if ($("#drop-remove").is(":checked")) {
-            // if so, remove the element from the "Draggable Events" list
-            $(this).remove();
-          }
-        },
-        events: newFiltered,
-      });
+            // is the "remove after drop" checkbox checked?
+            if ($("#drop-remove").is(":checked")) {
+              // if so, remove the element from the "Draggable Events" list
+              $(this).remove();
+            }
+          },
+          events: newFiltered,
+        });
+      }
     });
 
     /* initialize the external events
@@ -1171,36 +1201,30 @@
     //Check File API support
     if (window.File && window.FileList && window.FileReader) {
       var files = event.target.files; //FileList object
-      console.log(files)
-      // if (files[0].size > 192281) {
-      //   console.log("Files too large")
-      // } else {
-      //   console.log("Accepted")
-      // }
+
       for (var i = 0; i < files.length; i++) {
         if (files.length > 5) {
           alert("You can select up to 5 images only");
           $("#times").click();
         } else {
-          if (files[i].size <= 192281) {
-            var file = files[i];
-            //Only pics
-            if (!file.type.match("image")) continue;
+          var file = files[i];
+          //Only pics
+          if (!file.type.match("image")) continue;
 
-            var picReader = new FileReader();
-            picReader.addEventListener("load", function (event) {
-              var picFile = event.target;
-              var image = picFile.result;
+          var picReader = new FileReader();
+          picReader.addEventListener("load", function (event) {
+            var picFile = event.target;
+            var image = picFile.result;
+            resizeImage(image, 10, 1).then((res) => {
               images.push({
-                file: image
+                file: res
               });
             });
-            //Read the image
-            picReader.readAsDataURL(file);
-          } else {
-            alert("Files are too large!");
-            $("#times").click();
-          }
+          });
+
+          $("#eImgLabel").html(`Selected ${files.length} images`);
+          //Read the image
+          picReader.readAsDataURL(file);
         }
       }
     } else {
@@ -1226,10 +1250,14 @@
           picReader.addEventListener("load", function (event) {
             var picFile = event.target;
             var image = picFile.result;
-            empImages.push({
-              file: image
+            resizeImage(image, 10, 1).then((res) => {
+              empImages.push({
+                file: res
+              });
             });
           });
+
+          $("#empImgLabel").html(`Selected ${files.length} images`);
           //Read the image
           picReader.readAsDataURL(file);
         }
@@ -1237,6 +1265,63 @@
     } else {
       console.log("Your browser does not support File API");
     }
+  }
+
+  async function resizeImage(dataUrl, targetFileSizeKb, maxDeviation = 1) {
+    let originalFile = await urltoFile(dataUrl, "test.png", "image/png");
+    if (originalFile.size / 1000 < targetFileSizeKb) return dataUrl; // File is already smaller
+
+    let low = 0.0;
+    let middle = 0.5;
+    let high = 1.0;
+
+    let result = dataUrl;
+
+    let file = originalFile;
+
+    while (Math.abs(file.size / 1000 - targetFileSizeKb) > maxDeviation) {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const img = document.createElement("img");
+
+      const promise = new Promise((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = reject;
+      });
+
+      img.src = dataUrl;
+
+      await promise;
+
+      canvas.width = Math.round(img.width * middle);
+      canvas.height = Math.round(img.height * middle);
+      context.scale(canvas.width / img.width, canvas.height / img.height);
+      context.drawImage(img, 0, 0);
+      file = await urltoFile(canvas.toDataURL(), "test.png", "image/png");
+
+      if (file.size / 1000 < targetFileSizeKb - maxDeviation) {
+        low = middle;
+      } else if (file.size / 1000 > targetFileSizeKb) {
+        high = middle;
+      }
+
+      middle = (low + high) / 2;
+      result = canvas.toDataURL();
+    }
+
+    return result;
+  }
+
+  function urltoFile(url, filename, mimeType) {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        return new File([buf], filename, {
+          type: mimeType
+        });
+      });
   }
 
   document
@@ -1366,9 +1451,51 @@
                 },
                 success: function (data) {
 
-                  window.location.href = "#calendar";
+                  // window.location.href = "#calendar";
                   console.log(data);
                   console.log("Saved to users!");
+                  // var count = response.Count;
+                  var myData4 = JSON.stringify({
+                    adminEmail: forUpdate.adminEmail,
+                    cLocation: forUpdate.cLocation,
+                    comid: forUpdate.comid,
+                    employeeEmail: forUpdate.employeeEmail,
+                    employeeName: forUpdate.employeeName,
+                    hr: forUpdate.hr,
+                    color: forUpdate.color,
+                    mins: forUpdate.mins,
+                    secs: forUpdate.secs,
+                    task: forUpdate.task,
+                    title: forUpdate.title,
+                    cPhoto: forUpdate.cPhoto,
+                    cRemarks: forUpdate.cRemarks,
+                    unread: "false",
+                    createdAt: Date.now()
+                  });
+
+                  $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                    url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/notifications/" +
+                      forUpdate.id,
+                    data: myData4,
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    success: function (data) {
+
+                      window.location.href = "#calendar";
+                      console.log(data);
+                      console.log("Saved to Notifications!");
+
+
+                    },
+                    error: function (response) {
+                      console.log(response);
+                      console.log("Error");
+                    },
+                  });
 
 
                 },
@@ -1377,10 +1504,6 @@
                   console.log("Error");
                 },
               });
-
-
-
-
 
             });
 
@@ -1414,7 +1537,7 @@
     // console.log(arr);
     var user = sessionStorage.getItem("user");
     var cleaner = arr.filter((c) => c.employeeEmail === user);
-    console.log(cleaner);
+    // console.log(cleaner);
     for (let index = 0; index < cleaner.length; index++) {
       var hr = cleaner[index].hr * 1;
       var mn = cleaner[index].mins * 1;
@@ -1429,7 +1552,7 @@
     sessionStorage.setItem("lat", e.lat);
     sessionStorage.setItem("lng", e.lng);
     const tasks = e.task;
-    if (role == 1) {
+    if (role == 1 || role == 0) {
       $("#myModal3").modal({
         backdrop: "static",
         keyboard: false
@@ -1586,6 +1709,34 @@
           }
         }
       });
+
+      var aPhotos = e.aPhoto;
+      var aImages = aPhotos.map((photo) => {
+        return {
+          file: photo.M.file.S,
+        };
+      });
+
+      forUpdate = {
+        adminEmail: e.adminEmail,
+        allDay: e.allDay,
+        cLocation: cLocation,
+        color: e.color,
+        comid: e.comid,
+        day: e.day,
+        employeeEmail: e.employeeEmail,
+        employeeName: e.employeeName,
+        end: e.end,
+        id: e.id,
+        location: e.location,
+        month: e.month,
+        start: e.start,
+        startingTime: e.startingTime,
+        title: e.title,
+        year: e.year,
+        aRemarks: e.aRemarks,
+        aPhoto: aImages,
+      };
     }
   }
 
@@ -1674,7 +1825,10 @@
             lng: position.coords.longitude,
           };
 
-          console.log(pos);
+          // console.log(pos);
+
+          forUpdate.lat = pos.lat;
+          forUpdate.lng = pos.lng;
 
           $.ajax({
             url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.lat},${pos.lng}&key=AIzaSyDENyuxiDy6R45RVnr6jhPqGM3o5cUDS1k`,
@@ -1683,6 +1837,7 @@
           }).done(function (data) {
             // console.log(data);
             var results = data.results;
+            forUpdate.cLocation = results[0].formatted_address;
             $("#c-location").val(results[0].formatted_address);
           });
         });

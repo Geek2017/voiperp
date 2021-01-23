@@ -66,7 +66,7 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
         var employee = $scope.data.filter((user) => user.role === "ordinary");
 
-        console.log($scope.arr);
+        // console.log($scope.arr);
 
         var filtered = $scope.arr.filter(function (comid) {
             return comid.comid == userComID;
@@ -87,8 +87,25 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
                 role: users.role,
                 status: users.status,
                 rate: users.rate,
-                toPay: users.toPay,
                 workingHr: users.workingHr,
+                toPay: users.toPay,
+                action: users.action
+            }
+
+            return user
+        })
+
+        var superFiltered = $scope.arr.map((users) => {
+            var user = {
+                email: users.email,
+                fullname: users.fullname,
+                designation: users.designation,
+                contact: users.contact,
+                role: users.role,
+                status: users.status,
+                rate: users.rate,
+                workingHr: users.workingHr,
+                toPay: users.toPay,
                 action: users.action
             }
 
@@ -106,8 +123,8 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
                 role: users.role,
                 status: users.status,
                 rate: users.rate,
-                toPay: users.toPay,
                 workingHr: users.workingHr,
+                toPay: users.toPay,
                 // action: users.action
             }
 
@@ -359,7 +376,7 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
             }
         } else if (role == 0) {
-            var noOfContacts = $scope.arr.length;
+            var noOfContacts = superFiltered.length;
 
             if (noOfContacts > 0) {
 
@@ -375,7 +392,7 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
                 var col = []; // define an empty array
                 for (var i = 0; i < noOfContacts; i++) {
-                    for (var key in $scope.arr[i]) {
+                    for (var key in superFiltered[i]) {
                         if (col.indexOf(key) === -1) {
                             col.push(key);
                         }
@@ -409,13 +426,13 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
                     for (var j = 0; j < col.length; j++) {
                         var td = document.createElement("td");
-                        td.innerHTML = $scope.arr[i][col[j]];
+                        td.innerHTML = superFiltered[i][col[j]];
 
                         bRow.appendChild(td);
 
                     }
                     tBody.appendChild(bRow)
-                    var entry = $scope.arr[i];
+                    var entry = superFiltered[i];
                     var buttons = [{
                         value: "Edit",
                         type: "button",

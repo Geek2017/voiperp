@@ -82,6 +82,7 @@ angular.module('fvs').controller('NewClientCtrl', function ($scope) {
         },
         success: function (data) {
           console.log(data);
+          $('#myModal').modal();
           // console.log("Success");
           // localStorage.setItem("fullname", $('#fullname').val());
           // sessionStorage.setItem("state", 1);

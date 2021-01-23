@@ -11,16 +11,16 @@ angular.module('fvs').controller('ProjectCreateCtrl', function ($scope) {
     var user = sessionStorage.getItem("user");
 
     var projectName = $('#projectName').val(),
-    clientName = $('#clientName').val(),
-    projectRate = $('#projectRate').val(),
-    projectType = $('#projectType').val(),
-    priority = $('#priority').val(),
-    projectSize = $('#projectSize').val(),
-    startingDate = $('#startingDate').val(),
-    endingDate = $('#endingDate').val(),
-    taskTitle = $('#taskTitle').val(),
-    subTask = $('#subTask').val(),
-    details = $('#details').val();
+      clientName = $('#clientName').val(),
+      projectRate = $('#projectRate').val(),
+      projectType = $('#projectType').val(),
+      priority = $('#priority').val(),
+      projectSize = $('#projectSize').val(),
+      startingDate = $('#startingDate').val(),
+      endingDate = $('#endingDate').val(),
+      taskTitle = $('#taskTitle').val(),
+      subTask = $('#subTask').val(),
+      details = $('#details').val();
 
 
 
@@ -31,7 +31,7 @@ angular.module('fvs').controller('ProjectCreateCtrl', function ($scope) {
       output = document.getElementById('output'),
       pwd = document.getElementById('newUserPassword');
 
-    if (projectName && clientName) {
+    if (projectName && clientName && projectRate && projectType && priority && projectSize && startingDate && endingDate && taskTitle && subTask && details) {
 
       // fileSelect = document.getElementById("newUserPicture").files;
       // if (fileSelect.length > 0) {
@@ -88,6 +88,7 @@ angular.module('fvs').controller('ProjectCreateCtrl', function ($scope) {
         },
         success: function (data) {
           console.log(data);
+          $('#myModal').modal();
           // console.log("Success");
           // localStorage.setItem("fullname", $('#fullname').val());
           // sessionStorage.setItem("state", 1);
@@ -132,6 +133,9 @@ angular.module('fvs').controller('ProjectCreateCtrl', function ($scope) {
       });
     } else {
       document.getElementById("messages").innerHTML = "You need to fill up everything, check the fields again.";
+      setTimeout(() => {
+        document.getElementById("messages").innerHTML = "";
+      }, 3000);
       // setTimeout(function () {
       //     document.getElementById("messages").innerHTML = "";
       // }, 3000);

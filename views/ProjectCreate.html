@@ -66,7 +66,7 @@
       <div class="card">
         <div class="card-body">
           <div class="text-danger wrapper text-center" id="messages"></div>
-              <div class="text-success wrapper text-center" id="success"></div>
+          <div class="text-success wrapper text-center" id="success"></div>
           <div class="form theme-form">
             <div class="row">
               <div class="col">
@@ -189,16 +189,16 @@
                       </div>
                     </div>
                   </div> -->
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                 <select class="js-example-basic-single">
                   <option value="task">My Task</option>
                 </select>
-              </div>
-              <div class="form-group col-md-6">
+              </div> -->
+              <!-- <div class="form-group col-md-6">
                 <select class="js-example-disabled-results" id="bm-collection">
                   <option value="general">General</option>
                 </select>
-              </div>
+              </div> -->
               <!-- <div class="form-group col-md-12 my-0">
                     <textarea class="form-control" required="" autocomplete="off">  </textarea>
                   </div> -->
@@ -227,7 +227,7 @@
             <div class="row">
               <div class="col">
                 <button class="btn btn-success" type="button" id="addNewProject">Add</button>
-                <input class="btn btn-light" type="reset" value="Cancel">
+                <input class="btn btn-danger" type="reset" value="Cancel">
                 <!-- <div class="form-group mb-0"><a class="btn btn-success mr-3" href="#">Add</a><a class="btn btn-danger" href="#">Cancel</a></div> -->
               </div>
             </div>
@@ -235,6 +235,26 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Project Added!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>
 <!-- Container-fluid Ends-->

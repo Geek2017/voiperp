@@ -209,6 +209,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                 },
                 success: function (data) {
                     console.log(data);
+                    $('#myModal').modal();
                     // console.log("Success");
                     // localStorage.setItem("fullname", $('#fullname').val());
                     // sessionStorage.setItem("state", 1);
@@ -245,6 +246,11 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                     document.getElementById("messages").innerHTML =
                         "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
 
+                    setTimeout(() => {
+                        document.getElementById("messages").innerHTML =
+                            "";
+                    }, 3000);
+
 
                     // window.location.href = './index.html';
                 },
@@ -256,9 +262,9 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
             });
         } else {
             document.getElementById("messages").innerHTML = "You need to fill up everything, check the fields again.";
-            // setTimeout(function () {
-            //     document.getElementById("messages").innerHTML = "";
-            // }, 3000);
+            setTimeout(function () {
+                document.getElementById("messages").innerHTML = "";
+            }, 3000);
         }
 
     }
