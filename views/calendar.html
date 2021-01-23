@@ -796,8 +796,14 @@
         data.push(arr[i]);
       }
 
+
       var role = sessionStorage.getItem("role");
       var userEmail = sessionStorage.getItem("user");
+      var comidFilter = sessionStorage.getItem("comid");
+
+      var filteredComid = arr.filter(function (user) {
+        return user.comid == comidFilter;
+      });
 
       if (role == 0) {
         newFiltered = arr.map((users) => {
@@ -820,7 +826,7 @@
           return user;
         });
       } else if (role == 1) {
-        newFiltered = arr.map((users) => {
+        newFiltered = filteredComid.map((users) => {
           var startingTime = users.startingTime;
           var time = startingTime.split(":");
           var hr = time[0];
@@ -1157,7 +1163,7 @@
       year: e.year,
       aRemarks: $("#a-remarks").val(),
       aPhoto: aImages,
-      cRemarks: e.cRemarks,
+      cRemarks: $("#eRemarks").val(),
       cPhoto: eImages,
       workingHr: e.workingHr,
     });

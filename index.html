@@ -499,8 +499,8 @@
                 <li id="projects" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="box"></i><span>Projects</span></a>
                   <ul class="nav-submenu menu-content">
-                    <li><a href="#/projectlist">Project List</a></li>
-                    <li><a href="#/projectcreate">Create New</a></li>
+                    <!-- <li><a href="#/projectlist">Project List</a></li> -->
+                    <!-- <li><a href="#/projectcreate">Create New</a></li> -->
                     <li><a href="#/calendar">Schedule</a></li>
                     <li><a href="#/email">Email</a></li>
                   </ul>
@@ -509,7 +509,7 @@
                 <li id="projects2" class="dropdown" style="display: none;">
                   <a class="nav-link menu-title"><i data-feather="box"></i><span>Projects</span></a>
                   <ul class="nav-submenu menu-content">
-                    <li><a href="#/projectlist">Project List</a></li>
+                    <!-- <li><a href="#/projectlist">Project List</a></li> -->
                     <!-- <li><a href="#/projectcreate">Create New</a></li> -->
                     <li><a href="#/calendar">Schedule</a></li>
                     <!-- <li><a href="#/email">Email</a></li> -->
@@ -719,6 +719,7 @@
     var unreadNotif = [];
     var sortedNotif = [];
     var newNotif = [];
+    var comid = sessionStorage.getItem("comid");
     var settings = {
       url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allnotifications",
       method: "GET",
@@ -733,16 +734,21 @@
           for (let i = 0; i < count; i++) {
             const res = response.Items[i];
             var notif = {
-              title: res.title.S,
-              createdAt: res.createdAt.S,
-              unread: res.unread.S,
-              color: res.color.S,
-              id: res.id.S,
-              cPhoto: res.cPhoto.L,
               cLocation: res.cLocation.S,
+              cPhoto: res.cPhoto.L,
               cRemarks: res.cRemarks.S,
-              task: res.task.L,
+              color: res.color.S,
+              comid: res.comid.S,
+              createdAt: res.createdAt.S,
+              employeeEmail: res.employeeEmail.S,
               employeeName: res.employeeName.S,
+              hr: res.hr.S,
+              id: res.id.S,
+              mins: res.mins.S,
+              secs: res.secs.S,
+              task: res.task.L,
+              title: res.title.S,
+              unread: res.unread.S,
             };
             notifications.push(notif);
           }
@@ -753,7 +759,7 @@
         });
 
       unreadNotif = notifications
-        .filter((notif) => notif.unread != "true")
+        .filter((notif) => notif.unread != "true" && notif.comid == comid)
         .sort((a, b) => {
           let fa = parseInt(a.createdAt, 10),
             fb = parseInt(b.createdAt, 10);
@@ -761,12 +767,16 @@
           return fb - fa;
         });
 
-      sortedNotif = notifications.sort((a, b) => {
-        let fa = parseInt(a.createdAt, 10),
-          fb = parseInt(b.createdAt, 10);
+      // console.log(unreadNotif);
 
-        return fb - fa;
-      });
+      sortedNotif = notifications
+        .filter((notif) => notif.comid == comid)
+        .sort((a, b) => {
+          let fa = parseInt(a.createdAt, 10),
+            fb = parseInt(b.createdAt, 10);
+
+          return fb - fa;
+        });
 
       newNotif = notifications.filter((notif) => {
         var now = Date.now() - 86400000;
@@ -775,20 +785,25 @@
 
       // console.log(newNotif);
 
-      $("#notifBadge").text(sortedNotif.length);
+      if (unreadNotif.length == 0) {
+        $("#notifBadge").text("");
+      } else {
+        $("#notifBadge").text(unreadNotif.length);
+      }
+
       $("#notifMessage").text(
-        `You have ${sortedNotif.length} new notifications`
+        `You have ${unreadNotif.length} unread notifications`
       );
 
       var len = 0;
-      if (sortedNotif.length > 5) {
+      if (unreadNotif.length > 5) {
         len = 5;
       } else {
-        len = sortedNotif.length;
+        len = unreadNotif.length;
       }
 
       for (let k = 0; k < len; k++) {
-        const notif = sortedNotif[k];
+        const notif = unreadNotif[k];
         var time = parseInt(notif.createdAt, 10);
         var elapsed = moment(time).fromNow();
         var unreadStat = "";
@@ -813,8 +828,6 @@
       }
     });
 
-    // var newNotifs = [];
-
     setInterval(async () => {
       await $.ajax(settings)
         .done((response) => {
@@ -825,16 +838,21 @@
           for (let i = 0; i < count; i++) {
             const res = response.Items[i];
             var notif = {
-              title: res.title.S,
-              createdAt: res.createdAt.S,
-              unread: res.unread.S,
-              color: res.color.S,
-              id: res.id.S,
-              cPhoto: res.cPhoto.L,
               cLocation: res.cLocation.S,
+              cPhoto: res.cPhoto.L,
               cRemarks: res.cRemarks.S,
-              task: res.task.L,
+              color: res.color.S,
+              comid: res.comid.S,
+              createdAt: res.createdAt.S,
+              employeeEmail: res.employeeEmail.S,
               employeeName: res.employeeName.S,
+              hr: res.hr.S,
+              id: res.id.S,
+              mins: res.mins.S,
+              secs: res.secs.S,
+              task: res.task.L,
+              title: res.title.S,
+              unread: res.unread.S,
             };
             notifications.push(notif);
           }
@@ -844,7 +862,7 @@
         });
 
       unreadNotif = notifications
-        .filter((notif) => notif.unread != "true")
+        .filter((notif) => notif.unread != "true" && notif.comid == comid)
         .sort((a, b) => {
           let fa = parseInt(a.createdAt, 10),
             fb = parseInt(b.createdAt, 10);
@@ -852,32 +870,41 @@
           return fb - fa;
         });
 
-      sortedNotif = notifications.sort((a, b) => {
-        let fa = parseInt(a.createdAt, 10),
-          fb = parseInt(b.createdAt, 10);
+      sortedNotif = notifications
+        .filter((notif) => notif.comid == comid)
+        .sort((a, b) => {
+          let fa = parseInt(a.createdAt, 10),
+            fb = parseInt(b.createdAt, 10);
 
-        return fb - fa;
-      });
+          return fb - fa;
+        });
 
       newNotif = notifications.filter((notif) => {
         var now = Date.now() - 86400000;
         return parseInt(notif.createdAt, 10) > now;
       });
 
-      $("#notifBadge").text(sortedNotif.length);
+      // console.log(notifications);
+
+      if (unreadNotif.length == 0) {
+        $("#notifBadge").text("");
+      } else {
+        $("#notifBadge").text(unreadNotif.length);
+      }
+
       $("#notifMessage").text(
-        `You have ${sortedNotif.length} new notifications`
+        `You have ${unreadNotif.length} unread notifications`
       );
 
       var len = 0;
-      if (sortedNotif.length >= 5) {
+      if (unreadNotif.length >= 5) {
         len = 5;
       } else {
-        len = sortedNotif.length;
+        len = unreadNotif.length;
       }
 
       for (let k = 0; k < len; k++) {
-        const notif = sortedNotif[k];
+        const notif = unreadNotif[k];
         var time = parseInt(notif.createdAt, 10);
         var elapsed = moment(time).fromNow();
         var unreadStat = "";
@@ -912,7 +939,7 @@
       var toAppend = `<div class="p-2 rounded border border-dark e-notif">
                 <div class="d-flex">
                   Reminder:
-                  <p class="mb-0 ml-2">
+                  <p class="mb-0 ml-2 text-break">
                     <span class="font-weight-bold text-primary"
                       >${notif[0].employeeName}</span
                     >
@@ -922,13 +949,7 @@
                     <span class="font-weight-bold text-primary">${img.length} images</span>
                     @
                     <span
-                      style="
-                        display: inline-flex;
-                        width: 100%;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                      "
+                      class="text-break"
                       >${notif[0].cLocation}</span
                     >
                   </p>
@@ -943,11 +964,167 @@
               </div>`;
 
       $("#notifModalBody").append(toAppend);
+
+      var cPhoto = img.map((img) => {
+        return {
+          file: img.M.file.S,
+        };
+      });
+
+      var tasks = task.map((task) => {
+        return {
+          number: task.M.number.S,
+          status: task.M.status.S,
+          taskItem: task.M.taskItem.S,
+        };
+      });
+
+      var notifUpdate = JSON.stringify({
+        cLocation: notif[0].cLocation,
+        cPhoto: cPhoto,
+        cRemarks: notif[0].cRemarks,
+        color: notif[0].color,
+        comid: notif[0].comid,
+        createdAt: notif[0].createdAt,
+        employeeEmail: notif[0].employeeEmail,
+        employeeName: notif[0].employeeName,
+        hr: notif[0].hr,
+        id: notif[0].id,
+        mins: notif[0].mins,
+        secs: notif[0].secs,
+        task: tasks,
+        title: notif[0].title,
+        unread: "true",
+      });
+
+      // console.log(notifUpdate);
+
+      $.ajax({
+        type: "PUT",
+        dataType: "json",
+        url: `https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/notifications/${id}`,
+        data: notifUpdate,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        success: async function (data) {
+          console.log(data);
+          console.log("Notification updated!");
+          await $.ajax(settings)
+            .done((response) => {
+              var count = response.Count;
+              // console.log(response.Items);
+              $("#notifContainer .notif").remove();
+              notifications = [];
+              for (let i = 0; i < count; i++) {
+                const res = response.Items[i];
+                var notif = {
+                  cLocation: res.cLocation.S,
+                  cPhoto: res.cPhoto.L,
+                  cRemarks: res.cRemarks.S,
+                  color: res.color.S,
+                  comid: res.comid.S,
+                  createdAt: res.createdAt.S,
+                  employeeEmail: res.employeeEmail.S,
+                  employeeName: res.employeeName.S,
+                  hr: res.hr.S,
+                  id: res.id.S,
+                  mins: res.mins.S,
+                  secs: res.secs.S,
+                  task: res.task.L,
+                  title: res.title.S,
+                  unread: res.unread.S,
+                };
+                notifications.push(notif);
+              }
+            })
+            .fail((err) => {
+              console.log(err);
+            });
+
+          unreadNotif = notifications
+            .filter((notif) => notif.unread != "true" && notif.comid == comid)
+            .sort((a, b) => {
+              let fa = parseInt(a.createdAt, 10),
+                fb = parseInt(b.createdAt, 10);
+
+              return fb - fa;
+            });
+
+          sortedNotif = notifications
+            .filter((notif) => notif.comid == comid)
+            .sort((a, b) => {
+              let fa = parseInt(a.createdAt, 10),
+                fb = parseInt(b.createdAt, 10);
+
+              return fb - fa;
+            });
+
+          newNotif = notifications.filter((notif) => {
+            var now = Date.now() - 86400000;
+            return parseInt(notif.createdAt, 10) > now;
+          });
+
+          // console.log(notifications);
+
+          if (unreadNotif.length == 0) {
+            $("#notifBadge").text("");
+          } else {
+            $("#notifBadge").text(unreadNotif.length);
+          }
+
+          $("#notifMessage").text(
+            `You have ${unreadNotif.length} unread notifications`
+          );
+
+          var len = 0;
+          if (unreadNotif.length >= 5) {
+            len = 5;
+          } else {
+            len = unreadNotif.length;
+          }
+
+          for (let k = 0; k < len; k++) {
+            const notif = unreadNotif[k];
+            var time = parseInt(notif.createdAt, 10);
+            var elapsed = moment(time).fromNow();
+            var unreadStat = "";
+            if (notif.unread == "false") {
+              unreadStat = "fa fa-circle-o font-primary";
+            } else {
+              unreadStat = "fa fa-circle font-primary";
+            }
+            $("#notifContainer").append(`<div
+                      onclick="displayNotification('${notif.id}')"
+                      data-toggle="modal"
+                      data-target="#notifModal"
+                      class="notif"
+                    >
+                      <p class="mb-0 d-flex align-items-center justify-content-between">
+                        <span style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <i class="${unreadStat} mr-3" > </i>
+                        ${notif.title}</span>
+                        <span class="pull-right">${elapsed}</span>
+                      </p>
+                    </div>`);
+          }
+        },
+        error: function (response) {
+          console.log(response);
+          console.log("Error");
+        },
+      });
     }
 
     function displayAllNotif() {
       $("#notifModalTitle").text("All Notifications");
-      for (let i = 0; i < 10; i++) {
+      var len = 0;
+      if (sortedNotif.length >= 10) {
+        len = 10;
+      } else {
+        len = sortedNotif.length;
+      }
+      for (let i = 0; i < len; i++) {
         const notif = sortedNotif[i];
         var img = notif.cPhoto;
         var task = notif.task;
@@ -957,7 +1134,7 @@
                 <div class="d-flex">Title: <span class="mb-0 ml-2 w-100 text-left">${notif.title}</span></div>
                 <div class="d-flex">
                   Reminder:
-                  <p class="mb-0 ml-2 w-100">
+                  <p class="mb-0 ml-2 w-100 text-break">
                     <span class="font-weight-bold text-primary"
                       >${notif.employeeName}</span
                     >
@@ -967,13 +1144,7 @@
                     <span class="font-weight-bold text-primary">${img.length} images</span>
                     @
                     <span
-                      style="
-                        display: inline-flex;
-                        width: 100%;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                      "
+                      class="text-break"
                       >${notif.cLocation}</span
                     >
                   </p>
