@@ -7579,7 +7579,7 @@ body[class*='dark-'] .for-light {
 
 .page-wrapper.compact-wrapper .page-body-wrapper.sidebar-icon .page-body {
     padding: 0 15px;
-    min-height: calc(100vh - 80px);
+    /* min-height: calc(100vh - 80px); */
     margin-top: 80px;
     margin-left: 280px
 }
@@ -13444,12 +13444,12 @@ strong~p {
 }
 
 .default-according.style-1 button[aria-expanded="true"]:before {
-    content: "";
+    content: "î­³";
     font-family: IcoFont
 }
 
 .default-according.style-1 button[aria-expanded="false"]:before {
-    content: "";
+    content: "î­º";
     font-family: IcoFont
 }
 
@@ -13849,7 +13849,7 @@ strong~p {
     }
 
     .auth-bg-video .card-body .s--signup .theme-form {
-        margin-bottom: 295px;
+        margin-bottom: 315px;
         margin-top: 0
     }
 
@@ -13897,7 +13897,7 @@ strong~p {
     }
 
     .cont {
-        width: 100%
+        width: 80vw;
     }
 
     .cont.s--signup .img__text.m--up {
@@ -13950,20 +13950,30 @@ strong~p {
         margin-bottom: 280px;
         margin-top: 0
     }
+
+    .card-body-signup {
+        margin-top: 290px !important
+    }
 }
 
 @media only screen and (max-width: 767px) {
     .cont.s--signup .sub-cont {
-        -webkit-transform: translate3d(0, 535px, 0) !important;
-        transform: translate3d(0, 535px, 0) !important
+        -webkit-transform: translate3d(0, 475px, 0) !important;
+        transform: translate3d(0, 475px, 0) !important
     }
 
     .auth-bg {
         padding: 15px !important
     }
+
 }
 
 @media only screen and (max-width: 575px) {
+    .auth-bg-video .card-body .s--signup .theme-form {
+        margin-bottom: 295px;
+        margin-top: 0
+    }
+
     .authentication-main {
         margin-top: 10px
     }
@@ -13973,13 +13983,42 @@ strong~p {
     }
 
     .cont.s--signup .sub-cont {
-        -webkit-transform: translate3d(0, 570px, 0) !important;
-        transform: translate3d(0, 570px, 0) !important
+        -webkit-transform: translate3d(0, 450px, 0) !important;
+        transform: translate3d(0, 450px, 0) !important
     }
 
     .theme-form .login-divider:before,
     .theme-form .form-divider:before {
         left: 39% !important
+    }
+
+    .card-body-signup {
+        margin-top: 160px !important
+
+    }
+
+    .wizard-4 ul.anchor li {
+        padding-bottom: 0 !important;
+        margin-left: 3px !important;
+        margin-right: 3px !important;
+    }
+
+    .wizard-4 ul.anchor li a small {
+        display: none !important;
+    }
+
+    .action-bar {
+    display: flex !important;
+    justify-content: space-evenly !important;
+    }
+
+    .col-sm-12 {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    }
+
+    .btn {
+        padding: 5px;
     }
 }
 
@@ -13995,8 +14034,12 @@ strong~p {
     }
 
     .cont.s--signup .sub-cont {
-        -webkit-transform: translate3d(0, 588px, 0) !important;
-        transform: translate3d(0, 588px, 0) !important
+        -webkit-transform: translate3d(0, 455px, 0) !important;
+        transform: translate3d(0, 455px, 0) !important;
+    }
+
+    .cont .sub-cont {
+        padding: 30px 15px !important;
     }
 
     .theme-form .login-divider:before,

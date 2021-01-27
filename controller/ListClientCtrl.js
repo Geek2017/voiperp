@@ -53,6 +53,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                 firstname: response.Items[i].firstname.S,
                 lastname: response.Items[i].lastname.S,
                 title: response.Items[i].title.S,
+                website: response.Items[i].website.S,
                 toWhom: response.Items[i].toWhom.S,
                 action: ""
             }
@@ -79,6 +80,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             var user = {
                 email: users.email,
                 companyName: users.companyName,
+                website: users.website,
                 mailingAdd: users.mailingAdd,
                 phoneNo: users.phoneNo,
                 firstname: users.firstname,
@@ -94,6 +96,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             var user = {
                 email: users.email,
                 companyName: users.companyName,
+                website: users.website,
                 mailingAdd: users.mailingAdd,
                 phoneNo: users.phoneNo,
                 firstname: users.firstname,
@@ -108,15 +111,14 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
         var newFilteredEmail = filteredEmail.map((users) => {
             var user = {
                 email: users.email,
-                fullname: users.fullname,
-                designation: users.designation,
-                contact: users.contact,
-                role: users.role,
-                status: users.status,
-                rate: users.rate,
-                toPay: users.toPay,
-                workingHr: users.workingHr,
-                action: users.action
+                companyName: users.companyName,
+                website: users.website,
+                mailingAdd: users.mailingAdd,
+                phoneNo: users.phoneNo,
+                firstname: users.firstname,
+                lastname: users.lastname,
+                title: users.title
+                // action: users.action
             }
 
             return user
@@ -128,6 +130,16 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
 
         if (role == 2) {
             var noOfContacts = newFilteredEmail.length;
+            if (noOfContacts == 0) {
+                // $("#loadingImage").css("display", "block");
+                $("#loadingImage").css("display", "none");
+                $("#uploadTopping").attr("style", "display: block");
+                // $("#FileUpload1").attr("style", "display: block");
+                document.getElementById('uploadTopping').onclick = function () {
+                    document.getElementById('FileUpload1').click();
+                };
+                // $("#calendar").css("display", "none");
+            }
             if (noOfContacts > 0) {
 
 
@@ -249,6 +261,16 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             }
         } else if (role == 1) {
             var noOfContacts = newFiltered.length;
+            if (noOfContacts == 0) {
+                // $("#loadingImage").css("display", "block");
+                $("#loadingImage").css("display", "none");
+                $("#uploadTopping").attr("style", "display: block");
+                // $("#FileUpload1").attr("style", "display: block");
+                document.getElementById('uploadTopping').onclick = function () {
+                    document.getElementById('FileUpload1').click();
+                };
+                // $("#calendar").css("display", "none");
+            }
 
             if (noOfContacts > 0) {
 
@@ -371,6 +393,16 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
             }
         } else if (role == 0) {
             var noOfContacts = superFiltered.length;
+            if (noOfContacts == 0) {
+                // $("#loadingImage").css("display", "block");
+                $("#loadingImage").css("display", "none");
+                $("#uploadTopping").attr("style", "display: block");
+                // $("#FileUpload1").attr("style", "display: block");
+                document.getElementById('uploadTopping').onclick = function () {
+                    document.getElementById('FileUpload1').click();
+                };
+                // $("#calendar").css("display", "none");
+            }
 
             if (noOfContacts > 0) {
 
@@ -523,7 +555,7 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
         });
         // console.log(document.getElementById("export-button"));
         // console.log('1');
-    }, 3000);
+    }, 800);
 
 
 

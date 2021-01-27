@@ -130,6 +130,16 @@ angular.module('fvs').controller('LeadsCtrl', function ($scope) {
 
         if (role == 2) {
             var noOfContacts = newFilteredEmail.length;
+            if (noOfContacts == 0) {
+                // $("#loadingImage").css("display", "block");
+                $("#loadingImage").css("display", "none");
+                $("#uploadTopping").attr("style", "display: block");
+                // $("#FileUpload1").attr("style", "display: block");
+                document.getElementById('uploadTopping').onclick = function () {
+                    document.getElementById('FileUpload1').click();
+                };
+                // $("#calendar").css("display", "none");
+            }
             if (noOfContacts > 0) {
 
 
@@ -251,6 +261,16 @@ angular.module('fvs').controller('LeadsCtrl', function ($scope) {
             }
         } else if (role == 1) {
             var noOfContacts = newFiltered.length;
+            if (noOfContacts == 0) {
+                // $("#loadingImage").css("display", "block");
+                $("#loadingImage").css("display", "none");
+                $("#uploadTopping").attr("style", "display: block");
+                // $("#FileUpload1").attr("style", "display: block");
+                document.getElementById('uploadTopping').onclick = function () {
+                    document.getElementById('FileUpload1').click();
+                };
+                // $("#calendar").css("display", "none");
+            }
 
             if (noOfContacts > 0) {
 
@@ -311,11 +331,11 @@ angular.module('fvs').controller('LeadsCtrl', function ($scope) {
                     var buttons = [{
                         value: "Edit",
                         type: "button",
-                        className: "btn btn-info mx-2"
+                        className: "btn btn-info btn-xs mx-2"
                     }, {
                         value: "Delete",
                         type: "button",
-                        className: "btn btn-danger mx-2"
+                        className: "btn btn-danger btn-xs mx-2"
                     }];
                     // btn.type = buttons.values(type);
 
@@ -373,6 +393,16 @@ angular.module('fvs').controller('LeadsCtrl', function ($scope) {
             }
         } else if (role == 0) {
             var noOfContacts = superFiltered.length;
+            if (noOfContacts == 0) {
+                // $("#loadingImage").css("display", "block");
+                $("#loadingImage").css("display", "none");
+                $("#uploadTopping").attr("style", "display: block");
+                // $("#FileUpload1").attr("style", "display: block");
+                document.getElementById('uploadTopping').onclick = function () {
+                    document.getElementById('FileUpload1').click();
+                };
+                // $("#calendar").css("display", "none");
+            }
 
             if (noOfContacts > 0) {
 
@@ -525,7 +555,8 @@ angular.module('fvs').controller('LeadsCtrl', function ($scope) {
         });
         // console.log(document.getElementById("export-button"));
         console.log('1');
-    }, 3000);
+    }, 800);
+
 
 
 
@@ -542,6 +573,10 @@ angular.module('fvs').controller('LeadsCtrl', function ($scope) {
             role: 'status3'
         }
     ];
+
+    console.log($scope.arr.length);
+
+
 
     //   console.log($scope.statuses);
 

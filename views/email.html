@@ -14,6 +14,8 @@
   var toEmail = [];
 
   $(document).ready(async () => {
+    var comid = sessionStorage.getItem("comid");
+    var userEmail = sessionStorage.getItem("user");
     var settings = {
       url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/allusers",
       method: "GET",
@@ -27,6 +29,7 @@
             fullname: response.Items[i].fullname.S,
             role: response.Items[i].role.S,
             email: response.Items[i].email.S,
+            comid: response.Items[i].comid.S
           };
 
           users.push(user);
@@ -50,6 +53,7 @@
             fullname: `${response.Items[i].firstname.S} ${response.Items[i].lastname.S}`,
             role: "client",
             email: response.Items[i].email.S,
+            comid: response.Items[i].comid.S
           };
 
           users.push(client);
@@ -59,7 +63,9 @@
         console.log(err);
       });
 
-    users = users.filter((user) => user.role != "ordinary");
+    users = users.filter((user) => user.role != "ordinary" && user.comid == comid && user.email != userEmail);
+
+    console.log(users)
 
     sortedUsers = users.sort((a, b) => {
       let fa = a.fullname.toLowerCase(),

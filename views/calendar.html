@@ -693,6 +693,7 @@
   var newFiltered = [];
   var eventTasks = [];
   var calendar;
+  var comid = sessionStorage.getItem("comid");
 
   $(document).ready(async () => {
     // Initialize select2
@@ -726,6 +727,7 @@
             fullname: response.Items[i].fullname.S,
             role: response.Items[i].role.S,
             email: response.Items[i].email.S,
+            comid: response.Items[i].comid.S,
           };
 
           data2.push(arr2);
@@ -735,7 +737,7 @@
         console.log(err);
       });
 
-    var employee = data2.filter((user) => user.role === "ordinary");
+    var employee = data2.filter((user) => user.role === "ordinary" && user.comid === comid);
 
     for (var j = 0; j < employee.length; j++) {
       var e = employee[j];
@@ -1036,6 +1038,45 @@
                     $("#newEvent").trigger("reset");
                     $("#appendhere .task").remove();
                     $("#myModal").modal("hide");
+
+                    // var myData4 = JSON.stringify({
+                    //   comid: myData2.comid,
+                    //   adminEmail: myData2.adminEmail,
+                    //   location: myData2.location,
+                    //   employeeEmail: myData2.employeeEmail,
+                    //   employeeName: myData2.employeeName,
+                    //   color: myData2.color,
+                    //   task: myData2.task,
+                    //   title: myData2.title,
+                    //   aPhoto: myData2.aPhoto,
+                    //   aRemarks: myData2.cRemarks,
+                    //   unread: "false",
+                    //   createdAt: Date.now()
+                    // });
+
+                    // $.ajax({
+                    //   type: "POST",
+                    //   dataType: "json",
+                    //   // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                    //   url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/notifications/" +
+                    //     forUpdate.id,
+                    //   data: myData4,
+                    //   headers: {
+                    //     "Content-Type": "application/json",
+                    //   },
+                    //   success: function (data) {
+
+                    //     window.location.href = "#calendar";
+                    //     console.log(data);
+                    //     console.log("Saved to Notifications!");
+
+
+                    //   },
+                    //   error: function (response) {
+                    //     console.log(response);
+                    //     console.log("Error");
+                    //   },
+                    // });
                     setTimeout(() => {
                       window.location.href = "#calendar";
                     }, 500);
