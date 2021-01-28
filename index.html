@@ -230,7 +230,7 @@
         <div class="nav-right col-8 pull-right right-menu">
           <ul class="nav-menus">
             <li class="language-nav">
-              <div class="translate_wrapper">
+              <div class="translate_wrapper" id="langIcon" style="display: none;">
                 <div class="current_lang">
                   <div class="lang">
                     <i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN </span>
@@ -261,10 +261,10 @@
                 </div>
               </div>
             </li>
-            <li>
+            <li id="searchIcon" style="display: none;">
               <span class="header-search"><i data-feather="search"></i></span>
             </li>
-            <li class="onhover-dropdown">
+            <li class="onhover-dropdown" id="notificationIcon" style="display: none;">
               <div class="notification-box">
                 <i data-feather="bell"></i><span class="badge badge-pill badge-secondary" id="notifBadge"></span>
               </div>
@@ -598,7 +598,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6 footer-copyright">
-              <p class="mb-0">Copyright 2020 © Cuba All rights reserved.</p>
+              <p class="mb-0">Copyright 2020 © FVS All rights reserved.</p>
             </div>
             <div class="col-md-6">
               <p class="pull-right mb-0">
@@ -1200,31 +1200,37 @@
       if (role == 0) {
         $("#dash").show();
         $("#projects").show();
-        $("#marketing").show();
-        $("#sales").show();
+        $("#notificationIcon").show();
+        $("#searchIcon").show();
+        $("#langIcon").show();
+        // $("#marketing").show();
+        // $("#sales").show();
         $("#client").show();
         $("#leads").show();
-        $("#calls").show();
+        // $("#calls").show();
         $("#users").show();
         $("#company").show();
-        $("#invoice").show();
-        $("#reports").show();
-        $("#logs").show();
+        // $("#invoice").show();
+        // $("#reports").show();
+        // $("#logs").show();
         // document.getElementById("photoURL").src = logo;
         // $("#ai").show();
         // $("#logs").hide();
       } else if (role == 1) {
         $("#dash").show();
         $("#projects").show();
-        $("#marketing").show();
-        $("#sales").show();
+        $("#notificationIcon").show();
+        $("#searchIcon").show();
+        $("#langIcon").show();
+        // $("#marketing").show();
+        // $("#sales").show();
         $("#client").show();
         $("#leads").show();
-        $("#calls").show();
+        // $("#calls").show();
         $("#users").show();
         $("#company").show();
-        $("#invoice").show();
-        $("#reports").show();
+        // $("#invoice").show();
+        // $("#reports").show();
         // $("#logs").show();
         // document.getElementById("photoURL").src = logo;
         // $("#ai").show();

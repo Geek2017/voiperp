@@ -212,214 +212,321 @@
         onFinish: null
     }
 })(jQuery);
-(function ($) {
-    "use strict";
-    $('#wizard').smartWizard({
-        transitionEffect: 'slideleft',
-        onFinish: onFinishCallback
-    });
 
-    function onFinishCallback() {
 
-        // console.log("asdsad");
 
-        var comName = $('#comName').val(),
-            comAdd = $('#comAdd').val(),
-            comNum = $('#comNum').val(),
-            comLogo = localStorage.getItem("logo"),
-            email = $('#email').val(),
-            contact = $('#contact').val(),
-            designation = $('#designation').val(),
-            fullname = $('#fullname').val(),
-            image = localStorage.getItem("picture"),
-            password = $('#password').val();
+$('#wizard').smartWizard({
+    transitionEffect: 'slideleft',
+    onFinish: onFinishCallback
+});
 
-        fileSelect = document.getElementById("comLogo").files;
-        fileSelect2 = document.getElementById("picture").files;
-        var logo, picture;
-        if (fileSelect.length > 0) {
-            var fileSelect = fileSelect[0];
-            var fileReader = new FileReader();
+var images1 = "";
+var images2 = "";
 
-            fileReader.onload = function (FileLoadEvent) {
-                var data = FileLoadEvent.target.result;
-                logo = data;
-                // console.log(data);
-                localStorage.setItem("logo", data);
-                sessionStorage.setItem("comPhoto", data);
+async function resizeImage(dataUrl, targetFileSizeKb, maxDeviation = 1) {
+    let originalFile = await urltoFile(dataUrl, "test.png", "image/png");
+    if (originalFile.size / 1000 < targetFileSizeKb) return dataUrl; // File is already smaller
 
-            }
-            fileReader.readAsDataURL(fileSelect);
+    let low = 0.0;
+    let middle = 0.5;
+    let high = 1.0;
+
+    let result = dataUrl;
+
+    let file = originalFile;
+
+    while (Math.abs(file.size / 1000 - targetFileSizeKb) > maxDeviation) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        const img = document.createElement("img");
+
+        const promise = new Promise((resolve, reject) => {
+            img.onload = () => resolve();
+            img.onerror = reject;
+        });
+
+        img.src = dataUrl;
+
+        await promise;
+
+        canvas.width = Math.round(img.width * middle);
+        canvas.height = Math.round(img.height * middle);
+        context.scale(canvas.width / img.width, canvas.height / img.height);
+        context.drawImage(img, 0, 0);
+        file = await urltoFile(canvas.toDataURL(), "test.png", "image/png");
+
+        if (file.size / 1000 < targetFileSizeKb - maxDeviation) {
+            low = middle;
+        } else if (file.size / 1000 > targetFileSizeKb) {
+            high = middle;
         }
 
-        if (fileSelect2.length > 0) {
-            var fileSelect2 = fileSelect2[0];
-            var fileReader2 = new FileReader();
-
-            fileReader2.onload = function (FileLoadEvent) {
-                var data2 = FileLoadEvent.target.result;
-                picture = data2;
-                // console.log(data2);
-                localStorage.setItem("picture", data2);
-                sessionStorage.setItem("picture", data2);
-
-            }
-            fileReader2.readAsDataURL(fileSelect2);
-        }
-
-        if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
-
-            var logo, picture;
-
-
-            // var logo = document.getElementById("comLogo");
-            // logo.addEventListener("change", function () {
-            //     encodeImageFileURL();
-            // })
-
-
-
-            var myData = JSON.stringify({
-
-                //     // "count": "13",
-                //     // "domain": "www.done.com"
-                "name": $('#comName').val(),
-                "address": $('#comAdd').val(),
-                "contact": $('#comNum').val(),
-                "logo": localStorage.getItem("logo"),
-                "subscription": "0",
-                // "password": Base64.encode(pwd.value),
-                // "role": ""
-
-            });
-            // console.log(myData);
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
-                data: myData,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                success: function (response) {
-                    console.log(response);
-                    console.log("Success");
-                    // sessionStorage.setItem("state", 1);
-                    // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
-                    // setTimeout(function(){ 
-                    // $('#registerStyle').hide();
-                    // $('#forgotStyle').hide();
-                    // $('#loginStyle').show();
-                    // },3000);
-
-                    // window.location.href = './index.html';
-                },
-                error: function (response) {
-                    console.log(response.responseText);
-
-                    var id = response.responseText;
-                    // localStorage.setItem("comid", id);
-
-                    var str = id;
-                    var res = str.split("\r\n", 1);
-
-                    sessionStorage.setItem("comid", res[0]);
-
-                    console.log(res[0]);
-
-                    var myData2 = JSON.stringify({
-
-                        //     // "count": "13",
-                        //     // "domain": "www.done.com"
-                        "email": $('#email').val(),
-                        "comid": res[0],
-                        // "comid": $('#email').val(),
-                        "contact": $('#contact').val(),
-                        "designation": $('#designation').val(),
-                        "fullname": $('#fullname').val(),
-                        "image": localStorage.getItem("picture"),
-                        "password": Base64.encode(pwd.value),
-                        "role": "admin",
-                        "verification": "not verify"
-
-                        // "password": Base64.encode(pwd.value),
-                        // "role": ""
-
-                    });
-
-                    console.log(myData2);
-
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
-                        url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
-                        data: myData2,
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        success: function (data) {
-                            console.log(data);
-                            // console.log("Success");
-                            localStorage.setItem("fullname", $('#fullname').val());
-                            sessionStorage.setItem("state", 1);
-                            sessionStorage.setItem("role", 1);
-                            // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
-                            // setTimeout(function(){ 
-                            // $('#registerStyle').hide();
-                            // $('#forgotStyle').hide();
-                            // $('#loginStyle').show();
-                            // },3000);
-                            // $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .');
-                            var template_params = {
-                                "to_email": $('#email').val(),
-                                // "bcc": email,
-                                // "reply_to": email,
-                                "from_name": "FVS Team",
-                                "to_name": "",
-                                "message_html": "http://zumecall.com/zumecall/verification.html#" + res[0] + "#" + $('#email').val()
-                            }
-
-
-                            var service_id = "service_fvs";
-                            var template_id = "template_4cj69ab";
-                            emailjs.send(service_id, template_id, template_params);
-
-                            console.log("Sent");
-                            document.getElementById("comName").value = "";
-                            document.getElementById("comAdd").value = "";
-                            document.getElementById("comNum").value = "";
-                            document.getElementById("email").value = "";
-                            document.getElementById("contact").value = "";
-                            document.getElementById("designation").value = "";
-                            document.getElementById("fullname").value = "";
-                            document.getElementById("password").value = "";
-
-                            document.getElementById("messages2").innerHTML =
-                                "A verification email has been sent! You need to verify your email before logging in.";
-
-
-                            // window.location.href = './index.html';
-                        },
-                        error: function (response) {
-                            console.log(response);
-                            console.log("Error");
-
-                        }
-                    });
-                }
-            });
-        } else {
-            document.getElementById("messages2").innerHTML = "You need to fill up everything, check the fields again.";
-            setTimeout(function () {
-                document.getElementById("messages2").innerHTML = " ";
-            }, 3000);
-            // console.log("You need to fill up everything, check the feilds again.");
-        }
-
-
-
-
+        middle = (low + high) / 2;
+        result = canvas.toDataURL();
     }
-})(jQuery);
+
+    return result;
+}
+
+function urltoFile(url, filename, mimeType) {
+    return fetch(url)
+        .then(function (res) {
+            return res.arrayBuffer();
+        })
+        .then(function (buf) {
+            return new File([buf], filename, {
+                type: mimeType
+            });
+        });
+}
+
+document.getElementById("comLogo").addEventListener("change", function () {
+    if (window.File && window.FileList && window.FileReader) {
+        var files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            var picReader = new FileReader();
+            picReader.addEventListener("load", function (event) {
+                var picFile = event.target;
+                var image = picFile.result;
+                resizeImage(image, 10, 1).then((res) => {
+                    images1 = res;
+                });
+            });
+
+            picReader.readAsDataURL(file);
+        }
+    }
+}, false)
+
+document.getElementById("picture").addEventListener("change", function () {
+    if (window.File && window.FileList && window.FileReader) {
+        var files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            var picReader = new FileReader();
+            picReader.addEventListener("load", function (event) {
+                var picFile = event.target;
+                var image = picFile.result;
+                resizeImage(image, 10, 1).then((res) => {
+                    images2 = res;
+                });
+            });
+
+            picReader.readAsDataURL(file);
+        }
+    }
+}, false)
+
+
+function onFinishCallback() {
+
+    // console.log("asdsad");
+
+    var comName = $('#comName').val(),
+        comAdd = $('#comAdd').val(),
+        comNum = $('#comNum').val(),
+        comLogo = localStorage.getItem("logo"),
+        email = $('#email').val(),
+        contact = $('#contact').val(),
+        designation = $('#designation').val(),
+        fullname = $('#fullname').val(),
+        image = localStorage.getItem("picture"),
+        password = $('#password').val();
+
+    // fileSelect = document.getElementById("comLogo").files;
+    // fileSelect2 = document.getElementById("picture").files;
+    // var logo, picture;
+    // if (fileSelect.length > 0) {
+    //     var file = fileSelect[0];
+    //     var fileReader = new FileReader();
+
+    //     fileReader.onload = function (event) {
+    //         var data = event.target.result;
+    //         logo = data;
+    //         resizeImage(logo, 10, 1).then((res) => {
+    //             images1 = `${res}`;
+    //         });
+    //         localStorage.setItem("logo", data);
+    //         sessionStorage.setItem("comPhoto", data);
+    //         sessionStorage.setItem("images1", images1);
+
+    //     }
+    //     fileReader.readAsDataURL(file);
+    // }
+
+    // if (fileSelect2.length > 0) {
+    //     var fileSelect2 = fileSelect2[0];
+    //     var fileReader2 = new FileReader();
+
+    //     fileReader2.onload = function (FileLoadEvent) {
+    //         var data2 = FileLoadEvent.target.result;
+    //         picture = data2;
+    //         resizeImage(picture, 10, 1).then((res) => {
+    //             images2 = `${res}`;
+    //         });
+    //         // console.log(data2);
+    //         localStorage.setItem("picture", data2);
+    //         sessionStorage.setItem("picture", data2);
+    //         sessionStorage.setItem("images2", images2);
+
+    //     }
+    //     fileReader2.readAsDataURL(fileSelect2);
+    // }
+
+    // console.log(images1);
+    // console.log(images2);
+
+    if (comName && comAdd && comNum && email && contact && designation && fullname && password) {
+
+        var logo, picture;
+
+
+        // var logo = document.getElementById("comLogo");
+        // logo.addEventListener("change", function () {
+        //     encodeImageFileURL();
+        // })
+
+
+
+        var myData = JSON.stringify({
+
+            //     // "count": "13",
+            //     // "domain": "www.done.com"
+            "name": $('#comName').val(),
+            "address": $('#comAdd').val(),
+            "contact": $('#comNum').val(),
+            "logo": images1,
+            "subscription": "0",
+            // "password": Base64.encode(pwd.value),
+            // "role": ""
+
+        });
+
+        // console.log(myData)
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+            url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/companies/{id}",
+            data: myData,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            success: function (response) {
+                console.log(response);
+                console.log("Success");
+                // sessionStorage.setItem("state", 1);
+                // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
+                // setTimeout(function(){ 
+                // $('#registerStyle').hide();
+                // $('#forgotStyle').hide();
+                // $('#loginStyle').show();
+                // },3000);
+
+                // window.location.href = './index.html';
+            },
+            error: function (response) {
+                console.log(response.responseText);
+
+                var id = response.responseText;
+                // localStorage.setItem("comid", id);
+
+                var str = id;
+                var res = str.split("\r\n", 1);
+
+                sessionStorage.setItem("comid", res[0]);
+
+                console.log(res[0]);
+
+                var myData2 = JSON.stringify({
+
+                    //     // "count": "13",
+                    //     // "domain": "www.done.com"
+                    "email": $('#email').val(),
+                    "comid": res[0],
+                    // "comid": $('#email').val(),
+                    "contact": $('#contact').val(),
+                    "designation": $('#designation').val(),
+                    "fullname": $('#fullname').val(),
+                    "image": images2,
+                    "password": Base64.encode(pwd.value),
+                    "role": "admin",
+                    "verification": "not verify"
+
+                    // "password": Base64.encode(pwd.value),
+                    // "role": ""
+
+                });
+
+                console.log(myData2);
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    // url: "https://pq38i6wtd4.execute-api.ap-southeast-1.amazonaws.com/verkoapi/adcounts/{domain}",
+                    url: "https://iqq7nfcdw5.execute-api.us-east-1.amazonaws.com/fvs/users/{email}",
+                    data: myData2,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        // console.log("Success");
+                        localStorage.setItem("fullname", $('#fullname').val());
+                        sessionStorage.setItem("state", 1);
+                        sessionStorage.setItem("role", 1);
+                        // document.getElementById("success2").innerHTML = "Success, Redirecting to login. . .";
+                        // setTimeout(function(){ 
+                        // $('#registerStyle').hide();
+                        // $('#forgotStyle').hide();
+                        // $('#loginStyle').show();
+                        // },3000);
+                        // $('#wizard').smartWizard('showMessage', 'Done. Redirecting. . .');
+                        var template_params = {
+                            "to_email": $('#email').val(),
+                            // "bcc": email,
+                            // "reply_to": email,
+                            "from_name": "FVS Team",
+                            "to_name": "",
+                            "message_html": "http://zumecall.com/zumecall/verification.html#" + res[0] + "#" + $('#email').val()
+                        }
+
+
+                        var service_id = "service_fvs";
+                        var template_id = "template_4cj69ab";
+                        emailjs.send(service_id, template_id, template_params);
+
+                        console.log("Sent");
+                        document.getElementById("comName").value = "";
+                        document.getElementById("comAdd").value = "";
+                        document.getElementById("comNum").value = "";
+                        document.getElementById("email").value = "";
+                        document.getElementById("contact").value = "";
+                        document.getElementById("designation").value = "";
+                        document.getElementById("fullname").value = "";
+                        document.getElementById("password").value = "";
+
+                        document.getElementById("messages2").innerHTML =
+                            "A verification email has been sent! You need to verify your email before logging in.";
+
+
+                        // window.location.href = './index.html';
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        console.log("Error");
+
+                    }
+                });
+            }
+        });
+    } else {
+        document.getElementById("messages2").innerHTML = "You need to fill up everything, check the fields again.";
+        setTimeout(function () {
+            document.getElementById("messages2").innerHTML = " ";
+        }, 3000);
+        // console.log("You need to fill up everything, check the feilds again.");
+    }
+}

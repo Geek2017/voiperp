@@ -1,6 +1,6 @@
 <style>
     /* The Modal (background) */
-    
+
     .modal {
         display: none;
         /* Hidden by default */
@@ -21,8 +21,9 @@
         background-color: rgba(0, 0, 0, 0.4);
         /* Black w/ opacity */
     }
+
     /* Modal Content/Box */
-    
+
     .modal-content {
         color: #414242;
         margin: 15% auto;
@@ -41,17 +42,17 @@
         box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.20);
         border-radius: 6px;
     }
-    
+
     .modal-content a {
         color: #636464;
     }
-    
+
     .modal-content>h1 {
         display: block;
         width: 100%;
         text-align: center;
     }
-    
+
     button#accept {
         margin: 30px auto;
         display: block;
@@ -64,7 +65,7 @@
         padding: 0 20px;
         cursor: pointer;
     }
-    
+
     .safety {
         color: #9B9C9D;
         font-size: 12px;
@@ -72,7 +73,7 @@
         display: block;
         text-decoration: none;
     }
-    
+
     .close {
         background: #606061;
         color: #FFFFFF;
@@ -91,24 +92,28 @@
         -webkit-box-shadow: 1px 1px 3px #000;
         box-shadow: 1px 1px 3px #000;
     }
-    
+
     .close:hover {
         background: #00d9ff;
     }
 </style>
-<div >
+<div>
     <h2>&nbsp;&nbsp;Companies</h2>
 
-    <div id="myContacts">
-        <p>&nbsp;&nbsp;You have zero Companies</p>
+
+    <div class="dt-ext table-responsive">
+
+        <div id="myContacts">
+            <p>&nbsp;&nbsp;You have zero Companies</p>
+        </div>
     </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 
 
-      <!-- The Modal -->
-      <div id="myModal" class="modal">
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
@@ -136,7 +141,7 @@
                         <input type="text" class="form-control" id="editContact" ng-value="newContact">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="">Subscription</label>
                     <div class="">
@@ -159,7 +164,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn btn-info" data-dismiss="modal" ng-click="updateUser()">Save</button>
+                <button type="button" class="btn btn btn-info" data-dismiss="modal"
+                    ng-click="updateUser()">Save</button>
                 <button type="button" class="btn btn btn-danger" ng-click="close()">Cancel</button>
             </div>
         </div>

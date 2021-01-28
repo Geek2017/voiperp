@@ -331,11 +331,11 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                     var buttons = [{
                         value: "Edit",
                         type: "button",
-                        className: "btn btn-info mx-2"
+                        className: "btn btn-info btn-xs mx-2"
                     }, {
                         value: "Delete",
                         type: "button",
-                        className: "btn btn-danger mx-2"
+                        className: "btn btn-danger btn-xs mx-2"
                     }];
                     // btn.type = buttons.values(type);
 
@@ -463,11 +463,11 @@ angular.module('fvs').controller('ListClientCtrl', function ($scope) {
                     var buttons = [{
                         value: "Edit",
                         type: "button",
-                        className: "btn btn-info mx-2"
+                        className: "btn btn-info btn-xs mx-2"
                     }, {
                         value: "Delete",
                         type: "button",
-                        className: "btn btn-danger mx-2"
+                        className: "btn btn-danger btn-xs mx-2"
                     }];
                     // btn.type = buttons.values(type);
 

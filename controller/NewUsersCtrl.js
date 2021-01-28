@@ -2,6 +2,8 @@
 
 angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
 
+
+
     var Base64 = {
 
 
@@ -131,12 +133,102 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
 
     }
 
+
+
     addNew.onclick = function () {
+
         addNewUser();
     }
 
-    function addNewUser() {
 
+    var images1 = "";
+
+    async function resizeImage(dataUrl, targetFileSizeKb, maxDeviation = 1) {
+        let originalFile = await urltoFile(dataUrl, "test.png", "image/png");
+        if (originalFile.size / 1000 < targetFileSizeKb) return dataUrl; // File is already smaller
+
+        let low = 0.0;
+        let middle = 0.5;
+        let high = 1.0;
+
+        let result = dataUrl;
+
+        let file = originalFile;
+
+        while (Math.abs(file.size / 1000 - targetFileSizeKb) > maxDeviation) {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            const img = document.createElement("img");
+
+            const promise = new Promise((resolve, reject) => {
+                img.onload = () => resolve();
+                img.onerror = reject;
+            });
+
+            img.src = dataUrl;
+
+            await promise;
+
+            canvas.width = Math.round(img.width * middle);
+            canvas.height = Math.round(img.height * middle);
+            context.scale(canvas.width / img.width, canvas.height / img.height);
+            context.drawImage(img, 0, 0);
+            file = await urltoFile(canvas.toDataURL(), "test.png", "image/png");
+
+            if (file.size / 1000 < targetFileSizeKb - maxDeviation) {
+                low = middle;
+            } else if (file.size / 1000 > targetFileSizeKb) {
+                high = middle;
+            }
+
+            middle = (low + high) / 2;
+            result = canvas.toDataURL();
+        }
+
+        return result;
+    }
+
+    function urltoFile(url, filename, mimeType) {
+        return fetch(url)
+            .then(function (res) {
+                return res.arrayBuffer();
+            })
+            .then(function (buf) {
+                return new File([buf], filename, {
+                    type: mimeType
+                });
+            });
+    }
+
+    document.getElementById("newUserPicture").addEventListener("change", function () {
+        if (window.File && window.FileList && window.FileReader) {
+            var files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                var picReader = new FileReader();
+                picReader.addEventListener("load", function (event) {
+                    var picFile = event.target;
+                    var image = picFile.result;
+                    resizeImage(image, 10, 1).then((res) => {
+                        images1 = res;
+                    });
+                });
+
+                picReader.readAsDataURL(file);
+            }
+        }
+    }, false)
+
+    $("#newUserPicture").on("change", function () {
+        // console.log(document.getElementById("comLogo").files[0].name);
+        $("#pictureLabel").text(
+            document.getElementById("newUserPicture").files[0].name
+        );
+    });
+
+
+
+    function addNewUser() {
         var newUserEmail = $('#newUserEmail').val(),
             newUserContact = $('#newUserContact').val(),
             newUserDesignation = $('#newUserDesignation').val(),
@@ -152,26 +244,34 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
             output = document.getElementById('output'),
             pwd = document.getElementById('newUserPassword');
 
+        // console.log(images1);
+
         if (newUserEmail && newUserContact && newUserDesignation && newUserFullname && newUserPassword) {
 
-            fileSelect = document.getElementById("newUserPicture").files;
-            if (fileSelect.length > 0) {
-                var fileSelect = fileSelect[0];
-                var fileReader = new FileReader();
+            // fileSelect = document.getElementById("newUserPicture").files;
+            // if (fileSelect.length > 0) {
+            //     var fileSelect = fileSelect[0];
+            //     var fileReader = new FileReader();
 
-                fileReader.onload = function (FileLoadEvent) {
-                    var data = FileLoadEvent.target.result;
-                    // logo = data;
-                    // console.log(data);
-                    sessionStorage.setItem("newUserphoto", data);
-                    // sessionStorage.setItem("comPhoto", data);
+            //     fileReader.onload = function (FileLoadEvent) {
+            //         var data = FileLoadEvent.target.result;
+            //         // logo = data;
+            //         // console.log(data);
+            //         resizeImage(data, 10, 1).then((res) => {
+            //             images.push({
+            //                 file: res
+            //             });
+            //         });
+            //         console.log(images);
+            //         sessionStorage.setItem("newUserphoto", data);
+            //         // sessionStorage.setItem("comPhoto", data);
 
-                }
-                fileReader.readAsDataURL(fileSelect);
-            }
+            //     }
+            //     fileReader.readAsDataURL(fileSelect);
+            // }
 
             var userComID = sessionStorage.getItem("comid");
-            var url = "http://52.87.240.93/zumecall/verification.html#";
+            var url = "http://zumecall.com/zumecall/verification.html#";
 
             var myData2 = JSON.stringify({
 
@@ -184,7 +284,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                 "rate": $('#newUserRate').val(),
                 "designation": $('#newUserDesignation').val(),
                 "fullname": $('#newUserFullname').val(),
-                "image": sessionStorage.getItem("newUserphoto"),
+                "image": images1,
                 "password": Base64.encode(pwd.value),
                 "role": "ordinary",
                 "verification": "not verify",
@@ -196,7 +296,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
 
             });
 
-            console.log(myData2);
+            // console.log(myData2);
 
             $.ajax({
                 type: "POST",
@@ -242,6 +342,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
                     document.getElementById("newUserFullname").value = "";
                     document.getElementById("newUserPassword").value = "";
                     document.getElementById("newUserRate").value = "";
+                    document.getElementById("newUserPicture").value = "";
 
                     document.getElementById("messages").innerHTML =
                         "A verification email has been sent to the user! He/She needs to verify the email before logging in.";
