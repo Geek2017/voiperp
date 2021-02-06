@@ -281,7 +281,7 @@
                 </li>
               </ul>
             </li>
-            <li>
+            <li id="mode" style="display: none;">
               <div class="mode"><i class="fa fa-lightbulb-o"></i></div>
             </li>
             <!-- <li class="cart-nav onhover-dropdown">
@@ -394,7 +394,7 @@
                 </li>
               </ul>
             </li> -->
-            <li class="maximize">
+            <li class="maximize" id="fullScreen" style="display: none;">
               <a class="text-dark" href="" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a>
             </li>
             <li class="profile-nav onhover-dropdown p-0">
@@ -1201,6 +1201,8 @@
         $("#dash").show();
         $("#projects").show();
         $("#notificationIcon").show();
+        $("#mode").show();
+        $("#fullScreen").show();
         $("#searchIcon").show();
         $("#langIcon").show();
         // $("#marketing").show();
@@ -1220,6 +1222,8 @@
         $("#dash").show();
         $("#projects").show();
         $("#notificationIcon").show();
+        $("#mode").show();
+        $("#fullScreen").show();
         $("#searchIcon").show();
         $("#langIcon").show();
         // $("#marketing").show();
@@ -1237,6 +1241,8 @@
         // $("#logs").hide();
       } else if (role == 2) {
         // document.getElementById("photoURL").src = logo;
+        $("#mode").show();
+        $("#fullScreen").show();
         $("#dash").show();
         $("#projects2").show();
         // $("#client").show();

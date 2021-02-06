@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fvs').controller('DashboardCtrl', function($scope) {
+angular.module('fvs').controller('DashboardCtrl', function ($scope) {
     // greeting
 
     // currently sale
@@ -126,11 +126,11 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             showGrid: false,
             showLabel: false,
             offset: 0,
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
                 return (value / 1000) + 'k';
             }
         }
-    }).on('draw', function(data) {
+    }).on('draw', function (data) {
         if (data.type === 'bar') {
             data.element.attr({
                 style: 'stroke-width: 3px'
@@ -164,11 +164,11 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             showGrid: false,
             showLabel: false,
             offset: 0,
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
                 return (value / 1000) + 'k';
             }
         }
-    }).on('draw', function(data) {
+    }).on('draw', function (data) {
         if (data.type === 'bar') {
             data.element.attr({
                 style: 'stroke-width: 3px'
@@ -201,11 +201,11 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             showGrid: false,
             showLabel: false,
             offset: 0,
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
                 return (value / 1000) + 'k';
             }
         }
-    }).on('draw', function(data) {
+    }).on('draw', function (data) {
         if (data.type === 'bar') {
             data.element.attr({
                 style: 'stroke-width: 3px'
@@ -237,11 +237,11 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             showGrid: false,
             showLabel: false,
             offset: 0,
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
                 return (value / 1000) + 'k';
             }
         }
-    }).on('draw', function(data) {
+    }).on('draw', function (data) {
         if (data.type === 'bar') {
             data.element.attr({
                 style: 'stroke-width: 3px'
@@ -251,7 +251,7 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
 
     // right-side-small-chart
 
-    (function($) {
+    (function ($) {
         "use strict";
         $(".knob1").knob({
 
@@ -259,20 +259,20 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             'height': 65,
             'max': 100,
 
-            change: function(value) {
+            change: function (value) {
                 //console.log("change : " + value);
             },
-            release: function(value) {
+            release: function (value) {
                 //console.log(this.$.attr('value'));
                 console.log("release : " + value);
             },
-            cancel: function() {
+            cancel: function () {
                 console.log("cancel : ", this);
             },
-            format: function(value) {
+            format: function (value) {
                 return value + '%';
             },
-            draw: function() {
+            draw: function () {
 
                 // "tron" case
                 if (this.$.data('skin') == 'tron') {
@@ -315,12 +315,12 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             i = 0,
             $idir = $("div.idir"),
             $ival = $("div.ival"),
-            incr = function() {
+            incr = function () {
                 i++;
                 $idir.show().html("+").fadeOut();
                 $ival.html(i);
             },
-            decr = function() {
+            decr = function () {
                 i--;
                 $idir.show().html("-").fadeOut();
                 $ival.html(i);
@@ -329,7 +329,7 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
             min: 0,
             max: 20,
             stopper: false,
-            change: function() {
+            change: function () {
                 if (v > this.cv) {
                     if (up) {
                         decr();
@@ -393,7 +393,7 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
         },
         tooltip: {
             y: {
-                formatter: function(val) {
+                formatter: function (val) {
                     return val
                 }
             }
@@ -401,7 +401,7 @@ angular.module('fvs').controller('DashboardCtrl', function($scope) {
         yaxis: {
             tickAmount: 7,
             labels: {
-                formatter: function(val, i) {
+                formatter: function (val, i) {
                     if (i % 2 === 0) {
                         return val
                     } else {

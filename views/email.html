@@ -138,6 +138,7 @@
         var count = response.Count;
         console.log(response);
         fromName = response.fullname;
+        var sendLength = sendTo.length - 1;
         for (let index = 0; index < sendTo.length; index++) {
           // console.log(sendTo[index]);
           var template_params = {
@@ -153,15 +154,17 @@
           var service_id = "service_fvs";
           var template_id = "template_xtir89j";
           emailjs.send(service_id, template_id, template_params);
-          console.log("email has been sent " + sendTo[index].email);
-          document.getElementById("success").innerHTML = "Email has been sent";
-          document.getElementById("inputEmail").value = "";
-          document.getElementById("subject").value = "";
-          document.getElementById("message").value = "";
-          setTimeout(() => {
-            document.getElementById("success").innerHTML = "";
+          if (index == sendLength) {
+            console.log("email has been sent " + sendTo[index].email);
+            document.getElementById("success").innerHTML = "Email has been sent";
+            document.getElementById("inputEmail").value = "";
+            document.getElementById("subject").value = "";
+            document.getElementById("message").value = "";
+            setTimeout(() => {
+              document.getElementById("success").innerHTML = "";
 
-          }, 3000);
+            }, 3000);
+          }
         }
       });
     } else {

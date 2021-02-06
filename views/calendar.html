@@ -113,7 +113,42 @@
   .my-modal .modal-content {
     background-color: black;
   }
+
+  .pac-container {
+    z-index: 10000 !important;
+  }
+
+  .refresh-btn {
+    height: 26.59px;
+    width: 42px;
+    line-height: 32px;
+    text-align: center;
+    position: absolute;
+    right: 157px;
+    top: 10px;
+    font-size: 12px;
+    display: block;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #333;
+    text-shadow: 0 1px 1px rgb(255 255 255 / 75%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 1px 2px rgb(0 0 0 / 5%);
+  }
+
+  .refresh-btn :hover {
+    color: #333 !important;
+  }
 </style>
+
+<link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
+<link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+<link href="/assets/fullcalendar/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+<script src="/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" /> -->
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/calendar.css" /> -->
@@ -134,91 +169,17 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
 <br />
 
-<div class="container-fluid">
+<div class="container-fluid" style="max-width: 1000px">
   <div class="row">
     <div class="col-sm-12">
-      <div class="card box-shadow-title">
-        <!-- <div class="card-header">
-          <span id="myAdd">You are @ :{{gadd}}</span>
-          <object
-            data="./assets/geolocate.html"
-            width="100%"
-            height="500"
-          ></object>
-          <br />
-        </div> -->
-        <!-- <button id="btnCreateEvents" class="btn btn-primary" onclick="makeApiCall();">
-                    Create Events</button>
+      <div class="card box-shadow-title m-0">
+        <div id="wrap" style="max-width: 1000px; height: auto; width: 100%">
+          <img id="loadingImage" src="https://acegif.com/wp-content/uploads/loading-15.gif" alt="loading-image"
+            style="width: 100%; height: 100%; border-radius: 6px" />
+          <div id="refreshBtn"></div>
 
-                <div id="divifm">
-                    <iframe id="ifmCalendar"
-                        src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FManila&amp;src=amF5c29ubGlnbmVzQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=1"
-                        style="border-width: 0" width="950" height="520" frameborder="0" scrolling="no">
-                    </iframe>
-                </div> -->
-        <div id="wrap" style="max-width: 100%; height: auto" class="p-2">
-          <img id="loadingImage"
-            src="https://cdn.dribbble.com/users/846207/screenshots/5568468/gradient-circle-loading.gif"
-            alt="loading-image" class="rounded" style="width: 100%; height: 100%" />
-          <div id="calendar" class="p-0 m-0"></div>
-
-          <div style="clear: both"></div>
+          <div id="calendar" style="display: none"></div>
         </div>
-        <!-- <iframe src="https://calendar.google.com/calendar/embed?src=cj.lignes%40gmail.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
-        <!-- <div class="d-flex">
-                    <div id="lnb">
-                        <div class="lnb-new-schedule text-center">
-                            <button class="btn btn-primary" id="btn-new-schedule" type="button" data-toggle="modal">New schedule</button>
-                        </div>
-                        <div class="lnb-calendars" id="lnb-calendars">
-                            <div>
-                                <div class="lnb-calendars-item">
-                                    <label>
-                      <input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked=""><span></span><strong>View all</strong>
-                    </label>
-                                </div>
-                            </div>
-                            <div class="lnb-calendars-d1" id="calendarList"></div>
-                        </div>
-                    </div>
-                    <div id="right">
-                        <div id="menu"><span class="dropdown">
-                  <button class="btn btn-default btn-sm dropdown-toggle" id="dropdownMenu-calendarType" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="calendar-icon ic_view_month" id="calendarTypeIcon" style="margin-right: 4px;"></i><span id="calendarTypeName">Dropdown</span>
-                            <i class="calendar-icon tui-full-calendar-dropdown-arrow"></i>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-calendarType">
-                                <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-daily"><i class="calendar-icon ic_view_day"></i>Daily</a></li>
-                                <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weekly"><i class="calendar-icon ic_view_week"></i>Weekly</a></li>
-                                <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-monthly"><i class="calendar-icon ic_view_month"></i>Month</a></li>
-                                <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks2"><i class="calendar-icon ic_view_week"></i>2 weeks</a></li>
-                                <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks3"><i class="calendar-icon ic_view_week"></i>3 weeks</a></li>
-                                <li class="dropdown-divider" role="presentation"></li>
-                                <li role="presentation">
-                                    <a role="menuitem" data-action="toggle-workweek">
-                                        <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-workweek" checked=""><span class="checkbox-title"></span>Show weekends</a>
-                                </li>
-                                <li role="presentation">
-                                    <a role="menuitem" data-action="toggle-start-day-1">
-                                        <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-start-day-1"><span class="checkbox-title"></span>Start Week on Monday</a>
-                                </li>
-                                <li role="presentation">
-                                    <a role="menuitem" data-action="toggle-narrow-weekend">
-                                        <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-narrow-weekend"><span class="checkbox-title"></span>Narrower than weekdays</a>
-                                </li>
-                            </ul>
-                            </span><span id="menu-navi">
-                  <button class="btn btn-default btn-sm move-today" type="button" data-action="move-today">Today</button>
-                  <button class="btn btn-default btn-sm move-day" type="button" data-action="move-prev"><i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i></button>
-                  <button class="btn btn-default btn-sm move-day" type="button" data-action="move-next"><i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i></button></span><span class="render-range" id="renderRange"></span></div>
-                        <div id="calendar"></div>
-                    </div>
-                </div> -->
-        <!-- <div id="stopwatch">
-                    <div id="sw-time">00:00:00</div>
-                   
-                    <input type="button" value="Reset" id="sw-rst" disabled/>
-                    <input type="button" value="Start" id="sw-go" disabled/>
-                  </div> -->
       </div>
     </div>
   </div>
@@ -674,7 +635,7 @@
     sec = sec < 10 ? "0" + sec : sec;
 
     let currentTime = hour + ":" + min + ":" + sec + " " + am_pm;
-    document.getElementById("clock").innerHTML = currentTime;
+    // document.getElementById("clock").innerHTML = currentTime;
 
     return currentTime;
   }
@@ -696,6 +657,7 @@
   var comid = sessionStorage.getItem("comid");
 
   $(document).ready(async () => {
+    document.getElementById("clock").innerHTML = showTime();
     // Initialize select2
     // $("#selUser").select2();
 
@@ -760,7 +722,7 @@
       timeout: 0,
     };
 
-    $.ajax(settings).done(function (response) {
+    $.ajax(settings).done(async function (response) {
       var count = response.Count;
       // console.log(response.Items[0]);
       for (var i = 0; i < count; i++) {
@@ -884,7 +846,7 @@
 
         /* initialize the calendar
                   -----------------------------------------------------------------*/
-        calendar = $("#calendar").fullCalendar({
+        calendar = await $("#calendar").fullCalendar({
           header: {
             left: "title",
             center: "agendaDay,agendaWeek,month",
@@ -1121,11 +1083,32 @@
           },
           events: newFiltered,
         });
+        $(
+          "#refreshBtn"
+        ).append(`<a href="javascript:void(0)" class="refresh-btn" id="refreshCalendar" onclick="refreshCalendar()"
+            ><svg
+              style="color: #333"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-refresh-cw"
+            >
+              <polyline points="23 4 23 10 17 10" />
+              <polyline points="1 20 1 14 7 14" />
+              <path
+                d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+              /></svg
+          ></a>`);
+        checkWidth()
       }
     });
 
-    /* initialize the external events
-            -----------------------------------------------------------------*/
   });
 
   var forUpdate = {
@@ -1892,29 +1875,64 @@
     }
   }
 
+  function checkWidth() {
+    var width = $(window).width();
+    if (width <= 426) {
+      console.log(width);
+      $(".fc-header-left").addClass("d-block w-100");
+      $(".fc-header-center").addClass("d-inline-flex w-50");
+      $(".fc-header-right").addClass(
+        "d-inline-flex justify-content-end w-50"
+      );
+      $("#refreshCalendar").css("right", "10px");
+      $("#refreshCalendar").css("top", "13px");
+      $("#refreshCalendar").css("width", "55.73px");
+    } else {
+      $(".fc-header-left").removeClass("d-block w-100");
+      $(".fc-header-center").removeClass("d-inline-flex w-50");
+      $(".fc-header-right").removeClass(
+        "d-inline-flex justify-content-end w-50"
+      );
+      $("#refreshCalendar").css("right", "157px");
+      $("#refreshCalendar").css("top", "10px");
+    }
+  }
 
   var width = $(window).width();
+
   $(window).on("resize", function () {
     if ($(this).width() !== width) {
       width = $(this).width();
-      if (width <= 425) {
-        console.log(width);
+      if (width <= 426) {
+        // console.log(width);
         $(".fc-header-left").addClass("d-block w-100");
         $(".fc-header-center").addClass("d-inline-flex w-50");
         $(".fc-header-right").addClass(
           "d-inline-flex justify-content-end w-50"
         );
-      }
-      if (width > 425) {
-        $(".fc-header-left").removeClass("d-block w-100");
-        $(".fc-header-center").removeClass("d-inline-flex w-50");
-        $(".fc-header-right").removeClass(
-          "d-inline-flex justify-content-end w-50"
-        );
+        $("#refreshCalendar").css("right", "10px");
+        $("#refreshCalendar").css("top", "13px");
+        $("#refreshCalendar").css("width", "55.73px");
       }
     }
-
+    if (width > 426) {
+      $(".fc-header-left").removeClass("d-block w-100");
+      $(".fc-header-center").removeClass("d-inline-flex w-50");
+      $(".fc-header-right").removeClass(
+        "d-inline-flex justify-content-end w-50"
+      );
+      $("#refreshCalendar").css("right", "157px");
+      $("#refreshCalendar").css("top", "10px");
+    }
   });
+
+  function refreshCalendar() {
+    // console.log("clicked")
+    // $("#refreshCalendar").remove()
+    window.location.hash = "#/a";
+    window.location.hash = "#/calendar";
+  }
+
   // function initMap() {
   //   if (navigator.geolocation) {
   //     navigator.geolocation.getCurrentPosition(
@@ -2084,7 +2102,7 @@
       var working = hours + minsToHr;
       fix = working + toAdd;
       toPay = rate * fix.toFixed(2);
-      sessionStorage.setItem("toPay", toPay);
+      sessionStorage.setItem("toPay", toPay.toFixed(2));
       sessionStorage.setItem("workingHr", fix.toFixed(2));
       // console.log(working.toFixed(2));
       // console.log(toAdd.toFixed(2));
