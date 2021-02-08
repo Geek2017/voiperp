@@ -490,7 +490,7 @@ function onFinishCallback() {
                             // "reply_to": email,
                             "from_name": "FVS Team",
                             "to_name": "",
-                            "message_html": "http://zumecall.com/zumecall/verification.html#" + res[0] + "#" + $('#email').val()
+                            "message_html": "http://zumecall.com/verification.html#" + res[0] + "#" + $('#email').val()
                             // "message_html": "http://mitsi.digital/zumecall/zumecall/verification.html#" + res[0] + "#" + $('#email').val()
                         }
 

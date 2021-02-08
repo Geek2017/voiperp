@@ -271,7 +271,7 @@ angular.module('fvs').controller('NewUsersCtrl', function ($scope) {
             // }
 
             var userComID = sessionStorage.getItem("comid");
-            var url = "http://zumecall.com/zumecall/verification.html#";
+            var url = "http://zumecall.com/verification.html#";
 
             var myData2 = JSON.stringify({
 

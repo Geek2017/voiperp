@@ -311,7 +311,7 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
 
                     }
                     tBody.appendChild(bRow)
-                    var entry = newFiltered[i];
+                    var entry = employee[i];
                     var buttons = [{
                         value: "Edit",
                         type: "button",
@@ -654,6 +654,8 @@ angular.module('fvs').controller('ListUserCtrl', function ($scope) {
         };
         $.ajax(settings).done(function (response) {
             console.log(response);
+            window.location.hash = "#/";
+            window.location.hash = "#/listUsers";
             modal2.style.display = "none";
         });
     };
